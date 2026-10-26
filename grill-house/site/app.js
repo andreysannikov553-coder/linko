@@ -57,23 +57,29 @@
   addEventListener("resize",function(){frame()});
 
 
-  // сцена из съёмки в ресторане: кадры видео идут вместе с прокруткой
-  var tun=$("#tunnel");
+  // первый экран — сцена из съёмки: кадры видео идут вместе с прокруткой
+  var tun=$(".tunnel");
   if(tun&&!reduce)(function(){
-    var cv=$(".t-cv",tun),cx=cv.getContext("2d"),amb=$(".t-amb",tun),ax=amb.getContext("2d"),tin=$(".t-intro",tun),dim=$(".t-dim",tun),fin=$(".t-final",tun),bar2=$(".t-load i",tun);
-    var steps=$$(".t-step",tun).map(function(el){var r=el.dataset.f.split("-");return [el,+r[0],+r[1]]});
+    var cv=$(".t-cv",tun),cx=cv.getContext("2d"),hero=$(".t-hero",tun),dim=$(".t-dim",tun),fin=$(".t-final",tun),bar2=$(".t-load i",tun);
     var cl=function(x){return x<0?0:x>1?1:x},seg=function(p,a,b){return cl((p-a)/(b-a))};
     var io3=function(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2};
-    var N=+tun.dataset.frames,F=[],got=0,active=0,q=0,cur=0,want=0,drawn=-1,raf=0;
-    // сначала каждый 16-й кадр, потом гуще: сцена прокручивается сразу, детали догружаются
-    var order=[],seen={},retry={};
-    [16,8,4,2,1].forEach(function(st){for(var i=0;i<N;i+=st)if(!seen[i]){seen[i]=1;order.push(i)}if(st===16&&!seen[N-1]){seen[N-1]=1;order.push(N-1)}});
+    var N=+tun.dataset.frames,set,F,got,active,q,order,retry,cur=0,want=0,drawn=-1,raf=0,gen=0;
+    // компьютер — кадры 16:9, телефон — вертикальные; при повороте экрана набор меняется
+    var start=function(){
+      var s=innerWidth>=innerHeight?"d":"m";if(s===set)return;
+      set=s;gen++;F=[];got=0;active=0;q=0;retry={};order=[];tun.classList.remove("loaded");
+      // сначала каждый 16-й кадр, потом гуще: прокручивать можно сразу, детали догружаются
+      var seen={};
+      [16,8,4,2,1].forEach(function(st){for(var i=0;i<N;i+=st)if(!seen[i]){seen[i]=1;order.push(i)}if(st===16&&!seen[N-1]){seen[N-1]=1;order.push(N-1)}});
+      pump();
+    };
     var pump=function(){
+      var g=gen;
       while(active<6&&q<order.length)(function(i){
         active++;var im=new Image();im.decoding="async";
-        im.onload=function(){F[i]=im;got++;active--;bar2.style.transform="scaleX("+(got/N).toFixed(3)+")";if(got===N)tun.classList.add("loaded");if(Math.abs(i-cur)<17){drawn=-1;kick()}pump()};
-        im.onerror=function(){active--;if(!retry[i]){retry[i]=1;order.push(i)}pump()};
-        im.src=tun.dataset.src+("00"+i).slice(-3)+".webp";
+        im.onload=function(){if(g!==gen)return;F[i]=im;got++;active--;bar2.style.transform="scaleX("+(got/N).toFixed(3)+")";if(got===N)tun.classList.add("loaded");if(Math.abs(i-cur)<17){drawn=-1;kick()}pump()};
+        im.onerror=function(){if(g!==gen)return;active--;if(!retry[i]){retry[i]=1;order.push(i)}pump()};
+        im.src=tun.dataset.src+set+"/"+("00"+i).slice(-3)+".webp?v="+tun.dataset.v;
       })(order[q++]);
     };
     var near=function(i){for(var k=0;k<N;k++){if(F[i-k])return i-k;if(F[i+k])return i+k}return -1};
@@ -83,29 +89,42 @@
       paint(F[a],1);
       // между соседними кадрами — плавный переход, без рывков
       if(a===i&&t>.03&&F[i+1])paint(F[i+1],t);
-      ax.drawImage(cv,0,0,amb.width,amb.height);
     };
-    var loop=function(){raf=0;var dd=want-cur;cur=Math.abs(dd)<.02?want:cur+dd*.22;if(cur!==drawn){draw();drawn=cur}if(cur!==want)kick()};
+    var loop=function(){raf=0;var dd=want-cur;cur=Math.abs(dd)<.02?want:cur+dd*.2;if(cur!==drawn){draw();drawn=cur}if(cur!==want)kick()};
     var kick=function(){if(!raf)raf=requestAnimationFrame(loop)};
     var size=function(){var r=cv.getBoundingClientRect(),dp=Math.min(devicePixelRatio||1,2),w=Math.round(r.width*dp),h=Math.round(r.height*dp);if(w!==cv.width||h!==cv.height){cv.width=w;cv.height=h;drawn=-1;kick()}};
-    size();addEventListener("resize",size);
-    if(d.readyState==="complete")pump();else addEventListener("load",pump);
+    size();start();addEventListener("resize",function(){size();start()});
     var tunnelFrame=function(){
       var r=tun.getBoundingClientRect(),total=tun.offsetHeight-innerHeight;
       if(r.bottom<-50||r.top>innerHeight+50)return;
       var p=cl(-r.top/total);
-      want=seg(p,.04,.9)*(N-1);kick();
-      var fi=Math.round(want),go=seg(p,.01,.06);
-      tin.style.opacity=(1-go).toFixed(3);tin.style.transform="translateY(calc(-50% - "+(60*go).toFixed(1)+"px))";
-      dim.style.opacity=Math.max(1-go,seg(p,.9,.96)*.5).toFixed(3);
-      steps.forEach(function(s){s[0].classList.toggle("on",fi>=s[1]&&fi<s[2])});
-      var f=io3(seg(p,.9,.97));
+      want=seg(p,0,.88)*(N-1);kick();
+      var go=seg(p,0,.07);
+      hero.style.opacity=(1-go).toFixed(3);hero.style.transform="translateY("+(-70*go).toFixed(1)+"px)";hero.style.visibility=go>=1?"hidden":"";
+      dim.style.opacity=Math.max(.42*(1-seg(p,0,.08)),.45*seg(p,.88,.95)).toFixed(3);
+      var f=io3(seg(p,.88,.96));
       fin.style.opacity=f.toFixed(3);fin.style.transform="translateY("+((1-f)*30).toFixed(1)+"px)";fin.classList.toggle("on",f>.5);
     };
     var oldFrame=frame;frame=function(){oldFrame();tunnelFrame()};
   })();
 
   frame();
+
+  // бронь: в примере сайта заявка никуда не уходит — показываем, как её увидит администратор, и через пару секунд «подтверждаем»
+  var bk=$("#bk");
+  if(bk){
+    var bst=$("#bk-st"),bpre=$("#bk-pre"),berr=$("#bk-err"),bt;
+    var dd=new Date(),p2=function(n){return("0"+n).slice(-2)};bk.date.min=dd.getFullYear()+"-"+p2(dd.getMonth()+1)+"-"+p2(dd.getDate());bk.date.value=bk.date.min;
+    var bshow=function(s){bst.hidden=false;bst.setAttribute("data-s",s);$("span",bst).textContent=s==="bk_ok"?"Бронь № B12345 подтверждена. Ждём вас!":"Бронь № B12345 у администратора · ждём ответа"};
+    bk.addEventListener("submit",function(e){
+      e.preventDefault();berr.hidden=true;
+      var b={date:bk.date.value,time:bk.time.value,guests:bk.guests.value,hall:bk.hall.value,name:bk.name.value.trim(),phone:bk.phone.value.trim(),comment:bk.comment.value.trim()};
+      if(!b.date||!b.time||!b.name||b.phone.replace(/\D/g,"").length<6){berr.hidden=false;berr.textContent="Заполните дату, время, имя и телефон";return}
+      var x=b.date.split("-");
+      bpre.hidden=false;bpre.textContent="Пример: так бронь увидит администратор\n\n📅 Новая бронь № B12345\nДата: "+x[2]+"."+x[1]+"."+x[0]+"\nВремя: "+b.time+"\nГостей: "+b.guests+"\nЗал: "+b.hall+"\nИмя: "+b.name+"\nТелефон: "+b.phone+(b.comment?"\nПожелания: "+b.comment:"")+"\n\n[ ✅ Подтвердить ]  [ ❌ Нет мест ]\n\nНа рабочем сайте заявка сразу приходит администратору с этими кнопками, а гость видит ответ на этой странице.";
+      bshow("sent");clearTimeout(bt);bt=setTimeout(function(){bshow("bk_ok")},3500);
+    });
+  }
 
   // мобильное меню
   var burger=$("#burger");
