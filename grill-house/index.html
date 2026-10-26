@@ -182,14 +182,18 @@ p{margin:0}
 @media (max-width:980px){.path{grid-template-columns:1fr 1fr}.vis-g{grid-template-columns:1fr}}
 @media (max-width:600px){.path{grid-template-columns:1fr}.road li{grid-template-columns:40px minmax(0,1fr)}.road span{grid-column:2}}
 
-/* карточки для отзывов — рисунок вместо снимка экрана */
-.rcards{position:relative;background:radial-gradient(70% 50% at 50% 40%,#2A231B,#151210)!important;aspect-ratio:560/1060;display:block}
-.rc{position:absolute;border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:6px;color:#F1ECE4;background:linear-gradient(140deg,#26211A,#0F0D0A 60%,#1C1813);border:1px solid rgba(230,204,152,.45);box-shadow:0 18px 26px -12px rgba(0,0,0,.9)}
-.rc-l{display:flex;align-items:center;gap:6px;font:600 7px/1 var(--text);letter-spacing:.3em}.rc-l svg{width:16px;height:10px;fill:none;stroke:#C9A35C;stroke-width:1.6}
-.rc b{font:600 13px/1.2 var(--disp)}.rc span{font-size:9px;color:#A99F92;letter-spacing:.06em}
-.rc.big{left:12%;top:8%;width:62%;aspect-ratio:.7;transform:rotate(-5deg)}
-.rc-q{width:70%;align-self:center;margin:8px 0;border-radius:6px;background:#F1ECE4;padding:6px}
-.rc.bill{left:22%;bottom:8%;width:66%;aspect-ratio:1.586;transform:rotate(6deg)}
+/* карточки для отзывов — как карточки LINKO на нашем сайте */
+.rcards{position:relative;background:radial-gradient(80% 55% at 50% 45%,#1E2B25,#0D0C0A 75%)!important;aspect-ratio:560/1060;display:block}
+.rc{position:absolute;border-radius:12px;padding:11px 12px;display:flex;flex-direction:column;justify-content:space-between;gap:8px;color:#F3EDE4;background:linear-gradient(140deg,#26211A,#0F0D0A 60%,#1C1813);border:1px solid rgba(230,204,152,.45);box-shadow:0 22px 30px -12px rgba(0,0,0,.95)}
+.rc-l{display:flex;align-items:center;gap:7px;font:500 8px/1 Onest,sans-serif;letter-spacing:.42em}.rc-l svg{width:20px;height:12px;fill:none;stroke:#C8A46B;stroke-width:1.6}
+.rc-t{display:flex;align-items:center;gap:6px;font:500 11.5px/1.2 Georgia,"Times New Roman",serif;white-space:nowrap}
+.rc-n{width:16px;height:16px;flex:none;fill:none;stroke:#C8A46B;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.rc span{font-size:9px;color:#A69D90;letter-spacing:.08em;text-transform:uppercase}
+.rc.big{left:22%;top:6%;width:54%;aspect-ratio:.68;transform:rotate(-4deg)}
+.rc-q{width:68%;align-self:center;border-radius:6px;background:#F3EDE4;padding:6px}
+.rc.bill{left:10%;bottom:7%;width:78%;aspect-ratio:1.586;transform:rotate(4deg)}
+.rcards img.rc-q{height:auto!important;aspect-ratio:1!important;object-fit:contain!important}
+@media (max-width:700px){.rcards{aspect-ratio:16/11!important}.rc.big{left:8%;top:7%;width:36%}.rc.bill{left:auto;right:6%;bottom:12%;width:52%}}
 </style>
 </head>
 <body>
@@ -206,7 +210,7 @@ p{margin:0}
     <p class="lead">Предложение компании LINKO для ресторанов «Гриль Хаус»: меню с заказом со стола, отзывы, онлайн-бронь и сайт. Каждый сервис решает свою задачу и подключается отдельно, а итоги недели приходят отчётом: сколько гостей открыли меню, что заказали, какой средний чек.</p>
     <div class="ctas"><a class="btn" href="#live">Полистать меню вживую</a><a class="btn ghost" href="#prices">Цены</a></div>
     <div class="chips" aria-label="Сервисы">
-      <a href="#s-menu">QR-меню и заказ</a><a href="#s-card">Карточка на стол</a><a href="#s-review">Отзывы</a><a href="#s-book">Онлайн-бронь</a><a href="#s-site">Сайт</a><a href="#stats">Отчёт за неделю</a>
+      <a href="#s-review">Отзывы</a><a href="#s-card">Карточка на стол</a><a href="#s-menu">QR-меню и заказ</a><a href="#s-book">Онлайн-бронь</a><a href="#s-site">Сайт</a><a href="#stats">Отчёт за неделю</a>
     </div>
   </div>
   <div class="hero-img">
@@ -249,18 +253,20 @@ p{margin:0}
   </div>
   <div class="svcs">
 
-  <article class="svc" id="s-menu">
-    <figure class="shot"><img src="img/s-menu.jpg" width="560" height="1060" loading="lazy" alt="Меню на телефоне гостя: стейк добавлен в заказ, меню предлагает гарниры"></figure>
+  <article class="svc" id="s-review">
+    <figure class="shot rcards" aria-hidden="true">
+      <div class="rc big"><div class="rc-l"><svg viewBox="0 0 34 21"><rect x="1" y="2.5" width="19" height="16" rx="8"/><rect x="14" y="2.5" width="19" height="16" rx="8"/></svg>LINKO</div><img class="rc-q" src="img/qr.svg" alt=""><div class="rc-t"><svg class="rc-n" viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></svg>Оцените визит</div><span>на кассе</span></div>
+      <div class="rc bill"><div class="rc-l"><svg viewBox="0 0 34 21"><rect x="1" y="2.5" width="19" height="16" rx="8"/><rect x="14" y="2.5" width="19" height="16" rx="8"/></svg>LINKO</div><div class="rc-t"><svg class="rc-n" viewBox="0 0 24 24"><path d="M7 6c2.7 3.4 2.7 8.6 0 12M11 4c4 4.7 4 11.3 0 16M15 2c5.3 6 5.3 14 0 20"/></svg>Приложите телефон</div><span>в папке со счётом</span></div>
+    </figure>
     <div class="svc-c">
-      <div class="svc-top"><h3>QR-меню с заказом со стола</h3><div class="price">14 900 ₽<small>+ 2 900 ₽ в месяц</small></div></div>
-      <p class="pain"><span>Проблема</span>В час пик гость ждёт официанта, чтобы просто сделать заказ</p>
+      <div class="svc-top"><h3>Карточки для отзывов</h3><div class="price">от 2 000 ₽<small>на кассу — 3 000 ₽, в папку со счётом — 2 000 ₽</small></div></div>
+      <p class="pain"><span>Проблема</span>Гость расплатился и ушёл — момент, когда он доволен, упущен</p>
       <ul class="gains">
-        <li><b>Заказ без ожидания</b><span>Гость заказывает сам, официант получает заказ с номером стола</span></li>
-        <li><b>Допродажа сама</b><span>К стейку меню предлагает гарниры — гость добавляет в одно касание</span></li>
-        <li><b>Официант по кнопке</b><span>Вызов и счёт прямо со стола</span></li>
+        <li><b>На кассе при оплате</b><span>Большая карточка на виду: отзыв на Яндекс Картах в два касания</span></li>
+        <li><b>Вместе со счётом</b><span>Официант приносит карточку в папке со счётом — гость оставляет отзыв, пока ждёт сдачу</span></li>
+        <li><b>Честно для всех</b><span>Просьба одинаковая для каждого гостя — по правилам площадок</span></li>
       </ul>
-      <p class="incl"><b>В абонплату входит</b><span>Работа 24/7</span><span>Правки меню по сообщению</span><span>Отчёт каждый понедельник</span><span>Новые функции без доплаты</span></p>
-      <div class="svc-f"><ul class="tags"><li>Фото, вес, состав</li><li>Статус заказа для гостя</li><li>Стоп-лист за минуту</li><li>RU / EN</li></ul><button class="more" type="button" data-tab="menu">Полистать меню →</button></div>
+      <div class="svc-f"><ul class="tags"><li>NFC + QR</li><li>Переходы к отзыву — в отчёте</li></ul></div>
     </div>
   </article>
 
@@ -278,20 +284,18 @@ p{margin:0}
     </div>
   </article>
 
-    <article class="svc" id="s-review">
-    <figure class="shot rcards" aria-hidden="true">
-      <div class="rc big"><div class="rc-l"><svg viewBox="0 0 34 21"><rect x="1" y="2.5" width="19" height="16" rx="8"/><rect x="14" y="2.5" width="19" height="16" rx="8"/></svg>ГРИЛЬ ХАУС</div><img class="rc-q" src="img/qr.svg" alt=""><b>Оцените визит</b><span>на кассе</span></div>
-      <div class="rc bill"><div class="rc-l"><svg viewBox="0 0 34 21"><rect x="1" y="2.5" width="19" height="16" rx="8"/><rect x="14" y="2.5" width="19" height="16" rx="8"/></svg>ГРИЛЬ ХАУС</div><b>Понравилось?</b><span>в папке со счётом</span></div>
-    </figure>
+  <article class="svc" id="s-menu">
+    <figure class="shot"><img src="img/s-menu.jpg" width="560" height="1060" loading="lazy" alt="Меню на телефоне гостя: стейк добавлен в заказ, меню предлагает гарниры"></figure>
     <div class="svc-c">
-      <div class="svc-top"><h3>Карточки для отзывов</h3><div class="price">от 2 000 ₽<small>на кассу — 3 000 ₽, в папку со счётом — 2 000 ₽</small></div></div>
-      <p class="pain"><span>Проблема</span>Гость расплатился и ушёл — момент, когда он доволен, упущен</p>
+      <div class="svc-top"><h3>QR-меню с заказом со стола</h3><div class="price">14 900 ₽<small>+ 2 900 ₽ в месяц</small></div></div>
+      <p class="pain"><span>Проблема</span>В час пик гость ждёт официанта, чтобы просто сделать заказ</p>
       <ul class="gains">
-        <li><b>На кассе при оплате</b><span>Большая карточка на виду: отзыв на Яндекс Картах в два касания</span></li>
-        <li><b>Вместе со счётом</b><span>Официант приносит карточку в папке со счётом — гость оставляет отзыв, пока ждёт сдачу</span></li>
-        <li><b>Честно для всех</b><span>Просьба одинаковая для каждого гостя — по правилам площадок</span></li>
+        <li><b>Заказ без ожидания</b><span>Гость заказывает сам, официант получает заказ с номером стола</span></li>
+        <li><b>Допродажа сама</b><span>К стейку меню предлагает гарниры — гость добавляет в одно касание</span></li>
+        <li><b>Официант по кнопке</b><span>Вызов и счёт прямо со стола</span></li>
       </ul>
-      <div class="svc-f"><ul class="tags"><li>NFC + QR</li><li>Переходы к отзыву — в отчёте</li></ul></div>
+      <p class="incl"><b>В абонплату входит</b><span>Работа 24/7</span><span>Правки меню по сообщению</span><span>Отчёт каждый понедельник</span><span>Новые функции без доплаты</span></p>
+      <div class="svc-f"><ul class="tags"><li>Фото, вес, состав</li><li>Статус заказа для гостя</li><li>Стоп-лист за минуту</li><li>RU / EN</li></ul><button class="more" type="button" data-tab="menu">Полистать меню →</button></div>
     </div>
   </article>
 
@@ -404,9 +408,9 @@ p{margin:0}
     <h2>Стоимость за один ресторан</h2>
   </div>
   <div class="prices">
-    <div class="row"><div><b>QR-меню с заказом со стола</b><small>Фото, вес и состав блюд, заказ с номером стола, статус для гостя, вызов официанта и счёт, стоп-лист, таблички с QR</small></div><div class="p">14 900 ₽<small>+ 2 900 ₽ в месяц</small></div></div>
-    <div class="row"><div><b>Карточка на стол</b><small>Страница ресторана: меню, официант, отзыв, игры, сайт, соцсети · карточка NFC + QR — 2 000 ₽ на стол</small></div><div class="p">5 900 ₽</div></div>
     <div class="row"><div><b>Карточки для отзывов</b><small>Большая карточка на кассу — 3 000 ₽ · карточка в папку со счётом — 2 000 ₽</small></div><div class="p">от 2 000 ₽</div></div>
+    <div class="row"><div><b>Карточка на стол</b><small>Страница ресторана: меню, официант, отзыв, игры, сайт, соцсети · карточка NFC + QR — 2 000 ₽ на стол</small></div><div class="p">5 900 ₽</div></div>
+    <div class="row"><div><b>QR-меню с заказом со стола</b><small>Фото, вес и состав блюд, заказ с номером стола, статус для гостя, вызов официанта и счёт, стоп-лист, таблички с QR</small></div><div class="p">14 900 ₽<small>+ 2 900 ₽ в месяц</small></div></div>
     <div class="row"><div><b>Мини-сайт с онлайн-бронью</b><small>Страница ресторана с формой брони и заявкой на банкет</small></div><div class="p">от 15 000 ₽</div></div>
     <div class="row"><div><b>Сайт с анимацией при прокрутке</b><small>Сцена на видео из ресторана, меню, бронь, банкеты, контакты</small></div><div class="p">от 60 000 ₽</div></div>
     <div class="row free"><div><b>Еженедельный отчёт</b><small>Переходы, заказы, средний чек, популярные блюда, отзывы, брони</small></div><div class="p">входит в каждый сервис</div></div>
