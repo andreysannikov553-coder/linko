@@ -45,7 +45,7 @@ p{margin:0}
 
 /* шапка */
 .top{position:fixed;top:0;left:0;right:0;z-index:30;padding-top:env(safe-area-inset-top,0px);transition:background .4s,border-color .4s;border-bottom:1px solid transparent}
-.top:not(.solid){background:linear-gradient(rgba(8,7,6,.78),rgba(8,7,6,0))}
+.top:not(.solid){background:linear-gradient(rgba(8,7,6,.78),rgba(8,7,6,0)) border-box}
 .top.solid{background:rgba(10,9,8,.84);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom-color:var(--line)}
 .top .w{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:72px}
 .logo{display:inline-flex;align-items:center;gap:12px;text-decoration:none;font:500 17px/1 var(--sans);letter-spacing:.42em}

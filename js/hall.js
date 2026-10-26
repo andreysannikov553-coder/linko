@@ -28,6 +28,9 @@ function rr(g, x, y, w, h, r) { g.beginPath(); g.roundRect(x, y, w, h, r); }
 const GLOW = (() => { const [c, g] = can(128, 128), r = g.createRadialGradient(64, 64, 0, 64, 64, 64);
   r.addColorStop(0, "rgba(255,232,190,1)"); r.addColorStop(.22, "rgba(255,196,120,.5)"); r.addColorStop(1, "rgba(255,170,90,0)");
   g.fillStyle = r; g.fillRect(0, 0, 128, 128); return tex(c); })();
+const SOFT = (() => { const [c, g] = can(256, 256), r = g.createRadialGradient(128, 128, 0, 128, 128, 128);
+  [[0, .85], [.25, .55], [.5, .22], [.75, .06], [1, 0]].forEach(([k, a]) => r.addColorStop(k, `rgba(255,214,160,${a})`));
+  g.fillStyle = r; g.fillRect(0, 0, 256, 256); return tex(c); })();
 const FLOOR = (() => { const [c, g] = can(1024, 1024); g.fillStyle = "#1c140e"; g.fillRect(0, 0, 1024, 1024);
   for (let x = 0; x < 1024; x += 64) for (let y = -((x / 64) % 2) * 128; y < 1024; y += 256) {
     const l = 24 + rnd() * 12; g.fillStyle = `rgb(${l + 6},${l},${l * .7})`; g.fillRect(x + 1, y + 1, 62, 254);
@@ -44,7 +47,7 @@ const moon = new THREE.DirectionalLight("#7d93b5", .55); moon.position.set(-6, 8
 const cols = mob ? [-2.7, 0, 2.7] : [-9.9, -6.6, -3.3, 0, 3.3, 6.6, 9.9], rows = [0, -3.3, -6.6, -9.9, -13.2, -16.5];
 const T = [];
 rows.forEach((z) => cols.forEach((x) => { const hero = !x && !z;
-  T.push({ x: hero ? 0 : x + (rnd() - .5) * .6, z: hero ? 0 : z + (rnd() - .5) * .6, a: rnd() * Math.PI, hero }); }));
+  T.push({ x: hero ? 0 : x + (rnd() - .5) * .6, z: hero ? 0 : z + (rnd() - .5) * .6, a: hero ? Math.PI / 2 : rnd() * Math.PI, hero }); }));
 const n = T.length, o = new THREE.Object3D();
 function inst(geo, mat, count, place, shadow) {
   const m = new THREE.InstancedMesh(geo, mat, count); let k = 0;
@@ -68,16 +71,15 @@ inst(new THREE.ConeGeometry(.2, .17, 32, 1, true), brass, n, (t, w) => { at(t.x,
 inst(new THREE.CylinderGeometry(.004, .004, 3), iron, n, (t, w) => { at(t.x, LY + 1.6, t.z); w(); });
 const add = { transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, map: GLOW };
 inst(new THREE.SphereGeometry(.035, 12, 8), new THREE.MeshBasicMaterial({ color: "#ffe6b8" }), n, (t, w) => { at(t.x, LY + .02, t.z); w(); });
-const poolT = new THREE.MeshBasicMaterial({ ...add, color: "#ffb36b", opacity: .55 });
-inst(new THREE.CircleGeometry(.62, 40).rotateX(-Math.PI / 2), poolT, n, (t, w) => { at(t.x, .777, t.z); w(); });
-inst(new THREE.CircleGeometry(1.7, 40).rotateX(-Math.PI / 2), new THREE.MeshBasicMaterial({ ...add, color: "#ff9e55", opacity: .34 }), n, (t, w) => { at(t.x, .003, t.z); w(); });
+inst(new THREE.PlaneGeometry(1.3, 1.3).rotateX(-Math.PI / 2), new THREE.MeshBasicMaterial({ ...add, map: SOFT, color: "#ffc078", opacity: .75 }), n - 1, (t, w) => { if (!t.hero) { at(t.x, .777, t.z); w(); } });
+inst(new THREE.PlaneGeometry(3.6, 3.6).rotateX(-Math.PI / 2), new THREE.MeshBasicMaterial({ ...add, map: SOFT, color: "#ffa860", opacity: .45 }), n, (t, w) => { at(t.x, .003, t.z); w(); });
 T.forEach((t) => { const s = new THREE.Sprite(new THREE.SpriteMaterial({ ...add, color: "#ffcf8a", opacity: 1, fog: true })); s.position.set(t.x, LY + .01, t.z); s.scale.setScalar(.95); S.add(s); });
 // живой свет над ближними столами
 T.filter((t) => t.z > -7 && Math.abs(t.x) < 4).forEach((t) => {
   const p = new THREE.PointLight("#ffc98e", t.hero ? 0 : 3.6, 4, 2); p.position.set(t.x, LY - .05, t.z); S.add(p); });
 const spot = new THREE.SpotLight("#ffd29a", 9, 4, .62, .75, 2);
 spot.position.set(0, LY - .02, 0); spot.target.position.set(0, .75, 0); spot.castShadow = true;
-spot.shadow.mapSize.set(2048, 2048); spot.shadow.radius = 5; spot.shadow.bias = -.0004; spot.shadow.normalBias = .002; spot.shadow.camera.near = .5; spot.shadow.camera.far = 2.2; S.add(spot, spot.target);
+spot.shadow.mapSize.set(2048, 2048); spot.shadow.radius = 5; spot.shadow.bias = -.0004; spot.shadow.normalBias = .002; spot.shadow.camera.near = .25; spot.shadow.camera.far = 2.2; S.add(spot, spot.target);
 // стойка бара в глубине
 const bar = new THREE.Mesh(new THREE.BoxGeometry(16, 1.1, .7), new THREE.MeshStandardMaterial({ color: "#1c140e", roughness: .5 }));
 bar.position.set(0, .55, -20.5); S.add(bar);
@@ -98,31 +100,54 @@ const order = T.filter((t) => !t.hero).sort((a, b) => a.z - b.z || a.x - b.x);
 order.forEach((t, k) => { t.on = .1 + .36 * k / (order.length - 1); });
 T.forEach((t) => {
   t.cx = t.hero ? 0 : t.x + Math.sin(t.a + 1.4) * .22; t.cz = t.hero ? .06 : t.z + Math.cos(t.a + 1.4) * .22;
-  t.g = new THREE.Sprite(new THREE.SpriteMaterial({ ...add, color: "#e8c07a", opacity: 0 })); t.g.position.set(t.cx, .8, t.cz); S.add(t.g);
-  t.r = new THREE.Mesh(new THREE.RingGeometry(.8, 1, 64).rotateX(-Math.PI / 2), new THREE.MeshBasicMaterial({ color: "#e6c27f", transparent: true, opacity: 0, depthWrite: false, blending: THREE.AdditiveBlending }));
+  t.g = new THREE.Mesh(new THREE.PlaneGeometry(1, 1).rotateX(-Math.PI / 2), new THREE.MeshBasicMaterial({ ...add, map: SOFT, color: "#f2c77e", opacity: 0 }));
+  t.g.position.set(t.cx, .7783, t.cz); S.add(t.g);
+  t.r = new THREE.Mesh(new THREE.RingGeometry(.93, 1, 64).rotateX(-Math.PI / 2), new THREE.MeshBasicMaterial({ color: "#e6c27f", transparent: true, opacity: 0, depthWrite: false, blending: THREE.AdditiveBlending }));
   t.r.position.set(t.cx, .7785, t.cz); S.add(t.r);
   if (!t.hero) { const c = new THREE.Mesh(new THREE.BoxGeometry(.086, .003, .054), new THREE.MeshStandardMaterial({ color: "#100d0a", roughness: .4, metalness: .3, emissive: "#c8a46b", emissiveIntensity: 0 }));
     c.position.set(t.cx, .7765, t.cz); c.rotation.y = t.a; S.add(c); t.c = c; }
 });
-const heroT = T.find((t) => t.hero); heroT.on = .5;
-heroT.r.geometry.dispose(); heroT.r.geometry = new THREE.RingGeometry(.985, 1, 128).rotateX(-Math.PI / 2);
+const heroT = T.find((t) => t.hero); heroT.on = .5; heroT.r.visible = false;
 
 // --- карточка героя и телефон
 const [cc, cg] = can(1024, 644);
-const [sc, sg] = can(720, 1480);
+const [sc, sg] = can(720, 1530);
 const cardTex = tex(cc), scrTex = tex(sc);
 const card = new THREE.Mesh(new THREE.BoxGeometry(.086, .0025, .054), [iron, iron, new THREE.MeshStandardMaterial({ map: cardTex, roughness: .35, metalness: .2 }), iron, iron, iron]);
 card.position.set(0, .7765, .06); card.rotation.y = -.22; card.castShadow = card.receiveShadow = true; S.add(card);
 
-const shp = new THREE.Shape(); { const w = .074, h = .152, r = .012, x = -w / 2, y = -h / 2;
-  shp.moveTo(x + r, y); shp.lineTo(x + w - r, y); shp.quadraticCurveTo(x + w, y, x + w, y + r); shp.lineTo(x + w, y + h - r); shp.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
-  shp.lineTo(x + r, y + h); shp.quadraticCurveTo(x, y + h, x, y + h - r); shp.lineTo(x, y + r); shp.quadraticCurveTo(x, y, x + r, y); }
-const body = new THREE.Mesh(new THREE.ExtrudeGeometry(shp, { depth: .006, bevelEnabled: true, bevelThickness: .0015, bevelSize: .0015, bevelSegments: 3, curveSegments: 10 }),
-  new THREE.MeshStandardMaterial({ color: "#1d1a16", roughness: .28, metalness: .75 }));
-body.rotation.x = -Math.PI / 2; body.position.y = -.0075; body.castShadow = true;
+// отражения для металла и стекла: маленькая «комната» с лампами
+const ENV = (() => { const es = new THREE.Scene(), hdr = (c, k) => new THREE.MeshBasicMaterial({ color: new THREE.Color(c).multiplyScalar(k), side: THREE.DoubleSide });
+  es.add(new THREE.Mesh(new THREE.BoxGeometry(20, 8, 20), new THREE.MeshBasicMaterial({ color: "#1a120c", side: THREE.BackSide })));
+  [[-3, 3.5, -2], [2, 3.6, 1], [0, 3.8, -5], [5, 3.4, -3], [-5, 3.5, 3]].forEach(([x, y, z]) => { const m = new THREE.Mesh(new THREE.CircleGeometry(.6, 24), hdr("#ffcf8f", 9)); m.position.set(x, y, z); m.lookAt(0, 0, 0); es.add(m); });
+  const bar = new THREE.Mesh(new THREE.PlaneGeometry(14, .5), hdr("#ffb870", 4)); bar.position.set(0, 1.2, -9.5); es.add(bar);
+  const soft = new THREE.Mesh(new THREE.PlaneGeometry(6, 3), hdr("#fff1dc", 1.4)); soft.position.set(-6, 2, 6); soft.lookAt(0, 0, 0); es.add(soft);
+  const pm = new THREE.PMREMGenerator(R), t = pm.fromScene(es, .03).texture; pm.dispose(); return t; })();
+wood.envMap = ENV; wood.envMapIntensity = .35;
+card.material[2].envMap = ENV; card.material[2].envMapIntensity = .6;
+
+function rrShape(w, h, r) { const s = new THREE.Shape(), x = -w / 2, y = -h / 2;
+  s.moveTo(x + r, y); s.lineTo(x + w - r, y); s.absarc(x + w - r, y + r, r, -Math.PI / 2, 0); s.lineTo(x + w, y + h - r); s.absarc(x + w - r, y + h - r, r, 0, Math.PI / 2);
+  s.lineTo(x + r, y + h); s.absarc(x + r, y + h - r, r, Math.PI / 2, Math.PI); s.lineTo(x, y + r); s.absarc(x + r, y + r, r, Math.PI, Math.PI * 1.5); return s; }
+const PW = .0716, PH = .1476, PD = .0058, PB = .001;
+const glassM = new THREE.MeshPhysicalMaterial({ color: "#050506", roughness: .08, metalness: 0, clearcoat: 1, clearcoatRoughness: .05, envMap: ENV, envMapIntensity: 1.1 });
+const frameM = new THREE.MeshStandardMaterial({ color: "#a89c8c", roughness: .3, metalness: 1, envMap: ENV, envMapIntensity: 1.25 });
+const body = new THREE.Mesh(new THREE.ExtrudeGeometry(rrShape(PW, PH, .0105), { depth: PD, bevelEnabled: true, bevelThickness: PB, bevelSize: .0009, bevelSegments: 5, curveSegments: 28 }), [glassM, frameM]);
+body.rotation.x = -Math.PI / 2; body.position.y = -(PD + PB); body.castShadow = true;
+function flatUV(geo, w, h) { const p = geo.attributes.position, uv = geo.attributes.uv; for (let i = 0; i < p.count; i++) uv.setXY(i, p.getX(i) / w + .5, p.getY(i) / h + .5); uv.needsUpdate = true; return geo; }
+const SW = .0676, SH = .1436;
 const scrMat = new THREE.MeshBasicMaterial({ map: scrTex, color: "#000", toneMapped: false });
-const scr = new THREE.Mesh(new THREE.PlaneGeometry(.068, .146), scrMat); scr.rotation.x = -Math.PI / 2; scr.position.y = .0002;
-const phone = new THREE.Group(); phone.add(body, scr); S.add(phone);
+const scr = new THREE.Mesh(flatUV(new THREE.ShapeGeometry(rrShape(SW, SH, .0088), 24), SW, SH), scrMat); scr.rotation.x = -Math.PI / 2; scr.position.y = .00012;
+// блик стекла поверх экрана
+const glare = new THREE.Mesh(scr.geometry, new THREE.MeshStandardMaterial({ color: "#000", roughness: .05, metalness: 0, envMap: ENV, envMapIntensity: 1.1, transparent: true, opacity: .3, depthWrite: false, blending: THREE.AdditiveBlending }));
+glare.rotation.x = -Math.PI / 2; glare.position.y = .00025;
+const phone = new THREE.Group(); phone.add(body, scr, glare); S.add(phone);
+[[-1, -.0455, .0135], [-1, -.0295, .0135], [-1, -.063, .007], [1, -.04, .021]].forEach(([sd, z, l]) => {
+  const b = new THREE.Mesh(new THREE.BoxGeometry(.0011, .0024, l), frameM); b.position.set(sd * (PW / 2 + .0011), -(PD + PB) / 2 - PB / 2, z); phone.add(b); });
+// свет экрана на стол и мягкая вспышка в момент касания
+const scrLight = new THREE.PointLight("#dce6d4", 0, .6, 2); scrLight.position.set(0, .07, 0); phone.add(scrLight);
+const tapGlow = new THREE.Mesh(new THREE.PlaneGeometry(1, 1).rotateX(-Math.PI / 2), new THREE.MeshBasicMaterial({ ...add, map: SOFT, color: "#f5cf8c", opacity: 0 }));
+tapGlow.position.set(.02, .7784, .03); S.add(tapGlow);
 
 function drawCard(qr) {
   const g = cg, W = 1024, Hh = 644, gr = g.createLinearGradient(0, 0, W, Hh);
@@ -137,24 +162,34 @@ function drawCard(qr) {
   g.fillStyle = "#F3EDE4"; rr(g, 676, 268, 290, 290, 26); g.fill(); if (qr) g.drawImage(qr, 696, 288, 250, 250);
   cardTex.needsUpdate = true;
 }
-const rows4 = ["Меню", "Позвать официанта", "Попросить счёт", "Оставить отзыв"];
+const ICONS = { menu: "M7 3v8a2 2 0 0 0 2 2v8M5 3v5M9 3v5M17 21V3c-2.5 1.5-3.5 4-3.5 7.5S15 14 17 14", bell: "M6 16V11a6 6 0 1 1 12 0v5l1.5 2H4.5zM10 20.5a2 2 0 0 0 4 0",
+  bill: "M6 3h12v18l-2-1.4-2 1.4-2-1.4-2 1.4-2-1.4L6 21zM9 8h6M9 12h6M9 16h3", star: "M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z" };
+const rows4 = [["menu", "Меню", "блюда, фото и цены"], ["bell", "Позвать официанта", "подойдёт к столу 7"], ["bill", "Попросить счёт", "картой или наличными"], ["star", "Оставить отзыв", "на Яндекс Картах"]];
 let scrK = -1;
 function drawScreen(k) {
   const q = Math.round(k * 90) / 90; if (q === scrK) return; scrK = q;
-  const g = sg, W = 540, Hh = 1110; g.setTransform(4 / 3, 0, 0, 4 / 3, 0, 0); g.fillStyle = "#0E0C0A"; g.fillRect(0, 0, W, Hh);
-  const bg = g.createRadialGradient(270, 260, 0, 270, 260, 520); bg.addColorStop(0, "rgba(20,40,31,.95)"); bg.addColorStop(1, "rgba(14,12,10,0)"); g.fillStyle = bg; g.fillRect(0, 0, W, Hh);
-  g.fillStyle = "#000"; rr(g, 210, 22, 120, 34, 17); g.fill();
-  const a = ss(0, .35, q); g.globalAlpha = a; g.textAlign = "center"; g.textBaseline = "middle";
-  g.strokeStyle = "#C8A46B"; g.lineWidth = 4; rr(g, 222, 140, 54, 44, 22); g.stroke(); rr(g, 262, 140, 54, 44, 22); g.stroke();
-  g.fillStyle = "#C8A46B"; g.font = '500 22px Onest, sans-serif'; g.letterSpacing = "8px"; g.fillText("СТОЛ 7", 274, 236); g.letterSpacing = "0px";
-  g.fillStyle = "#F3EDE4"; g.font = '500 58px "Playfair Display", Georgia, serif'; g.fillText("Добрый вечер", 270, 312);
+  const g = sg, W = 540, Hh = 1147; g.setTransform(4 / 3, 0, 0, 4 / 3, 0, 0); g.fillStyle = "#0D0B09"; g.fillRect(0, 0, W, Hh);
+  const bg = g.createRadialGradient(270, 210, 0, 270, 210, 560); bg.addColorStop(0, "rgba(22,44,34,.95)"); bg.addColorStop(1, "rgba(13,11,9,0)"); g.fillStyle = bg; g.fillRect(0, 0, W, Hh);
+  // строка состояния и вырез камеры
+  g.textBaseline = "middle"; g.fillStyle = "#F3EDE4"; g.font = "600 27px Onest, sans-serif"; g.textAlign = "left"; g.fillText("21:47", 54, 52);
+  g.fillStyle = "#000"; rr(g, 205, 30, 130, 40, 20); g.fill();
+  g.fillStyle = "#F3EDE4"; [0, 1, 2, 3].forEach((i) => { rr(g, 386 + i * 9, 60 - 6 - i * 4, 6, 8 + i * 4, 1.5); g.fill(); });
+  g.strokeStyle = "rgba(243,237,228,.55)"; g.lineWidth = 2; rr(g, 434, 42, 46, 21, 6); g.stroke(); g.fillStyle = "#F3EDE4"; rr(g, 437, 45, 31, 15, 3.5); g.fill(); rr(g, 482, 48, 3, 9, 1.5); g.fill();
+  const a = ss(0, .3, q), lift = (1 - a) * 22; g.globalAlpha = a; g.textAlign = "center";
+  g.strokeStyle = "#C8A46B"; g.lineWidth = 3.2; rr(g, 228, 128 + lift, 48, 38, 19); g.stroke(); rr(g, 264, 128 + lift, 48, 38, 19); g.stroke();
+  g.fillStyle = "#C8A46B"; g.font = "500 19px Onest, sans-serif"; g.letterSpacing = "7px"; g.fillText("СТОЛ 7", 273, 206 + lift); g.letterSpacing = "0px";
+  g.fillStyle = "#F3EDE4"; g.font = '500 54px "Playfair Display", Georgia, serif'; g.fillText("Добрый вечер", 270, 268 + lift);
+  g.fillStyle = "#A69D90"; g.font = "400 24px Onest, sans-serif"; g.fillText("Чем можем помочь?", 270, 318 + lift);
   g.textAlign = "left";
-  rows4.forEach((t, i) => { const v = ss(.2 + i * .14, .45 + i * .14, q), y = 410 + i * 150 + (1 - v) * 40; g.globalAlpha = v;
-    g.fillStyle = "rgba(29,26,21,.95)"; rr(g, 40, y, 460, 124, 26); g.fill(); g.strokeStyle = "rgba(200,164,107,.35)"; g.lineWidth = 2; g.stroke();
-    g.strokeStyle = "#C8A46B"; g.lineWidth = 3; g.beginPath(); g.arc(104, y + 62, 30, 0, 7); g.stroke();
-    g.fillStyle = "#C8A46B"; g.beginPath(); g.arc(104, y + 62, 7, 0, 7); g.fill();
-    g.fillStyle = "#F3EDE4"; g.font = '500 34px Onest, sans-serif'; g.fillText(t, 158, y + 64); });
-  g.globalAlpha = 1; scrTex.needsUpdate = true;
+  rows4.forEach(([ic, t, sub], i) => { const v = ss(.18 + i * .13, .42 + i * .13, q), y = 382 + i * 146 + (1 - v) * 34; g.globalAlpha = v;
+    g.fillStyle = "rgba(30,27,22,.96)"; rr(g, 34, y, 472, 124, 28); g.fill(); g.strokeStyle = "rgba(200,164,107,.28)"; g.lineWidth = 1.6; g.stroke();
+    g.fillStyle = "rgba(200,164,107,.13)"; g.beginPath(); g.arc(100, y + 62, 34, 0, 7); g.fill();
+    g.save(); g.translate(82, y + 44); g.scale(1.5, 1.5); g.strokeStyle = "#D9B97E"; g.lineWidth = 1.5; g.lineCap = g.lineJoin = "round"; g.stroke(new Path2D(ICONS[ic])); g.restore();
+    g.fillStyle = "#F3EDE4"; g.font = "500 29px Onest, sans-serif"; g.fillText(t, 154, y + 50);
+    g.fillStyle = "#8F8578"; g.font = "400 21px Onest, sans-serif"; g.fillText(sub, 154, y + 84);
+    g.strokeStyle = "#6f665b"; g.lineWidth = 2.6; g.beginPath(); g.moveTo(472, y + 50); g.lineTo(484, y + 62); g.lineTo(472, y + 74); g.stroke(); });
+  g.globalAlpha = 1; g.fillStyle = "rgba(243,237,228,.45)"; rr(g, 200, 1112, 140, 6, 3); g.fill();
+  scrTex.needsUpdate = true;
 }
 drawCard(); drawScreen(0);
 Promise.all([d.fonts.load('500 54px "Playfair Display"'), d.fonts.load("500 34px Onest"), d.fonts.load("400 30px Onest")]).catch(() => {}).then(() => {
@@ -165,7 +200,7 @@ Promise.all([d.fonts.load('500 54px "Playfair Display"'), d.fonts.load("500 34px
 const DN = mob ? 260 : 600, dp = new Float32Array(DN * 3), dv = new Float32Array(DN);
 for (let i = 0; i < DN; i++) { dp[i * 3] = (rnd() - .5) * 16; dp[i * 3 + 1] = .8 + rnd() * 2.8; dp[i * 3 + 2] = 3 - rnd() * 21; dv[i] = .02 + rnd() * .05; }
 const dg = new THREE.BufferGeometry(); dg.setAttribute("position", new THREE.BufferAttribute(dp, 3));
-S.add(new THREE.Points(dg, new THREE.PointsMaterial({ ...add, color: "#f0d2a0", size: .03, opacity: .55 })));
+S.add(new THREE.Points(dg, new THREE.PointsMaterial({ ...add, color: "#f0d2a0", size: .02, opacity: .5 })));
 
 // --- путь камеры
 const V = (x, y, z) => new THREE.Vector3(x, y, z);
@@ -185,28 +220,31 @@ addEventListener("resize", size); size();
 
 // --- кадр
 const wins = caps.map((c) => c.dataset.w.split(",").map(Number));
+const SNAP = /[?&]snap/.test(location.search); // для проверки кадров: без инерции
 let cur = 0, run = true, last = performance.now(), fN = -90, fT = 0;
 const prog = () => { const r = hall.getBoundingClientRect(); return cl(-r.top / (hall.offsetHeight - innerHeight)); };
 function frame(now) {
   const raw = (now - last) / 1000, dt = Math.min(.05, raw), time = now / 1000; last = now;
   // плавность важнее пикселей: если кадры не успевают, чуть снижаем разрешение
   if (++fN > 0) { fT += raw; if (fN === 45) { if (fT / fN > 1 / 42 && dpr > 1) { dpr = Math.max(1, dpr - .25); R.setPixelRatio(dpr); size(); } fN = 0; fT = 0; } }
-  cur += (prog() - cur) * (1 - Math.exp(-dt * 3.6)); const p = cur;
+  cur = SNAP ? prog() : cur + (prog() - cur) * (1 - Math.exp(-dt * 2.6)); const p = cur;
   const u = seg(p); cP.getPoint(u, cam.position); cL.getPoint(u, tg);
   const sway = 1 - ss(.5, .8, p); cam.position.x += Math.sin(time * .23) * .25 * sway; cam.position.y += Math.sin(time * .31) * .1 * sway; cam.lookAt(tg);
   T.forEach((t) => { const k = ss(t.on, t.on + .05, p), w = p - t.on;
     if (t.c) t.c.material.emissiveIntensity = k * (1.8 + .5 * Math.sin(time * 2 + t.x));
     const near = t.hero ? 1 - ss(.55, .62, p) : 1;
-    t.g.material.opacity = k * near; t.g.scale.setScalar(.15 + k * .55);
+    t.g.material.opacity = k * near * (t.hero ? .4 : .9); t.g.scale.setScalar(t.hero ? .16 + k * .08 : .2 + k * .5);
     const pulse = w > 0 && w < .08 ? w / .08 : ((time * .45 + t.x * .13 + t.z * .07) % 1);
-    const ring = t.hero ? 0 : k; t.r.scale.setScalar(.04 + pulse * .6); t.r.material.opacity = ring * (1 - pulse) * .95; });
+    const ring = t.hero ? 0 : k; t.r.scale.setScalar(.04 + pulse * .34); t.r.material.opacity = ring * (1 - pulse) * .7; });
   // касание: телефон опускается на карточку, по столу расходится волна, экран загорается
   const down = ss(.56, .74, p), up = ss(.8, .97, p), tap = ss(.73, .76, p);
-  phone.position.set(.02 - .01 * up, 1.35 - (1.35 - .787) * down + .145 * up, .42 - .39 * down + .1 * up);
-  phone.rotation.set(.55 * (1 - down) + .62 * up, -.22 + .1 * (1 - down), 0);
+  // телефон опускается на карточку сверху, из-за кадра; тень проявляется по мере приближения к столу
+  phone.position.set(.02 - .01 * up, 1.9 - (1.9 - .787) * down + .145 * up, .12 - .09 * down + .1 * up);
+  phone.rotation.set(.25 * (1 - down) + .62 * up, -.22 + .15 * (1 - down), .08 * (1 - down));
+  spot.shadow.intensity = 1 - ss(.9, 1.1, phone.position.y);
   phone.visible = p > .5;
-  const hw = ss(.74, .9, p); heroT.r.scale.setScalar(.03 + hw * .55); heroT.r.material.opacity = tap * (1 - hw) * .85;
-  scrMat.color.setScalar(.06 + .94 * tap); drawScreen(ss(.76, .95, p));
+  tapGlow.scale.setScalar(.24 + .22 * ss(.72, .9, p)); tapGlow.material.opacity = ss(.72, .755, p) * (1 - ss(.76, .9, p)) * .5;
+  scrLight.intensity = .01 * tap; scrMat.color.setScalar(.015 + .985 * tap); drawScreen(ss(.76, .95, p));
   spot.intensity = 2.5 + 3 * ss(.3, .6, p);
   R.toneMappingExposure = 2 - .7 * ss(.45, .66, p);
   for (let i = 0; i < DN; i++) { dp[i * 3 + 1] += dv[i] * dt; dp[i * 3] += Math.sin(time * .3 + i) * dt * .02; if (dp[i * 3 + 1] > 3.6) dp[i * 3 + 1] = .8; }
