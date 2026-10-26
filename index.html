@@ -220,7 +220,7 @@ html.js .rv.in{opacity:1;transform:none}
 
 <header class="top" id="top"><div class="w">
   <a class="logo" href="#"><svg viewBox="0 0 34 21" aria-hidden="true"><rect x="1" y="2.5" width="19" height="16" rx="8"/><rect x="14" y="2.5" width="19" height="16" rx="8"/></svg>LINKO</a>
-  <nav class="nav" aria-label="Разделы"><a href="#how">Как это работает</a><a href="#works">Наши работы</a><a href="#services">Сервисы</a><a href="#steps">Запуск</a><a href="#lead">Заявка</a></nav>
+  <nav class="nav" aria-label="Разделы"><a href="#how">Как это работает</a><a href="#works">Наши работы</a><a href="#services">Сервисы</a><a href="#price">Цены</a><a href="#faq">Вопросы</a><a href="#lead">Заявка</a></nav>
   <a class="btn" href="#lead">Оставить заявку</a>
 </div></header>
 
@@ -318,6 +318,46 @@ html.js .rv.in{opacity:1;transform:none}
   </div>
 </div></section>
 
+<section class="sec" id="price"><div class="w">
+  <div class="head rv"><span class="kick">Стоимость</span><h2>Посчитайте <em>для своего зала</em></h2><p class="lead">Цены за одно заведение. Без комиссий с заказов, отчёт по понедельникам входит в каждый сервис.</p></div>
+  <div class="calc rv" id="calc">
+    <div class="calc-o">
+      <div class="calc-n"><label for="c-t">Столов в зале</label><div class="calc-r"><input id="c-t" type="range" min="1" max="60" value="12"><output id="c-tv" for="c-t">12</output></div></div>
+      <label class="calc-i"><input type="checkbox" data-k="card" checked><span><b>Карточки на столы</b><small>Страница стола: меню, официант, отзыв · 5 900 ₽ + 2 000 ₽ за карточку NFC + QR</small></span></label>
+      <div class="calc-g" role="radiogroup" aria-label="Меню"><span>Меню</span>
+        <label class="calc-i"><input type="radio" name="c-m" data-k="m0"><span><b>Без меню</b></span></label>
+        <label class="calc-i"><input type="radio" name="c-m" data-k="m1"><span><b>QR-меню</b><small>Фото, вес, состав, стоп-лист, RU / EN · 7 900 ₽ + 1 500 ₽ в месяц</small></span></label>
+        <label class="calc-i"><input type="radio" name="c-m" data-k="m2" checked><span><b>Меню с заказом со стола</b><small>Заказ с номером стола, вызов официанта и счёт · 14 900 ₽ + 2 900 ₽ в месяц</small></span></label></div>
+      <label class="calc-i"><input type="checkbox" data-k="rev"><span><b>Карточка для отзывов на кассу</b><small>Яндекс Карты в два касания · 3 000 ₽</small></span></label>
+      <div class="calc-g" role="radiogroup" aria-label="Сайт"><span>Сайт</span>
+        <label class="calc-i"><input type="radio" name="c-s" data-k="s0" checked><span><b>Без сайта</b></span></label>
+        <label class="calc-i"><input type="radio" name="c-s" data-k="s1"><span><b>Мини-сайт с онлайн-бронью</b><small>Меню, фото, бронь и заявка на банкет · от 15 000 ₽</small></span></label>
+        <label class="calc-i"><input type="radio" name="c-s" data-k="s2"><span><b>Сайт со сценой</b><small>Снимаем у вас, гость «заходит» в зал · от 60 000 ₽</small></span></label></div>
+    </div>
+    <aside class="calc-s" aria-live="polite">
+      <span class="kick">Ваш расчёт</span>
+      <div class="calc-l" id="c-l"></div>
+      <div class="calc-t"><span>Разово</span><b id="c-one">0 ₽</b></div>
+      <div class="calc-t"><span>В месяц</span><b id="c-mo">0 ₽</b></div>
+      <p class="calc-f">Абонплата — работа сервиса 24/7, правки меню по сообщению и отчёт по понедельникам. Несколько заведений считаем пакетом.</p>
+      <a class="btn" href="#lead" id="c-go">Получить точный расчёт</a>
+    </aside>
+  </div>
+</div></section>
+
+<section class="sec" id="faq"><div class="w faq-g">
+  <div class="head rv"><span class="kick">Вопросы</span><h2>Частые <em>вопросы</em></h2><p class="lead">Не нашли ответ — напишите в <a href="https://t.me/andrey_vit" rel="noopener" data-goal="tg">Telegram</a>.</p></div>
+  <div class="faq rv">
+    <details><summary>Гостю нужно скачивать приложение?</summary><p>Нет. Меню, заказ и отзыв открываются в обычном браузере телефона — касанием карточки или камерой по QR-коду.</p></details>
+    <details><summary>А если в телефоне нет NFC?</summary><p>На каждой карточке есть QR-код — его открывает камера любого смартфона. NFC читают iPhone начиная с XS и большинство Android: достаточно поднести телефон.</p></details>
+    <details><summary>Сколько стоит карточка?</summary><p>Карточка на стол с NFC и QR — 2 000 ₽, большая карточка на кассу — 3 000 ₽. Страница стола, на которую она ведёт, — 5 900 ₽ разово. Форма и дизайн — под ваше заведение.</p></details>
+    <details><summary>Как поменять цены или блюда в меню?</summary><p>Напишите нам сообщение — поправим. Карточки и QR-коды остаются те же, перепечатывать ничего не нужно. Правки входят в абонплату.</p></details>
+    <details><summary>Можно подключить только отзывы?</summary><p>Да. Каждый сервис подключается отдельно: можно начать с одной карточки для отзывов на кассе — 3 000 ₽, без абонплаты.</p></details>
+    <details><summary>Вы берёте процент с заказов?</summary><p>Нет. Только разовая цена за сборку и абонплата за меню — от суммы заказов ничего не зависит.</p></details>
+    <details><summary>Как быстро можно запуститься?</summary><p>Демо на ваших блюдах — через 2–3 дня после разговора. Дальше ставим карточки на столы и показываем персоналу, как принимать заказы.</p></details>
+  </div>
+</div></section>
+
 <section class="sec lead-sec" id="lead"><div class="w lead-g">
   <div class="lead-t rv">
     <span class="kick">Заявка</span>
@@ -326,6 +366,7 @@ html.js .rv.in{opacity:1;transform:none}
     <ul class="contact">
       <li><span class="badge"><svg class="ic"><use href="#i-phone"/></svg></span>Свяжемся в течение дня</li>
       <li><span class="badge"><svg class="ic"><use href="#i-palette"/></svg></span>Демо — бесплатно и без обязательств</li>
+      <li><span class="badge"><svg class="ic"><use href="#i-send"/></svg></span><a href="https://t.me/andrey_vit" rel="noopener" data-goal="tg">Telegram: @andrey_vit</a></li>
     </ul>
   </div>
   <form id="form" class="rv" novalidate>
@@ -355,6 +396,7 @@ html.js .rv.in{opacity:1;transform:none}
   <a class="logo" href="#"><svg viewBox="0 0 34 21" aria-hidden="true"><rect x="1" y="2.5" width="19" height="16" rx="8"/><rect x="14" y="2.5" width="19" height="16" rx="8"/></svg>LINKO</a>
   <span>Цифровые сервисы для ресторанов · 2026</span>
 </div></footer>
+<a class="tgb" id="tgb" href="https://t.me/andrey_vit" rel="noopener" data-goal="tg" aria-label="Написать в Telegram"><svg class="ic"><use href="#i-send"/></svg>Написать в Telegram</a>
 
 <script>
 (function(){
@@ -418,12 +460,13 @@ html.js .rv.in{opacity:1;transform:none}
     go.disabled = true; res.hidden = false; res.textContent = "Отправляем…";
     fetch("https://qr-orders.andreysannikov553.workers.dev/lead", {method: "POST", headers: {"Content-Type": "text/plain"},
       body: JSON.stringify({site: "linko", name: name, phone: phone, service: [f.place.value.trim(), want].filter(Boolean).join(" · "), comment: f.comment.value.trim(), website: f.website.value})})
-      .then(function(r){ if (!r.ok) throw 0; res.textContent = "Спасибо! Заявка у нас — ответим в течение дня."; f.reset(); })
+      .then(function(r){ if (!r.ok) throw 0; res.textContent = "Спасибо! Заявка у нас — ответим в течение дня."; f.reset(); if (window.linkoGoal) linkoGoal("lead"); })
       .catch(function(){ res.innerHTML = 'Не получилось отправить. Напишите нам в <a href="https://t.me/andrey_vit" rel="noopener">Telegram</a> — ответим сразу.'; })
       .then(function(){ go.disabled = false; });
   });
 })();
 </script>
+<script src="js/extra.js" defer></script>
 <script type="module" src="js/hall.js" onerror="document.documentElement.classList.add('nogl')"></script>
 </body>
 </html>
