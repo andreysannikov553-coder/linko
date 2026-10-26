@@ -109,17 +109,6 @@ p{margin:0}
 
 /* наши работы */
 .works{background:linear-gradient(180deg,var(--bg),var(--em) 50%,var(--bg))}
-.rail{display:flex;gap:28px;overflow-x:auto;scroll-snap-type:x mandatory;padding-block:10px 30px;padding-inline:max(24px,calc(50vw - 576px));scrollbar-width:none}
-.rail::-webkit-scrollbar{display:none}
-.wk{flex:none;scroll-snap-align:center;display:flex;flex-direction:column;gap:14px;align-items:center;margin:0}
-.wk .phone{position:relative;right:auto;top:auto;width:220px;animation:none;transition:transform .5s var(--ease)}
-.wk:hover .phone{transform:translateY(-8px)}
-.wk b{font:500 19px/1.2 var(--serif)}
-.wk span{font-size:13px;color:var(--soft);display:flex;align-items:center;gap:8px}
-.wk i{width:12px;height:12px;border-radius:50%;display:inline-block}
-.rail-nav{display:flex;gap:10px}
-.rail-nav button{width:48px;height:48px;border-radius:50%;border:1px solid var(--line2);background:transparent;color:var(--gold);cursor:pointer;display:grid;place-items:center;transition:background .3s,color .3s}
-.rail-nav button:hover{background:var(--gold);color:#120F0B}
 .phys{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:clamp(48px,6vw,80px)}
 .pc{border-radius:24px;padding:28px 26px;background:var(--surf);border:1px solid var(--line);display:flex;flex-direction:column;gap:14px}
 .pc .vis{height:160px;display:grid;place-items:center;perspective:700px}
@@ -282,19 +271,13 @@ html.js .rv.in{opacity:1;transform:none}
 </div></section>
 
 <section class="sec works" id="works"><div class="w">
-  <div class="head rv" style="flex-direction:row;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px">
-    <div style="display:flex;flex-direction:column;gap:20px"><span class="kick">Наши работы</span><h2>Каждое заведение — <em>в&nbsp;своём стиле</em></h2><p class="lead">Страница, которая открывается с карточки на столе. Цвета, шрифты и кнопки — под заведение.</p></div>
-    <div class="rail-nav"><button type="button" id="prev" aria-label="Назад"><svg class="ic"><use href="#i-arrow-l"/></svg></button><button type="button" id="next" aria-label="Вперёд"><svg class="ic"><use href="#i-arrow"/></svg></button></div>
+  <div class="head rv"><span class="kick">Наши работы</span><h2>Каждое заведение — <em>в&nbsp;своём стиле</em></h2><p class="lead">Страница, которая открывается с карточки на столе. Нажмите на стиль — та же страница перекрасится под другое заведение.</p></div>
+  <div class="sty rv" id="sty">
+    <div class="sty-ph"><i class="sty-glow" id="sty-glow"></i><div class="phone"><div class="scr"><iframe class="live" id="sty-f" data-src="works/w1/?t=7&amp;kp=1" title="Пример страницы карточки" tabindex="-1"></iframe></div></div></div>
+    <div class="sty-c"><div class="sty-l" role="radiogroup" aria-label="Стиль заведения"><button type="button" role="radio" aria-label="Кафе, медь и графит" aria-checked="true" data-v="#14100D,#1D1814,#F3EADF,#BBA996,#C8875A,#2E2119,#2E2620" data-t="Кофе · завтраки · десерты" data-s="9.00"><span class="sw"><i style="background:#14100D"></i><i style="background:#1D1814"></i><i style="background:#C8875A"></i></span><b>Кафе</b><small>медь и графит</small></button><button type="button" role="radio" aria-label="Паб, красный и уголь" aria-checked="false" data-v="#141212,#1C1919,#F4EEE6,#BDB3A8,#D7263D,#2C1A1C,#2B2626" data-t="Крафт · бургеры · живая музыка" data-s="9.00"><span class="sw"><i style="background:#141212"></i><i style="background:#1C1919"></i><i style="background:#D7263D"></i></span><b>Паб</b><small>красный и уголь</small></button><button type="button" role="radio" aria-label="Гастробар, шалфей" aria-checked="false" data-v="#151715,#1D201D,#EEF0EA,#B3BAB0,#9DB3A0,#26302A,#2A2E2A" data-t="Кухня · бар · кальяны" data-s="8.67"><span class="sw"><i style="background:#151715"></i><i style="background:#1D201D"></i><i style="background:#9DB3A0"></i></span><b>Гастробар</b><small>шалфей</small></button><button type="button" role="radio" aria-label="Бургерная, янтарь" aria-checked="false" data-v="#171411,#211C17,#F6EFE6,#C2B5A6,#F2A23A,#33261A,#2E2822" data-t="Бургеры · пицца · вок" data-s="8.67"><span class="sw"><i style="background:#171411"></i><i style="background:#211C17"></i><i style="background:#F2A23A"></i></span><b>Бургерная</b><small>янтарь</small></button><button type="button" role="radio" aria-label="Ресторан, шоколад и золото" aria-checked="false" data-v="#2A1512,#3A1F1A,#FBF7F0,#E3CFB6,#D9B67F,#4A2A23,#4E3129" data-t="Авторская кухня · банкеты" data-s="9.00"><span class="sw"><i style="background:#2A1512"></i><i style="background:#3A1F1A"></i><i style="background:#D9B67F"></i></span><b>Ресторан</b><small>шоколад и золото</small></button><button type="button" role="radio" aria-label="Боулинг-бар, серебро" aria-checked="false" data-v="#111215,#191B1F,#EEF0F4,#AEB4BE,#C9D0DA,#262A31,#272A30" data-t="Боулинг · караоке · кухня" data-s="7.09"><span class="sw"><i style="background:#111215"></i><i style="background:#191B1F"></i><i style="background:#C9D0DA"></i></span><b>Боулинг-бар</b><small>серебро</small></button></div>
+      <p class="sty-n">Цвета, шрифты, кнопки и логотип — ваши. Стиль собираем по фото зала, меню и вывески.</p></div>
   </div>
 </div>
-  <div class="rail" id="rail">
-    <figure class="wk rv"><div class="phone"><div class="scr"><iframe class="live" data-src="works/w1/?t=7&amp;kp=1" title="Кафе" tabindex="-1"></iframe></div></div><b>Кафе</b><span><i style="background:#C8875A"></i>медь и графит</span></figure>
-    <figure class="wk rv"><div class="phone"><div class="scr"><iframe class="live" data-src="works/w2/?t=4&amp;kp=1" title="Паб" tabindex="-1"></iframe></div></div><b>Паб</b><span><i style="background:#D7263D"></i>красный и уголь</span></figure>
-    <figure class="wk rv"><div class="phone"><div class="scr"><iframe class="live" data-src="works/w3/?t=12&amp;kp=1" title="Гастробар" tabindex="-1"></iframe></div></div><b>Гастробар</b><span><i style="background:#9DB3A0"></i>шалфей</span></figure>
-    <figure class="wk rv"><div class="phone"><div class="scr"><iframe class="live" data-src="works/w4/?t=3&amp;kp=1" title="Бургерная" tabindex="-1"></iframe></div></div><b>Бургерная</b><span><i style="background:#F2A23A"></i>янтарь</span></figure>
-    <figure class="wk rv"><div class="phone"><div class="scr"><iframe class="live" data-src="works/w5/?t=9&amp;kp=1" title="Ресторан" tabindex="-1"></iframe></div></div><b>Ресторан</b><span><i style="background:#C9A35C"></i>шоколад и золото</span></figure>
-    <figure class="wk rv"><div class="phone"><div class="scr"><iframe class="live" data-src="works/w6/?t=2&amp;kp=1" title="Боулинг-бар" tabindex="-1"></iframe></div></div><b>Боулинг-бар</b><span><i style="background:#C9D0DA"></i>серебро</span></figure>
-  </div>
 <div class="w">
   <div class="phys">
     <div class="pc rv"><div class="vis"><div class="lk"><div class="lk-l"><svg viewBox="0 0 34 21"><rect x="1" y="2.5" width="19" height="16" rx="8"/><rect x="14" y="2.5" width="19" height="16" rx="8"/></svg>LINKO</div><div class="lk-b"><span class="lk-n"><svg viewBox="0 0 24 24"><path d="M7 6c2.7 3.4 2.7 8.6 0 12M11 4c4 4.7 4 11.3 0 16M15 2c5.3 6 5.3 14 0 20"/></svg><span>Приложите<br>телефон<small class="lk-s">или наведите камеру</small></span></span><img class="lk-q" src="qr.svg" alt=""></div></div></div><h3>Карточка на стол</h3><p>Приложить телефон или навести камеру на QR — работает и так, и так. Номер стола зашит в карточку: официант видит, откуда заказ.</p></div>
@@ -382,11 +365,21 @@ html.js .rv.in{opacity:1;transform:none}
   function fit(){ [].forEach.call(d.querySelectorAll(".scr"), function(s){ var f = s.querySelector(".live"); if (f) f.style.transform = "scale(" + (s.clientWidth / 375) + ")"; }); }
   addEventListener("resize", fit); fit();
   // галерея работ: страницы грузятся, когда галерея рядом
-  var rail = d.getElementById("rail"), lazy = [].slice.call(rail.querySelectorAll("iframe[data-src]"));
-  var load = function(){ lazy.forEach(function(f){ if (!f.getAttribute("src")) f.src = f.dataset.src; }); };
-  if ("IntersectionObserver" in window) new IntersectionObserver(function(e, o){ if (e[0].isIntersecting){ load(); o.disconnect(); } }, {rootMargin: "500px"}).observe(rail); else load();
-  var step = function(dir){ rail.scrollBy({left: dir * 248, behavior: reduce ? "auto" : "smooth"}); };
-  d.getElementById("prev").onclick = function(){ step(-1); }; d.getElementById("next").onclick = function(){ step(1); };
+  // наши работы: одна живая страница, стиль меняется по кнопке (и сам по кругу, пока посетитель не выбрал)
+  var sty = d.getElementById("sty"), sf = d.getElementById("sty-f"), glow = d.getElementById("sty-glow"), sb = [].slice.call(sty.querySelectorAll(".sty-l button"));
+  var VK = ["bg", "paper", "ink", "soft", "accent", "accent-soft", "line"], si = 0, sauto = !reduce, stimer;
+  function paint(i){ si = i; sb.forEach(function(b, k){ b.setAttribute("aria-checked", String(k === i)); });
+    var v = sb[i].dataset.v.split(","); glow.style.backgroundColor = v[4];
+    var doc = sf.contentDocument, h, t; if (!doc || !doc.querySelector("h1")) return;
+    VK.forEach(function(k, j){ doc.documentElement.style.setProperty("--" + k, v[j]); });
+    h = doc.querySelector("h1"); t = doc.querySelector(".tag"); h.style.opacity = t.style.opacity = 0;
+    setTimeout(function(){ h.textContent = sb[i].querySelector("b").textContent; h.style.fontSize = "clamp(22px," + sb[i].dataset.s + "vw,46px)"; t.textContent = sb[i].dataset.t; h.style.opacity = t.style.opacity = 1; }, 380); }
+  sf.addEventListener("load", function(){ var doc = sf.contentDocument; if (!doc) return; var st = doc.createElement("style");
+    st.textContent = "*,*::before,*::after{transition:background-color .8s ease,color .8s ease,border-color .8s ease,fill .8s ease,stroke .8s ease,opacity .38s ease!important}"; doc.head.appendChild(st); paint(si); });
+  sb.forEach(function(b, k){ b.onclick = function(){ sauto = false; clearInterval(stimer); paint(k); }; });
+  var sload = function(){ if (!sf.getAttribute("src")) sf.src = sf.dataset.src; };
+  if ("IntersectionObserver" in window) new IntersectionObserver(function(e){ var on = e[0].isIntersecting; if (on) sload(); clearInterval(stimer);
+    if (on && sauto) stimer = setInterval(function(){ paint((si + 1) % sb.length); }, 3800); }, {rootMargin: "200px"}).observe(sty); else sload();
   // прокрутка: шапка, кадр «Искусство гостеприимства», шкала запуска
   var top = d.getElementById("top"), cine = d.getElementById("cine"), tl = d.getElementById("tl"), tli = [].slice.call(tl.children);
   function frame(){
@@ -405,7 +398,7 @@ html.js .rv.in{opacity:1;transform:none}
   function show(e){ e.classList.add("in"); if (e.parentNode === flow) flow.style.setProperty("--d", 1); if (e.id === "chat") bars.forEach(function(b, k){ setTimeout(function(){ b.style.setProperty("--g", 1); }, 120 * k); }); }
   if (!("IntersectionObserver" in window) || reduce){ rv.forEach(show); bars.forEach(function(b){ b.style.setProperty("--g", 1); }); flow.style.setProperty("--d", 1); }
   else { var io = new IntersectionObserver(function(es){ es.forEach(function(x){ if (x.isIntersecting){ show(x.target); io.unobserve(x.target); } }); }, {threshold: .15, rootMargin: "0px 0px -6% 0px"});
-    rv.forEach(function(e){ var sib = [].indexOf.call(e.parentNode.children, e); if (e.parentNode === flow || e.parentNode === rail) e.style.transitionDelay = (sib % 6) * 90 + "ms"; io.observe(e); });
+    rv.forEach(function(e){ var sib = [].indexOf.call(e.parentNode.children, e); if (e.parentNode === flow) e.style.transitionDelay = (sib % 6) * 90 + "ms"; io.observe(e); });
     setTimeout(function(){ rv.forEach(function(e){ if (e.getBoundingClientRect().top < innerHeight) show(e); }); }, 1500); }
   // живые сценки: играют, только пока видны; цифры отчёта считаются заново при каждом показе
   var fmt = function(n){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, "\u00a0"); };

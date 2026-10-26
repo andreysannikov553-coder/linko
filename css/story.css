@@ -239,3 +239,23 @@
 @keyframes szoom{from{transform:scale(1.35) translateY(4%)}to{transform:scale(1.05) translateY(-3%)}}
 @keyframes stext{from{transform:translateY(16px);opacity:.3}to{transform:none;opacity:1}}
 @media (max-width:600px){.sv-order{width:100%}}
+
+/* --- наши работы: одна страница, переключатель стилей --- */
+.sty{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(32px,6vw,90px);align-items:center}
+.sty-ph{position:relative;display:grid;place-items:center;padding-block:20px}
+.sty-glow{position:absolute;left:50%;top:50%;width:min(130%,520px);aspect-ratio:1;transform:translate(-50%,-50%);background-color:#C8875A;opacity:.32;-webkit-mask:radial-gradient(closest-side,#000,transparent);mask:radial-gradient(closest-side,#000,transparent);transition:background-color .8s ease;pointer-events:none}
+.sty .phone{position:relative;right:auto;top:auto;width:clamp(240px,23vw,290px);animation:none}
+.sty-c{display:flex;flex-direction:column;gap:22px}
+.sty-l{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.sty-l button{display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;column-gap:14px;row-gap:2px;align-items:center;text-align:left;padding:16px 18px;border-radius:18px;background:var(--surf);border:1px solid var(--line);color:var(--ink);font:inherit;cursor:pointer;transition:border-color .35s,background .35s,transform .35s var(--ease)}
+.sty-l button:hover{border-color:var(--line2);transform:translateY(-2px)}
+.sty-l button[aria-checked="true"]{border-color:var(--gold);background:linear-gradient(180deg,rgba(200,164,107,.1),var(--surf))}
+.sty-l .sw{grid-row:1/3;display:flex}
+.sty-l .sw i{width:22px;height:22px;border-radius:50%;border:2px solid var(--surf);margin-left:-8px;box-shadow:0 0 0 1px rgba(255,255,255,.08)}
+.sty-l .sw i:first-child{margin-left:0}
+.sty-l b{font:500 18px/1.2 var(--serif)}
+.sty-l small{font-size:13px;color:var(--soft)}
+.sty-n{color:var(--soft);font-size:15px;max-width:48ch}
+@media (max-width:860px){.sty{grid-template-columns:1fr;gap:18px}.sty-c{order:-1;gap:14px}.sty .phone{width:min(220px,58vw)}.sty-ph{padding-block:6px}
+  .sty-l{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.sty-l button{grid-template-columns:1fr;justify-items:center;text-align:center;row-gap:6px;padding:10px 6px;border-radius:14px}
+  .sty-l .sw{grid-row:auto}.sty-l .sw i{width:16px;height:16px;margin-left:-6px}.sty-l b{font-size:14px}.sty-l small{display:none}.sty-n{font-size:14px}}
