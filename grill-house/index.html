@@ -184,16 +184,11 @@ p{margin:0}
 
 /* карточки для отзывов — как карточки LINKO на нашем сайте */
 .rcards{position:relative;background:radial-gradient(80% 55% at 50% 45%,#1E2B25,#0D0C0A 75%)!important;aspect-ratio:560/1060;display:block}
-.rc{position:absolute;border-radius:12px;padding:11px 12px;display:flex;flex-direction:column;justify-content:space-between;gap:8px;color:#F3EDE4;background:linear-gradient(140deg,#26211A,#0F0D0A 60%,#1C1813);border:1px solid rgba(230,204,152,.45);box-shadow:0 22px 30px -12px rgba(0,0,0,.95)}
-.rc-l{display:flex;align-items:center;gap:7px;font:500 8px/1 Onest,sans-serif;letter-spacing:.42em}.rc-l svg{width:20px;height:12px;fill:none;stroke:#C8A46B;stroke-width:1.6}
-.rc-t{display:flex;align-items:center;gap:6px;font:500 11.5px/1.2 Georgia,"Times New Roman",serif;white-space:nowrap}
-.rc-n{width:16px;height:16px;flex:none;fill:none;stroke:#C8A46B;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-.rc span{font-size:9px;color:#A69D90;letter-spacing:.08em;text-transform:uppercase}
-.rc.big{left:22%;top:6%;width:54%;aspect-ratio:.68;transform:rotate(-4deg)}
-.rc-q{width:68%;align-self:center;border-radius:6px;background:#F3EDE4;padding:6px}
-.rc.bill{left:10%;bottom:7%;width:78%;aspect-ratio:1.586;transform:rotate(4deg)}
-.rcards img.rc-q{height:auto!important;aspect-ratio:1!important;object-fit:contain!important}
-@media (max-width:700px){.rcards{aspect-ratio:16/11!important}.rc.big{left:8%;top:7%;width:36%}.rc.bill{left:auto;right:6%;bottom:12%;width:52%}}
+.rc-w{position:absolute;left:7%;width:86%;display:flex;flex-direction:column;align-items:center;gap:10px}
+.rc-w.a{top:9%;transform:rotate(-3deg)}.rc-w.b{bottom:9%;transform:rotate(3deg)}
+.rcards .rc-w img{width:100%;height:auto!important;aspect-ratio:1000/655!important;border-radius:14px;border:1px solid rgba(230,204,152,.3);box-shadow:0 22px 34px -12px rgba(0,0,0,.95);object-fit:cover!important}
+.rc-w span{font:500 11px/1 Onest,sans-serif;color:#A69D90;letter-spacing:.12em;text-transform:uppercase}
+@media (max-width:700px){.rcards{aspect-ratio:16/11!important}.rc-w.a{top:50%;transform:translateY(-55%) rotate(-3deg)}.rc-w.b{display:none}}
 </style>
 </head>
 <body>
@@ -254,10 +249,7 @@ p{margin:0}
   <div class="svcs">
 
   <article class="svc" id="s-review">
-    <figure class="shot rcards" aria-hidden="true">
-      <div class="rc big"><div class="rc-l"><svg viewBox="0 0 34 21"><rect x="1" y="2.5" width="19" height="16" rx="8"/><rect x="14" y="2.5" width="19" height="16" rx="8"/></svg>LINKO</div><img class="rc-q" src="img/qr.svg" alt=""><div class="rc-t"><svg class="rc-n" viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></svg>Оцените визит</div><span>на кассе</span></div>
-      <div class="rc bill"><div class="rc-l"><svg viewBox="0 0 34 21"><rect x="1" y="2.5" width="19" height="16" rx="8"/><rect x="14" y="2.5" width="19" height="16" rx="8"/></svg>LINKO</div><div class="rc-t"><svg class="rc-n" viewBox="0 0 24 24"><path d="M7 6c2.7 3.4 2.7 8.6 0 12M11 4c4 4.7 4 11.3 0 16M15 2c5.3 6 5.3 14 0 20"/></svg>Приложите телефон</div><span>в папке со счётом</span></div>
-    </figure>
+    <figure class="shot rcards"><div class="rc-w a"><img src="img/s-review.jpg" width="1000" height="655" loading="lazy" alt="Карточка Гриль Хауса: «Приложите телефон» и QR-код для отзыва"><span>на кассе</span></div><div class="rc-w b"><img src="img/s-review.jpg" width="1000" height="655" loading="lazy" alt=""><span>в папке со счётом</span></div></figure>
     <div class="svc-c">
       <div class="svc-top"><h3>Карточки для отзывов</h3><div class="price">от 2 000 ₽<small>на кассу — 3 000 ₽, в папку со счётом — 2 000 ₽</small></div></div>
       <p class="pain"><span>Проблема</span>Гость расплатился и ушёл — момент, когда он доволен, упущен</p>
