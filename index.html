@@ -135,6 +135,65 @@ p{margin:0}
 .stage.away .nfc{opacity:0}
 @media (max-width:920px){.stick{grid-template-columns:1fr;grid-template-rows:auto auto;align-content:center;gap:18px;padding-top:76px}.stage{justify-self:center;order:-1;padding-bottom:44px}.stage .phone{width:min(210px,52vw)}.stage .v{zoom:.7}.stage .nfc{width:min(200px,54vw);padding:12px 14px}.steps{height:210px}.step{gap:12px}.step h2{font-size:27px}.step p{font-size:15.5px}}
 
+
+/* 3D-карточка: крутится, разлетается на слои, ложится на стол, к ней прикладывают телефон */
+.cs{position:relative;height:430vh;background:radial-gradient(80% 60% at 70% 40%,#13261F 0%,#0C1612 45%,var(--bg) 100%)}
+.cs-stick{position:sticky;top:0;height:100svh;overflow:hidden}
+.cs-stick .grain{opacity:.08}
+.cs-txt{position:absolute;left:max(24px,calc((100vw - 1200px)/2 + 24px));top:50%;transform:translateY(-50%);width:min(560px,46vw);z-index:4}
+.cs-t{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:26px;transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.cs-t.off{opacity:0;transform:translateY(calc(-50% + 30px));pointer-events:none}
+.cs-t h1{font-size:clamp(40px,6.2vw,90px)}
+.cs-t h2{font-size:clamp(34px,4.6vw,66px)}
+.cs-stage{position:absolute;right:max(24px,calc((100vw - 1200px)/2 + 24px));top:0;bottom:0;width:min(560px,48vw);perspective:1400px;perspective-origin:50% 40%}
+.c3{position:absolute;left:44%;top:52%;width:min(340px,40vw);aspect-ratio:1.586;transform-style:preserve-3d;transform:translate(-50%,-50%) rotateX(var(--rx,10deg)) rotateY(var(--ry,-24deg)) rotateZ(var(--rz,0deg))}
+.lyr{position:absolute;inset:0;border-radius:18px;transform-style:preserve-3d;transform:translate3d(0,var(--ly,0px),var(--lz,0px));backface-visibility:hidden}
+.lyr .lb{position:absolute;left:calc(100% + 18px);top:50%;transform:translateY(-50%);white-space:nowrap;font-size:13px;color:var(--soft);letter-spacing:.04em;opacity:var(--lo,0);transition:opacity .3s;display:flex;align-items:center;gap:10px}
+.lyr .lb::before{content:"";width:34px;height:1px;background:var(--gold)}
+.lyr .lb b{color:var(--ink);font-weight:500}
+.l-top{background:linear-gradient(140deg,#25201A 0%,#100E0B 60%,#1B1712 100%);border:1px solid rgba(230,204,152,.4);box-shadow:inset 0 1px 0 rgba(255,255,255,.08);display:flex;flex-direction:column;justify-content:space-between;padding:22px 24px;overflow:visible}
+.l-top .lg{display:flex;align-items:center;gap:10px;font:500 13px/1 var(--sans);letter-spacing:.42em;color:var(--ink)}
+.l-top .lg svg{width:30px;height:18px;fill:none;stroke:var(--gold);stroke-width:1.6}
+.l-top .tp{display:flex;align-items:center;gap:12px}
+.l-top .tp svg{width:30px;height:30px;fill:none;stroke:var(--gold);stroke-width:1.6;stroke-linecap:round}
+.l-top .tp b{display:block;font:500 17px/1.2 var(--serif)}.l-top .tp span{font-size:11px;color:var(--soft);letter-spacing:.06em}
+.l-qr{background:#F3EDE4;display:flex;align-items:center;justify-content:flex-end;padding:16px 22px;border:1px solid rgba(0,0,0,.1)}
+.l-qr img{height:76%;aspect-ratio:1}
+.l-qr i{position:absolute;left:22px;top:50%;transform:translateY(-50%);font:500 16px/1.2 var(--serif);color:#1A1612;font-style:normal;max-width:9ch}
+.l-nfc{background:rgba(20,18,15,.55);border:1px solid rgba(230,204,152,.25);display:grid;place-items:center}
+.l-nfc svg{width:86%;height:82%;fill:none;stroke:var(--gold);stroke-width:1.3}
+.l-base{background:linear-gradient(140deg,#3A2E22,#1A140F);border:1px solid rgba(230,204,152,.18);box-shadow:0 40px 60px -20px rgba(0,0,0,.85)}
+.edge{position:absolute;left:0;right:0;bottom:-6px;height:6px;border-radius:0 0 18px 18px;background:linear-gradient(90deg,#6E5634,#C8A46B,#6E5634);transform:rotateX(-90deg);transform-origin:top}
+.tap{position:absolute;left:50%;top:52%;width:min(170px,20vw);aspect-ratio:9/19;border-radius:26px;padding:6px;background:linear-gradient(145deg,#2A251F,#0F0D0B);box-shadow:0 0 0 1px rgba(230,204,152,.2),0 40px 60px -20px rgba(0,0,0,.9);transform:translate(-30%,var(--py,-180%)) rotate(-8deg);opacity:var(--po,0);z-index:3}
+.tap .ts{width:100%;height:100%;border-radius:21px;background:#0B0A09;overflow:hidden;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;padding:12px}
+.tap .ts>*{opacity:var(--so,0);transition:opacity .4s}
+.tap .ts::before{content:"";position:absolute;inset:0;background:radial-gradient(70% 50% at 50% 30%,rgba(200,164,107,.35),transparent);opacity:var(--so,0)}
+.tap b{font:500 15px/1.15 var(--serif);position:relative}.tap span{font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);position:relative}
+.tap em{position:relative;font-style:normal;font-size:9.5px;color:var(--soft);padding:6px 10px;border-radius:10px;background:rgba(255,255,255,.06);width:100%}
+.waves{position:absolute;left:50%;top:56%;width:10px;height:10px;transform:translate(-50%,-50%);opacity:var(--wo,0);z-index:2;pointer-events:none}
+.waves i{position:absolute;left:50%;top:50%;width:150px;height:150px;margin:-75px 0 0 -75px;border-radius:50%;border:1px solid var(--gold);animation:ring 2.4s ease-out infinite}
+.waves i:nth-child(2){animation-delay:.8s}.waves i:nth-child(3){animation-delay:1.6s}
+.cs-hint{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--soft);display:flex;flex-direction:column;align-items:center;gap:10px;opacity:var(--ho,1)}
+.cs-hint::after{content:"";width:1px;height:36px;background:linear-gradient(var(--gold),transparent);animation:drop 2s ease-in-out infinite}
+@keyframes drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+@media (max-width:920px){
+  .cs-txt{left:24px;right:24px;width:auto;top:auto;bottom:calc(64px + env(safe-area-inset-bottom,0px));transform:none;height:46%}
+  .cs-t{top:auto;bottom:0;transform:none;gap:16px}.cs-t.off{transform:translateY(20px)}
+  .cs-t h1{font-size:clamp(34px,10vw,52px)}.cs-t h2{font-size:clamp(28px,8vw,40px)}.cs-t .lead{font-size:15.5px}
+  .cs-stage{left:0;right:0;width:auto;top:56px;bottom:auto;height:46%}
+  .c3{width:min(250px,60vw)}.l-top{padding:14px 16px}.l-top .lg{font-size:10px}.l-top .tp b{font-size:13px}.l-top .tp span{font-size:9px}.l-top .tp svg{width:22px;height:22px}.l-qr i{font-size:12px;left:14px}.tap .ts{zoom:.72}.lyr .lb{display:none}.tap{width:min(110px,26vw)}.cs-hint{display:none}
+}
+
+/* кадр на весь экран: фото приближается при прокрутке, поверх — крупная надпись */
+.cine{position:relative;height:200vh}
+.cine-s{position:sticky;top:0;height:100svh;overflow:hidden;display:grid;place-items:center}
+.cine img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(var(--z,1.25));filter:brightness(.55) saturate(.95)}
+.cine-s::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,9,8,.6),rgba(10,9,8,.1) 40%,rgba(10,9,8,.85))}
+.cine h2{position:relative;z-index:2;text-align:center;font-size:clamp(46px,9vw,148px);line-height:.98;padding-inline:24px}
+.cine h2 span{display:block;opacity:var(--a,0);transform:translateY(calc((1 - var(--a,0)) * 40px))}
+.cine h2 span:nth-child(2){opacity:var(--b,0);transform:translateY(calc((1 - var(--b,0)) * 40px))}
+.cine p{position:absolute;z-index:2;bottom:12vh;left:0;right:0;text-align:center;color:var(--soft);font-size:16px;opacity:var(--b,0);padding-inline:24px}
+
 /* сервисы */
 .svc-list{border-top:1px solid var(--line)}
 .svc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr) 40px;gap:24px;align-items:center;padding-block:34px;border-bottom:1px solid var(--line)}
@@ -213,26 +272,26 @@ html.js .rv.in{opacity:1;transform:none}
   <a class="btn" href="#lead">Оставить заявку</a>
 </div></header>
 
-<section class="hero"><div class="grain"></div><div class="w">
-  <div class="hero-t">
-    <span class="kick up">Цифровые сервисы для ресторанов</span>
-    <h1 class="up">Одно касание — и&nbsp;ресторан <em>в&nbsp;телефоне гостя</em></h1>
-    <p class="lead up">На столе — NFC-карточка. Гость прикладывает к ней телефон, и сразу открываются меню, заказ, вызов официанта и отзыв. Без приложений и регистрации. А вы каждый понедельник видите, как это работает, в цифрах.</p>
-    <div class="ctas up"><a class="btn" href="#lead">Обсудить ваше заведение</a><a class="btn line" href="#how">Как это работает</a></div>
+<section class="cs" id="intro" aria-label="NFC-карточка LINKO">
+  <div class="cs-stick"><div class="grain"></div>
+    <div class="cs-txt">
+      <div class="cs-t" data-t="0"><span class="kick">Цифровые сервисы для ресторанов</span><h1>Одно касание — и&nbsp;ресторан <em>в&nbsp;телефоне гостя</em></h1><p class="lead">На каждом столе — NFC-карточка. Гость прикладывает телефон, и открываются меню, заказ, официант и отзыв. Без приложений.</p><div class="ctas"><a class="btn" href="#lead">Обсудить ваше заведение</a><a class="btn line" href="#how">Как это работает</a></div></div>
+      <div class="cs-t off" data-t="1"><span class="kick">Внутри карточки</span><h2>Маленькая вещь, <em>продуманная</em> до&nbsp;слоя</h2><p class="lead">Лицевая сторона в стиле ресторана, QR для любого телефона, NFC-антенна для касания и прочная основа.</p></div>
+      <div class="cs-t off" data-t="2"><span class="kick">Касание</span><h2>Приложил телефон — <em>меню открыто</em></h2><p class="lead">Страница ресторана открывается за секунду: меню с фото, вызов официанта, отзыв на картах, Wi-Fi.</p></div>
+    </div>
+    <div class="cs-stage" aria-hidden="true">
+      <div class="waves"><i></i><i></i><i></i></div>
+      <div class="c3" id="c3">
+        <div class="lyr l-base" data-l="0"><span class="lb"><b>Основа</b></span></div>
+        <div class="lyr l-nfc" data-l="1"><svg viewBox="0 0 300 190" aria-hidden="true"><rect x="12" y="10" width="276" height="170" rx="14"/><rect x="21" y="19" width="258" height="152" rx="13"/><rect x="30" y="28" width="240" height="134" rx="12"/><rect x="39" y="37" width="222" height="116" rx="11"/><rect x="48" y="46" width="204" height="98" rx="10"/><rect x="128" y="78" width="44" height="34" rx="4" fill="rgba(200,164,107,.25)"/><path d="M134 86h32M134 95h32M134 104h32M142 78v34M150 78v34M158 78v34" stroke-width="1"/></svg><span class="lb"><b>NFC-антенна</b></span></div>
+        <div class="lyr l-qr" data-l="2"><i>Наведите камеру</i><img src="qr.svg" alt=""><span class="lb"><b>QR-код</b></span></div>
+        <div class="lyr l-top" data-l="3"><div class="lg"><svg viewBox="0 0 34 21" aria-hidden="true"><rect x="1" y="2.5" width="19" height="16" rx="8"/><rect x="14" y="2.5" width="19" height="16" rx="8"/></svg>LINKO</div><div class="tp"><svg viewBox="0 0 34 34"><path d="M10 9c4 5 4 11 0 16M15 6c6 7 6 15 0 22M20 3c8 9 8 19 0 28"/></svg><div><b>Приложите телефон</b><span>меню · официант · отзыв</span></div></div><span class="lb"><b>Лицевая сторона</b></span><div class="edge"></div></div>
+      </div>
+      <div class="tap" id="tap"><div class="ts"><span>steak &amp; grill</span><b>Ваш ресторан</b><em>Меню и заказ</em><em>Позвать официанта</em><em>Оставить отзыв</em></div></div>
+    </div>
+    <div class="cs-hint">Листайте</div>
   </div>
-  <div class="hero-ph">
-    <div class="phone"><div class="scr"><div class="v"><div class="v-bg"></div>
-      <div class="v-name">Ваш ресторан</div><div class="v-sub">steak &amp; grill</div><div class="v-tbl">Стол 7</div>
-      <div class="v-btn"><i>◎</i><div><b>Меню и заказ</b><span>Блюда, цены, заказ со стола</span></div></div>
-      <div class="v-btn"><i>◌</i><div><b>Позвать официанта</b><span>Подойдёт к вашему столу</span></div></div>
-      <div class="v-btn"><i>✦</i><div><b>Оставить отзыв</b><span>Пара слов о вашем визите</span></div></div>
-      <div class="v-btn"><i>⌁</i><div><b>Wi-Fi</b><span>Пароль в одно касание</span></div></div>
-    </div></div></div>
-    <div class="nfc"><svg viewBox="0 0 34 34" aria-hidden="true"><path d="M10 9c4 5 4 11 0 16M15 6c6 7 6 15 0 22M20 3c8 9 8 19 0 28"/></svg><div><b>Приложите телефон</b><span>NFC · или наведите камеру на QR</span></div></div>
-    <div class="float f1"><i></i><b>Заказ принят</b>&nbsp;· стол 7</div>
-    <div class="float f2"><i></i><b>+1 отзыв</b>&nbsp;на картах</div>
-  </div>
-</div></section>
+</section>
 
 <div class="rule"></div>
 
@@ -288,6 +347,12 @@ html.js .rv.in{opacity:1;transform:none}
     </div>
   </div>
 </section>
+
+<section class="cine" id="cine" aria-label="Искусство гостеприимства"><div class="cine-s">
+  <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=2000&amp;q=78&amp;auto=format&amp;fit=crop" alt="" loading="lazy">
+  <h2><span>Искусство</span><span><em>гостеприимства</em></span></h2>
+  <p>Технологии, которых гость не замечает — он просто чувствует заботу.</p>
+</div></section>
 
 <section class="sec" id="services"><div class="w">
   <div class="rv" style="display:flex;flex-direction:column;gap:22px;margin-bottom:56px">
@@ -400,6 +465,33 @@ html.js .rv.in{opacity:1;transform:none}
   var ticking = false;
   addEventListener("scroll", function(){ if (!ticking){ ticking = true; requestAnimationFrame(function(){ frame(); ticking = false; }); } }, {passive: true});
   addEventListener("resize", frame); frame();
+
+  // 3D-карточка
+  var cs = d.getElementById("intro"), c3 = d.getElementById("c3"), tap = d.getElementById("tap"), lyrs = [].slice.call(c3.querySelectorAll(".lyr")),
+      csT = [].slice.call(cs.querySelectorAll(".cs-t")), waves = cs.querySelector(".waves"), hint = cs.querySelector(".cs-hint"), ct = -1, mob = matchMedia("(max-width:920px)");
+  var cl = function(x){ return Math.min(1, Math.max(0, x)); }, ss = function(a, b, x){ x = cl((x - a) / (b - a)); return x * x * (3 - 2 * x); }, lerp = function(a, b, t){ return a + (b - a) * t; };
+  function card(){
+    var r = cs.getBoundingClientRect(), p = cl(-r.top / (cs.offsetHeight - innerHeight));
+    var spin = ss(0, .22, p), ex = ss(.22, .4, p) - ss(.58, .72, p), lay = ss(.6, .78, p), down = ss(.78, .9, p), on = ss(.9, .95, p);
+    var t = reduce ? 0 : (performance.now() / 1000);
+    c3.style.setProperty("--ry", lerp(lerp(-24, 22, spin), 0, Math.max(ex, lay)).toFixed(2) + "deg");
+    c3.style.setProperty("--rx", lerp(lerp(10 + (spin < 1 ? Math.sin(t) * 2 : 0), 52, ex), 64, lay).toFixed(2) + "deg");
+    c3.style.setProperty("--rz", lerp(lerp(0, -18, ex), -10, lay).toFixed(2) + "deg");
+    var gap = mob.matches ? 46 : 74;
+    lyrs.forEach(function(l, k){ l.style.setProperty("--lz", (k * 2 + ex * k * gap).toFixed(1) + "px"); l.style.setProperty("--lo", ex > .85 ? 1 : 0); });
+    tap.style.setProperty("--py", lerp(-200, -78, down).toFixed(1) + "%"); tap.style.setProperty("--po", ss(.74, .8, p).toFixed(3)); tap.style.setProperty("--so", on.toFixed(3));
+    waves.style.setProperty("--wo", on.toFixed(3)); hint.style.setProperty("--ho", (1 - ss(.02, .08, p)).toFixed(3));
+    var ti = p < .24 ? 0 : p < .66 ? 1 : 2;
+    if (ti !== ct){ ct = ti; csT.forEach(function(e, k){ e.classList.toggle("off", k !== ti); }); }
+  }
+  // кадр на весь экран
+  var cine = d.getElementById("cine");
+  function cin(){
+    var r = cine.getBoundingClientRect(), p = cl(-r.top / (cine.offsetHeight - innerHeight));
+    cine.style.setProperty("--z", lerp(1.25, 1, p).toFixed(4)); cine.style.setProperty("--a", ss(.05, .35, p).toFixed(3)); cine.style.setProperty("--b", ss(.3, .6, p).toFixed(3));
+  }
+  function loop(){ card(); cin(); requestAnimationFrame(loop); }
+  requestAnimationFrame(loop);
   // плавное появление блоков; без поддержки — всё видно сразу
   var rv = [].slice.call(d.querySelectorAll(".rv"));
   if (!("IntersectionObserver" in window) || reduce) rv.forEach(function(e){ e.classList.add("in"); });
