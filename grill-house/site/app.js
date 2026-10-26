@@ -113,6 +113,8 @@
   // бронь: в примере сайта заявка никуда не уходит — показываем, как её увидит администратор, и через пару секунд «подтверждаем»
   var bk=$("#bk");
   if(bk){
+    // «Заявка на банкет» — та же форма брони, с банкетным столом и пометкой
+    $$("[data-banq]").forEach(function(a){a.addEventListener("click",function(){bk.hall.value="Банкетный стол";if(!bk.comment.value)bk.comment.value="Банкет: ";bk.guests.value="11 и больше"})});
     var bst=$("#bk-st"),bpre=$("#bk-pre"),berr=$("#bk-err"),bt;
     var dd=new Date(),p2=function(n){return("0"+n).slice(-2)};bk.date.min=dd.getFullYear()+"-"+p2(dd.getMonth()+1)+"-"+p2(dd.getDate());bk.date.value=bk.date.min;
     var bshow=function(s){bst.hidden=false;bst.setAttribute("data-s",s);$("span",bst).textContent=s==="bk_ok"?"Бронь № B12345 подтверждена. Ждём вас!":"Бронь № B12345 у администратора · ждём ответа"};
