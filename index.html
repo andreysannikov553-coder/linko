@@ -11,6 +11,8 @@
 <meta property="og:description" content="Одно касание NFC-карточки — меню, заказ, официант и отзыв. Отчёт каждый понедельник.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap">
+<script>(function(){var H=document.documentElement;try{var c=document.createElement("canvas");if(matchMedia("(prefers-reduced-motion: reduce)").matches||!(c.getContext("webgl2")||c.getContext("webgl")))throw 0}catch(e){H.classList.add("nogl")}})()</script>
+<link rel="modulepreload" href="js/three.core.min.js"><link rel="modulepreload" href="js/three.module.min.js">
 <style>
 :root{--bg:#0A0908;--bg2:#100E0C;--surf:#16140F;--surf2:#1D1A15;--ink:#F3EDE4;--soft:#A69D90;--faint:#8F8578;--gold:#C8A46B;--gold-l:#E6CC98;--em:#10241D;
   --line:rgba(243,237,228,.1);--line2:rgba(200,164,107,.35);
@@ -52,6 +54,22 @@ p{margin:0}
 .top .btn{padding:12px 22px;font-size:14px}
 @media (max-width:960px){.nav{display:none}}
 @media (max-width:400px){.top .btn{padding:11px 16px;font-size:13px}.logo{letter-spacing:.3em}}
+
+/* ночной зал: 3D-сцена за прокруткой */
+.hall{position:relative;height:420vh;background:#060505}
+.nogl .hall{display:none}
+.hall-pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
+.hall-pin canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hall-v{position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 90% at 50% 40%,transparent 55%,rgba(4,4,3,.75)),linear-gradient(0deg,rgba(6,5,5,.85),transparent 42%)}
+.hall-cap{position:absolute;left:0;right:0;bottom:clamp(72px,13vh,130px);margin:0 auto;max-width:1200px;padding-inline:24px;display:flex;flex-direction:column;gap:16px;opacity:0;pointer-events:none;text-shadow:0 2px 28px rgba(0,0,0,.85)}
+.hall-cap.c0{opacity:1}
+.hall-cap h2{font-size:clamp(36px,5.4vw,76px);max-width:15ch}
+.hall-cap p{color:var(--soft);max-width:40ch}
+.hall-hint{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;font:500 11px/1 var(--sans);letter-spacing:.32em;text-transform:uppercase;color:var(--soft)}
+.hall-hint i{width:1px;height:38px;background:linear-gradient(var(--gold),transparent);animation:drip 2.2s var(--ease) infinite;transform-origin:top}
+@keyframes drip{0%{transform:scaleY(0)}60%{transform:scaleY(1);opacity:1}100%{transform:scaleY(1);opacity:0}}
+.hall-fade{position:absolute;inset:0;background:var(--bg);opacity:0;pointer-events:none}
+@media (max-width:760px){.hall{height:360vh}.hall-cap{bottom:clamp(96px,14vh,124px)}}
 
 /* первый экран */
 .hero{position:relative;padding-block:clamp(120px,14vw,170px) clamp(70px,8vw,110px);overflow:hidden;background:radial-gradient(70% 60% at 78% 45%,#14281F 0%,rgba(16,36,29,.4) 40%,transparent 75%)}
@@ -259,6 +277,16 @@ html.js .rv.in{opacity:1;transform:none}
   <a class="btn" href="#lead">Оставить заявку</a>
 </div></header>
 
+<section class="hall" id="hall" aria-label="Ночной зал ресторана: на каждом столе карточка LINKO"><div class="hall-pin">
+  <canvas id="hall-c" aria-hidden="true"></canvas><div class="hall-v"></div>
+  <div class="hall-cap c0" data-w="0,0,.14,.22"><span class="kick">LINKO</span><h2>Вечер. <em>Полный зал.</em></h2><p>Гостей много, официантов мало. Посмотрите, что меняется.</p></div>
+  <div class="hall-cap" data-w=".24,.3,.46,.52"><span class="kick">На каждом столе</span><h2>Карточка, которая <em>работает за официанта</em></h2></div>
+  <div class="hall-cap" data-w=".56,.62,.72,.76"><span class="kick">Одно движение</span><h2>Гость прикладывает <em>телефон</em></h2></div>
+  <div class="hall-cap" data-w=".8,.86,.95,.99"><span class="kick">Без приложений</span><h2>Меню, официант, счёт и отзыв — <em>сразу на экране</em></h2></div>
+  <div class="hall-hint"><span>Листайте</span><i></i></div>
+  <div class="hall-fade"></div>
+</div></section>
+
 <section class="hero"><div class="grain"></div><div class="w">
   <div class="hero-t">
     <span class="kick up">Цифровые сервисы для ресторанов</span>
@@ -420,7 +448,7 @@ html.js .rv.in{opacity:1;transform:none}
   // прокрутка: шапка, кадр «Искусство гостеприимства», шкала запуска
   var top = d.getElementById("top"), cine = d.getElementById("cine"), tl = d.getElementById("tl"), tli = [].slice.call(tl.children);
   function frame(){
-    top.classList.toggle("solid", scrollY > 40);
+    var hl = d.getElementById("hall"); top.classList.toggle("solid", scrollY > (hl && hl.offsetHeight ? hl.offsetHeight - 80 : 40));
     var r = cine.getBoundingClientRect(), p = cl(-r.top / (cine.offsetHeight - innerHeight));
     cine.style.setProperty("--z", (1.25 - .25 * p).toFixed(4)); cine.style.setProperty("--a", ss(.05, .35, p).toFixed(3)); cine.style.setProperty("--b", ss(.3, .6, p).toFixed(3));
     var t = tl.getBoundingClientRect(), q = cl((innerHeight * .75 - t.top) / (t.height + innerHeight * .15));
@@ -454,5 +482,6 @@ html.js .rv.in{opacity:1;transform:none}
   });
 })();
 </script>
+<script type="module" src="js/hall.js" onerror="document.documentElement.classList.add('nogl')"></script>
 </body>
 </html>
