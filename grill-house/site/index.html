@@ -2,7 +2,12 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<script>document.documentElement.className+=" js";if("scrollRestoration" in history)history.scrollRestoration="manual";if(location.hash)history.replaceState(null,"",location.pathname+location.search);window.scrollTo(0,0);addEventListener("load",function(){window.scrollTo(0,0)});addEventListener("pageshow",function(e){if(e.persisted)window.scrollTo(0,0)})</script>
+<script>/* сайт всегда открывается с самого верха: браузер восстанавливает прокрутку и после загрузки, поэтому возвращаем наверх несколько раз — пока гость сам не начал листать */
+(function(){var d=document.documentElement,moved=false;d.className+=" js";if("scrollRestoration" in history)history.scrollRestoration="manual";if(location.hash)history.replaceState(null,"",location.pathname+location.search);
+function top(){if(moved)return;var b=d.style.scrollBehavior;d.style.scrollBehavior="auto";window.scrollTo(0,0);d.style.scrollBehavior=b}
+["wheel","touchmove","keydown"].forEach(function(e){addEventListener(e,function(){moved=true},{passive:true,once:true})});
+top();addEventListener("DOMContentLoaded",top);addEventListener("load",function(){top();setTimeout(top,120);setTimeout(top,500);setTimeout(top,1200)});
+addEventListener("pageshow",function(){moved=false;top();setTimeout(top,120)});addEventListener("pagehide",function(){d.style.scrollBehavior="auto";window.scrollTo(0,0)})})();</script>
 <meta name="theme-color" content="#0C1410"><meta name="robots" content="noindex">
 <title>Гриль Хаус: мясной ресторан в Чайковском</title>
 <meta name="description" content="Стейки и гриль на Приморском бульваре в Чайковском. Полное меню, бронь стола, часы работы и как добраться.">
