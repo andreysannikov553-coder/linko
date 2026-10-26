@@ -141,7 +141,8 @@
     tabs.forEach(function(t,k){t.setAttribute("aria-selected",k===i);t.tabIndex=k===i?0:-1});
     panels.forEach(function(p,k){p.classList.toggle("on",k===i);p.hidden=k!==i});
     var t=tabs[i];if(focus)t.focus();
-    t.scrollIntoView({block:"nearest",inline:"center",behavior:reduce?"auto":"smooth"});
+    // сдвигаем только полосу вкладок: scrollIntoView прокручивал всю страницу к меню при открытии сайта
+    var bar=t.parentElement,x=bar.scrollLeft+t.getBoundingClientRect().left-bar.getBoundingClientRect().left-(bar.clientWidth-t.offsetWidth)/2;bar.scrollLeft=x;
   }
   tabs.forEach(function(t,i){
     t.addEventListener("click",function(){pick(i)});
