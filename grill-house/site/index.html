@@ -11,7 +11,7 @@
 <meta property="og:image" content="img/hero.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;700&display=swap&subset=cyrillic,vietnamese">
-<link rel="stylesheet" href="styles.css?v=5158ad66">
+<link rel="stylesheet" href="styles.css?v=8e69f1e5">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Restaurant", "name": "Гриль Хаус", "servesCuisine": ["Стейки", "Гриль"], "telephone": "+73424149339", "address": {"@type": "PostalAddress", "streetAddress": "Приморский бульвар, 32/1", "addressLocality": "Чайковский", "addressCountry": "RU"}, "openingHours": ["Mo-Th 09:00-22:00", "Fr-Sa 09:00-01:00", "Su 09:00-23:00"], "sameAs": ["https://vk.com/grillhouse.chaik"]}</script>
 </head>
 <body>
@@ -75,8 +75,14 @@
   <div class="rv"><p class="eyebrow">Днём</p><h2>Бизнес-ланч</h2><div class="line"></div>
     <p class="lead2">По будням с 12:00 до 16:00. Каждый день недели своё меню: собирайте обед из того, что хочется.</p>
     <p class="lead2" style="margin-top:14px">Завтраки — с 9:00 до 11:00.</p></div>
-  <ul class="rows price rv" style="--d:1"><li><span>Салат</span><b>179 ₽</b></li><li><span>Суп</span><b>179 ₽</b></li><li><span>Горячее</span><b>239 ₽</b></li><li><span>Гарнир</span><b>99 ₽</b></li>
-    <li class="note"><span>Меню дня и десерт — у официанта</span></li></ul>
+  <div class="rv" style="--d:1">
+    <div class="lunch-cards">
+      <figure><img src="img/extra/lunch-salad.jpg" alt="Салат" loading="lazy"><figcaption>Салат<b>179 ₽</b></figcaption></figure>
+      <figure><img src="img/extra/lunch-soup.jpg" alt="Суп" loading="lazy"><figcaption>Суп<b>179 ₽</b></figcaption></figure>
+      <figure><img src="img/extra/lunch-hot.jpg" alt="Горячее" loading="lazy"><figcaption>Горячее<b>239 ₽</b></figcaption></figure>
+    </div>
+    <p class="lunch-more"><span>Гарнир</span><b>99 ₽</b><i>·</i><span>меню дня и десерт — у официанта</span></p>
+  </div>
 </div></section>
 
 <section id="menu"><div class="wrap">
@@ -92,11 +98,15 @@
   <p class="hint">Листайте вбок &rarr;</p>
 </div></section>
 
-<section class="music" id="music"><div class="wrap">
+<section class="music" id="music"><div class="wrap grid">
   <div class="rv"><p class="eyebrow">По выходным</p><h2>Живая музыка</h2><div class="line"></div>
-    <p class="lead2">Вокал и саксофон по выходным и в праздники. Кто выступает в ближайшие выходные — в афише сообщества.</p></div>
-  <ul class="chips2 rv"><li>Алексей Меринов</li><li>Екатерина Тюкалова</li><li>Александр Иванцов · саксофон</li><li>Антон Францев</li><li>Ирина Мерзлякова</li><li>Александра Муканова</li><li>Алина Влади</li><li>Михаил Клековкин</li><li>Екатерина Балеевских</li><li>Лариса Иванова</li></ul>
-  <p class="rv"><a class="btn" data-mag href="https://vk.com/grillhouse.chaik">Афиша во ВКонтакте</a></p>
+    <p class="lead2">Вокал и саксофон по выходным и в праздники. Кто выступает в ближайшие выходные — в афише сообщества.</p>
+    <p style="margin:26px 0 0"><a class="btn" data-mag href="https://vk.com/grillhouse.chaik">Афиша во ВКонтакте</a></p></div>
+  <div class="vinyl rv" style="--d:1" aria-hidden="true">
+    <span class="ring r1"></span><span class="ring r2"></span><span class="ring r3"></span>
+    <div class="disc"><img src="img/extra/sax.jpg" alt="" loading="lazy"></div>
+    <div class="eq"><i style="--k:0"></i><i style="--k:1"></i><i style="--k:2"></i><i style="--k:3"></i><i style="--k:4"></i><i style="--k:5"></i><i style="--k:6"></i><i style="--k:7"></i><i style="--k:8"></i></div>
+  </div>
 </div></section>
 
 <section class="banq" id="banquets"><div class="wrap grid">
