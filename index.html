@@ -107,18 +107,6 @@ p{margin:0}
 @media (max-width:960px){.hero .w{grid-template-columns:1fr}.scene{height:520px;max-width:520px;width:100%;margin-inline:auto}.t2{left:0;top:6%}.t1{right:0;top:40%}}
 @media (max-width:420px){.scene{height:470px}.hero .phone{width:200px;right:0}.card{width:180px;left:-2%;bottom:4%}.waves{left:20%;bottom:14%}.toast{font-size:12px;padding:9px 12px}}
 
-/* путь гостя */
-.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;list-style:none;margin:0;padding:0;position:relative}
-.flow::before,.flow::after{content:"";position:absolute;left:12%;right:12%;top:52px;height:1px;background:var(--line)}
-.flow::after{background:var(--gold);transform:scaleX(var(--d,0));transform-origin:left;transition:transform 1.4s var(--ease)}
-.flow li{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;padding:26px 20px 30px;border-radius:24px;background:linear-gradient(180deg,var(--surf),rgba(22,20,15,.4));border:1px solid var(--line)}
-.flow li>div{display:flex;flex-direction:column;gap:8px}
-.flow .badge{position:relative;z-index:1;background:var(--surf2)}
-.flow .k{font:500 11px/1 var(--sans);letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
-.flow p{color:var(--soft);font-size:15px}
-@media (max-width:900px){.flow{grid-template-columns:1fr 1fr}.flow::before,.flow::after{display:none}}
-@media (max-width:520px){.flow{grid-template-columns:1fr}.flow li{flex-direction:row;text-align:left;align-items:flex-start;padding:20px}}
-
 /* наши работы */
 .works{background:linear-gradient(180deg,var(--bg),var(--em) 50%,var(--bg))}
 .rail{display:flex;gap:28px;overflow-x:auto;scroll-snap-type:x mandatory;padding-block:10px 30px;padding-inline:max(24px,calc(50vw - 576px));scrollbar-width:none}
@@ -135,14 +123,6 @@ p{margin:0}
 .phys{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:clamp(48px,6vw,80px)}
 .pc{border-radius:24px;padding:28px 26px;background:var(--surf);border:1px solid var(--line);display:flex;flex-direction:column;gap:14px}
 .pc .vis{height:160px;display:grid;place-items:center;perspective:700px}
-.mini{width:190px;aspect-ratio:1.586;border-radius:12px;padding:12px 14px;background:linear-gradient(140deg,#26211A,#0F0D0A 60%,#1C1813);border:1px solid rgba(230,204,152,.4);display:flex;flex-direction:column;justify-content:space-between;transform:rotateX(18deg) rotateY(-16deg);box-shadow:0 20px 30px -14px rgba(0,0,0,.9);transition:transform .6s var(--ease)}
-.pc:hover .mini{transform:rotateX(8deg) rotateY(-4deg) translateY(-4px)}
-.mini .cl{display:flex;align-items:center;gap:6px;font:500 8px/1 var(--sans);letter-spacing:.4em}.mini .cl svg{width:18px;height:11px;fill:none;stroke:var(--gold);stroke-width:1.6}
-.mini .ct{font:500 12px/1.2 var(--serif);display:flex;align-items:center;gap:8px}.mini .ct .ic{width:16px;height:16px;color:var(--gold)}
-.mini.big{width:118px;aspect-ratio:.7;gap:8px}
-.mini.big .qr{width:72%;align-self:center;background:#F3EDE4;border-radius:6px;padding:5px}
-.mini.light{background:linear-gradient(140deg,#F4EEE4,#DCD2C2);border-color:rgba(0,0,0,.1);color:#1A1612}
-.mini.light .cl svg{stroke:#8A6A35}.mini.light .ct .ic{color:#8A6A35}
 .pc p{color:var(--soft);font-size:15px}
 @media (max-width:860px){.phys{grid-template-columns:1fr}}
 
@@ -164,34 +144,10 @@ p{margin:0}
 .tile.wide>div:first-child{display:flex;flex-direction:column;gap:14px}
 .tags{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:4px 0 0;padding:0}
 .tags li{font-size:12.5px;padding:7px 12px;border-radius:99px;border:1px solid var(--line);color:var(--soft)}
-.cartui{width:240px;border-radius:18px;padding:14px;background:#0E0C0A;border:1px solid var(--line);display:flex;flex-direction:column;gap:10px;font-size:12.5px}
-.cartui .row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 11px;border-radius:10px;background:rgba(255,255,255,.04)}
-.cartui .row b{font:500 13.5px/1.2 var(--serif)}.cartui .row span{color:var(--gold-l)}
-.cartui .go{display:flex;justify-content:space-between;padding:11px 12px;border-radius:12px;background:var(--gold);color:#120F0B;font-weight:500}
-.cartui .st{display:flex;align-items:center;gap:8px;color:var(--soft);font-size:12px}
-.cartui .st i{width:8px;height:8px;border-radius:50%;background:var(--gold);animation:pulse 1.6s infinite}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(200,164,107,.6)}100%{box-shadow:0 0 0 10px rgba(200,164,107,0)}}
 @media (max-width:900px){.bento{grid-template-columns:1fr 1fr}.tile.wide{grid-column:1/-1}}
-@media (max-width:600px){.bento{grid-template-columns:1fr}.tile.wide{grid-template-columns:1fr}.cartui{width:100%}}
+@media (max-width:600px){.bento{grid-template-columns:1fr}.tile.wide{grid-template-columns:1fr}}
 
-/* отчёт */
-.rep{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(36px,6vw,90px);align-items:center}
-.kpis{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:30px}
-.kpi{border-radius:20px;padding:18px 20px;background:var(--surf);border:1px solid var(--line);display:flex;align-items:center;gap:14px}
-.kpi .ic{color:var(--gold);width:26px;height:26px}
-.kpi b{display:block;font:500 17px/1.2 var(--serif)}.kpi span{font-size:13px;color:var(--soft)}
-.chat{border-radius:26px;padding:22px;background:var(--surf);border:1px solid var(--line);max-width:440px;justify-self:end;width:100%}
-.chat-h{display:flex;align-items:center;gap:12px;padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:16px}
-.chat-h i{width:40px;height:40px;border-radius:50%;background:var(--gold);color:#120F0B;display:grid;place-items:center;font-style:normal;font-size:12px;font-weight:600;letter-spacing:.1em}
-.chat-h b{display:block;font-weight:500}.chat-h span{font-size:12.5px;color:var(--soft)}
-.bub{padding:16px 18px;border-radius:18px 18px 18px 6px;background:var(--surf2);font-size:14.5px;line-height:1.6;display:flex;flex-direction:column;gap:8px}
-.bub div{display:flex;align-items:center;gap:10px}.bub .ic{width:18px;height:18px;color:var(--gold)}
-.bub strong{font-weight:500}
-.bars{display:flex;align-items:flex-end;gap:6px;height:64px;margin-top:6px}
-.bars i{flex:1;border-radius:4px 4px 0 0;background:linear-gradient(var(--gold),rgba(200,164,107,.25));height:var(--h);transform-origin:bottom;transform:scaleY(var(--g,0));transition:transform 1s var(--ease)}
-.note{font-size:12.5px;color:var(--faint);margin-top:12px}
-@media (max-width:860px){.rep{grid-template-columns:1fr}.chat{justify-self:stretch;max-width:none}}
-@media (max-width:420px){.kpis{grid-template-columns:1fr}}
 
 /* от разговора до отчёта */
 .tl{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;list-style:none;margin:0;padding:0}
@@ -249,6 +205,7 @@ html.js .rv{opacity:0;transform:translateY(30px);transition:opacity .9s var(--ea
 html.js .rv.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}html.js .rv{opacity:1;transform:none}}
 </style>
+<link rel="stylesheet" href="css/story.css">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -312,11 +269,15 @@ html.js .rv.in{opacity:1;transform:none}
 
 <section class="sec" id="how"><div class="w">
   <div class="head rv"><span class="kick">Как это работает</span><h2>Путь гостя — <em>четыре шага</em></h2></div>
-  <ol class="flow" id="flow">
-    <li class="rv"><span class="badge"><svg class="ic"><use href="#i-nfc"/></svg></span><div><span class="k">Касание</span><h3>Карточка на столе</h3><p>Телефон к NFC или камера на QR</p></div></li>
-    <li class="rv"><span class="badge"><svg class="ic"><use href="#i-menu"/></svg></span><div><span class="k">Меню</span><h3>Блюда по фото</h3><p>Вес, состав, подсказки гарниров</p></div></li>
-    <li class="rv"><span class="badge"><svg class="ic"><use href="#i-bell"/></svg></span><div><span class="k">Заказ</span><h3>Сразу официанту</h3><p>С номером стола и статусом для гостя</p></div></li>
-    <li class="rv"><span class="badge"><svg class="ic"><use href="#i-chart"/></svg></span><div><span class="k">Отчёт</span><h3>Цифры в понедельник</h3><p>Заказы, средний чек, отзывы</p></div></li>
+  <ol class="path" id="flow">
+    <li class="st rv"><div class="st-t"><span class="st-n">01</span><span class="k">Касание</span><h3>Карточка на столе</h3><p>Гость прикладывает телефон к карточке или наводит камеру на QR. Страница стола открывается сразу — без приложений и регистрации.</p><ul class="tags"><li>NFC</li><li>QR-код</li><li>iPhone и Android</li></ul></div>
+      <div class="scn s1" aria-hidden="true"><div class="rg"><i></i><i></i><i></i></div><div class="lk"><div class="lk-l"><svg viewBox="0 0 34 21"><rect x="1" y="2.5" width="19" height="16" rx="8"/><rect x="14" y="2.5" width="19" height="16" rx="8"/></svg>LINKO</div><div class="lk-b"><span class="lk-n"><svg viewBox="0 0 24 24"><path d="M7 6c2.7 3.4 2.7 8.6 0 12M11 4c4 4.7 4 11.3 0 16M15 2c5.3 6 5.3 14 0 20"/></svg><span>Приложите<br>телефон<small class="lk-s">или наведите камеру</small></span></span><img class="lk-q" src="qr.svg" alt=""></div></div><div class="ph"><div class="sc"><div class="sb"><b>21:47</b><i></i></div><div class="hi"><svg class="logo2" viewBox="0 0 34 21"><rect x="1" y="2.5" width="19" height="16" rx="8"/><rect x="14" y="2.5" width="19" height="16" rx="8"/></svg><span>СТОЛ 7</span><b>Добрый вечер</b></div><div class="bt4"><span><svg class="ic"><use href="#i-menu"/></svg>Меню</span><span><svg class="ic"><use href="#i-bell"/></svg>Позвать официанта</span><span><svg class="ic"><use href="#i-check"/></svg>Попросить счёт</span><span><svg class="ic"><use href="#i-star"/></svg>Оставить отзыв</span></div><i class="off"></i></div></div></div></li>
+    <li class="st rv"><div class="st-t"><span class="st-n">02</span><span class="k">Меню</span><h3>Блюда по фото</h3><p>Фото, вес и состав каждого блюда. К стейку меню само предложит гарнир — гость добавит его одним нажатием.</p><ul class="tags"><li>Фото и вес</li><li>Подсказки гарниров</li><li>RU / EN</li></ul></div>
+      <div class="scn s2" aria-hidden="true"><div class="ph"><div class="sc"><div class="sb"><b>21:47</b><i></i></div><div class="mh"><b>Меню</b><span class="tabs"><i class="on">Мангал</i><i>Горячее</i><i>Салаты</i></span></div><div class="ml"><div class="dish"><img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=160&amp;q=70&amp;auto=format&amp;fit=crop" alt="" loading="lazy"><div><b>Ассорти на мангале</b><span>900 г · 1 890 ₽</span></div><i class="add">+</i></div><div class="dish"><img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?w=160&amp;q=70&amp;auto=format&amp;fit=crop" alt="" loading="lazy"><div><b>Стейк стриплойн</b><span>250 г · 1 290 ₽</span></div><i class="add">+</i></div><div class="dish"><img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=160&amp;q=70&amp;auto=format&amp;fit=crop" alt="" loading="lazy"><div><b>Свиные рёбра BBQ</b><span>450 г · 990 ₽</span></div><i class="add">+</i></div><div class="dish"><img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=160&amp;q=70&amp;auto=format&amp;fit=crop" alt="" loading="lazy"><div><b>Боул с авокадо</b><span>320 г · 590 ₽</span></div><i class="add">+</i></div></div><div class="sheet"><span>К стейку подойдёт</span><div class="sg"><div><b>Картофель фри</b><span>150 г · 170 ₽</span></div><i class="add">+</i></div></div><div class="cart"><span class="cv"><span class="c1">1 блюдо · 1 290 ₽</span><span class="c2">2 блюда · 1 460 ₽</span></span><b>Заказ →</b></div><i class="tap t1"></i><i class="tap t2"></i></div></div></div></li>
+    <li class="st rv"><div class="st-t"><span class="st-n">03</span><span class="k">Заказ</span><h3>Сразу официанту</h3><p>Заказ уходит официанту с номером стола — в мессенджер персонала. Гость видит статус: отправлен, принят, готовится.</p><ul class="tags"><li>Номер стола</li><li>Статус для гостя</li><li>Вызов и счёт</li></ul></div>
+      <div class="scn s3" aria-hidden="true"><div class="who gst"><div class="ph"><div class="sc"><div class="sb"><b>21:47</b><i></i></div><div class="oc"><span class="k2">Ваш заказ · стол 7</span><div class="it"><b>Стейк стриплойн</b><span>1 290 ₽</span></div><div class="it"><b>Картофель фри</b><span>170 ₽</span></div><div class="tot"><span>Итого</span><b>1 460 ₽</b></div><div class="sbtn"><span class="a">Отправить официанту</span><span class="b">Отправлен</span><span class="c"><svg class="ic"><use href="#i-check"/></svg>Принят</span></div></div></div></div><span class="lbl">Гость</span></div><i class="pk"></i><div class="who wtr"><div class="ph"><div class="sc lock"><div class="sb"><b>21:47</b><i></i></div><div class="clk"><b>21:47</b><span>смена · зал</span></div><div class="nt"><div class="nh"><svg viewBox="0 0 34 21"><rect x="1" y="2.5" width="19" height="16" rx="8"/><rect x="14" y="2.5" width="19" height="16" rx="8"/></svg><span>Заказы</span><em>сейчас</em></div><b>Стол 7 · новый заказ</b><span>Стейк стриплойн, картофель фри · 1 460 ₽</span><i class="acc">Принять</i></div></div></div><span class="lbl">Официант</span></div></div></li>
+    <li class="st rv"><div class="st-t"><span class="st-n">04</span><span class="k">Отчёт</span><h3>Цифры в понедельник</h3><p>Каждый понедельник в 9:00 — итоги недели в мессенджер, который вы выберете. Без таблиц и личных кабинетов. Ресторану — свой отчёт, управляющей компании — сводка по сети.</p><ul class="tags"><li>Открытия меню</li><li>Заказы и средний чек</li><li>Топ-5 блюд</li><li>Переходы к отзыву</li></ul></div>
+      <div class="scn s4" aria-hidden="true"><div class="rp"><div class="rp-h"><i>LK</i><div><b>LINKO · отчёты</b><span>понедельник, 09:00</span></div></div><div class="typing"><i></i><i></i><i></i></div><div class="msg"><b class="mt">Итоги недели <span>· пример, цифры условные</span></b><div class="kp"><div><span>Меню открыли</span><b data-to="412">412</b></div><div><span>Заказов со стола</span><b data-to="97">97</b></div><div><span>Средний чек</span><b data-to="1735" data-suf=" ₽">1 735 ₽</b></div><div><span>Перешли к отзыву</span><b data-to="38">38</b></div></div><div class="rb"><i style="--h:.3"></i><i style="--h:.42"></i><i style="--h:.38"></i><i style="--h:.55"></i><i style="--h:.68"></i><i class="mx" style="--h:1"></i><i style="--h:.84"></i></div><div class="rd"><span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span></div><p class="best"><b>Суббота</b> — лучший день · пик 19:00–20:00</p></div></div></div></li>
   </ol>
 </div></section>
 
@@ -336,9 +297,9 @@ html.js .rv.in{opacity:1;transform:none}
   </div>
 <div class="w">
   <div class="phys">
-    <div class="pc rv"><div class="vis"><div class="mini"><div class="cl"><svg viewBox="0 0 34 21"><rect x="1" y="2.5" width="19" height="16" rx="8"/><rect x="14" y="2.5" width="19" height="16" rx="8"/></svg>LINKO</div><div class="ct"><svg class="ic"><use href="#i-nfc"/></svg>Приложите телефон</div></div></div><h3>Карточка на стол</h3><p>NFC и QR на каждом столе. Номер стола зашит в карточку — официант видит, откуда заказ.</p></div>
-    <div class="pc rv"><div class="vis"><div class="mini big"><div class="cl"><svg viewBox="0 0 34 21"><rect x="1" y="2.5" width="19" height="16" rx="8"/><rect x="14" y="2.5" width="19" height="16" rx="8"/></svg>LINKO</div><img class="qr" src="qr.svg" alt=""><div class="ct"><svg class="ic"><use href="#i-star"/></svg>Оцените визит</div></div></div><h3>Большая карточка на кассу</h3><p>Стоит на виду: отзыв на Яндекс Картах в два касания — одинаково для всех гостей.</p></div>
-    <div class="pc rv"><div class="vis"><div class="mini light"><div class="cl"><svg viewBox="0 0 34 21"><rect x="1" y="2.5" width="19" height="16" rx="8"/><rect x="14" y="2.5" width="19" height="16" rx="8"/></svg>ВАШ ЛОГОТИП</div><div class="ct"><svg class="ic"><use href="#i-palette"/></svg>В цветах заведения</div></div></div><h3>Дизайн под заведение</h3><p>Логотип, цвета и надписи — ваши. Карточка выглядит как часть интерьера, а не реклама.</p></div>
+    <div class="pc rv"><div class="vis"><div class="lk"><div class="lk-l"><svg viewBox="0 0 34 21"><rect x="1" y="2.5" width="19" height="16" rx="8"/><rect x="14" y="2.5" width="19" height="16" rx="8"/></svg>LINKO</div><div class="lk-b"><span class="lk-n"><svg viewBox="0 0 24 24"><path d="M7 6c2.7 3.4 2.7 8.6 0 12M11 4c4 4.7 4 11.3 0 16M15 2c5.3 6 5.3 14 0 20"/></svg><span>Приложите<br>телефон<small class="lk-s">или наведите камеру</small></span></span><img class="lk-q" src="qr.svg" alt=""></div></div></div><h3>Карточка на стол</h3><p>Приложить телефон или навести камеру на QR — работает и так, и так. Номер стола зашит в карточку: официант видит, откуда заказ.</p></div>
+    <div class="pc rv"><div class="vis"><div class="lk v"><div class="lk-l"><svg viewBox="0 0 34 21"><rect x="1" y="2.5" width="19" height="16" rx="8"/><rect x="14" y="2.5" width="19" height="16" rx="8"/></svg>LINKO</div><span class="lk-t">Оцените визит</span><img class="lk-q" src="qr.svg" alt=""><span class="lk-n"><svg viewBox="0 0 24 24"><path d="M7 6c2.7 3.4 2.7 8.6 0 12M11 4c4 4.7 4 11.3 0 16M15 2c5.3 6 5.3 14 0 20"/></svg>Приложите телефон</span></div></div><h3>Большая карточка на кассу</h3><p>Стоит на виду у кассы: телефон к карточке или камера на QR — и отзыв на Яндекс Картах в два касания.</p></div>
+    <div class="pc rv"><div class="vis"><div class="shapes"><div class="sh-r"><svg viewBox="0 0 24 24"><path d="M7 6c2.7 3.4 2.7 8.6 0 12M11 4c4 4.7 4 11.3 0 16M15 2c5.3 6 5.3 14 0 20"/></svg><img src="qr.svg" alt=""><small>ВАШ ЛОГО</small></div><div class="sh-t"><svg viewBox="0 0 24 24"><path d="M7 6c2.7 3.4 2.7 8.6 0 12M11 4c4 4.7 4 11.3 0 16M15 2c5.3 6 5.3 14 0 20"/></svg><img src="qr.svg" alt=""><small>ВАШ ЛОГО</small></div><div class="sh-a"><svg viewBox="0 0 24 24"><path d="M7 6c2.7 3.4 2.7 8.6 0 12M11 4c4 4.7 4 11.3 0 16M15 2c5.3 6 5.3 14 0 20"/></svg><img src="qr.svg" alt=""></div></div></div><h3>Дизайн и форма — под заведение</h3><p>Логотип, цвета, материал и форма — любые: круглая подставка, домик, акрил или дерево. Карточка выглядит как часть интерьера.</p></div>
   </div>
 </div></section>
 
@@ -351,33 +312,13 @@ html.js .rv.in{opacity:1;transform:none}
   <div class="head rv"><span class="kick">Сервисы</span><h2>Берите то, что <em>нужно вам</em></h2><p class="lead">Каждый сервис подключается отдельно и собирается на ваших блюдах, ценах и фото.</p></div>
   <div class="bento">
     <div class="tile wide rv"><div><span class="badge"><svg class="ic"><use href="#i-menu"/></svg></span><h3>Меню с заказом со стола</h3><p>Гость заказывает сам — официант получает заказ с номером стола.</p><ul class="tags"><li>Фото и вес</li><li>Подсказки гарниров</li><li>Статус заказа</li><li>Стоп-лист</li></ul></div>
-      <div class="cartui" aria-hidden="true"><div class="row"><b>Стейк с овощами</b><span>1 290 ₽</span></div><div class="row"><b>Картофель на гриле</b><span>170 ₽</span></div><div class="go"><span>Отправить официанту</span><span>1 460 ₽</span></div><div class="st"><i></i>Готовится · стол 7</div></div></div>
-    <div class="tile rv"><span class="badge"><svg class="ic"><use href="#i-nfc"/></svg></span><h3>NFC-карточки</h3><p>На столы и на кассу: меню, официант, Wi-Fi и отзыв в одно касание.</p></div>
-    <div class="tile rv"><span class="badge"><svg class="ic"><use href="#i-star"/></svg></span><h3>Отзывы на картах</h3><p>Отзыв в два касания — рейтинг растёт, место в поиске тоже.</p></div>
-    <div class="tile rv"><span class="badge"><svg class="ic"><use href="#i-cal"/></svg></span><h3>Онлайн-бронь</h3><p>Мини-сайт с формой брони. Заявка сразу администратору.</p></div>
-    <div class="tile rv"><span class="badge"><svg class="ic"><use href="#i-globe"/></svg></span><h3>Сайт со сценой</h3><p>Гость «заходит» в ресторан, листая страницу. Снимаем у вас.</p></div>
+      <div class="scn sv-order" aria-hidden="true"><div class="ph"><div class="sc"><div class="sb"><b>21:47</b><i></i></div><div class="ost o1"><img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?w=400&amp;q=70&amp;auto=format&amp;fit=crop" alt="" loading="lazy"><b>Стейк стриплойн</b><span>250 г · говядина, соус демиглас</span><div class="prc"><b>1 290 ₽</b><i>Добавить</i></div></div><div class="ost o2"><span class="k2" style="font-size:.72em;letter-spacing:.18em;color:var(--gold)">ВАШ ЗАКАЗ · СТОЛ 7</span><div class="it"><b>Стейк стриплойн</b><span>1 290 ₽</span></div><div class="it"><b>Картофель фри</b><span>170 ₽</span></div><div class="tot"><span>Итого</span><b>1 460 ₽</b></div><div class="go2">Отправить официанту</div></div><div class="ost o3"><span class="ok"><svg class="ic"><use href="#i-check"/></svg></span><b>Заказ у официанта</b><span class="live2"><i></i>Готовится · стол 7</span></div><i class="tap"></i></div></div></div></div>
+    <div class="tile rv"><span class="badge"><svg class="ic"><use href="#i-nfc"/></svg></span><h3>NFC-карточки</h3><p>На столы и на кассу: меню, официант, Wi-Fi и отзыв в одно касание. QR — для тех, кто привык к камере.</p><div class="dm dm-nfc scn" aria-hidden="true"><span class="chip">без приложения</span><div class="rg"><i></i><i></i></div><div class="lk"><div class="lk-l"><svg viewBox="0 0 34 21"><rect x="1" y="2.5" width="19" height="16" rx="8"/><rect x="14" y="2.5" width="19" height="16" rx="8"/></svg>LINKO</div><div class="lk-b"><span class="lk-n"><svg viewBox="0 0 24 24"><path d="M7 6c2.7 3.4 2.7 8.6 0 12M11 4c4 4.7 4 11.3 0 16M15 2c5.3 6 5.3 14 0 20"/></svg><span>Приложите<br>телефон<small class="lk-s">или наведите камеру</small></span></span><img class="lk-q" src="qr.svg" alt=""></div></div><div class="ph"><div class="sc"></div></div></div></div>
+    <div class="tile rv"><span class="badge"><svg class="ic"><use href="#i-star"/></svg></span><h3>Отзывы на картах</h3><p>Отзыв в два касания — рейтинг растёт, место в поиске тоже.</p><div class="dm dm-rev scn" aria-hidden="true"><div class="stars"><svg viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></svg></div><span class="toast2"><svg class="ic"><use href="#i-check"/></svg>Отзыв на Яндекс Картах опубликован</span></div></div>
+    <div class="tile rv"><span class="badge"><svg class="ic"><use href="#i-cal"/></svg></span><h3>Онлайн-бронь</h3><p>Мини-сайт с формой брони. Заявка сразу администратору.</p><div class="dm dm-book scn" aria-hidden="true"><div class="days2"><span>ср<b>29</b></span><span>чт<b>30</b></span><span class="on">пт<b>31</b></span><span>сб<b>1</b></span><span>вс<b>2</b></span></div><div class="times"><span>18:00</span><span class="on">19:30</span><span>21:00</span></div><span class="toast2"><svg class="ic"><use href="#i-check"/></svg>Бронь у администратора</span></div></div>
+    <div class="tile rv"><span class="badge"><svg class="ic"><use href="#i-globe"/></svg></span><h3>Сайт со сценой</h3><p>Гость «заходит» в ресторан, листая страницу. Снимаем у вас.</p><div class="dm dm-site scn" aria-hidden="true"><div class="brw"><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=700&amp;q=70&amp;auto=format&amp;fit=crop" alt="" loading="lazy"><b>Добро пожаловать <em>в зал</em></b></div></div></div>
   </div>
 </div></section>
-
-<section class="sec" style="padding-top:0"><div class="w rep">
-  <div class="rv"><span class="kick">Отчёт</span><h2 style="margin-top:20px">Понедельник, 9:00 — <em>цифры недели</em></h2><p class="lead" style="margin-top:20px">Приходит в мессенджер, который вы выберете. Без таблиц и личных кабинетов.</p>
-    <div class="kpis">
-      <div class="kpi"><svg class="ic"><use href="#i-phone"/></svg><div><b>Открытия</b><span>сколько гостей открыли меню</span></div></div>
-      <div class="kpi"><svg class="ic"><use href="#i-bell"/></svg><div><b>Заказы и чек</b><span>сумма и средний чек</span></div></div>
-      <div class="kpi"><svg class="ic"><use href="#i-menu"/></svg><div><b>Топ-5 блюд</b><span>что заказывают чаще</span></div></div>
-      <div class="kpi"><svg class="ic"><use href="#i-star"/></svg><div><b>Отзывы</b><span>переходы к отзыву</span></div></div>
-    </div></div>
-  <div class="chat rv" id="chat"><div class="chat-h"><i>LK</i><div><b>LINKO · отчёты</b><span>понедельник, 09:00</span></div></div>
-    <div class="bub"><strong>Неделя 12–19 октября</strong>
-      <div><svg class="ic"><use href="#i-phone"/></svg>Меню открыли 412 раз</div>
-      <div><svg class="ic"><use href="#i-bell"/></svg>Заказов: 97 · средний чек 1 735 ₽</div>
-      <div><svg class="ic"><use href="#i-star"/></svg>Перешли к отзыву: 38</div>
-      <div><svg class="ic"><use href="#i-chart"/></svg>Пик: 19:00–20:00</div>
-      <div class="bars" aria-hidden="true"><i style="--h:30%"></i><i style="--h:42%"></i><i style="--h:38%"></i><i style="--h:55%"></i><i style="--h:68%"></i><i style="--h:100%"></i><i style="--h:84%"></i></div>
-    </div>
-    <p class="note">Пример отчёта, цифры условные</p></div>
-</div></section>
-
 <section class="sec" id="steps" style="background:linear-gradient(180deg,var(--bg),var(--em) 60%,var(--bg))"><div class="w">
   <div class="head rv"><span class="kick">Запуск</span><h2>От разговора до <em>первого отчёта</em></h2></div>
   <ol class="tl" id="tl">
@@ -466,6 +407,13 @@ html.js .rv.in{opacity:1;transform:none}
   else { var io = new IntersectionObserver(function(es){ es.forEach(function(x){ if (x.isIntersecting){ show(x.target); io.unobserve(x.target); } }); }, {threshold: .15, rootMargin: "0px 0px -6% 0px"});
     rv.forEach(function(e){ var sib = [].indexOf.call(e.parentNode.children, e); if (e.parentNode === flow || e.parentNode === rail) e.style.transitionDelay = (sib % 6) * 90 + "ms"; io.observe(e); });
     setTimeout(function(){ rv.forEach(function(e){ if (e.getBoundingClientRect().top < innerHeight) show(e); }); }, 1500); }
+  // живые сценки: играют, только пока видны; цифры отчёта считаются заново при каждом показе
+  var fmt = function(n){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, "\u00a0"); };
+  function count(sc){ [].forEach.call(sc.querySelectorAll("[data-to]"), function(b){ var to = +b.dataset.to, suf = b.dataset.suf || "", t0 = performance.now() + 1100;
+    (function step(now){ var k = cl((now - t0) / 1400); b.textContent = fmt(Math.round(to * (1 - Math.pow(1 - k, 3)))) + suf; if (k < 1) requestAnimationFrame(step); })(t0); }); }
+  if ("IntersectionObserver" in window && !reduce){ var so = new IntersectionObserver(function(es){ es.forEach(function(x){ var on = x.isIntersecting, c = x.target.classList;
+      if (on && !c.contains("play") && c.contains("s4")) count(x.target); c.toggle("play", on); }); }, {threshold: .3});
+    [].forEach.call(d.querySelectorAll(".scn"), function(e){ so.observe(e); }); }
   // заявка
   var f = d.getElementById("form"), res = d.getElementById("f-res"), go = d.getElementById("f-go");
   f.addEventListener("submit", function(e){
