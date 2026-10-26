@@ -45,6 +45,7 @@ p{margin:0}
 
 /* шапка */
 .top{position:fixed;top:0;left:0;right:0;z-index:30;padding-top:env(safe-area-inset-top,0px);transition:background .4s,border-color .4s;border-bottom:1px solid transparent}
+.top:not(.solid){background:linear-gradient(rgba(8,7,6,.78),rgba(8,7,6,0))}
 .top.solid{background:rgba(10,9,8,.84);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom-color:var(--line)}
 .top .w{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:72px}
 .logo{display:inline-flex;align-items:center;gap:12px;text-decoration:none;font:500 17px/1 var(--sans);letter-spacing:.42em}
@@ -56,11 +57,11 @@ p{margin:0}
 @media (max-width:400px){.top .btn{padding:11px 16px;font-size:13px}.logo{letter-spacing:.3em}}
 
 /* ночной зал: 3D-сцена за прокруткой */
-.hall{position:relative;height:420vh;background:#060505}
+.hall{position:relative;height:420vh;background:#0d0a08}
 .nogl .hall{display:none}
 .hall-pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
 .hall-pin canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
-.hall-v{position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 90% at 50% 40%,transparent 55%,rgba(4,4,3,.75)),linear-gradient(0deg,rgba(6,5,5,.85),transparent 42%)}
+.hall-v{position:absolute;inset:0;pointer-events:none;background:radial-gradient(130% 95% at 50% 40%,transparent 62%,rgba(4,4,3,.5)),linear-gradient(0deg,rgba(6,5,5,.8),transparent 38%)}
 .hall-cap{position:absolute;left:0;right:0;bottom:clamp(72px,13vh,130px);margin:0 auto;max-width:1200px;padding-inline:24px;display:flex;flex-direction:column;gap:16px;opacity:0;pointer-events:none;text-shadow:0 2px 28px rgba(0,0,0,.85)}
 .hall-cap.c0{opacity:1}
 .hall-cap h2{font-size:clamp(36px,5.4vw,76px);max-width:15ch}
