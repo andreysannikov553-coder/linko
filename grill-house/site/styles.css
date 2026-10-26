@@ -143,26 +143,43 @@ footer .logo{display:block;margin-bottom:14px;font-size:26px}
   .js .rv,.js .wipe,.hero h1 .ch,.hero .fade,.dish{opacity:1;transform:none;clip-path:none}#fx{display:none}.marquee .tr{animation:none}#loader{display:none}
 }
 
-/* спуск и сборка блюда */
-.tunnel{position:relative;height:560svh;border-bottom:1px solid var(--line);background:var(--bg)}
-.stage{position:sticky;top:0;height:100svh;overflow:hidden;display:grid;place-items:center}
-.t-bg{position:absolute;inset:0;background:url(img/hero.jpg) center/cover;will-change:transform,opacity;transform-origin:50% 40%}
-.t-vig{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(14,13,12,.15),rgba(14,13,12,.92) 78%)}
-.t-intro{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;padding:0 22px;will-change:transform,opacity;opacity:0}
+/* сцена из съёмки: кадры видео идут вместе с прокруткой */
+.tunnel{position:relative;height:720svh;border-bottom:1px solid var(--line);background:var(--bg)}
+.stage{position:sticky;top:0;height:100svh;overflow:hidden}
+.t-amb{position:absolute;inset:-10%;width:120%;height:120%;filter:blur(40px) saturate(1.3);opacity:0;transition:opacity 1s}
+.t-frame{position:absolute;inset:0;overflow:hidden;background:var(--bg2)}
+.t-cv,.t-poster{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover}
+.js .t-poster{display:none}
+.t-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,13,12,.55),rgba(14,13,12,0) 22%,rgba(14,13,12,0) 52%,rgba(14,13,12,.92))}
+.t-dim{position:absolute;inset:0;background:rgba(14,13,12,.62)}
+.t-load{position:absolute;left:0;right:0;bottom:0;height:2px;background:rgba(239,230,214,.08);transition:opacity .8s}
+.t-load i{display:block;height:100%;background:var(--gold);transform:scaleX(0);transform-origin:0 50%;transition:transform .3s}
+.loaded .t-load{opacity:0}
+.t-intro{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;padding:0 22px;will-change:transform,opacity}
 .t-intro h2{font-size:clamp(46px,12vw,110px);letter-spacing:.14em;padding-left:.14em}
-.t-shot{position:absolute;inset:0;opacity:0;overflow:hidden}
-.t-cam{position:absolute;left:0;top:0;transform-origin:0 0;will-change:transform,filter}
-.t-cam img{position:absolute;display:block;max-width:none}
-.t-sheen{position:absolute;inset:-20%;background:linear-gradient(105deg,transparent 40%,rgba(255,240,205,.22) 50%,transparent 60%);mix-blend-mode:screen;opacity:0;will-change:transform,opacity}
-.t-shade{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 45%,rgba(14,13,12,0) 35%,rgba(14,13,12,.78) 100%),linear-gradient(180deg,rgba(14,13,12,.35),rgba(14,13,12,0) 30%,rgba(14,13,12,0) 55%,rgba(14,13,12,.92))}
-.t-steps{position:absolute;left:0;right:0;bottom:calc(9svh + env(safe-area-inset-bottom,0px));text-align:center;height:84px;pointer-events:none}
-.t-step{position:absolute;left:0;right:0;opacity:0;transform:translateY(16px);transition:opacity .6s var(--ease),transform .7s var(--ease);padding:0 22px}
+.t-note{margin:14px 0 0;color:var(--soft);font-size:14px}
+.t-steps{position:absolute;left:0;right:0;bottom:calc(12svh + env(safe-area-inset-bottom,0px));text-align:center;height:96px;pointer-events:none}
+.t-step{position:absolute;left:0;right:0;bottom:0;opacity:0;transform:translateY(16px);transition:opacity .6s var(--ease),transform .7s var(--ease);padding:0 22px}
 .t-step.on{opacity:1;transform:none}
-.t-step span{display:block;font-size:11.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);font-weight:700}
-.t-step b{display:block;font:600 clamp(26px,5.6vw,46px) "Cormorant Garamond",Georgia,serif;letter-spacing:.03em;margin-top:6px;text-shadow:0 2px 18px rgba(0,0,0,.6)}
-.t-final{position:absolute;left:0;right:0;bottom:calc(8svh + env(safe-area-inset-bottom,0px));text-align:center;padding:0 22px;opacity:0;transform:translateY(30px);pointer-events:none}
+.t-step span{display:block;font-size:11.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);font-weight:700;text-shadow:0 1px 10px rgba(0,0,0,.8)}
+.t-step b{display:block;font:600 clamp(28px,5.6vw,46px)/1.1 "Cormorant Garamond",Georgia,serif;letter-spacing:.03em;margin-top:6px;text-shadow:0 2px 18px rgba(0,0,0,.7)}
+.t-final{position:absolute;left:0;right:0;top:calc(66px + 4svh);text-align:center;padding:0 22px;opacity:0;transform:translateY(30px);pointer-events:none}
 .t-final.on{pointer-events:auto}
-.t-final h3{font-size:clamp(36px,7vw,64px);margin:4px 0;text-shadow:0 2px 24px rgba(0,0,0,.7)}
-.t-final .price{display:block;font-size:18px}
+.t-final h3{font-size:clamp(36px,7vw,64px);line-height:1.05;margin:4px 0;text-shadow:0 2px 24px rgba(0,0,0,.7)}
 .cta2{margin-top:16px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-@media (prefers-reduced-motion:reduce){.tunnel{height:100svh}.t-shot,.t-final{opacity:1;transform:none}.t-final{pointer-events:auto}.t-intro,.t-steps,.t-sheen{display:none}}
+@media (max-width:420px){.cta2 .btn{padding:12px 16px;font-size:13px}}
+/* широкий экран: видео вертикальное — ставим его окном справа, подписи слева */
+@media (min-aspect-ratio:4/5) and (min-width:700px){
+  .t-amb{opacity:.5}
+  .t-frame{inset:auto;top:7svh;height:86svh;aspect-ratio:640/1146;right:max(6vw,calc(50% - 540px));border-radius:22px;border:1px solid var(--line);box-shadow:0 40px 120px rgba(0,0,0,.6)}
+  .t-shade{background:linear-gradient(180deg,rgba(14,13,12,.25),rgba(14,13,12,0) 25%,rgba(14,13,12,0) 75%,rgba(14,13,12,.4))}
+  .t-intro,.t-steps,.t-final{left:max(6vw,calc(50% - 540px));right:auto;width:min(40vw,500px);text-align:left;padding:0}
+  .t-intro h2{padding-left:0}
+  .t-steps{top:50%;bottom:auto;height:0}
+  .t-step{top:0;bottom:auto;transform:translateY(calc(-50% + 16px));padding:0}
+  .t-step.on{transform:translateY(-50%)}
+  .t-step b{font-size:clamp(34px,4vw,56px)}
+  .t-final{top:50%;bottom:auto;margin-top:-90px}
+  .t-final .cta2{justify-content:flex-start}
+}
+@media (prefers-reduced-motion:reduce){.tunnel{height:100svh}.t-poster{display:block!important}.t-cv,.t-dim,.t-load,.t-intro,.t-steps{display:none}.t-final{opacity:1;transform:none;pointer-events:auto}}

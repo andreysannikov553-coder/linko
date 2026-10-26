@@ -11,7 +11,7 @@
 <meta property="og:image" content="img/hero.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;700&display=swap&subset=cyrillic,vietnamese">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css?v=0406cbe4">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Restaurant", "name": "Гриль Хаус", "servesCuisine": ["Стейки", "Гриль"], "telephone": "+73424149339", "address": {"@type": "PostalAddress", "streetAddress": "Приморский бульвар, 32/1", "addressLocality": "Чайковский", "addressCountry": "RU"}, "openingHours": ["Mo-Th 09:00-22:00", "Fr-Sa 09:00-01:00", "Su 09:00-23:00"], "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.5", "reviewCount": "46"}, "hasMenu": "https://andreysannikov553-coder.github.io/linko/grill-house/menu/", "sameAs": ["https://vk.com/grillhouse.chaik"]}</script>
 </head>
 <body>
@@ -38,17 +38,19 @@
   <div class="scroll" aria-hidden="true"></div>
 </div></header>
 
-<div class="tunnel" id="tunnel">
+<div class="tunnel" id="tunnel" data-src="scene/" data-frames="298">
   <div class="stage">
-    <div class="t-bg" aria-hidden="true"></div><div class="t-vig" aria-hidden="true"></div>
-    <div class="t-intro"><p class="eyebrow">Прокрутите вниз</p><h2>Падаем<br>в кухню</h2></div>
-    <div class="t-shot" aria-hidden="true"><div class="t-cam"><img src="img/scene-hq.jpg" alt="" decoding="async"></div><div class="t-sheen"></div><div class="t-shade"></div></div>
+    <canvas class="t-amb" width="24" height="43" aria-hidden="true"></canvas>
+    <div class="t-frame"><canvas class="t-cv" aria-hidden="true"></canvas><img class="t-poster" src="scene/297.webp" alt="Стейк на столе в отдельном кабинете «Гриль Хауса»" loading="lazy"><div class="t-shade"></div><div class="t-dim"></div><div class="t-load"><i></i></div></div>
+    <div class="t-intro"><p class="eyebrow">Прокрутите вниз</p><h2>Заходите</h2><p class="t-note">Снято в ресторане</p></div>
     <div class="t-steps" aria-hidden="true">
-      <div class="t-step"><span>Прямо с углей</span><b>Дым, жар и мангал</b></div>
-      <div class="t-step"><span>Крупным планом</span><b>Стейк на раскалённой сковороде</b></div>
-      <div class="t-step"><span>К подаче</span><b>Сразу на ваш стол</b></div>
+      <div class="t-step" data-f="14-104"><span>Основной зал</span><b>Окна, зелень и мягкие кресла</b></div>
+      <div class="t-step" data-f="104-150"><span>Ваш стол</span><b>Стейк с углей — к вашему столу</b></div>
+      <div class="t-step" data-f="150-186"><span>У кирпичной стены</span><b>Диваны и подушки</b></div>
+      <div class="t-step" data-f="186-232"><span>Банкетный стол</span><b>Для большой компании</b></div>
+      <div class="t-step" data-f="232-272"><span>Отдельный кабинет</span><b>За шторами, без лишних глаз</b></div>
     </div>
-    <div class="t-final"><span class="eyebrow">Готово к подаче</span><h3>Стейк Рибай Чойс</h3><p class="price">890 ₽ за 100 г</p><div class="cta2"><a class="btn main" data-mag href="https://andreysannikov553-coder.github.io/linko/grill-house/menu/">Заказать</a><a class="btn" data-mag href="#menu">Всё меню</a></div></div>
+    <div class="t-final"><span class="eyebrow">Стол готов</span><h3>Осталось выбрать стейк</h3><div class="cta2"><a class="btn main" data-mag href="#book">Забронировать стол</a><a class="btn" data-mag href="https://andreysannikov553-coder.github.io/linko/grill-house/menu/">Меню и заказ</a></div></div>
   </div>
 </div>
 
@@ -101,6 +103,6 @@
   <div class="soc"><a href="https://vk.com/grillhouse.chaik">VK</a><a href="tel:+73424149339">Позвонить</a><a href="https://yandex.ru/maps/org/gril_khaus/132392228655/">Яндекс Карты</a><a href="https://andreysannikov553-coder.github.io/linko/grill-house/menu/">Меню по QR</a></div>
   <div>Это пример сайта: факты взяты с Яндекс Карт и сайта сети, оформление под ваше заведение делаем индивидуально. Связь: <a href="https://t.me/andrey_vit">@andrey_vit</a></div>
 </footer>
-<script src="app.js" defer></script>
+<script src="app.js?v=dbf70b0b" defer></script>
 </body>
 </html>

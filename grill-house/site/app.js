@@ -57,46 +57,53 @@
   addEventListener("resize",function(){frame()});
 
 
-  // спуск и «камера» по настоящему фото блюда: всё привязано к прокрутке
+  // сцена из съёмки в ресторане: кадры видео идут вместе с прокруткой
   var tun=$("#tunnel");
-  if(tun&&!reduce){
-    var tbg=$(".t-bg",tun),tin=$(".t-intro",tun),shot=$(".t-shot",tun),cam=$(".t-cam",tun),img=$(".t-cam img",tun),sheen=$(".t-sheen",tun),fin=$(".t-final",tun);
-    var steps=$$(".t-step",tun);
+  if(tun&&!reduce)(function(){
+    var cv=$(".t-cv",tun),cx=cv.getContext("2d"),amb=$(".t-amb",tun),ax=amb.getContext("2d"),tin=$(".t-intro",tun),dim=$(".t-dim",tun),fin=$(".t-final",tun),bar2=$(".t-load i",tun);
+    var steps=$$(".t-step",tun).map(function(el){var r=el.dataset.f.split("-");return [el,+r[0],+r[1]]});
     var cl=function(x){return x<0?0:x>1?1:x},seg=function(p,a,b){return cl((p-a)/(b-a))};
-    var io3=function(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2},lerp=function(a,b,t){return a+(b-a)*t};
-    var IW=1280,IH=853,SW,SH,k,dw,dh,ox,oy,cr;
-    var lay=function(){SW=shot.clientWidth||innerWidth;SH=shot.clientHeight||innerHeight;k=Math.max(SW/IW,SH/IH);dw=IW*k;dh=IH*k;ox=(SW-dw)/2;oy=(SH-dh)/2;
-      img.style.width=dw+"px";img.style.height=dh+"px";img.style.left=ox+"px";img.style.top=oy+"px";cr=Math.min(SW/IW,SH/IH)/k};
-    lay();addEventListener("resize",function(){lay();tunnelFrame()});
-    // ключевые кадры камеры: [прогресс, фокус x, фокус y, зум]
-    var K=[[.24,.40,.32,3.0],[.38,.42,.36,2.8],[.55,.62,.66,2.8],[.70,.36,.68,2.4],[.88,.55,.55,0]];
+    var io3=function(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2};
+    var N=+tun.dataset.frames,F=[],got=0,active=0,q=0,cur=0,want=0,drawn=-1,raf=0;
+    // сначала каждый 16-й кадр, потом гуще: сцена прокручивается сразу, детали догружаются
+    var order=[],seen={},retry={};
+    [16,8,4,2,1].forEach(function(st){for(var i=0;i<N;i+=st)if(!seen[i]){seen[i]=1;order.push(i)}if(st===16&&!seen[N-1]){seen[N-1]=1;order.push(N-1)}});
+    var pump=function(){
+      while(active<6&&q<order.length)(function(i){
+        active++;var im=new Image();im.decoding="async";
+        im.onload=function(){F[i]=im;got++;active--;bar2.style.transform="scaleX("+(got/N).toFixed(3)+")";if(got===N)tun.classList.add("loaded");if(Math.abs(i-cur)<17){drawn=-1;kick()}pump()};
+        im.onerror=function(){active--;if(!retry[i]){retry[i]=1;order.push(i)}pump()};
+        im.src=tun.dataset.src+("00"+i).slice(-3)+".webp";
+      })(order[q++]);
+    };
+    var near=function(i){for(var k=0;k<N;k++){if(F[i-k])return i-k;if(F[i+k])return i+k}return -1};
+    var paint=function(im,al){var cw=cv.width,ch=cv.height,k=Math.max(cw/im.naturalWidth,ch/im.naturalHeight),w=im.naturalWidth*k,h=im.naturalHeight*k;cx.globalAlpha=al;cx.drawImage(im,(cw-w)/2,(ch-h)/2,w,h);cx.globalAlpha=1};
+    var draw=function(){
+      var i=Math.floor(cur),t=cur-i,a=near(i);if(a<0)return;
+      paint(F[a],1);
+      // между соседними кадрами — плавный переход, без рывков
+      if(a===i&&t>.03&&F[i+1])paint(F[i+1],t);
+      ax.drawImage(cv,0,0,amb.width,amb.height);
+    };
+    var loop=function(){raf=0;var dd=want-cur;cur=Math.abs(dd)<.02?want:cur+dd*.22;if(cur!==drawn){draw();drawn=cur}if(cur!==want)kick()};
+    var kick=function(){if(!raf)raf=requestAnimationFrame(loop)};
+    var size=function(){var r=cv.getBoundingClientRect(),dp=Math.min(devicePixelRatio||1,2),w=Math.round(r.width*dp),h=Math.round(r.height*dp);if(w!==cv.width||h!==cv.height){cv.width=w;cv.height=h;drawn=-1;kick()}};
+    size();addEventListener("resize",size);
+    if(d.readyState==="complete")pump();else addEventListener("load",pump);
     var tunnelFrame=function(){
       var r=tun.getBoundingClientRect(),total=tun.offsetHeight-innerHeight;
       if(r.bottom<-50||r.top>innerHeight+50)return;
       var p=cl(-r.top/total);
-      var dive=io3(seg(p,0,.3));
-      tbg.style.transform="scale("+(1+dive*2.2).toFixed(3)+")";tbg.style.opacity=(1-dive).toFixed(3);
-      var iv=seg(p,0,.06)*(1-seg(p,.16,.26)),go=seg(p,.16,.26);
-      tin.style.opacity=iv.toFixed(3);tin.style.transform="translateY(calc(-50% - "+(70*go).toFixed(1)+"px)) scale("+(1+.35*go).toFixed(3)+")";
-      shot.style.opacity=io3(seg(p,.2,.32)).toFixed(3);
-      var smax=Math.min(3.2,2.4/k),zs=function(z){return z===0?Math.min(1,cr*1.15):1+(z-1)*(smax-1)/2.2};
-      var a=K[0],b=K[K.length-1];
-      for(var i=0;i<K.length-1;i++){if(p>=K[i][0]&&p<=K[i+1][0]){a=K[i];b=K[i+1];break}}
-      if(p<K[0][0]){a=b=K[0]}
-      var t=a===b?0:io3(seg(p,a[0],b[0]));
-      var fx=lerp(a[1],b[1],t),fy=lerp(a[2],b[2],t),s=lerp(zs(a[3]),zs(b[3]),t);
-      var px=ox+fx*dw,py=oy+fy*dh,dx=SW/2,dy=SH/2-(p>.8?seg(p,.8,.92)*SH*.08:0);
-      var blur=(1-seg(p,.22,.38))*14;
-      cam.style.transform="translate("+dx.toFixed(1)+"px,"+dy.toFixed(1)+"px) scale("+s.toFixed(4)+") translate("+(-px).toFixed(1)+"px,"+(-py).toFixed(1)+"px)";
-      cam.style.filter=blur>.2?"blur("+blur.toFixed(1)+"px) saturate(1.05)":"saturate(1.05)";
-      var sw=seg(p,.4,.8);sheen.style.opacity=(Math.sin(sw*Math.PI)*.9).toFixed(3);sheen.style.transform="translateX("+((sw-.5)*120).toFixed(1)+"%)";
-      var si=p<.3?-1:p<.5?0:p<.66?1:p<.82?2:-1;
-      steps.forEach(function(el,n){el.classList.toggle("on",n===si)});
-      var f=io3(seg(p,.86,.97));
+      want=seg(p,.04,.9)*(N-1);kick();
+      var fi=Math.round(want),go=seg(p,.01,.06);
+      tin.style.opacity=(1-go).toFixed(3);tin.style.transform="translateY(calc(-50% - "+(60*go).toFixed(1)+"px))";
+      dim.style.opacity=Math.max(1-go,seg(p,.9,.96)*.5).toFixed(3);
+      steps.forEach(function(s){s[0].classList.toggle("on",fi>=s[1]&&fi<s[2])});
+      var f=io3(seg(p,.9,.97));
       fin.style.opacity=f.toFixed(3);fin.style.transform="translateY("+((1-f)*30).toFixed(1)+"px)";fin.classList.toggle("on",f>.5);
     };
     var oldFrame=frame;frame=function(){oldFrame();tunnelFrame()};
-  }
+  })();
 
   frame();
 
