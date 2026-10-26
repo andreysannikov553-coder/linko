@@ -181,6 +181,15 @@ p{margin:0}
 .road b{font:600 17px/1.3 var(--disp)}.road span{font-size:15px;color:var(--soft)}
 @media (max-width:980px){.path{grid-template-columns:1fr 1fr}.vis-g{grid-template-columns:1fr}}
 @media (max-width:600px){.path{grid-template-columns:1fr}.road li{grid-template-columns:40px minmax(0,1fr)}.road span{grid-column:2}}
+
+/* карточки для отзывов — рисунок вместо снимка экрана */
+.rcards{position:relative;background:radial-gradient(70% 50% at 50% 40%,#2A231B,#151210)!important;aspect-ratio:560/1060;display:block}
+.rc{position:absolute;border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:6px;color:#F1ECE4;background:linear-gradient(140deg,#26211A,#0F0D0A 60%,#1C1813);border:1px solid rgba(230,204,152,.45);box-shadow:0 18px 26px -12px rgba(0,0,0,.9)}
+.rc-l{display:flex;align-items:center;gap:6px;font:600 7px/1 var(--text);letter-spacing:.3em}.rc-l svg{width:16px;height:10px;fill:none;stroke:#C9A35C;stroke-width:1.6}
+.rc b{font:600 13px/1.2 var(--disp)}.rc span{font-size:9px;color:#A99F92;letter-spacing:.06em}
+.rc.big{left:12%;top:8%;width:62%;aspect-ratio:.7;transform:rotate(-5deg)}
+.rc-q{width:70%;align-self:center;margin:8px 0;border-radius:6px;background:#F1ECE4;padding:6px}
+.rc.bill{left:22%;bottom:8%;width:66%;aspect-ratio:1.586;transform:rotate(6deg)}
 </style>
 </head>
 <body>
@@ -197,7 +206,7 @@ p{margin:0}
     <p class="lead">Предложение компании LINKO для ресторанов «Гриль Хаус»: меню с заказом со стола, отзывы, онлайн-бронь и сайт. Каждый сервис решает свою задачу и подключается отдельно, а итоги недели приходят отчётом: сколько гостей открыли меню, что заказали, какой средний чек.</p>
     <div class="ctas"><a class="btn" href="#live">Полистать меню вживую</a><a class="btn ghost" href="#prices">Цены</a></div>
     <div class="chips" aria-label="Сервисы">
-      <a href="#s-menu">QR-меню и заказ</a><a href="#s-card">Отзывы</a><a href="#s-book">Онлайн-бронь</a><a href="#s-site">Сайт</a><a href="#stats">Отчёт за неделю</a>
+      <a href="#s-menu">QR-меню и заказ</a><a href="#s-card">Карточка на стол</a><a href="#s-review">Отзывы</a><a href="#s-book">Онлайн-бронь</a><a href="#s-site">Сайт</a><a href="#stats">Отчёт за неделю</a>
     </div>
   </div>
   <div class="hero-img">
@@ -215,7 +224,7 @@ p{margin:0}
   <ol class="path">
     <li><span class="path-k">До визита</span><b>Находит ресторан и бронирует стол</b><span>Сайт сети со сценой при прокрутке: гость «заходит» в ресторан ещё дома. Бронь — онлайн, заявка сразу администратору.</span></li>
     <li><span class="path-k">За столом</span><b>Открывает меню с телефона</b><span>Карточка NFC + QR на столе: меню с фото и весом, заказ со стола, вызов официанта и счёт.</span></li>
-    <li><span class="path-k">После ужина</span><b>Оставляет отзыв</b><span>Большая карточка на кассе — отзыв на Яндекс Картах в два касания, одинаково для всех гостей.</span></li>
+    <li><span class="path-k">После ужина</span><b>Оставляет отзыв</b><span>Карточка на кассе или вместе со счётом — отзыв на Яндекс Картах в два касания, одинаково для всех гостей.</span></li>
     <li><span class="path-k">Понедельник</span><b>Сеть видит цифры</b><span>Ресторан получает свой отчёт, управляющая компания — сводку: открытия меню, заказы, средний чек, отзывы по каждой точке.</span></li>
   </ol>
   <div class="vis-g">
@@ -258,18 +267,35 @@ p{margin:0}
   <article class="svc" id="s-card">
     <figure class="shot"><img src="img/s-card.jpg" width="560" height="1060" loading="lazy" alt="Страница карточки на столе: меню, вызов официанта, отзыв, игры, сайт"></figure>
     <div class="svc-c">
-      <div class="svc-top"><h3>Отзывы: карточки на столы и кассу</h3><div class="price">5 900 ₽<small>карточка на стол — 2 000 ₽, большая на кассу — 3 000 ₽</small></div></div>
+      <div class="svc-top"><h3>Карточка на стол: меню, официант, отзыв</h3><div class="price">5 900 ₽<small>карточка NFC + QR — 2 000 ₽ на стол</small></div></div>
       <p class="pain"><span>Проблема</span>Довольные гости уходят молча — отзыв оставляют единицы</p>
       <ul class="gains">
         <li><b>Отзыв в два касания</b><span>Телефон к карточке — и сразу отзыв на Яндекс Картах</span></li>
         <li><b>Всё на одной странице</b><span>Меню, вызов официанта, сайт и соцсети ресторана</span></li>
         <li><b>Дети заняты</b><span>Игры, пока готовится заказ</span></li>
       </ul>
-      <div class="svc-f"><ul class="tags"><li>NFC + QR</li><li>Большая карточка на кассе — для отзывов</li><li>Одинаково для всех гостей</li><li>Переходы к отзыву — в отчёте</li></ul><button class="more" type="button" data-tab="card">Открыть карточку →</button></div>
+      <div class="svc-f"><ul class="tags"><li>NFC + QR</li><li>Номер стола в карточке</li><li>Одинаково для всех гостей</li><li>Переходы к отзыву — в отчёте</li></ul><button class="more" type="button" data-tab="card">Открыть карточку →</button></div>
     </div>
   </article>
 
-    <article class="svc" id="s-book">
+    <article class="svc" id="s-review">
+    <figure class="shot rcards" aria-hidden="true">
+      <div class="rc big"><div class="rc-l"><svg viewBox="0 0 34 21"><rect x="1" y="2.5" width="19" height="16" rx="8"/><rect x="14" y="2.5" width="19" height="16" rx="8"/></svg>ГРИЛЬ ХАУС</div><img class="rc-q" src="img/qr.svg" alt=""><b>Оцените визит</b><span>на кассе</span></div>
+      <div class="rc bill"><div class="rc-l"><svg viewBox="0 0 34 21"><rect x="1" y="2.5" width="19" height="16" rx="8"/><rect x="14" y="2.5" width="19" height="16" rx="8"/></svg>ГРИЛЬ ХАУС</div><b>Понравилось?</b><span>в папке со счётом</span></div>
+    </figure>
+    <div class="svc-c">
+      <div class="svc-top"><h3>Карточки для отзывов</h3><div class="price">от 2 000 ₽<small>на кассу — 3 000 ₽, в папку со счётом — 2 000 ₽</small></div></div>
+      <p class="pain"><span>Проблема</span>Гость расплатился и ушёл — момент, когда он доволен, упущен</p>
+      <ul class="gains">
+        <li><b>На кассе при оплате</b><span>Большая карточка на виду: отзыв на Яндекс Картах в два касания</span></li>
+        <li><b>Вместе со счётом</b><span>Официант приносит карточку в папке со счётом — гость оставляет отзыв, пока ждёт сдачу</span></li>
+        <li><b>Честно для всех</b><span>Просьба одинаковая для каждого гостя — по правилам площадок</span></li>
+      </ul>
+      <div class="svc-f"><ul class="tags"><li>NFC + QR</li><li>Переходы к отзыву — в отчёте</li></ul></div>
+    </div>
+  </article>
+
+  <article class="svc" id="s-book">
     <figure class="shot"><img src="img/s-book.jpg" width="560" height="1060" loading="lazy" alt="Форма онлайн-брони: дата, время, гости, и ответ «Бронь подтверждена»"></figure>
     <div class="svc-c">
       <div class="svc-top"><h3>Мини-сайт с онлайн-бронью</h3><div class="price">от 15 000 ₽<small>без абонентской платы</small></div></div>
@@ -379,7 +405,8 @@ p{margin:0}
   </div>
   <div class="prices">
     <div class="row"><div><b>QR-меню с заказом со стола</b><small>Фото, вес и состав блюд, заказ с номером стола, статус для гостя, вызов официанта и счёт, стоп-лист, таблички с QR</small></div><div class="p">14 900 ₽<small>+ 2 900 ₽ в месяц</small></div></div>
-    <div class="row"><div><b>Отзывы: карточки на столы и кассу</b><small>Страница ресторана: меню, отзыв, игры, сайт, соцсети · карточка NFC + QR на стол — 2 000 ₽, большая на кассу — 3 000 ₽</small></div><div class="p">5 900 ₽</div></div>
+    <div class="row"><div><b>Карточка на стол</b><small>Страница ресторана: меню, официант, отзыв, игры, сайт, соцсети · карточка NFC + QR — 2 000 ₽ на стол</small></div><div class="p">5 900 ₽</div></div>
+    <div class="row"><div><b>Карточки для отзывов</b><small>Большая карточка на кассу — 3 000 ₽ · карточка в папку со счётом — 2 000 ₽</small></div><div class="p">от 2 000 ₽</div></div>
     <div class="row"><div><b>Мини-сайт с онлайн-бронью</b><small>Страница ресторана с формой брони и заявкой на банкет</small></div><div class="p">от 15 000 ₽</div></div>
     <div class="row"><div><b>Сайт с анимацией при прокрутке</b><small>Сцена на видео из ресторана, меню, бронь, банкеты, контакты</small></div><div class="p">от 60 000 ₽</div></div>
     <div class="row free"><div><b>Еженедельный отчёт</b><small>Переходы, заказы, средний чек, популярные блюда, отзывы, брони</small></div><div class="p">входит в каждый сервис</div></div>
