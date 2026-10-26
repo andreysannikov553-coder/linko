@@ -8,6 +8,11 @@
     ym(+YM, "init", {clickmap: true, trackLinks: true, accurateTrackBounce: true, webvisor: true});
   }
   window.linkoGoal = goal;
+  // ссылки внутри страницы: плавно к разделу, без #якоря в адресе — иначе сохранённая ссылка открывается с середины
+  d.addEventListener("click", function(e){ var a = e.target.closest && e.target.closest('a[href^="#"]'); if (!a) return;
+    var id = a.getAttribute("href").slice(1), el = id ? d.getElementById(id) : null; if (id && !el) return; e.preventDefault();
+    if (el) el.scrollIntoView({behavior: "smooth"}); else scrollTo({top: 0, behavior: "smooth"});
+    if (location.hash) history.replaceState(null, "", location.pathname + location.search); });
   [].forEach.call(d.querySelectorAll("[data-goal]"), function(a){ a.addEventListener("click", function(){ goal(a.dataset.goal); }); });
 
   // калькулятор: цены за одно заведение (как в КП)

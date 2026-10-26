@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<script>document.documentElement.className+=" js";if("scrollRestoration" in history)history.scrollRestoration="manual";if(!location.hash){window.scrollTo(0,0);addEventListener("load",function(){window.scrollTo(0,0)});addEventListener("pageshow",function(e){if(e.persisted)window.scrollTo(0,0)})}</script>
+<script>document.documentElement.className+=" js";if("scrollRestoration" in history)history.scrollRestoration="manual";if(location.hash)history.replaceState(null,"",location.pathname+location.search);window.scrollTo(0,0);addEventListener("load",function(){window.scrollTo(0,0)});addEventListener("pageshow",function(e){if(e.persisted)window.scrollTo(0,0)})</script>
 <meta name="theme-color" content="#0C1410"><meta name="robots" content="noindex">
 <title>Гриль Хаус: мясной ресторан в Чайковском</title>
 <meta name="description" content="Стейки и гриль на Приморском бульваре в Чайковском. Полное меню, бронь стола, часы работы и как добраться.">
@@ -84,9 +84,6 @@
   <p class="hint">Листайте вбок &rarr;</p>
 </div></section>
 
-<section class="atm"><div class="band"><div class="bg" data-speed=".12"></div>
-  <blockquote class="rv">Ваш <em>стейк</em> уже на углях</blockquote></div></section>
-
 <section class="reviews" id="reviews"><div class="wrap">
   <div class="rv"><p class="eyebrow">Отзывы</p><h2>Что пишут гости</h2><div class="line"></div>
     <p class="lead2">Настоящие отзывы и рейтинг с Яндекс Карт, обновляются сами.</p></div>
@@ -113,7 +110,7 @@
     <ul class="rows"><li><span>Адрес</span><b>Приморский бульвар, 32/1, Чайковский</b></li><li><span>Часы</span><b>пн–чт 09:00–22:00<br>пт–сб 09:00–01:00<br>вс 09:00–23:00</b></li><li><span>Телефон</span><b>+7 342 414-93-39</b></li></ul>
     <p style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap"><a class="btn main" data-mag href="https://yandex.ru/maps/org/grill_house/161086447623/">Построить маршрут</a><a class="btn" data-mag href="tel:+73424149339">Позвонить</a></p>
   </div>
-  <div class="map rv" style="grid-column:1/-1"><iframe title="Гриль Хаус на Яндекс Картах" loading="lazy" src="https://yandex.ru/map-widget/v1/org/grill_house/161086447623/"></iframe></div>
+  <div class="map rv" style="grid-column:1/-1"><iframe title="Гриль Хаус на Яндекс Картах" loading="lazy" src="https://yandex.ru/map-widget/v1/?ll=54.147644%2C56.775563&z=17&oid=161086447623&ol=biz"></iframe></div>
 </div></section>
 </main>
 
