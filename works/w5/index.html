@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#2A1512">
+<meta name="robots" content="noindex">
+<title>Ресторан</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@400;600;700&display=swap&subset=cyrillic,vietnamese">
+<style>
+:root{--bg:#2A1512;--paper:#3A1F1A;--ink:#FBF7F0;--soft:#E3CFB6;--accent:#D9B67F;--accent-soft:#4A2A23;--line:#4E3129}
+*{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.5 Manrope,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
+main{max-width:460px;margin:0 auto;padding:0 20px 40px}
+.hero{padding:44px 20px 30px;}
+.hero>div{max-width:460px;margin:0 auto}
+.full::before{content:"";position:fixed;inset:0;z-index:-1;display:none}
+.full .item{background:#3A1F1AB2;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.full .soc a{background:#3A1F1AB2;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.full .table{background:#3A1F1AB2}
+.hero.caps{padding-top:104px}
+.caps h1{font-weight:600;text-transform:uppercase;letter-spacing:.2em;padding-left:.2em;font-size:clamp(30px,9vw,46px)}
+.caps .tag{color:var(--accent);letter-spacing:.34em;font-size:12px;margin-top:12px}
+.lines{position:fixed;inset:10px;border:1px solid color-mix(in srgb,var(--accent) 60%,transparent);pointer-events:none;z-index:5}
+.lines::after{content:"";position:absolute;inset:4px;border:1px solid color-mix(in srgb,var(--accent) 28%,transparent)}
+.orn{display:flex;align-items:center;justify-content:center;gap:10px;margin:16px auto 0;width:150px}
+.orn i{flex:1;height:1px;background:color-mix(in srgb,var(--accent) 70%,transparent)}
+.orn b{width:6px;height:6px;background:var(--accent);transform:rotate(45deg)}
+.ln .item{border-color:color-mix(in srgb,var(--accent) 40%,transparent)}
+.ln .table{border-color:color-mix(in srgb,var(--accent) 50%,transparent)}
+.ln .soc a{border-color:color-mix(in srgb,var(--accent) 40%,transparent)}
+.caps h1,.caps .tag{text-shadow:0 0 10px var(--bg),0 0 22px var(--bg),0 0 38px var(--bg)}
+h1{font:700 clamp(34px,10vw,46px)/1.05 "Cormorant Garamond",Georgia,serif;margin:0;text-align:center;text-wrap:balance}
+.tag{margin:8px 0 0;text-align:center;color:var(--soft);font-size:13px;letter-spacing:.16em;text-transform:uppercase}
+.table{display:block;width:max-content;margin:18px auto 0;padding:4px 14px;border:1px solid var(--line);border-radius:999px;font-size:13px;color:var(--soft)}
+.table[hidden]{display:none}
+.list{display:grid;gap:12px;margin-top:6px}
+.item{display:flex;flex-direction:column;align-items:stretch;background:var(--paper);border:1px solid var(--line);border-radius:16px}
+.btn{display:flex;align-items:center;gap:14px;width:100%;text-align:left;font:inherit;color:inherit;text-decoration:none;background:none;border:0;padding:16px 18px;cursor:pointer}
+.btn b{display:block;font-size:16.5px}
+.btn .tx{display:block;min-width:0}
+.btn em{display:block;font-style:normal;color:var(--soft);font-size:13.5px;margin-top:2px}
+.ic{flex:none;width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 55%,transparent);background:color-mix(in srgb,var(--accent) 10%,transparent)}
+.ic svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.btn:focus-visible,.go:focus-visible,.soc a:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:12px}
+.panel{padding:0 18px 18px;display:grid;gap:10px}
+.panel[hidden],.msg[hidden]{display:none}
+.row{display:flex;justify-content:space-between;gap:12px;font-size:14.5px;padding:8px 0;border-bottom:1px solid var(--line)}
+.row span{color:var(--soft)}
+.row code{font:600 15px ui-monospace,Menlo,monospace;word-break:break-all;text-align:right}
+.glink{display:block;padding:12px 14px;border:1px solid var(--line);border-radius:12px;color:var(--ink);text-decoration:none;font-weight:600;background:var(--bg)}
+.go{font:inherit;font-weight:700;font-size:14.5px;padding:12px 18px;border-radius:12px;border:1px solid var(--accent);background:var(--accent);color:var(--bg);cursor:pointer}
+.go[disabled]{opacity:.6;cursor:default}
+.hint,.msg{margin:0;color:var(--soft);font-size:13.5px}
+.msg{color:var(--ink);background:var(--accent-soft);padding:10px 12px;border-radius:10px}
+label{display:grid;gap:6px;font-size:13.5px;color:var(--soft)}
+label[hidden]{display:none}
+input{font:inherit;font-size:16px;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);width:100%}
+.soc{margin-top:32px;text-align:center}
+.soc h2{margin:0 0 12px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--soft);font-weight:700}
+.soc div{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+.soc a{padding:9px 16px;border:1px solid var(--line);border-radius:999px;color:var(--ink);text-decoration:none;font-size:14px;background:var(--paper)}
+.lcard{position:relative;overflow:hidden;border-radius:16px;padding:18px 18px 16px;color:var(--bg);background:linear-gradient(135deg,var(--accent),color-mix(in srgb,var(--accent) 55%,#000));box-shadow:0 10px 24px rgba(0,0,0,.18)}
+.lcard::after{content:"";position:absolute;right:-46px;top:-46px;width:150px;height:150px;border-radius:50%;background:rgba(255,255,255,.13)}
+.lcard.pop{animation:lpop .55s}@keyframes lpop{40%{transform:scale(1.035)}}
+.lc-top{display:flex;justify-content:space-between;gap:10px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.9}
+.lc-bal{margin-top:18px}.lc-bal b{font:700 46px/1 "Cormorant Garamond",Georgia,serif;font-variant-numeric:tabular-nums}.lc-bal span{font-size:14px;opacity:.9}
+.lc-rule{margin-top:6px;font-size:12.5px;opacity:.85}
+.lhist{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:13.5px}
+.lhist li{display:flex;justify-content:space-between;gap:10px;color:var(--soft)}.lhist b{color:var(--ink);font-variant-numeric:tabular-nums}
+.lnk{background:none;border:0;padding:0;font:inherit;font-size:13px;color:var(--soft);text-decoration:underline;cursor:pointer;justify-self:start}
+details.staff{border-top:1px solid var(--line);padding-top:10px}details.staff summary{cursor:pointer;font-weight:700;font-size:14px;color:var(--soft)}
+details.staff[open]{display:grid;gap:10px}details.staff .go{width:100%}
+.seg{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:10px}
+.seg button{font:inherit;font-weight:700;font-size:14px;padding:10px;border:0;background:var(--bg);color:var(--soft);cursor:pointer}
+.seg button.on{background:var(--accent);color:var(--bg)}
+#bjoin,#bcard{display:grid;gap:10px}#bjoin[hidden],#bcard[hidden]{display:none}
+.scanb{display:flex;align-items:center;justify-content:center;gap:10px}.scanb svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.rhint{margin:0;font-size:13px;color:var(--soft);text-align:center}
+.scan{position:fixed;inset:0;z-index:90;background:#000;display:flex;align-items:center;justify-content:center}.scan[hidden]{display:none}
+.scan video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.scan-f{position:relative;width:min(68vw,280px);aspect-ratio:1;border-radius:24px;box-shadow:0 0 0 100vmax rgba(0,0,0,.55);outline:3px solid #fff;outline-offset:-3px}
+.scan-ui{position:absolute;left:0;right:0;bottom:0;padding:20px 20px calc(24px + env(safe-area-inset-bottom,0px));display:grid;gap:12px;text-align:center;color:#fff}
+.scan-ui p{margin:0;font-size:15px;font-weight:600}
+.scan-ph{display:block;padding:14px;border-radius:14px;background:rgba(255,255,255,.14);font-weight:700;cursor:pointer}
+.scan-x{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));right:14px;width:44px;height:44px;border-radius:50%;border:0;background:rgba(0,0,0,.5);color:#fff;font-size:26px;line-height:1;cursor:pointer}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body class="">
+
+<header class="hero caps"><div>
+<h1 style="font-size:clamp(22px,9.00vw,46px)">Ресторан</h1>
+<p class="tag">Авторская кухня · банкеты</p>
+
+<span class="table" id="tb" hidden></span>
+</div></header>
+<main>
+<div class="list">
+<div class="item"><a class="btn" id="menu" href=""><i class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3v8M5 3v5a2 2 0 0 0 4 0V3M7 11v10"/><path d="M17 21V3c-2.2 1.5-3 4-3 7v3h3"/></svg></i><span class="tx"><b>Меню и заказ</b><em>Блюда, цены, заказ со стола</em></span></a></div>
+<div class="item"><button class="btn" id="wifi-b" type="button" aria-expanded="false" aria-controls="wifi-p"><i class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 9a14 14 0 0 1 19 0"/><path d="M5.5 12.5a9.5 9.5 0 0 1 13 0"/><path d="M8.7 16a5 5 0 0 1 6.6 0"/><circle cx="12" cy="19.2" r="1" fill="currentColor"/></svg></i><span class="tx"><b>Wi-Fi</b><em>Подключиться к сети</em></span></button><div class="panel" id="wifi-p" hidden><div class="row"><span>Сеть</span><code>Guest</code></div><p class="hint">Откройте «Настройки», затем Wi-Fi, выберите сеть и вставьте пароль.</p></div></div>
+<div class="item"><button class="btn" id="waiter-b" type="button" aria-expanded="false" aria-controls="waiter-p"><i class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 16v-5a6 6 0 1 1 12 0v5l1.6 2.2H4.4z"/><path d="M10 20.8a2.2 2.2 0 0 0 4 0"/><path d="M12 3v2"/></svg></i><span class="tx"><b>Позвать официанта</b><em>Подойдёт к вашему столу</em></span></button><div class="panel" id="waiter-p" hidden><label>Номер вашего стола<input id="tn" inputmode="numeric" maxlength="8" autocomplete="off"></label><button class="go" id="send" type="button">Позвать</button><p class="msg" id="wmsg" hidden aria-live="polite"></p></div></div>
+<div class="item"><a class="btn" id="review-b" href="https://yandex.ru/maps" rel="noopener"><i class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9.5h8M8 12.5h5"/></svg></i><span class="tx"><b>Оставить отзыв</b><em>Пара слов о вашем визите</em></span></a></div>
+<div class="item"><button class="btn" id="games-b" type="button" aria-expanded="false" aria-controls="games-p"><i class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="7" width="19" height="11" rx="5"/><path d="M7.5 10.5v4M5.5 12.5h4"/><circle cx="15.5" cy="11.5" r=".9" fill="currentColor"/><circle cx="18" cy="13.5" r=".9" fill="currentColor"/></svg></i><span class="tx"><b>Игры</b><em>Пока ждёте заказ</em></span></button><div class="panel" id="games-p" hidden><a class="glink" href="games/memory/">Найди пару</a><a class="glink" href="games/coloring/">Раскраска</a><a class="glink" href="games/sudoku/">Судоку</a><a class="glink" href="games/2048/">2048</a></div></div>
+<div class="item"><a class="btn" href="https://example.com" rel="noopener"><i class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></svg></i><span class="tx"><b>Сайт заведения</b><em>Подробнее о нас</em></span></a></div>
+</div>
+<div class="soc"><h2>Мы в соцсетях</h2><div><a href="https://vk.com" rel="noopener">VK</a><a href="https://t.me" rel="noopener">Telegram</a></div></div>
+</main>
+<script>
+(function(){
+  var C={"l": {"table": "Стол", "menu": "Меню и заказ", "menu_s": "Блюда, цены, заказ со стола", "wifi": "Wi-Fi", "wifi_s": "Подключиться к сети", "net": "Сеть", "pass": "Пароль", "copy": "Скопировать пароль", "copied": "Скопировано", "wifi_hint": "Откройте «Настройки», затем Wi-Fi, выберите сеть и вставьте пароль.", "wifi_demo": "Пример: на вашей странице здесь будет настоящий пароль Wi-Fi.", "waiter": "Позвать официанта", "waiter_s": "Подойдёт к вашему столу", "tn": "Номер вашего стола", "send": "Позвать", "sending": "Отправляем…", "ok": "Официант получил вызов и скоро подойдёт.", "fail": "Не получилось отправить. Подзовите официанта жестом.", "slow": "Слишком много вызовов подряд. Подождите минуту.", "review": "Оставить отзыв", "review_s": "Пара слов о вашем визите", "site": "Сайт заведения", "site_s": "Подробнее о нас", "social": "Мы в соцсетях", "games": "Игры", "games_s": "Пока ждёте заказ", "g_sudoku": "Судоку", "g_2048": "2048", "g_memory": "Найди пару", "g_coloring": "Раскраска", "bonus": "Бонусная карта", "bonus_s": "Кешбэк {rate}% баллами", "b_phone": "Ваш номер телефона", "b_open": "Открыть карту", "b_note": "Баллы привязаны к номеру. Без СМС и регистрации.", "b_card": "Бонусная карта", "b_pts": "балл|балла|баллов", "b_rule": "Кешбэк {rate}% с каждого чека · 1 балл = 1 {cur}", "b_other": "Другой номер", "b_staff": "Для официанта", "b_earn": "Начислить", "b_spend": "Списать", "b_sum": "Сумма чека", "b_spts": "Сколько баллов списать", "b_pin": "PIN официанта", "b_ok": "Подтвердить", "b_earned": "Начислено +{p}", "b_spent": "Списано {p}", "b_epin": "Неверный PIN.", "b_elock": "Слишком много попыток. Подождите 15 минут.", "b_elow": "Недостаточно баллов.", "b_efail": "Не получилось. Попробуйте ещё раз.", "b_ephone": "Проверьте номер телефона.", "b_demo": "Демо: PIN официанта {pin}", "b_he": "Начислено", "b_hs": "Списано", "b_scan": "Сканировать чек", "b_aim": "Наведите камеру на QR-код кассового чека", "b_photo": "Сфотографировать чек", "b_nocam": "Камера недоступна. Сфотографируйте чек кнопкой ниже.", "b_nofound": "QR-код не найден. Снимите чек ближе и ровнее.", "b_enot": "Это не QR-код кассового чека.", "b_rok": "Начислено +{p} за чек на {s}", "b_eused": "Этот чек уже учтён.", "b_eold": "Чек слишком старый: баллы начисляются по свежим чекам.", "b_eforeign": "Это чек другого заведения.", "b_elimit": "На сегодня лимит чеков исчерпан. Приходите ещё!", "b_rhint": "После оплаты отсканируйте QR-код на чеке — баллы начислятся сами.", "b_rempty": "Пока нет начислений. Отсканируйте чек после оплаты.", "b_empty": "Пока нет начислений. Покажите карту официанту при оплате.", "b_wait": "Загружаем…"}, "lang": "ru", "menu_url": "#", "wifi": {"ssid": "Guest", "pass": "welcome"}, "waiter": {"endpoint": "https://example.com/order", "venue": "demo"}, "loyalty": null};
+  var t=(new URLSearchParams(location.search).get("t")||"").replace(/[^0-9A-Za-z-]/g,"").slice(0,8);
+  var tb=document.getElementById("tb");
+  // зона из QR: ?z=lane&t=3 — «Дорожка 3» (боулинг, караоке, веранда); без z — стол
+  var z=(new URLSearchParams(location.search).get("z")||"").replace(/[^a-z]/g,"").slice(0,12);
+  var ZL={ru:{lane:"Дорожка",karaoke:"Караоке",billiard:"Бильярд",veranda:"Веранда",vip:"VIP-зал",hall:"Зал",room:"Комната"},
+    en:{lane:"Lane",karaoke:"Karaoke",billiard:"Billiards",veranda:"Terrace",vip:"VIP room",hall:"Hall",room:"Room"}};
+  var zl=(ZL[C.lang]||ZL.en)[z];if(!zl)z="";
+  if(t){tb.textContent=(zl||C.l.table)+" "+t;tb.hidden=false}
+  // «открыли страницу» для отчёта заведения: по QR/NFC на столе — qr, иначе по ссылке
+  // ?kp=1 — страница показана внутри коммерческого предложения: в отчёт ресторана не считаем
+  var KP=/[?&]kp=1/.test(location.search);
+  try{if(!KP&&C.waiter&&C.waiter.endpoint&&!sessionStorage.getItem(C.waiter.venue+"-hit")){sessionStorage.setItem(C.waiter.venue+"-hit","1");
+    var hb=JSON.stringify({venue:C.waiter.venue,src:t?"qr":"link"});navigator.sendBeacon&&navigator.sendBeacon(C.waiter.endpoint.replace(/\/order$/,"/hit"),new Blob([hb],{type:"text/plain"}))}}catch(e){}
+  // «перешли к отзыву» — отдельная строка в отчёте (без личных данных)
+  var rb=document.getElementById("review-b");
+  if(rb&&!KP&&C.waiter&&C.waiter.endpoint)rb.addEventListener("click",function(){try{navigator.sendBeacon&&navigator.sendBeacon(C.waiter.endpoint.replace(/\/order$/,"/hit"),new Blob([JSON.stringify({venue:C.waiter.venue,src:"review"})],{type:"text/plain"}))}catch(e){}});
+  var mb=document.getElementById("menu");
+  if(mb&&C.menu_url){mb.href=C.menu_url+(t?(C.menu_url.indexOf("?")<0?"?":"&")+"t="+encodeURIComponent(t)+(z?"&z="+z:""):"")}
+  function toggle(btn,panel){
+    var open=panel.hidden;
+    panel.hidden=!open;btn.setAttribute("aria-expanded",open?"true":"false");
+  }
+  var gb=document.getElementById("games-b"),gp=document.getElementById("games-p");
+  if(gb)gb.addEventListener("click",function(){toggle(gb,gp)});
+  var wb=document.getElementById("wifi-b"),wp=document.getElementById("wifi-p");
+  if(wb)wb.addEventListener("click",function(){toggle(wb,wp)});
+  var cp=document.getElementById("copy");
+  if(cp)cp.addEventListener("click",function(){
+    var done=function(){cp.textContent=C.l.copied};
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(C.wifi.password).then(done,function(){})}
+    else{var i=document.createElement("input");i.value=C.wifi.password;document.body.appendChild(i);i.select();try{document.execCommand("copy");done()}catch(e){}i.remove()}
+  });
+  var ab=document.getElementById("waiter-b"),ap=document.getElementById("waiter-p");
+  if(ab){
+    var tin=document.getElementById("tn"),send=document.getElementById("send"),msg=document.getElementById("wmsg");
+    if(t)tin.parentNode.hidden=true;
+    ab.addEventListener("click",function(){toggle(ab,ap)});
+    send.addEventListener("click",function(){
+      var tbl=t||tin.value.replace(/[^0-9A-Za-z-]/g,"").slice(0,8);
+      if(!tbl){tin.focus();return}
+      send.disabled=true;msg.hidden=false;msg.textContent=C.l.sending;
+      fetch(C.waiter.endpoint,{method:"POST",headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({venue:C.waiter.venue,table:tbl,zone:z,kind:"waiter",lang:C.lang})})
+        .then(function(r){msg.textContent=r.ok?C.l.ok:(r.status===429?C.l.slow:C.l.fail);if(!r.ok)send.disabled=false})
+        .catch(function(){msg.textContent=C.l.fail;send.disabled=false});
+    });
+  }
+  var BC=C.loyalty;
+  if(BC&&BC.venue){
+    var bb=document.getElementById("bonus-b"),bp=document.getElementById("bonus-p"),$=function(i){return document.getElementById(i)};
+    var KEY="bonus:"+BC.venue,phone="",op="earn",cur=BC.cur||"",rate=BC.rate||0;
+    try{phone=localStorage.getItem(KEY)||""}catch(e){}
+    var nf=function(n){return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g," ")};
+    var F=C.l.b_pts.split("|"),pl=function(n){n=Math.abs(n);if(C.lang!=="ru")return n===1?F[0]:F[1];var a=n%10,b=n%100;return a===1&&b!==11?F[0]:a>=2&&a<=4&&(b<12||b>14)?F[1]:F[2]};
+    var say=function(x){var m=$("bmsg");m.hidden=!x;m.textContent=x||""};
+    var digits=function(v){var d=String(v||"").replace(/\D/g,"");if(d.length===11&&d[0]==="8")d="7"+d.slice(1);return d.length>=9&&d.length<=15?d:""};
+    var api=function(o,x){var b={op:o,venue:BC.venue,phone:phone};for(var k in x)b[k]=x[k];
+      return fetch(BC.endpoint,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(b)}).then(function(r){return r.json().then(function(j){j.status=r.status;return j})})};
+    var dt=function(ts){var d=new Date(ts);return d.toLocaleDateString(C.lang==="en"?"en-GB":"ru-RU",{day:"numeric",month:"short"})};
+    var show=function(j){
+      rate=j.rate||rate;cur=j.cur||cur;
+      $("bjoin").hidden=true;$("bcard").hidden=false;
+      $("bbal").textContent=nf(j.balance||0);$("bpl").textContent=pl(j.balance||0);$("bphm").textContent="•••• "+phone.slice(-4,-2)+" "+phone.slice(-2);
+      $("brule").textContent=C.l.b_rule.replace("{rate}",rate).replace("{cur}",cur);
+      var h=j.history||[];$("bhist").innerHTML=h.length?h.slice(0,3).map(function(x){return "<li><span>"+(x.kind==="earn"?C.l.b_he:C.l.b_hs)+" · "+dt(x.ts)+"</span><b>"+(x.kind==="earn"?"+":"−")+nf(x.points)+"</b></li>"}).join(""):"<li><span>"+C.l.b_empty+"</span></li>";
+    };
+    var load=function(){say(C.l.b_wait);api("card").then(function(j){if(j.ok){say("");show(j)}else say(C.l.b_efail)}).catch(function(){say(C.l.b_efail)})};
+    bb.addEventListener("click",function(){toggle(bb,bp);if(!bp.hidden&&phone)load()});
+    $("bgo").addEventListener("click",function(){var d=digits($("bph").value);if(!d){say(C.l.b_ephone);return}phone=d;try{localStorage.setItem(KEY,d)}catch(e){}load()});
+    $("bother").addEventListener("click",function(){phone="";try{localStorage.removeItem(KEY)}catch(e){}$("bcard").hidden=true;$("bjoin").hidden=false;say("")});
+    [].forEach.call(document.querySelectorAll(".seg button"),function(b){b.addEventListener("click",function(){op=b.getAttribute("data-op");
+      [].forEach.call(document.querySelectorAll(".seg button"),function(x){x.className=x===b?"on":""});$("bamtl").textContent=op==="earn"?C.l.b_sum:C.l.b_spts})});
+    $("bconf").addEventListener("click",function(){
+      var a=parseInt(String($("bamt").value).replace(/\D/g,""),10)||0,pin=String($("bpin").value).replace(/\D/g,"");
+      if(!a){$("bamt").focus();return}if(!pin){$("bpin").focus();return}
+      var btn=$("bconf");btn.disabled=true;say(C.l.b_wait);
+      api(op,{amount:a,pin:pin}).then(function(j){btn.disabled=false;
+        if(j.ok){show(j);$("bamt").value="";$("bpin").value="";var c=document.querySelector(".lcard");c.classList.remove("pop");void c.offsetWidth;c.classList.add("pop");
+          say((op==="earn"?C.l.b_earned:C.l.b_spent).replace("{p}",nf(j.points||0))+" "+pl(j.points||0));return}
+        say(j.error==="pin"?C.l.b_epin:j.error==="locked"?C.l.b_elock:j.error==="low"?C.l.b_elow:C.l.b_efail);
+      }).catch(function(){btn.disabled=false;say(C.l.b_efail)});
+    });
+    if(phone)$("bph").value="+"+phone;
+    var pop=function(){var c=document.querySelector(".lcard");if(!c)return;c.classList.remove("pop");void c.offsetWidth;c.classList.add("pop")};
+    var sb=$("bscan");
+    if(sb){
+      C.l.b_empty=C.l.b_rempty;document.body.appendChild($("scan")); // окно камеры — поверх всей страницы, а не внутри стеклянного блока
+      // QR кассового чека: BarcodeDetector, где он есть (Android), иначе jsQR (iPhone); запасной путь — фото чека
+      var sv=$("scv"),stream=null,raf=0,det=null,cv=document.createElement("canvas"),cx=cv.getContext("2d",{willReadFrequently:true});
+      var lib=function(){return window.jsQR?Promise.resolve():new Promise(function(ok,no){var x=document.createElement("script");x.src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js";x.onload=ok;x.onerror=no;document.head.appendChild(x)})};
+      var decode=function(src,w,h,max){if(!w||!h||!window.jsQR)return null;var k=Math.min(1,max/Math.max(w,h));cv.width=Math.round(w*k);cv.height=Math.round(h*k);
+        cx.drawImage(src,0,0,cv.width,cv.height);var r=jsQR(cx.getImageData(0,0,cv.width,cv.height).data,cv.width,cv.height,{inversionAttempts:"attemptBoth"});return r&&r.data};
+      var stop=function(){cancelAnimationFrame(raf);raf=0;if(stream){stream.getTracks().forEach(function(t){t.stop()});stream=null}$("scan").hidden=true;document.body.style.overflow=""};
+      var got=function(text){stop();
+        if(!/fn=\d{16}/.test(text)||!/fp=\d/.test(text)){say(C.l.b_enot);return}
+        say(C.l.b_wait);
+        api("receipt",{qr:text}).then(function(j){
+          if(j.ok){show(j);pop();say(C.l.b_rok.replace("{p}",nf(j.points||0)+" "+pl(j.points||0)).replace("{s}",nf(j.amount||0)+" "+cur));return}
+          var E={used:C.l.b_eused,old:C.l.b_eold,foreign:C.l.b_eforeign,limit:C.l.b_elimit,locked:C.l.b_elock,receipt:C.l.b_enot};say(E[j.error]||C.l.b_efail);
+        }).catch(function(){say(C.l.b_efail)});
+      };
+      var tick=function(){
+        if(!stream)return;
+        if(sv.readyState>=2){
+          if(det){det.detect(sv).then(function(c){if(c&&c[0])got(c[0].rawValue);else raf=requestAnimationFrame(tick)}).catch(function(){det=null;raf=requestAnimationFrame(tick)});return}
+          var t=decode(sv,sv.videoWidth,sv.videoHeight,720);if(t){got(t);return}
+        }
+        raf=requestAnimationFrame(tick);
+      };
+      sb.addEventListener("click",function(){
+        $("scan").hidden=false;document.body.style.overflow="hidden";$("scm").textContent=C.l.b_aim;
+        try{det="BarcodeDetector" in window?new BarcodeDetector({formats:["qr_code"]}):null}catch(e){det=null}
+        (det?Promise.resolve():lib()).then(function(){return navigator.mediaDevices.getUserMedia({video:{facingMode:"environment",width:{ideal:1280}},audio:false})})
+          .then(function(s){stream=s;sv.srcObject=s;return sv.play()}).then(function(){raf=requestAnimationFrame(tick)})
+          .catch(function(){$("scm").textContent=C.l.b_nocam});
+      });
+      $("scx").addEventListener("click",stop);
+      $("scf").addEventListener("change",function(){var fl=this.files&&this.files[0];this.value="";if(!fl)return;$("scm").textContent=C.l.b_wait;
+        lib().then(function(){var img=new Image();img.onload=function(){var t=decode(img,img.naturalWidth,img.naturalHeight,1600);URL.revokeObjectURL(img.src);if(t)got(t);else $("scm").textContent=C.l.b_nofound};img.src=URL.createObjectURL(fl)})
+          .catch(function(){$("scm").textContent=C.l.b_efail});
+      });
+    }
+  }
+})();
+</script>
+</body>
+</html>
