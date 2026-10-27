@@ -120,6 +120,7 @@
       e.preventDefault();berr.hidden=true;
       var b={date:bk.date.value,time:bk.time.value,guests:bk.guests.value,hall:bk.hall.value,name:bk.name.value.trim(),phone:bk.phone.value.trim(),comment:bk.comment.value.trim()};
       if(!b.date||!b.time||!b.name||b.phone.replace(/\D/g,"").length<6){berr.hidden=false;berr.textContent="Заполните дату, время, имя и телефон";return}
+      if(!bk.consent.checked){berr.hidden=false;berr.textContent="Отметьте согласие на обработку персональных данных";return}
       var x=b.date.split("-");
       bpre.hidden=false;bpre.textContent="Пример: так бронь увидит администратор\n\n📅 Новая бронь № B12345\nДата: "+x[2]+"."+x[1]+"."+x[0]+"\nВремя: "+b.time+"\nГостей: "+b.guests+"\nЗал: "+b.hall+"\nИмя: "+b.name+"\nТелефон: "+b.phone+(b.comment?"\nПожелания: "+b.comment:"")+"\n\n[ ✅ Подтвердить ]  [ ❌ Нет мест ]\n\nНа рабочем сайте заявка сразу приходит администратору с этими кнопками, а гость видит ответ на этой странице.";
       bshow("sent");clearTimeout(bt);bt=setTimeout(function(){bshow("bk_ok")},3500);

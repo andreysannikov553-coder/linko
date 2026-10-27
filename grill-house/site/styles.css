@@ -212,3 +212,6 @@ footer .logo{display:block;margin-bottom:14px;font-size:26px}
 @keyframes breathe{50%{transform:scale(1.025)}}
 @keyframes eq{0%{transform:scaleY(.15)}100%{transform:scaleY(1)}}
 @media (prefers-reduced-motion:reduce){.vinyl .ring{display:none}.vinyl .eq i{transform:scaleY(.6)}}
+.consent{display:flex;gap:12px;align-items:flex-start;text-transform:none;letter-spacing:0;font-size:13.5px;color:var(--soft);cursor:pointer}
+.consent input{width:20px;height:20px;min-width:20px;margin:1px 0 0;padding:0;accent-color:var(--gold)}
+.consent a{color:var(--gold)}
