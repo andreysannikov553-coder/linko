@@ -57,48 +57,46 @@
   addEventListener("resize",function(){frame()});
 
 
-  // первый экран — сцена из съёмки: кадры видео идут вместе с прокруткой
+  // первый экран — сцена из съёмки: видео перематывается вместе с прокруткой
   var tun=$(".tunnel");
   if(tun&&!reduce)(function(){
-    var cv=$(".t-cv",tun),cx=cv.getContext("2d"),hero=$(".t-hero",tun),dim=$(".t-dim",tun),fin=$(".t-final",tun),bar2=$(".t-load i",tun);
+    var vid=$(".t-cv",tun),hero=$(".t-hero",tun),dim=$(".t-dim",tun),fin=$(".t-final",tun),bar2=$(".t-load i",tun);
     var cl=function(x){return x<0?0:x>1?1:x},seg=function(p,a,b){return cl((p-a)/(b-a))};
     var io3=function(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2};
-    var N=+tun.dataset.frames,set,F,got,active,q,order,retry,cur=0,want=0,drawn=-1,raf=0,gen=0;
-    // компьютер — кадры 16:9, телефон — вертикальные; при повороте экрана набор меняется
+    var set,dur=0,ready=false,cur=0,want=0,raf=0,gen=0;
+    // компьютер — видео 16:9, телефон — вертикальное; при повороте экрана файл меняется
+    // файл скачиваем целиком: перемотка по уже загруженному видео идёт без задержек
     var start=function(){
       var s=innerWidth>=innerHeight?"d":"m";if(s===set)return;
-      set=s;gen++;F=[];got=0;active=0;q=0;retry={};order=[];tun.classList.remove("loaded");
-      // сначала каждый 16-й кадр, потом гуще: прокручивать можно сразу, детали догружаются
-      var seen={};
-      [16,8,4,2,1].forEach(function(st){for(var i=0;i<N;i+=st)if(!seen[i]){seen[i]=1;order.push(i)}if(st===16&&!seen[N-1]){seen[N-1]=1;order.push(N-1)}});
-      pump();
+      set=s;var g=++gen;ready=false;tun.classList.remove("loaded");vid.classList.remove("on");
+      var url=tun.dataset.src+s+".mp4?v="+tun.dataset.v;
+      var use=function(src){if(g!==gen)return;vid.src=src;vid.load()};
+      fetch(url).then(function(r){
+        var total=+r.headers.get("content-length")||0,got=0,parts=[],rd=r.body&&r.body.getReader&&r.body.getReader();
+        if(!rd||!r.ok)return r.blob().then(function(b){use(URL.createObjectURL(b))});
+        return (function pull(){return rd.read().then(function(x){
+          if(x.done){use(URL.createObjectURL(new Blob(parts,{type:"video/mp4"})));return}
+          parts.push(x.value);got+=x.value.length;if(total)bar2.style.transform="scaleX("+(got/total).toFixed(3)+")";return pull()})})();
+      }).catch(function(){use(url)});
     };
-    var pump=function(){
-      var g=gen;
-      while(active<6&&q<order.length)(function(i){
-        active++;var im=new Image();im.decoding="async";
-        im.onload=function(){if(g!==gen)return;F[i]=im;got++;active--;bar2.style.transform="scaleX("+(got/N).toFixed(3)+")";if(got===N)tun.classList.add("loaded");if(Math.abs(i-cur)<17){drawn=-1;kick()}pump()};
-        im.onerror=function(){if(g!==gen)return;active--;if(!retry[i]){retry[i]=1;order.push(i)}pump()};
-        im.src=tun.dataset.src+set+"/"+("00"+i).slice(-3)+".webp?v="+tun.dataset.v;
-      })(order[q++]);
-    };
-    var near=function(i){for(var k=0;k<N;k++){if(F[i-k])return i-k;if(F[i+k])return i+k}return -1};
-    var paint=function(im,al){var cw=cv.width,ch=cv.height,k=Math.max(cw/im.naturalWidth,ch/im.naturalHeight),w=im.naturalWidth*k,h=im.naturalHeight*k;cx.globalAlpha=al;cx.drawImage(im,(cw-w)/2,(ch-h)/2,w,h);cx.globalAlpha=1};
-    var draw=function(){
-      var i=Math.floor(cur),t=cur-i,a=near(i);if(a<0)return;
-      paint(F[a],1);
-      // между соседними кадрами — плавный переход, без рывков
-      if(a===i&&t>.03&&F[i+1])paint(F[i+1],t);
-    };
-    var loop=function(){raf=0;var dd=want-cur;cur=Math.abs(dd)<.02?want:cur+dd*.2;if(cur!==drawn){draw();drawn=cur}if(cur!==want)kick()};
+    vid.addEventListener("loadeddata",function(){
+      dur=vid.duration||0;ready=dur>0;
+      // Safari показывает кадры после перемотки только у «запущенного» видео
+      var pp=vid.play();if(pp&&pp.then)pp.then(function(){vid.pause();kick()}).catch(function(){});else vid.pause();
+      bar2.style.transform="scaleX(1)";tun.classList.add("loaded");vid.classList.add("on");kick();
+    });
+    vid.addEventListener("seeked",function(){kick()});
+    // плавность: позиция догоняет прокрутку мягко, новая перемотка — только когда закончилась прошлая
+    var loop=function(){raf=0;var dd=want-cur;cur=Math.abs(dd)<.0003?want:cur+dd*.16;
+      if(ready&&!vid.seeking){var t=cur*(dur-.04);if(Math.abs(vid.currentTime-t)>.008)vid.currentTime=t}
+      if(cur!==want||(ready&&vid.seeking))kick()};
     var kick=function(){if(!raf)raf=requestAnimationFrame(loop)};
-    var size=function(){var r=cv.getBoundingClientRect(),dp=Math.min(devicePixelRatio||1,2),w=Math.round(r.width*dp),h=Math.round(r.height*dp);if(w!==cv.width||h!==cv.height){cv.width=w;cv.height=h;drawn=-1;kick()}};
-    size();start();addEventListener("resize",function(){size();start()});
+    start();addEventListener("resize",start);
     var tunnelFrame=function(){
       var r=tun.getBoundingClientRect(),total=tun.offsetHeight-innerHeight;
       if(r.bottom<-50||r.top>innerHeight+50)return;
       var p=cl(-r.top/total);
-      want=seg(p,0,.88)*(N-1);kick();
+      want=seg(p,0,.88);kick();
       var go=seg(p,0,.07);
       hero.style.opacity=(1-go).toFixed(3);hero.style.transform="translateY("+(-70*go).toFixed(1)+"px)";hero.style.visibility=go>=1?"hidden":"";
       dim.style.opacity=Math.max(.42*(1-seg(p,0,.08)),.45*seg(p,.88,.95)).toFixed(3);

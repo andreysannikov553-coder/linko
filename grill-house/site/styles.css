@@ -145,6 +145,7 @@ footer .logo{display:block;margin-bottom:14px;font-size:26px}
 .stage{position:sticky;top:0;height:100svh;overflow:hidden}
 .t-frame{position:absolute;inset:0;overflow:hidden;background:var(--bg2)}
 .t-poster,.t-cv{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover}
+.t-cv{opacity:0;transition:opacity .4s}.t-cv.on{opacity:1}
 .t-vig{position:absolute;inset:0;background:radial-gradient(ellipse 75% 70% at 50% 50%,rgba(0,0,0,0) 45%,rgba(0,0,0,.55) 100%)}
 .t-grain{position:absolute;inset:-50%;background:url(grain.png);opacity:.13;mix-blend-mode:overlay;animation:grain .8s steps(5) infinite;pointer-events:none}
 @keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-7%,5%)}40%{transform:translate(6%,-8%)}60%{transform:translate(-4%,-3%)}80%{transform:translate(8%,7%)}100%{transform:translate(0,0)}}
