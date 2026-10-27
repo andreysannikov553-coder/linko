@@ -1,0 +1,1058 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#2A1512">
+<meta name="robots" content="noindex">
+<title>Ресторан «Чайковский» Menu Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Manrope:wght@400;500;600;700&display=swap&subset=cyrillic">
+<style>
+:root{
+  --ground:#FBF7F0; --paper:#FFFDF9; --ink:#3A1F1A; --ink-soft:#6E5148; --ink-faint:#9C857B;
+  --olive:#8C2F2B; --olive-soft:#F3E6DA; --line:#EADFD2; --shadow:0 12px 32px rgba(58,31,26,.14);
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+body{font-size:15px}
+.demo{background:#3A1F1A!important;color:#E9D7BF!important;letter-spacing:.01em}
+.demo b{color:#fff}
+.has-hero .hero{position:relative;padding-block:104px 34px!important;color:#fff;background:
+  linear-gradient(180deg,rgba(42,21,18,.45) 0%,rgba(42,21,18,.72) 60%,rgba(42,21,18,.9) 100%),
+  url(img/hero.jpg) center 45%/cover no-repeat!important}
+.logo{font-family:var(--logo-font);font-weight:600!important;text-transform:uppercase;letter-spacing:.2em;font-size:clamp(34px,10vw,58px)!important;padding-left:.2em;color:#fff!important;text-shadow:0 2px 22px rgba(0,0,0,.45)}
+.logo-sub{color:#D9B67F!important;letter-spacing:.5em!important;font-size:12px!important;margin-top:10px!important}
+.crest{color:#F1E4D2!important;letter-spacing:.2em!important;margin-top:22px!important}
+.addr{color:#E3CFB6!important}
+.svc-b{background:rgba(255,253,249,.12)!important;color:#fff!important;border-color:rgba(255,255,255,.35)!important}
+.lang{background:rgba(42,21,18,.55)!important;border-color:rgba(255,255,255,.25)!important}
+.lang button{color:#fff!important}
+.lang button[aria-pressed="true"]{background:#D9B67F!important;color:#2A1512!important}
+.flt{background:rgba(255,253,249,.14)!important;color:#fff!important;border-color:rgba(255,255,255,.3)!important}
+.flt[aria-pressed="true"]{background:#D9B67F!important;color:#2A1512!important}
+.bar{background:rgba(251,247,240,.94)!important;border-bottom-color:var(--line)!important}
+.chip{letter-spacing:.06em;text-transform:uppercase;font-size:11.5px!important}
+.chip:hover{background:var(--olive-soft)!important;color:var(--olive)!important}
+.sec{padding-block:44px 6px!important}
+.sec-h{font-family:var(--logo-font);font-size:32px!important;font-weight:600!important;font-style:italic;letter-spacing:.02em!important;color:var(--olive)}
+.sec-h::after{width:46px!important;height:1px!important;background:#B08D57!important;margin-top:12px!important}
+.item{border-bottom-color:var(--line)!important}
+.name{font-family:var(--logo-font);font-size:20px!important;font-weight:600!important;line-height:1.25!important}
+.desc{color:var(--ink-faint)!important;font-size:13px!important}
+.price{color:var(--olive)!important;font-size:16px!important}
+.add{border-color:var(--olive)!important;color:var(--olive)!important;text-transform:uppercase;letter-spacing:.08em;font-size:11px!important;padding:8px 14px!important}
+.add:hover{background:var(--olive-soft)!important}
+.step{background:var(--olive)!important}.step .qty{color:#fff!important}.step button{background:#fff!important;color:var(--olive)!important}
+.cartbar-in{background:var(--olive)!important;color:#fff!important}.cnt{background:#fff!important;color:var(--olive)!important}
+.btn-main{background:var(--olive)!important;color:#fff!important;border-color:var(--olive)!important}
+.btn-alt{color:var(--olive)!important;border-color:var(--olive)!important}
+.foot-t{font-family:var(--logo-font);font-style:italic;font-size:26px!important}
+@media (min-width:720px){.wrap{max-width:980px!important}.list{display:grid;grid-template-columns:1fr 1fr;column-gap:36px}}
+:root{--logo-font:"Cormorant Garamond",Georgia,serif}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--ground);color:var(--ink);font-family:Manrope,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+body.has-cart{padding-bottom:76px}
+[hidden]{display:none!important}
+.wrap{max-width:680px;margin:0 auto;padding-inline:16px}
+
+.demo{background:var(--ink);color:var(--ground);font-size:12px;line-height:1.4;text-align:center;padding:8px 16px}
+.demo b{font-weight:700}
+
+.hero{padding-block:30px 18px;text-align:center}
+.logo{font-family:var(--logo-font);font-size:clamp(58px,17vw,84px);line-height:.9;margin:0;font-weight:400}
+.logo-sub{font-family:"Cormorant Garamond",Georgia,serif;font-size:15px;letter-spacing:.42em;text-transform:uppercase;margin:2px 0 0;padding-left:.42em;font-weight:600}
+.crest{display:block;margin:14px 0 0;color:var(--olive);font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700}
+.addr{display:block;margin:4px 0 0;color:var(--ink-soft);font-size:13px}
+.lang{display:inline-flex;gap:2px;margin-top:18px;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:3px}
+.lang button{border:0;background:none;font:inherit;font-size:12px;font-weight:700;letter-spacing:.04em;color:var(--ink-soft);padding:6px 12px;border-radius:999px;cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--ground)}
+.lang button:focus-visible,.chip:focus-visible,.add:focus-visible,.btn:focus-visible{outline:2px solid var(--olive);outline-offset:2px}
+
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--ground) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.chips{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding-block:8px}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto;padding:6px 12px;border-radius:999px;font-size:13px;font-weight:600;color:var(--ink-soft);text-decoration:none;white-space:nowrap}
+.chip:hover{background:var(--olive-soft);color:var(--ink)}
+
+.sec{padding-block:26px 6px;scroll-margin-top:56px}
+.sec-h{font-family:"Cormorant Garamond",Georgia,serif;font-size:27px;font-weight:700;margin:0 0 6px;text-transform:uppercase;letter-spacing:.06em}
+.sec-h::after{content:"";display:block;width:34px;height:2px;background:var(--ink);margin-top:6px}
+.list{list-style:none;margin:0;padding:0}
+.item{padding-block:14px;border-bottom:1px solid var(--line)}
+.item:last-child{border-bottom:0}
+.item.has-ph{display:flex;gap:14px;align-items:flex-start}
+.has-ph .txt{flex:1;min-width:0}
+.ph{width:96px;height:96px;flex:0 0 96px;border-radius:12px;object-fit:cover;display:block;background:var(--paper)}
+.photo-note{display:block;margin-top:6px;font-size:11.5px;color:var(--ink-faint);font-style:italic}
+.name{margin:0;font-size:15.5px;font-weight:600;line-height:1.35;text-wrap:pretty}
+.desc{margin:3px 0 0;font-size:12.5px;color:var(--ink-soft);line-height:1.45}
+.buy{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:8px;min-height:32px}
+.price{font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap;font-size:15px;color:var(--olive)}
+.add{border:1px solid var(--ink);background:transparent;color:var(--ink);font:inherit;font-size:12px;font-weight:700;padding:6px 12px;border-radius:999px;cursor:pointer}
+.add:hover{background:var(--olive-soft)}
+.step{display:inline-flex;align-items:center;gap:2px;background:var(--ink);border-radius:999px;padding:3px}
+.step button{width:26px;height:26px;border-radius:50%;border:0;background:var(--ground);color:var(--ink);font:inherit;font-weight:800;font-size:15px;line-height:1;cursor:pointer}
+.step .qty{min-width:22px;text-align:center;font-size:13px;font-weight:800;color:var(--ground)}
+
+.foot{margin-top:28px;padding-block:24px 34px;border-top:1px solid var(--line);text-align:center}
+.foot-t{font-family:"Cormorant Garamond",Georgia,serif;font-size:24px;font-weight:700;margin:0 0 14px}
+.acts{display:flex;gap:9px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:11px 18px;border-radius:999px;font:inherit;font-size:14px;font-weight:700;text-decoration:none;border:1px solid var(--ink);cursor:pointer}
+.btn-main{background:var(--ink);color:var(--ground)}
+.btn-alt{background:transparent;color:var(--ink)}
+.vat{display:block;margin:18px 0 0;font-size:11.5px;color:var(--ink-faint);font-style:italic}
+
+.cartbar{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;justify-content:center;padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));pointer-events:none;border:0;background:none;font:inherit}
+.cartbar-in{pointer-events:auto;width:100%;max-width:440px;display:flex;align-items:center;gap:10px;background:var(--ink);color:var(--ground);border-radius:16px;padding:12px 16px;box-shadow:var(--shadow);cursor:pointer}
+.cnt{width:26px;height:26px;border-radius:50%;background:var(--ground);color:var(--ink);font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.cartbar-label{flex:1;text-align:left;font-weight:700;font-size:14px}
+.cartbar-sum{font-weight:700;font-variant-numeric:tabular-nums;font-size:14px}
+
+.backdrop{position:fixed;inset:0;background:rgba(10,14,20,.5);z-index:40;opacity:0;pointer-events:none;transition:opacity .2s}
+.backdrop.open{opacity:1;pointer-events:auto}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:41;background:var(--paper);border-radius:18px 18px 0 0;max-height:84vh;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .25s cubic-bezier(.2,.8,.2,1);padding-bottom:env(safe-area-inset-bottom,0px);max-width:680px;margin:0 auto}
+.sheet.open{transform:none}
+.sheet-head{display:flex;align-items:center;justify-content:space-between;padding:16px 18px 10px;border-bottom:1px solid var(--line)}
+.sheet-title{font-family:"Cormorant Garamond",Georgia,serif;font-size:22px;font-weight:700}
+.x{border:0;background:none;font-size:22px;line-height:1;color:var(--ink-faint);cursor:pointer;padding:4px}
+.sheet-list{overflow-y:auto;padding:4px 18px}
+.row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:0}
+.row-n{flex:1;font-size:14px;font-weight:600}
+.row-p{font-size:13px;color:var(--ink-soft);font-variant-numeric:tabular-nums;white-space:nowrap}
+.empty{padding:28px 0;text-align:center;color:var(--ink-soft)}
+.sheet-foot{padding:12px 18px 16px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:10px}
+.sum{display:flex;justify-content:space-between;font-weight:800;font-size:16px;font-variant-numeric:tabular-nums}
+.note{display:block;font-size:11.5px;color:var(--ink-faint);text-align:center;margin:0}
+.modes{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;background:var(--line);padding:4px;border-radius:12px}
+.modes[hidden]{display:none}
+.modes button{font:inherit;font-size:13px;font-weight:700;border:0;border-radius:9px;padding:9px 4px;background:transparent;color:var(--ink-soft);cursor:pointer}
+.modes button[aria-pressed="true"]{background:var(--paper);color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.12)}
+.gform{display:flex;flex-direction:column;gap:11px;padding:14px 0}
+.gform label{display:flex;flex-direction:column;gap:5px;font-size:12.5px;color:var(--ink-soft);font-weight:600}
+.gform input,.gform textarea,.gform select{font:inherit;font-size:16px;padding:11px 12px;border:1px solid var(--line);border-radius:12px;background:var(--ground);color:var(--ink);width:100%}
+.gform textarea{min-height:64px;resize:vertical}
+.gform .row{display:flex;gap:8px}.gform .row>*{flex:1;min-width:0}
+.gform .pick{display:flex;gap:6px}.gform .pick button{flex:1;font:inherit;font-size:13.5px;font-weight:700;padding:10px 6px;border-radius:10px;border:1px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer}
+.gform .pick button[aria-pressed="true"]{border-color:var(--olive);color:var(--olive);background:var(--olive-soft)}
+.gform .hint{font-size:12.5px;color:var(--ink-faint);margin:0}
+.gform .err{font-size:13px;color:#C0392B;margin:0}
+.gform .geo{align-self:flex-start;font:inherit;font-size:13px;font-weight:700;background:none;border:0;color:var(--olive);padding:0;cursor:pointer;text-decoration:underline}
+.pay{display:flex;flex-direction:column;gap:12px;padding:14px 0;text-align:center}
+.pay .amt{font:700 30px/1.1 "Cormorant Garamond",Georgia,serif;color:var(--olive)}
+.pay .ref{font-size:13px;color:var(--ink-soft)}
+.pay .qrbox{align-self:center;width:220px;height:220px;border-radius:14px;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.pay .qrbox img{width:100%;height:100%;object-fit:contain}
+.pay .qrbox.demo{border:2px dashed var(--olive);background:var(--olive-soft);color:var(--ink);font-size:13px;padding:16px;line-height:1.4}
+.pay .hint{font-size:12.5px;color:var(--ink-faint);margin:0}
+.pay .btn{justify-content:center}
+.sheet-actions{display:flex;gap:9px}
+.sheet-actions .btn{justify-content:center}
+.sheet-actions .btn-main{flex:1}
+
+.preview{margin:0;padding:14px;border-radius:12px;background:var(--ground);border:1px solid var(--line);white-space:pre-wrap;font:inherit;font-size:14px}
+.preview-h{margin:0 0 4px;font-weight:700}
+.preview-s{margin:0 0 12px;color:var(--ink-soft);font-size:13px}
+
+/* premium layout: config "layout": "cards" — big 4:3 dish photos, two columns on wide screens */
+.layout-cards .item.has-ph{display:flex;flex-direction:column;align-items:stretch;gap:14px;padding-block:20px}
+.layout-cards .has-ph .txt{width:100%}
+.layout-cards .has-ph .ph{width:100%;height:auto;aspect-ratio:4/3;flex:none;border-radius:14px;box-shadow:var(--shadow)}
+.layout-cards .name{font-size:19px}
+.layout-cards .sec{padding-block:40px 6px}
+@media (min-width:720px){
+  .layout-cards .wrap{max-width:980px}
+  .layout-cards .list{display:grid;grid-template-columns:1fr 1fr;column-gap:28px}
+  .layout-cards .item.has-ph{border-bottom:0}
+}
+/* config "hero": photo behind the header, fading into the page ground */
+.has-hero .hero{padding-block:110px 34px;background:
+  linear-gradient(180deg,color-mix(in srgb,var(--ground) 20%,transparent) 0%,color-mix(in srgb,var(--ground) 78%,transparent) 55%,var(--ground) 100%),
+  url(img/hero.jpg) center 45%/cover no-repeat}
+.svc{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.svc-b{border:1px solid var(--line);background:color-mix(in srgb,var(--paper) 85%,transparent);color:var(--ink);font:inherit;font-size:12.5px;font-weight:600;padding:8px 14px;border-radius:999px;cursor:pointer}
+.svc-b:active{transform:scale(.97)} .svc-b[disabled]{opacity:.55}
+.toast{position:fixed;left:50%;bottom:92px;transform:translateX(-50%);background:var(--ink);color:var(--ground);padding:10px 16px;border-radius:12px;font-size:13.5px;font-weight:600;z-index:60;box-shadow:var(--shadow);max-width:90vw;text-align:center}
+.item.soldout{opacity:.55}
+.item.soldout .add,.item.soldout .step{display:none}
+.sold-tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);border:1px solid var(--line);border-radius:999px;padding:5px 12px}
+.flts{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.flt{border:1px solid var(--line);background:color-mix(in srgb,var(--paper) 85%,transparent);color:var(--ink);font:inherit;font-size:12.5px;font-weight:600;padding:7px 13px;border-radius:999px;cursor:pointer}
+.flt[aria-pressed="true"]{background:var(--olive);border-color:var(--olive);color:var(--on-accent,#fff)}
+.flt:focus-visible{outline:2px solid var(--olive);outline-offset:2px}
+.vbadge{display:inline-block;margin-top:10px;border:1px solid var(--olive);color:var(--olive);font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:4px 12px;border-radius:999px}
+.tgs{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+.tg{font-size:11.5px;color:var(--ink-faint);border:1px solid var(--line);border-radius:999px;padding:1px 8px}
+.item.fhide,.sec.fhide{display:none}
+.empty-f{text-align:center;color:var(--ink-soft);padding:30px 0}
+.sug{position:fixed;left:50%;transform:translateX(-50%);bottom:84px;width:min(420px,calc(100% - 28px));background:var(--paper);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:10px 14px 6px;z-index:35}
+.sug-h{display:flex;justify-content:space-between;align-items:center;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--olive);padding-bottom:4px}
+.sug-r{display:flex;align-items:center;gap:10px;padding:7px 0;border-top:1px solid var(--line)}
+.sug-n{flex:1;font-size:14px;font-weight:600;line-height:1.3}
+.sug-p{font-size:13px;color:var(--ink-soft);font-variant-numeric:tabular-nums;white-space:nowrap}
+.sug-a{border:1px solid var(--olive);background:transparent;color:var(--olive);width:30px;height:30px;border-radius:50%;font:inherit;font-size:18px;line-height:1;cursor:pointer}
+.sug-a:active{transform:scale(.92)}
+.sheet-sug{padding:8px 18px 4px;border-top:1px solid var(--line)}
+.openbar{text-align:center;font-size:12.5px;font-weight:600;padding:8px 16px;color:var(--ink-soft);border-bottom:1px solid var(--line)}
+.openbar.is-open::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:#3FA66B;margin-right:8px}
+.openbar.is-closed::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:#C0553B;margin-right:8px}
+.item.timeclosed{opacity:.55}
+.item.timeclosed .add,.item.timeclosed .step{display:none}
+.add[data-q]:not([data-q=""])::after{content:" · " attr(data-q)}
+.one-lang .langbox{display:none}
+.promo{margin:0;padding:10px 16px;text-align:center;font-size:13.5px;font-weight:600;background:var(--olive);color:var(--ground)}
+.ostat{position:fixed;left:12px;right:12px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:40;max-width:560px;margin:0 auto;display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:16px;background:var(--paper);color:var(--ink);border:1px solid var(--line);box-shadow:var(--shadow)}
+.has-cart .ostat{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+.ostat .dot{flex:none;width:10px;height:10px;border-radius:50%;background:var(--ink-faint)}
+.ostat[data-s="accepted"] .dot,.ostat[data-s="cooking"] .dot{background:#D9A441;animation:opulse 1.6s infinite}
+.ostat[data-s="ready"] .dot,.ostat[data-s="bk_ok"] .dot{background:#4FA36B}
+.ostat[data-s="bk_no"] .dot{background:#C8553D}
+.ostat .ot{flex:1;min-width:0;font-size:14px;font-weight:600;line-height:1.3}
+.ostat .ot small{display:block;font-weight:400;font-size:12px;color:var(--ink-faint)}
+.ostat .x{flex:none}
+@keyframes opulse{50%{opacity:.35}}
+.opt{display:flex;flex-direction:column;gap:14px;padding:14px 0}
+.opt fieldset{border:0;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.opt legend{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:6px}
+.opt label{display:flex;align-items:center;gap:10px;padding:12px;border:1px solid var(--line);border-radius:12px;cursor:pointer}
+.opt label span{flex:1}.opt label b{font-weight:600}
+.opt input{accent-color:var(--olive);width:18px;height:18px;margin:0}
+.bform{display:flex;flex-direction:column;gap:12px;padding:14px 0}
+.bform label{display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--ink-soft)}
+.bform input,.bform select{font:inherit;font-size:16px;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--ground);color:var(--ink);width:100%;box-sizing:border-box}
+.bform .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tipsb{justify-content:center}
+@media (prefers-reduced-motion:reduce){.ostat .dot{animation:none}}
+.rvc{position:fixed;left:50%;transform:translateX(-50%);bottom:84px;width:min(440px,calc(100% - 28px));background:var(--paper);border:1px solid var(--olive);border-radius:18px;box-shadow:var(--shadow);padding:16px 16px 14px;z-index:36;text-align:center}
+.rv-t{font-family:"Cormorant Garamond",Georgia,serif;font-size:21px;font-weight:700;margin:0 0 4px;line-height:1.2}
+.rv-p{margin:0 0 12px;color:var(--ink-soft);font-size:13.5px}
+.rv-a{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.rv-link{margin:14px 0 0;font-size:13.5px}.rv-link a{color:var(--olive);font-weight:600}
+/* «Живые» фото (config "anim"): медленный кинонаезд и пар из процедурной турбулентности (SVG). Играют только на экране. */
+.phw{position:relative;overflow:hidden;display:block;isolation:isolate}
+.phw .phi{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.03);will-change:transform}
+.anim .phw.on .phi{animation:kb0 26s ease-in-out infinite alternate}
+.anim .phw.kb1.on .phi{animation-name:kb1;animation-duration:30s}
+.anim .phw.kb2.on .phi{animation-name:kb2;animation-duration:24s}
+.anim .phw.kb3.on .phi{animation-name:kb3;animation-duration:28s}
+@keyframes kb0{from{transform:scale(1.03) translate(0,0)}to{transform:scale(1.08) translate(-1.2%,-.8%)}}
+@keyframes kb1{from{transform:scale(1.08) translate(-1%,.5%)}to{transform:scale(1.03) translate(.8%,-.4%)}}
+@keyframes kb2{from{transform:scale(1.03) translate(.8%,.8%)}to{transform:scale(1.08) translate(-.5%,-1%)}}
+@keyframes kb3{from{transform:scale(1.07) translate(.5%,-.8%)}to{transform:scale(1.03) translate(-.8%,.8%)}}
+.phw .smoke{position:absolute;left:10%;bottom:30%;width:80%;height:100%;pointer-events:none;z-index:1;opacity:0;
+  background:radial-gradient(ellipse 42% 60% at 50% 80%,#fff,rgba(255,255,255,.55) 45%,transparent 72%);
+  filter:url(#fx-smoke) blur(1.5px);mix-blend-mode:screen;transform-origin:50% 100%}
+.phw .smoke.s2{left:26%;width:60%;bottom:36%;filter:url(#fx-smoke2) blur(2px)}
+.anim .phw.on .smoke{animation:rise 11s ease-in-out infinite}
+.anim .phw.on .smoke.s2{animation-duration:14s;animation-delay:-6s}
+@keyframes rise{0%{opacity:0;transform:translateY(14%) scale(.9,.8)}30%{opacity:.85}65%{opacity:.55}100%{opacity:0;transform:translateY(-26%) scale(1.12,1.3)}}
+/* Глубина 2.5D: фото и вырезанный слой еды смещаются с разной скоростью */
+.phw .phf{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;z-index:1;filter:drop-shadow(0 3px 5px rgba(0,0,0,.12));transform:scale(1.05)}
+.phw.dp .phi{transform:scale(1.05)}
+.anim .phw.dp.on .phi{animation:dpb 9s ease-in-out infinite alternate}
+.anim .phw.dp.on .phf{animation:dpf 9s ease-in-out infinite alternate}
+.anim .phw.dp.kb1.on .phi,.anim .phw.dp.kb1.on .phf{animation-duration:10.5s;animation-direction:alternate-reverse}
+.anim .phw.dp.kb2.on .phi,.anim .phw.dp.kb2.on .phf{animation-duration:8.5s}
+.anim .phw.dp.kb3.on .phi,.anim .phw.dp.kb3.on .phf{animation-duration:11s;animation-direction:alternate-reverse}
+@keyframes dpb{from{transform:scale(1.05) translate(-.3%,0)}to{transform:scale(1.05) translate(.3%,-.2%)}}
+@keyframes dpf{from{transform:scale(1.05) translate(-.9%,.2%)}to{transform:scale(1.05) translate(.9%,-.5%)}}
+/* Подъезд камеры (config "anim": {"push": true}): к главному на фото, пауза на крупном плане, отъезд */
+.anim .phw.push.on .phi{transform-origin:var(--fx,50%) var(--fy,50%);animation:push 12s cubic-bezier(.45,0,.55,1) infinite}
+@keyframes push{0%,8%{transform:scale(1)}45%,60%{transform:scale(1.12)}100%{transform:scale(1)}}
+.phw.push .phi{transform:none}
+@media (prefers-reduced-motion:reduce){.anim .phw .phi,.anim .phw .phf,.anim .phw .smoke{animation:none!important}.anim .phw .smoke{opacity:0}}
+
+/* языки — в правом верхнем углу шапки; кнопки сервиса крупнее и выше фильтров */
+.hero{position:relative}
+.langbox{position:absolute;top:12px;right:12px;z-index:5}
+.langbox .lang{margin-top:0!important;box-shadow:0 2px 10px rgba(0,0,0,.12)}
+.langbox .lang button{padding:5px 9px;font-size:11.5px}
+.svc{gap:10px!important;margin-top:20px!important}
+.svc-b{flex:1 1 0;max-width:230px;font-size:14.5px!important;padding:12px 10px!important;font-weight:700!important;min-height:48px;white-space:nowrap}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body class="has-hero anim">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <!-- пар: шум превращается в белые струйки (альфа по рисунку шума), маска — мягкое пятно элемента; шум медленно «течёт» -->
+  <filter id="fx-smoke" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+    <feTurbulence type="fractalNoise" baseFrequency="0.006 0.02" numOctaves="4" seed="7" result="n"><animate attributeName="baseFrequency" dur="20s" values="0.006 0.02;0.008 0.025;0.006 0.02" repeatCount="indefinite"/></feTurbulence>
+    <feColorMatrix in="n" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  3.0 0 0 0 -0.9" result="w"/>
+    <feComposite in="w" in2="SourceGraphic" operator="in"/>
+  </filter>
+  <filter id="fx-smoke2" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+    <feTurbulence type="fractalNoise" baseFrequency="0.012 0.03" numOctaves="3" seed="23" result="n"><animate attributeName="baseFrequency" dur="15s" values="0.012 0.03;0.009 0.034;0.012 0.03" repeatCount="indefinite"/></feTurbulence>
+    <feColorMatrix in="n" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 6.0 0 0 -2.4" result="w"/>
+    <feComposite in="w" in2="SourceGraphic" operator="in"/>
+  </filter>
+</svg>
+
+
+<div class="demo">Демо для <b>ресторана «Чайковский» в Чайковском</b>: ваше меню с сайта отеля «Чайковский» как QR-меню на русском и английском · сделал @andrey_vit</div>
+
+<header class="hero wrap">
+  <p class="logo">Чайковский</p>
+  <p class="logo-sub">Ресторан</p>
+  <span class="crest"><span data-ru="Отель «Чайковский» · ул. Мира, 7" data-en="Hotel Chaykovsky · Mira St 7">Отель «Чайковский» · ул. Мира, 7</span></span>
+  <span class="addr"><span data-ru="ежедневно 12:00–23:00" data-en="daily 12:00–23:00">ежедневно 12:00–23:00</span></span>
+  
+  <div class="langbox"><div class="lang" role="group" aria-label="Язык / Language">
+    <button type="button" id="lang-ru" aria-pressed="true">RU</button>
+    <button type="button" id="lang-en" aria-pressed="false">EN</button>
+  </div></div>
+  <div class="svc" id="svc" hidden>
+    <button type="button" class="svc-b" id="call-waiter"><span data-ru="Позвать официанта" data-en="Call the waiter">Позвать официанта</span></button>
+    <button type="button" class="svc-b" id="call-bill"><span data-ru="Попросить счёт" data-en="Ask for the bill">Попросить счёт</span></button>
+  </div>
+  <div class="flts" id="flts"><button type="button" class="flt" data-flt="kids" aria-pressed="false"><span data-ru="👶 Детям" data-en="👶 For kids">👶 Детям</span></button><button type="button" class="flt" data-flt="veg" aria-pressed="false"><span data-ru="🌱 Вегетарианское" data-en="🌱 Vegetarian">🌱 Вегетарианское</span></button><button type="button" class="flt" data-flt="nopork" aria-pressed="false"><span data-ru="Без свинины" data-en="No pork">Без свинины</span></button></div>
+</header>
+
+<p class="promo" id="promo" hidden></p>
+<div class="openbar" id="openbar" hidden></div>
+
+<nav class="bar" aria-label="Разделы меню"><div class="wrap chips"><a class="chip" href="#s-salads"><span data-ru="Салаты" data-en="Salads">Салаты</span></a><a class="chip" href="#s-hotsnack"><span data-ru="Горячие закуски" data-en="Hot starters">Горячие закуски</span></a><a class="chip" href="#s-soups"><span data-ru="Супы" data-en="Soups">Супы</span></a><a class="chip" href="#s-fish"><span data-ru="Рыба" data-en="Fish">Рыба</span></a><a class="chip" href="#s-meat"><span data-ru="Мясо" data-en="Meat">Мясо</span></a><a class="chip" href="#s-desserts"><span data-ru="Десерты" data-en="Desserts">Десерты</span></a><a class="chip" href="#s-drinks"><span data-ru="Напитки" data-en="Drinks">Напитки</span></a><a class="chip" href="#s-kids"><span data-ru="Для маленьких гостей" data-en="For little guests">Для маленьких гостей</span></a></div></nav>
+
+<main class="wrap">
+<section class="sec" id="s-salads"><h2 class="sec-h"><span data-ru="Салаты" data-en="Salads">Салаты</span></h2><ul class="list"><li class="item" data-id="salads-1" data-tags=""><div class="txt"><h3 class="name" data-ru="Салат из свежих овощей с яйцом «Пашот»" data-en="Fresh vegetable salad with poached egg">Салат из свежих овощей с яйцом «Пашот»</h3><p class="desc" data-ru="150 г" data-en="150 g">150 г</p><div class="buy"><span class="price">390 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li><li class="item" data-id="salads-2" data-tags=""><div class="txt"><h3 class="name" data-ru="Помидоры «с ветки»" data-en="Vine tomatoes">Помидоры «с ветки»</h3><p class="desc" data-ru="150 г · деревенская рикотта и вкус Модены" data-en="150 g · farmhouse ricotta and a taste of Modena">150 г · деревенская рикотта и вкус Модены</p><div class="buy"><span class="price">470 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li><li class="item" data-id="salads-3" data-tags=""><div class="txt"><h3 class="name" data-ru="Карпаччо индейки с хрустящим зелёным салатом" data-en="Turkey carpaccio with crisp green salad">Карпаччо индейки с хрустящим зелёным салатом</h3><p class="desc" data-ru="160 г" data-en="160 g">160 г</p><div class="buy"><span class="price">530 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li><li class="item" data-id="salads-4" data-tags=""><div class="txt"><h3 class="name" data-ru="Салат от Цезаря Кардини с вяленой индейкой" data-en="Caesar Cardini salad with cured turkey">Салат от Цезаря Кардини с вяленой индейкой</h3><p class="desc" data-ru="160 г" data-en="160 g">160 г</p><div class="buy"><span class="price">550 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li><li class="item" data-id="salads-5" data-tags=""><div class="txt"><h3 class="name" data-ru="«Дымная» утка с тыквенным муссом и каплями мёда" data-en="Smoked duck with pumpkin mousse and honey">«Дымная» утка с тыквенным муссом и каплями мёда</h3><p class="desc" data-ru="160 г" data-en="160 g">160 г</p><div class="buy"><span class="price">570 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li><li class="item" data-id="salads-6" data-tags=""><div class="txt"><h3 class="name" data-ru="Салат с анчоусами, печёным картофелем и перепелиным яйцом" data-en="Salad with anchovies, baked potato and quail egg">Салат с анчоусами, печёным картофелем и перепелиным яйцом</h3><p class="desc" data-ru="160 г" data-en="160 g">160 г</p><div class="buy"><span class="price">580 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li><li class="item" data-id="salads-7" data-tags=""><div class="txt"><h3 class="name" data-ru="Пастрами из телятины с помидорами в крошке пармезана" data-en="Veal pastrami with tomatoes in Parmesan crumb">Пастрами из телятины с помидорами в крошке пармезана</h3><p class="desc" data-ru="150 г" data-en="150 g">150 г</p><div class="buy"><span class="price">670 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li><li class="item" data-id="salads-8" data-tags=""><div class="txt"><h3 class="name" data-ru="Фирменный «Айсберг» с креветками и голубым сыром" data-en="Signature Iceberg salad with prawns and blue cheese">Фирменный «Айсберг» с креветками и голубым сыром</h3><p class="desc" data-ru="160 г" data-en="160 g">160 г</p><div class="buy"><span class="price">690 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li><li class="item" data-id="salads-9" data-tags=""><div class="txt"><h3 class="name" data-ru="Лосось с брокколи, мякотью апельсина и соусом «Просекко»" data-en="Salmon with broccoli, orange and Prosecco sauce">Лосось с брокколи, мякотью апельсина и соусом «Просекко»</h3><p class="desc" data-ru="160 г" data-en="160 g">160 г</p><div class="buy"><span class="price">690 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li></ul></section>
+<section class="sec" id="s-hotsnack"><h2 class="sec-h"><span data-ru="Горячие закуски" data-en="Hot starters">Горячие закуски</span></h2><ul class="list"><li class="item" data-id="hotsnack-1" data-tags="veg"><div class="txt"><h3 class="name" data-ru="Баклажаны пармиджано" data-en="Eggplant parmigiana">Баклажаны пармиджано</h3><div class="tgs"><span class="tg tg-veg" data-ru="🌱" data-en="🌱">🌱</span></div><p class="desc" data-ru="150 г" data-en="150 g">150 г</p><div class="buy"><span class="price">470 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li><li class="item" data-id="hotsnack-2" data-tags="veg"><div class="txt"><h3 class="name" data-ru="Тыквенное суфле с домашним песто" data-en="Pumpkin soufflé with homemade pesto">Тыквенное суфле с домашним песто</h3><div class="tgs"><span class="tg tg-veg" data-ru="🌱" data-en="🌱">🌱</span></div><p class="desc" data-ru="100 г" data-en="100 g">100 г</p><div class="buy"><span class="price">420 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li><li class="item" data-id="hotsnack-3" data-tags=""><div class="txt"><h3 class="name" data-ru="Тягучий сыр в кипящих рубленых томатах" data-en="Melted cheese in bubbling chopped tomatoes">Тягучий сыр в кипящих рубленых томатах</h3><p class="desc" data-ru="150 г" data-en="150 g">150 г</p><div class="buy"><span class="price">470 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li><li class="item" data-id="hotsnack-4" data-tags=""><div class="txt"><h3 class="name" data-ru="Филе сома в кружевном кляре и соусом «Цезарь»" data-en="Catfish fillet in lace batter with Caesar sauce">Филе сома в кружевном кляре и соусом «Цезарь»</h3><p class="desc" data-ru="100/30 г" data-en="100/30 g">100/30 г</p><div class="buy"><span class="price">470 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li><li class="item" data-id="hotsnack-5" data-tags="pork"><div class="txt"><h3 class="name" data-ru="Помидорки черри, печёные в беконе" data-en="Cherry tomatoes baked in bacon">Помидорки черри, печёные в беконе</h3><div class="tgs"><span class="tg tg-pork" data-ru="🐖 свинина" data-en="🐖 pork">🐖 свинина</span></div><p class="desc" data-ru="5 шт." data-en="5 pcs">5 шт.</p><div class="buy"><span class="price">520 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li></ul></section>
+<section class="sec" id="s-soups"><h2 class="sec-h"><span data-ru="Супы" data-en="Soups">Супы</span></h2><ul class="list"><li class="item" data-id="soups-1" data-tags="veg"><div class="txt"><h3 class="name" data-ru="Суп из брокколи и шпината со сливочной рикоттой" data-en="Broccoli and spinach soup with creamy ricotta">Суп из брокколи и шпината со сливочной рикоттой</h3><div class="tgs"><span class="tg tg-veg" data-ru="🌱" data-en="🌱">🌱</span></div><p class="desc" data-ru="300 г" data-en="300 g">300 г</p><div class="buy"><span class="price">470 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li><li class="item" data-id="soups-2" data-tags=""><div class="txt"><h3 class="name" data-ru="Грибной капучино" data-en="Mushroom cappuccino">Грибной капучино</h3><p class="desc" data-ru="300 г" data-en="300 g">300 г</p><div class="buy"><span class="price">530 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li><li class="item" data-id="soups-3" data-tags=""><div class="txt"><h3 class="name" data-ru="«Рыбная супа» с хрустящей чиабаттой" data-en="Fish soup with crispy ciabatta">«Рыбная супа» с хрустящей чиабаттой</h3><p class="desc" data-ru="300 г" data-en="300 g">300 г</p><div class="buy"><span class="price">570 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li><li class="item" data-id="soups-4" data-tags=""><div class="txt"><h3 class="name" data-ru="Мясная похлёбка с костровыми овощами" data-en="Meat broth with fire-roasted vegetables">Мясная похлёбка с костровыми овощами</h3><p class="desc" data-ru="300 г" data-en="300 g">300 г</p><div class="buy"><span class="price">570 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li></ul></section>
+<section class="sec" id="s-fish"><h2 class="sec-h"><span data-ru="Рыба" data-en="Fish">Рыба</span></h2><ul class="list"><li class="item" data-id="fish-1" data-tags=""><div class="txt"><h3 class="name" data-ru="Щучьи котлеты на картофельном креме" data-en="Pike cutlets on potato cream">Щучьи котлеты на картофельном креме</h3><p class="desc" data-ru="250 г" data-en="250 g">250 г</p><div class="buy"><span class="price">620 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li><li class="item" data-id="fish-2" data-tags=""><div class="txt"><h3 class="name" data-ru="Рагу из сома в рубленых томатах с «оливковой» нотой" data-en="Catfish ragout in chopped tomatoes with olives">Рагу из сома в рубленых томатах с «оливковой» нотой</h3><p class="desc" data-ru="270 г" data-en="270 g">270 г</p><div class="buy"><span class="price">680 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li><li class="item" data-id="fish-3" data-tags=""><div class="txt"><h3 class="name" data-ru="Судак со шпинатом и «жжёным томатом»" data-en="Pike-perch with spinach and charred tomato">Судак со шпинатом и «жжёным томатом»</h3><p class="desc" data-ru="190 г" data-en="190 g">190 г</p><div class="buy"><span class="price">770 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li><li class="item" data-id="fish-4" data-tags=""><div class="txt"><h3 class="name" data-ru="Форель «с дымком» и печёные овощи" data-en="Smoked trout with roasted vegetables">Форель «с дымком» и печёные овощи</h3><p class="desc" data-ru="1 шт." data-en="1 pcs">1 шт.</p><div class="buy"><span class="price">840 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li><li class="item" data-id="fish-5" data-tags=""><div class="txt"><h3 class="name" data-ru="Креветки с тыквенным кремом и зелёным чесночным маслом" data-en="Prawns with pumpkin cream and green garlic oil">Креветки с тыквенным кремом и зелёным чесночным маслом</h3><p class="desc" data-ru="190 г" data-en="190 g">190 г</p><div class="buy"><span class="price">950 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li><li class="item" data-id="fish-6" data-tags=""><div class="txt"><h3 class="name" data-ru="Тёплое карпаччо лосося с муссом из рикотты и «красной» икрой" data-en="Warm salmon carpaccio with ricotta mousse and red caviar">Тёплое карпаччо лосося с муссом из рикотты и «красной» икрой</h3><p class="desc" data-ru="200 г" data-en="200 g">200 г</p><div class="buy"><span class="price">1 170 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li><li class="item" data-id="fish-7" data-tags=""><div class="txt"><h3 class="name" data-ru="Стерлядь, сливочные грибы и картофельная лазаньетта" data-en="Sterlet, creamy mushrooms and potato lasagnetta">Стерлядь, сливочные грибы и картофельная лазаньетта</h3><p class="desc" data-ru="220 г" data-en="220 g">220 г</p><div class="buy"><span class="price">1 420 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li></ul></section>
+<section class="sec" id="s-meat"><h2 class="sec-h"><span data-ru="Мясо" data-en="Meat">Мясо</span></h2><ul class="list"><li class="item" data-id="meat-1" data-tags=""><div class="txt"><h3 class="name" data-ru="Горячий «Цезарь» с курицей" data-en="Warm chicken Caesar">Горячий «Цезарь» с курицей</h3><p class="desc" data-ru="220 г" data-en="220 g">220 г</p><div class="buy"><span class="price">690 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li><li class="item" data-id="meat-2" data-tags=""><div class="txt"><h3 class="name" data-ru="Домашний перепел, томлённый в белом вине с яблоками и чёрной сливой" data-en="Homestyle quail braised in white wine with apples and prunes">Домашний перепел, томлённый в белом вине с яблоками и чёрной сливой</h3><p class="desc" data-ru="1 шт." data-en="1 pcs">1 шт.</p><div class="buy"><span class="price">720 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li><li class="item" data-id="meat-3" data-tags="pork"><div class="txt"><h3 class="name" data-ru="Медальоны из свиной вырезки-гриль с помидорами, мятой и гранатовым соусом" data-en="Grilled pork tenderloin medallions with tomatoes, mint and pomegranate sauce">Медальоны из свиной вырезки-гриль с помидорами, мятой и гранатовым соусом</h3><div class="tgs"><span class="tg tg-pork" data-ru="🐖 свинина" data-en="🐖 pork">🐖 свинина</span></div><p class="desc" data-ru="210 г" data-en="210 g">210 г</p><div class="buy"><span class="price">740 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li><li class="item" data-id="meat-4" data-tags=""><div class="txt"><h3 class="name" data-ru="«Пастуший пирог» с говяжьим языком" data-en="Shepherd&#x27;s pie with beef tongue">«Пастуший пирог» с говяжьим языком</h3><p class="desc" data-ru="280 г" data-en="280 g">280 г</p><div class="buy"><span class="price">760 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li><li class="item" data-id="meat-5" data-tags=""><div class="txt"><h3 class="name" data-ru="Бифштекс из кабана с овощным рататуем в соусе из печёного перца" data-en="Wild boar steak with ratatouille and roasted pepper sauce">Бифштекс из кабана с овощным рататуем в соусе из печёного перца</h3><p class="desc" data-ru="250 г" data-en="250 g">250 г</p><div class="buy"><span class="price">790 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li><li class="item" data-id="meat-6" data-tags=""><div class="txt"><h3 class="name" data-ru="Рубленый лось с картофелем и кремовыми грибами" data-en="Minced elk with potatoes and creamy mushrooms">Рубленый лось с картофелем и кремовыми грибами</h3><p class="desc" data-ru="250 г" data-en="250 g">250 г</p><div class="buy"><span class="price">840 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li><li class="item" data-id="meat-7" data-tags=""><div class="txt"><h3 class="name" data-ru="«Кассуле» — жаркое из лося с фасолью" data-en="Elk cassoulet with beans">«Кассуле» — жаркое из лося с фасолью</h3><p class="desc" data-ru="300 г · овощи, вино и ароматные травы" data-en="300 g · vegetables, wine and herbs">300 г · овощи, вино и ароматные травы</p><div class="buy"><span class="price">980 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li><li class="item" data-id="meat-8" data-tags=""><div class="txt"><h3 class="name" data-ru="Телячья тальята с печёным баклажаном и вялеными на солнце томатами" data-en="Veal tagliata with roasted eggplant and sun-dried tomatoes">Телячья тальята с печёным баклажаном и вялеными на солнце томатами</h3><p class="desc" data-ru="200 г" data-en="200 g">200 г</p><div class="buy"><span class="price">1 230 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li></ul></section>
+<section class="sec" id="s-desserts"><h2 class="sec-h"><span data-ru="Десерты" data-en="Desserts">Десерты</span></h2><ul class="list"><li class="item" data-id="desserts-1" data-tags=""><div class="txt"><h3 class="name" data-ru="Канноли — хрустящие сицилийские трубочки" data-en="Cannoli, crisp Sicilian pastry tubes">Канноли — хрустящие сицилийские трубочки</h3><p class="desc" data-ru="3 шт." data-en="3 pcs">3 шт.</p><div class="buy"><span class="price">320 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li><li class="item" data-id="desserts-2" data-tags=""><div class="txt"><h3 class="name" data-ru="Сырники с рикоттой и домашним вареньем" data-en="Ricotta syrniki with homemade jam">Сырники с рикоттой и домашним вареньем</h3><p class="desc" data-ru="2 шт./30 г" data-en="2 pcs/30 g">2 шт./30 г</p><div class="buy"><span class="price">320 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li><li class="item" data-id="desserts-3" data-tags=""><div class="txt"><h3 class="name" data-ru="Цитрусовый тарт" data-en="Citrus tart">Цитрусовый тарт</h3><p class="desc" data-ru="70 г" data-en="70 g">70 г</p><div class="buy"><span class="price">350 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li><li class="item" data-id="desserts-4" data-tags=""><div class="txt"><h3 class="name" data-ru="Миндальное печенье с горячим тыквенным кремом" data-en="Almond biscuits with warm pumpkin cream">Миндальное печенье с горячим тыквенным кремом</h3><p class="desc" data-ru="5 шт./80 г" data-en="5 pcs/80 g">5 шт./80 г</p><div class="buy"><span class="price">380 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li><li class="item" data-id="desserts-5" data-tags=""><div class="txt"><h3 class="name" data-ru="Шоколадное суфле с мороженым" data-en="Chocolate soufflé with ice cream">Шоколадное суфле с мороженым</h3><p class="desc" data-ru="130 г" data-en="130 g">130 г</p><div class="buy"><span class="price">420 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li><li class="item" data-id="desserts-6" data-tags=""><div class="txt"><h3 class="name" data-ru="Итальянский дуэт профитролей с фисташкой и белым шоколадом" data-en="Italian profiterole duo with pistachio and white chocolate">Итальянский дуэт профитролей с фисташкой и белым шоколадом</h3><p class="desc" data-ru="2 шт." data-en="2 pcs">2 шт.</p><div class="buy"><span class="price">490 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li><li class="item" data-id="desserts-7" data-tags=""><div class="txt"><h3 class="name" data-ru="Яблочное сорбе" data-en="Apple sorbet">Яблочное сорбе</h3><p class="desc" data-ru="100 г" data-en="100 g">100 г</p><div class="buy"><span class="price">270 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li></ul></section>
+<section class="sec" id="s-drinks"><h2 class="sec-h"><span data-ru="Напитки" data-en="Drinks">Напитки</span></h2><ul class="list"><li class="item" data-id="drinks-1" data-tags=""><div class="txt"><h3 class="name" data-ru="Апероль Спритц безалкогольный" data-en="Alcohol-free Aperol Spritz">Апероль Спритц безалкогольный</h3><p class="desc" data-ru="300 мл" data-en="300 ml">300 мл</p><div class="buy"><span class="price">350 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li><li class="item" data-id="drinks-2" data-tags=""><div class="txt"><h3 class="name" data-ru="«Мохито» безалкогольный" data-en="Virgin Mojito">«Мохито» безалкогольный</h3><p class="desc" data-ru="300 мл" data-en="300 ml">300 мл</p><div class="buy"><span class="price">350 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li><li class="item" data-id="drinks-3" data-tags=""><div class="txt"><h3 class="name" data-ru="Горячий чай «Лимончелло»" data-en="Hot Limoncello tea">Горячий чай «Лимончелло»</h3><p class="desc" data-ru="500 мл" data-en="500 ml">500 мл</p><div class="buy"><span class="price">440 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li><li class="item" data-id="drinks-4" data-tags=""><div class="txt"><h3 class="name" data-ru="Освежающий альпийский травяной" data-en="Refreshing Alpine herbal tea">Освежающий альпийский травяной</h3><p class="desc" data-ru="500 мл" data-en="500 ml">500 мл</p><div class="buy"><span class="price">440 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li></ul></section>
+<section class="sec" id="s-kids"><h2 class="sec-h"><span data-ru="Для маленьких гостей" data-en="For little guests">Для маленьких гостей</span></h2><ul class="list"><li class="item" data-id="kids-1" data-tags="kids"><div class="txt"><h3 class="name" data-ru="Овощной салатик со сметаной или оливковым маслом" data-en="Vegetable salad with sour cream or olive oil">Овощной салатик со сметаной или оливковым маслом</h3><div class="tgs"><span class="tg tg-kids" data-ru="👶" data-en="👶">👶</span></div><p class="desc" data-ru="120 г" data-en="120 g">120 г</p><div class="buy"><span class="price">270 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li><li class="item" data-id="kids-2" data-tags="kids"><div class="txt"><h3 class="name" data-ru="Суп куриный с макарошками" data-en="Chicken soup with pasta">Суп куриный с макарошками</h3><div class="tgs"><span class="tg tg-kids" data-ru="👶" data-en="👶">👶</span></div><p class="desc" data-ru="150 г" data-en="150 g">150 г</p><div class="buy"><span class="price">270 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li><li class="item" data-id="kids-3" data-tags="kids"><div class="txt"><h3 class="name" data-ru="Картофель фри с кетчупом" data-en="Fries with ketchup">Картофель фри с кетчупом</h3><div class="tgs"><span class="tg tg-kids" data-ru="👶" data-en="👶">👶</span></div><p class="desc" data-ru="100/30 г" data-en="100/30 g">100/30 г</p><div class="buy"><span class="price">270 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li><li class="item" data-id="kids-4" data-tags="kids"><div class="txt"><h3 class="name" data-ru="Куриный шашлычок" data-en="Chicken skewer">Куриный шашлычок</h3><div class="tgs"><span class="tg tg-kids" data-ru="👶" data-en="👶">👶</span></div><p class="desc" data-ru="70 г" data-en="70 g">70 г</p><div class="buy"><span class="price">270 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li><li class="item" data-id="kids-5" data-tags="kids"><div class="txt"><h3 class="name" data-ru="Равиоли по-русски с мясом" data-en="Russian-style meat ravioli">Равиоли по-русски с мясом</h3><div class="tgs"><span class="tg tg-kids" data-ru="👶" data-en="👶">👶</span></div><p class="desc" data-ru="150/30 г" data-en="150/30 g">150/30 г</p><div class="buy"><span class="price">270 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li><li class="item" data-id="kids-6" data-tags="kids"><div class="txt"><h3 class="name" data-ru="Блинчики с макалкой на выбор" data-en="Pancakes with a dip of your choice">Блинчики с макалкой на выбор</h3><div class="tgs"><span class="tg tg-kids" data-ru="👶" data-en="👶">👶</span></div><p class="desc" data-ru="2 шт./80 г" data-en="2 pcs/80 g">2 шт./80 г</p><div class="buy"><span class="price">270 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li><li class="item" data-id="kids-7" data-tags="kids"><div class="txt"><h3 class="name" data-ru="Мороженое шариком" data-en="Ice cream scoop">Мороженое шариком</h3><div class="tgs"><span class="tg tg-kids" data-ru="👶" data-en="👶">👶</span></div><p class="desc" data-ru="1 шт." data-en="1 pcs">1 шт.</p><div class="buy"><span class="price">120 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li><li class="item" data-id="kids-8" data-tags="kids"><div class="txt"><h3 class="name" data-ru="Молочный коктейль" data-en="Milkshake">Молочный коктейль</h3><div class="tgs"><span class="tg tg-kids" data-ru="👶" data-en="👶">👶</span></div><p class="desc" data-ru="200 мл" data-en="200 ml">200 мл</p><div class="buy"><span class="price">290 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li><li class="item" data-id="kids-9" data-tags="kids"><div class="txt"><h3 class="name" data-ru="Горячий шоколад с добавкой" data-en="Hot chocolate with a topping">Горячий шоколад с добавкой</h3><div class="tgs"><span class="tg tg-kids" data-ru="👶" data-en="👶">👶</span></div><p class="desc" data-ru="130 мл" data-en="130 ml">130 мл</p><div class="buy"><span class="price">350 ₽</span><button type="button" class="add"><span data-ru="Добавить" data-en="Add">Добавить</span></button><div class="step" hidden><button type="button" class="qm" aria-label="−">−</button><span class="qty">0</span><button type="button" class="qp" aria-label="+">+</button></div></div></div></li></ul></section>
+<footer class="foot">
+  <p class="foot-t"><span data-ru="Забронировать стол" data-en="Book a table">Забронировать стол</span></p>
+  <div class="acts">
+    <button type="button" class="btn btn-main" id="book"><span data-ru="Бронь в Telegram" data-en="Book in Telegram">Бронь в Telegram</span></button>
+    <a class="btn btn-alt" href="tel:+73424140040"><span data-ru="Позвонить" data-en="Call">Позвонить</span></a>
+  </div>
+  <p class="rv-link" id="rv-link" hidden><a id="rv-foot" href="https://yandex.ru/maps/org/restaurant_chaikovsky/101736090648/reviews/" target="_blank" rel="noopener"></a></p>
+  <span class="vat"><span data-ru="Цены в рублях. Сезонное меню «Римские каникулы с Чайковским»." data-en="Prices in rubles. Seasonal menu “Roman Holiday with Tchaikovsky”.">Цены в рублях. Сезонное меню «Римские каникулы с Чайковским».</span></span>
+  <span class="vat tagnote"><span data-ru="Метки поставлены по составу из меню. При аллергии и религиозных ограничениях уточняйте у официанта." data-en="Tags are based on the ingredients listed in the menu. For allergies or religious restrictions, please ask your waiter.">Метки поставлены по составу из меню. При аллергии и религиозных ограничениях уточняйте у официанта.</span></span>
+  <span class="photo-note">Фото на обложке и цены — с официального сайта отеля «Чайковский».</span>
+</footer>
+</main>
+
+<div class="rvc" id="rvc" hidden role="dialog" aria-labelledby="rv-t">
+  <p class="rv-t" id="rv-t"><span data-ru="Были у нас? Поделитесь впечатлением" data-en="Dined with us? Share your experience">Были у нас? Поделитесь впечатлением</span></p>
+  <p class="rv-p"><span data-ru="Честный отзыв помогает другим гостям выбрать, где поесть." data-en="An honest review helps other guests choose where to eat.">Честный отзыв помогает другим гостям выбрать, где поесть.</span></p>
+  <div class="rv-a"><a class="btn btn-main" id="rv-go" href="https://yandex.ru/maps/org/restaurant_chaikovsky/101736090648/reviews/" target="_blank" rel="noopener"></a><button type="button" class="btn btn-alt" id="rv-later"><span data-ru="Не сейчас" data-en="Not now">Не сейчас</span></button></div>
+</div>
+
+<div class="sug" id="sug" hidden role="status" aria-live="polite">
+  <div class="sug-h"><span id="sug-t"><span data-ru="Хорошо сочетается" data-en="Goes well with">Хорошо сочетается</span></span><button type="button" class="x" id="sug-x" aria-label="×">×</button></div>
+  <div id="sug-list"></div>
+</div>
+
+<div class="ostat" id="ostat" hidden role="status" aria-live="polite" data-s="sent"><span class="dot" aria-hidden="true"></span><span class="ot"><span id="ostat-t"></span><small id="ostat-s" hidden></small></span><button type="button" class="x" id="ostat-x" aria-label="×">×</button></div>
+
+<button type="button" class="cartbar" id="cartbar" hidden>
+  <span class="cartbar-in"><span class="cnt" id="cnt">0</span><span class="cartbar-label"><span data-ru="Мой заказ" data-en="My order">Мой заказ</span></span><span class="cartbar-sum" id="bar-sum"></span></span>
+</button>
+
+<div class="backdrop" id="backdrop"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-t">
+  <div class="sheet-head"><span class="sheet-title" id="sheet-t"><span data-ru="Мой заказ" data-en="My order">Мой заказ</span></span><button type="button" class="x" id="close" aria-label="Закрыть">×</button></div>
+  <div class="sheet-list" id="list"></div>
+  <div class="sheet-sug" id="sheet-sug" hidden><div class="sug-h"><span><span data-ru="Не забыли добавить?" data-en="Want to add something?">Не забыли добавить?</span></span></div><div id="sheet-sug-list"></div></div>
+  <div class="sheet-foot" id="foot">
+    <div class="sum"><span data-ru="Итого" data-en="Total">Итого</span><span id="sum"></span></div>
+    <span class="note" id="nopay"><span data-ru="Это не оплата: официант увидит список и подтвердит заказ." data-en="This is not a payment: the waiter sees your list and confirms the order.">Это не оплата: официант увидит список и подтвердит заказ.</span></span>
+    <div class="modes" id="modes" role="group" hidden><button type="button" data-m="table" aria-pressed="true"></button><button type="button" data-m="takeaway" aria-pressed="false"></button><button type="button" data-m="delivery" aria-pressed="false"></button></div>
+    <div class="sheet-actions">
+      <button type="button" class="btn btn-alt" id="clear"><span data-ru="Очистить" data-en="Clear">Очистить</span></button>
+      <button type="button" class="btn btn-main" id="send"><span data-ru="Отправить официанту" data-en="Send to the waiter">Отправить официанту</span></button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var DATA = {"salads-1": {"n": {"ru": "Салат из свежих овощей с яйцом «Пашот»", "en": "Fresh vegetable salad with poached egg"}, "p": 390}, "salads-2": {"n": {"ru": "Помидоры «с ветки»", "en": "Vine tomatoes"}, "p": 470}, "salads-3": {"n": {"ru": "Карпаччо индейки с хрустящим зелёным салатом", "en": "Turkey carpaccio with crisp green salad"}, "p": 530}, "salads-4": {"n": {"ru": "Салат от Цезаря Кардини с вяленой индейкой", "en": "Caesar Cardini salad with cured turkey"}, "p": 550}, "salads-5": {"n": {"ru": "«Дымная» утка с тыквенным муссом и каплями мёда", "en": "Smoked duck with pumpkin mousse and honey"}, "p": 570}, "salads-6": {"n": {"ru": "Салат с анчоусами, печёным картофелем и перепелиным яйцом", "en": "Salad with anchovies, baked potato and quail egg"}, "p": 580}, "salads-7": {"n": {"ru": "Пастрами из телятины с помидорами в крошке пармезана", "en": "Veal pastrami with tomatoes in Parmesan crumb"}, "p": 670}, "salads-8": {"n": {"ru": "Фирменный «Айсберг» с креветками и голубым сыром", "en": "Signature Iceberg salad with prawns and blue cheese"}, "p": 690}, "salads-9": {"n": {"ru": "Лосось с брокколи, мякотью апельсина и соусом «Просекко»", "en": "Salmon with broccoli, orange and Prosecco sauce"}, "p": 690}, "hotsnack-1": {"n": {"ru": "Баклажаны пармиджано", "en": "Eggplant parmigiana"}, "p": 470}, "hotsnack-2": {"n": {"ru": "Тыквенное суфле с домашним песто", "en": "Pumpkin soufflé with homemade pesto"}, "p": 420}, "hotsnack-3": {"n": {"ru": "Тягучий сыр в кипящих рубленых томатах", "en": "Melted cheese in bubbling chopped tomatoes"}, "p": 470}, "hotsnack-4": {"n": {"ru": "Филе сома в кружевном кляре и соусом «Цезарь»", "en": "Catfish fillet in lace batter with Caesar sauce"}, "p": 470}, "hotsnack-5": {"n": {"ru": "Помидорки черри, печёные в беконе", "en": "Cherry tomatoes baked in bacon"}, "p": 520}, "soups-1": {"n": {"ru": "Суп из брокколи и шпината со сливочной рикоттой", "en": "Broccoli and spinach soup with creamy ricotta"}, "p": 470}, "soups-2": {"n": {"ru": "Грибной капучино", "en": "Mushroom cappuccino"}, "p": 530}, "soups-3": {"n": {"ru": "«Рыбная супа» с хрустящей чиабаттой", "en": "Fish soup with crispy ciabatta"}, "p": 570}, "soups-4": {"n": {"ru": "Мясная похлёбка с костровыми овощами", "en": "Meat broth with fire-roasted vegetables"}, "p": 570}, "fish-1": {"n": {"ru": "Щучьи котлеты на картофельном креме", "en": "Pike cutlets on potato cream"}, "p": 620}, "fish-2": {"n": {"ru": "Рагу из сома в рубленых томатах с «оливковой» нотой", "en": "Catfish ragout in chopped tomatoes with olives"}, "p": 680}, "fish-3": {"n": {"ru": "Судак со шпинатом и «жжёным томатом»", "en": "Pike-perch with spinach and charred tomato"}, "p": 770}, "fish-4": {"n": {"ru": "Форель «с дымком» и печёные овощи", "en": "Smoked trout with roasted vegetables"}, "p": 840}, "fish-5": {"n": {"ru": "Креветки с тыквенным кремом и зелёным чесночным маслом", "en": "Prawns with pumpkin cream and green garlic oil"}, "p": 950}, "fish-6": {"n": {"ru": "Тёплое карпаччо лосося с муссом из рикотты и «красной» икрой", "en": "Warm salmon carpaccio with ricotta mousse and red caviar"}, "p": 1170}, "fish-7": {"n": {"ru": "Стерлядь, сливочные грибы и картофельная лазаньетта", "en": "Sterlet, creamy mushrooms and potato lasagnetta"}, "p": 1420}, "meat-1": {"n": {"ru": "Горячий «Цезарь» с курицей", "en": "Warm chicken Caesar"}, "p": 690}, "meat-2": {"n": {"ru": "Домашний перепел, томлённый в белом вине с яблоками и чёрной сливой", "en": "Homestyle quail braised in white wine with apples and prunes"}, "p": 720}, "meat-3": {"n": {"ru": "Медальоны из свиной вырезки-гриль с помидорами, мятой и гранатовым соусом", "en": "Grilled pork tenderloin medallions with tomatoes, mint and pomegranate sauce"}, "p": 740}, "meat-4": {"n": {"ru": "«Пастуший пирог» с говяжьим языком", "en": "Shepherd's pie with beef tongue"}, "p": 760}, "meat-5": {"n": {"ru": "Бифштекс из кабана с овощным рататуем в соусе из печёного перца", "en": "Wild boar steak with ratatouille and roasted pepper sauce"}, "p": 790}, "meat-6": {"n": {"ru": "Рубленый лось с картофелем и кремовыми грибами", "en": "Minced elk with potatoes and creamy mushrooms"}, "p": 840}, "meat-7": {"n": {"ru": "«Кассуле» — жаркое из лося с фасолью", "en": "Elk cassoulet with beans"}, "p": 980}, "meat-8": {"n": {"ru": "Телячья тальята с печёным баклажаном и вялеными на солнце томатами", "en": "Veal tagliata with roasted eggplant and sun-dried tomatoes"}, "p": 1230}, "desserts-1": {"n": {"ru": "Канноли — хрустящие сицилийские трубочки", "en": "Cannoli, crisp Sicilian pastry tubes"}, "p": 320}, "desserts-2": {"n": {"ru": "Сырники с рикоттой и домашним вареньем", "en": "Ricotta syrniki with homemade jam"}, "p": 320}, "desserts-3": {"n": {"ru": "Цитрусовый тарт", "en": "Citrus tart"}, "p": 350}, "desserts-4": {"n": {"ru": "Миндальное печенье с горячим тыквенным кремом", "en": "Almond biscuits with warm pumpkin cream"}, "p": 380}, "desserts-5": {"n": {"ru": "Шоколадное суфле с мороженым", "en": "Chocolate soufflé with ice cream"}, "p": 420}, "desserts-6": {"n": {"ru": "Итальянский дуэт профитролей с фисташкой и белым шоколадом", "en": "Italian profiterole duo with pistachio and white chocolate"}, "p": 490}, "desserts-7": {"n": {"ru": "Яблочное сорбе", "en": "Apple sorbet"}, "p": 270}, "drinks-1": {"n": {"ru": "Апероль Спритц безалкогольный", "en": "Alcohol-free Aperol Spritz"}, "p": 350}, "drinks-2": {"n": {"ru": "«Мохито» безалкогольный", "en": "Virgin Mojito"}, "p": 350}, "drinks-3": {"n": {"ru": "Горячий чай «Лимончелло»", "en": "Hot Limoncello tea"}, "p": 440}, "drinks-4": {"n": {"ru": "Освежающий альпийский травяной", "en": "Refreshing Alpine herbal tea"}, "p": 440}, "kids-1": {"n": {"ru": "Овощной салатик со сметаной или оливковым маслом", "en": "Vegetable salad with sour cream or olive oil"}, "p": 270}, "kids-2": {"n": {"ru": "Суп куриный с макарошками", "en": "Chicken soup with pasta"}, "p": 270}, "kids-3": {"n": {"ru": "Картофель фри с кетчупом", "en": "Fries with ketchup"}, "p": 270}, "kids-4": {"n": {"ru": "Куриный шашлычок", "en": "Chicken skewer"}, "p": 270}, "kids-5": {"n": {"ru": "Равиоли по-русски с мясом", "en": "Russian-style meat ravioli"}, "p": 270}, "kids-6": {"n": {"ru": "Блинчики с макалкой на выбор", "en": "Pancakes with a dip of your choice"}, "p": 270}, "kids-7": {"n": {"ru": "Мороженое шариком", "en": "Ice cream scoop"}, "p": 120}, "kids-8": {"n": {"ru": "Молочный коктейль", "en": "Milkshake"}, "p": 290}, "kids-9": {"n": {"ru": "Горячий шоколад с добавкой", "en": "Hot chocolate with a topping"}, "p": 350}};
+  var UI = {"add": {"ru": "Добавить", "en": "Add", "vi": "Thêm", "ko": "담기", "zh": "加入"}, "view": {"ru": "Мой заказ", "en": "My order", "vi": "Đơn của tôi", "ko": "내 주문", "zh": "我的点单"}, "clear": {"ru": "Очистить", "en": "Clear", "vi": "Xoá hết", "ko": "비우기", "zh": "清空"}, "send": {"ru": "Отправить официанту", "en": "Send to the waiter", "vi": "Gửi cho phục vụ", "ko": "직원에게 보내기", "zh": "发送给服务员"}, "total": {"ru": "Итого", "en": "Total", "vi": "Tổng", "ko": "합계", "zh": "合计"}, "nopay": {"ru": "Это не оплата: официант увидит список и подтвердит заказ.", "en": "This is not a payment: the waiter sees your list and confirms the order.", "vi": "Đây không phải thanh toán: phục vụ sẽ xem và xác nhận đơn.", "ko": "결제가 아닙니다. 직원이 목록을 확인하고 주문을 확정합니다.", "zh": "这不是付款：服务员会查看并确认您的点单。"}, "book": {"ru": "Забронировать стол", "en": "Book a table", "vi": "Đặt bàn", "ko": "테이블 예약", "zh": "预订餐桌"}, "bookt": {"ru": "Бронь в Telegram", "en": "Book in Telegram", "vi": "Đặt bàn qua Telegram", "ko": "Telegram으로 예약", "zh": "通过 Telegram 预订"}, "call": {"ru": "Позвонить", "en": "Call", "vi": "Gọi điện", "ko": "전화하기", "zh": "致电"}, "f_spicy": {"ru": "🌶 Острое", "en": "🌶 Spicy", "vi": "🌶 Cay", "ko": "🌶 매운맛", "zh": "🌶 辣"}, "f_veg": {"ru": "🌱 Вегетарианское", "en": "🌱 Vegetarian", "vi": "🌱 Món chay", "ko": "🌱 채식", "zh": "🌱 素食"}, "f_kids": {"ru": "👶 Детям", "en": "👶 For kids", "vi": "👶 Cho bé", "ko": "👶 어린이", "zh": "👶 儿童"}, "f_nopork": {"ru": "Без свинины", "en": "No pork", "vi": "Không thịt heo", "ko": "돼지고기 제외", "zh": "不含猪肉"}, "t_spicy": {"ru": "🌶", "en": "🌶", "vi": "🌶", "ko": "🌶", "zh": "🌶"}, "t_veg": {"ru": "🌱", "en": "🌱", "vi": "🌱", "ko": "🌱", "zh": "🌱"}, "t_kids": {"ru": "👶", "en": "👶", "vi": "👶", "ko": "👶", "zh": "👶"}, "t_pork": {"ru": "🐖 свинина", "en": "🐖 pork", "vi": "🐖 thịt heo", "ko": "🐖 돼지고기", "zh": "🐖 猪肉"}, "tagnote": {"ru": "Метки поставлены по составу из меню. При аллергии и религиозных ограничениях уточняйте у официанта.", "en": "Tags are based on the ingredients listed in the menu. For allergies or religious restrictions, please ask your waiter.", "vi": "Nhãn dựa trên thành phần ghi trong thực đơn. Nếu bị dị ứng hoặc có hạn chế tôn giáo, vui lòng hỏi phục vụ.", "ko": "표시는 메뉴에 적힌 재료 기준입니다. 알레르기·종교적 제한이 있으면 직원에게 문의하세요.", "zh": "标签依据菜单所列食材。如有过敏或宗教饮食限制，请咨询服务员。"}, "sug_t": {"ru": "Хорошо сочетается", "en": "Goes well with", "vi": "Món dùng kèm", "ko": "함께 드시면 좋아요", "zh": "搭配推荐"}, "sug_cart": {"ru": "Не забыли добавить?", "en": "Want to add something?", "vi": "Bạn muốn thêm món?", "ko": "함께 추가하시겠어요?", "zh": "要不要再加点什么？"}, "open_until": {"ru": "Открыто до {t}", "en": "Open until {t}", "vi": "Mở cửa đến {t}", "ko": "{t}까지 영업", "zh": "营业至 {t}"}, "closed_next": {"ru": "Сейчас закрыто · откроемся {w} в {t}", "en": "Closed now · opens {w} at {t}", "vi": "Hiện đã đóng cửa · mở lại {w} lúc {t}", "ko": "지금은 영업 종료 · {w} {t}에 오픈", "zh": "目前已打烊 · {w} {t} 开门"}, "today": {"ru": "сегодня", "en": "today", "vi": "hôm nay", "ko": "오늘", "zh": "今天"}, "tomorrow": {"ru": "завтра", "en": "tomorrow", "vi": "ngày mai", "ko": "내일", "zh": "明天"}, "wd": {"ru": "в понедельник|во вторник|в среду|в четверг|в пятницу|в субботу|в воскресенье", "en": "on Monday|on Tuesday|on Wednesday|on Thursday|on Friday|on Saturday|on Sunday", "vi": "thứ Hai|thứ Ba|thứ Tư|thứ Năm|thứ Sáu|thứ Bảy|Chủ nhật", "ko": "월요일|화요일|수요일|목요일|금요일|토요일|일요일", "zh": "周一|周二|周三|周四|周五|周六|周日"}, "window": {"ru": "Подаётся с {a} до {b}", "en": "Served {a}–{b}", "vi": "Phục vụ {a}–{b}", "ko": "{a}–{b} 제공", "zh": "供应时间 {a}–{b}"}, "rv_t": {"ru": "Были у нас? Поделитесь впечатлением", "en": "Dined with us? Share your experience", "vi": "Bạn đã dùng bữa? Hãy chia sẻ cảm nhận", "ko": "방문하셨나요? 후기를 남겨 주세요", "zh": "用餐后，欢迎留下您的评价"}, "rv_p": {"ru": "Честный отзыв помогает другим гостям выбрать, где поесть.", "en": "An honest review helps other guests choose where to eat.", "vi": "Một đánh giá trung thực giúp thực khách khác chọn nơi ăn uống.", "ko": "솔직한 후기는 다른 손님이 식당을 고르는 데 도움이 됩니다.", "zh": "真实的评价能帮助其他客人选择用餐地点。"}, "rv_google": {"ru": "Оставить отзыв на Google Картах", "en": "Write a review on Google Maps", "vi": "Viết đánh giá trên Google Maps", "ko": "구글 지도에 후기 남기기", "zh": "在谷歌地图上评价"}, "rv_yandex": {"ru": "Оставить отзыв на Яндекс Картах", "en": "Write a review on Yandex Maps", "vi": "Viết đánh giá trên Yandex Maps", "ko": "얀덱스 지도에 후기 남기기", "zh": "在Yandex地图上评价"}, "rv_later": {"ru": "Не сейчас", "en": "Not now", "vi": "Để sau", "ko": "나중에", "zh": "以后再说"}, "soldout": {"ru": "Нет в наличии", "en": "Sold out", "vi": "Hết món", "ko": "품절", "zh": "已售罄"}, "waiter": {"ru": "Позвать официанта", "en": "Call the waiter", "vi": "Gọi phục vụ", "ko": "직원 호출", "zh": "呼叫服务员"}, "bill": {"ru": "Попросить счёт", "en": "Ask for the bill", "vi": "Yêu cầu thanh toán", "ko": "계산서 요청", "zh": "请求结账"}, "sent_ok": {"ru": "Отправлено персоналу ✓", "en": "Sent to the staff ✓", "vi": "Đã gửi cho nhân viên ✓", "ko": "직원에게 전달했습니다 ✓", "zh": "已通知服务员 ✓"}, "dl_table": {"ru": "За столом", "en": "At the table", "vi": "Tại bàn", "ko": "테이블", "zh": "堂食"}, "dl_takeaway": {"ru": "Навынос", "en": "Takeaway", "vi": "Mang đi", "ko": "포장", "zh": "外带"}, "dl_delivery": {"ru": "Доставка", "en": "Delivery", "vi": "Giao hàng", "ko": "배달", "zh": "外送"}, "dl_next": {"ru": "Оформить заказ", "en": "Checkout", "vi": "Đặt món", "ko": "주문하기", "zh": "下单"}, "dl_note_t": {"ru": "Заберёте сами, оплата при получении", "en": "Pick it up yourself, pay on collection", "vi": "Tự đến lấy, thanh toán khi nhận", "ko": "직접 픽업, 수령 시 결제", "zh": "自取，取餐时付款"}, "dl_note_d": {"ru": "Доставка курьером, стоимость назовём при подтверждении", "en": "Courier delivery, the fee is confirmed with you", "vi": "Giao bởi shipper, phí sẽ báo khi xác nhận", "ko": "배달 기사, 배달비는 확인 시 안내", "zh": "骑手配送，费用确认时告知"}, "dl_title_t": {"ru": "Заказ навынос", "en": "Takeaway order", "vi": "Đơn mang đi", "ko": "포장 주문", "zh": "外带订单"}, "dl_title_d": {"ru": "Заказ на доставку", "en": "Delivery order", "vi": "Đơn giao hàng", "ko": "배달 주문", "zh": "外送订单"}, "dl_name": {"ru": "Имя", "en": "Name", "vi": "Tên", "ko": "이름", "zh": "姓名"}, "dl_phone": {"ru": "Телефон", "en": "Phone", "vi": "Điện thoại hoặc Zalo", "ko": "전화 또는 Zalo", "zh": "电话或 Zalo"}, "dl_addr": {"ru": "Адрес: улица, дом, квартира, подъезд", "en": "Address: street, building, apartment", "vi": "Địa chỉ: đường, số nhà, khách sạn, phòng", "ko": "주소: 거리, 건물, 호텔, 객실", "zh": "地址：街道、门牌、酒店、房号"}, "dl_geo": {"ru": "Отправить мою точку на карте", "en": "Share my location", "vi": "Gửi vị trí của tôi", "ko": "내 위치 보내기", "zh": "发送我的位置"}, "dl_geo_ok": {"ru": "Точка добавлена к заказу", "en": "Location added to the order", "vi": "Đã thêm vị trí vào đơn", "ko": "주문에 위치 추가됨", "zh": "位置已加入订单"}, "dl_when": {"ru": "Когда", "en": "When", "vi": "Khi nào", "ko": "언제", "zh": "时间"}, "dl_asap": {"ru": "Как можно скорее", "en": "As soon as possible", "vi": "Càng sớm càng tốt", "ko": "가능한 빨리", "zh": "尽快"}, "dl_attime": {"ru": "Ко времени", "en": "At a set time", "vi": "Hẹn giờ", "ko": "시간 지정", "zh": "指定时间"}, "dl_pay": {"ru": "Оплата", "en": "Payment", "vi": "Thanh toán", "ko": "결제", "zh": "付款"}, "dl_cash": {"ru": "Наличными", "en": "Cash", "vi": "Tiền mặt", "ko": "현금", "zh": "现金"}, "dl_transfer": {"ru": "Переводом по QR", "en": "Bank transfer QR", "vi": "Chuyển khoản QR", "ko": "QR 송금", "zh": "扫码转账"}, "dl_comment": {"ru": "Комментарий", "en": "Comment", "vi": "Ghi chú", "ko": "요청 사항", "zh": "备注"}, "dl_back": {"ru": "Назад", "en": "Back", "vi": "Quay lại", "ko": "뒤로", "zh": "返回"}, "dl_fill": {"ru": "Заполните имя, телефон и адрес", "en": "Please fill in name, phone and address", "vi": "Vui lòng điền tên, số điện thoại và địa chỉ", "ko": "이름, 전화, 주소를 입력하세요", "zh": "请填写姓名、电话和地址"}, "dl_fill_t": {"ru": "Заполните имя и телефон", "en": "Please fill in name and phone", "vi": "Vui lòng điền tên và số điện thoại", "ko": "이름과 전화를 입력하세요", "zh": "请填写姓名和电话"}, "dl_min": {"ru": "Минимальная сумма доставки:", "en": "Minimum delivery order:", "vi": "Đơn tối thiểu giao hàng:", "ko": "최소 배달 금액:", "zh": "外送最低消费："}, "dl_done": {"ru": "Заказ отправлен", "en": "Order sent", "vi": "Đã gửi đơn", "ko": "주문 완료", "zh": "订单已发送"}, "dl_done_s": {"ru": "Заведение подтвердит заказ по телефону.", "en": "The venue will confirm by phone.", "vi": "Quán sẽ xác nhận qua điện thoại hoặc Zalo.", "ko": "매장이 전화 또는 Zalo로 확인합니다.", "zh": "店家会通过电话或 Zalo 确认。"}, "dl_done_tr": {"ru": "Заведение подтвердит заказ и пришлёт QR для оплаты.", "en": "The venue will confirm and send you a payment QR.", "vi": "Quán sẽ xác nhận và gửi mã QR thanh toán.", "ko": "매장이 확인 후 결제 QR을 보내드립니다.", "zh": "店家确认后会发送付款二维码。"}, "dl_online": {"ru": "По ссылке (СБП)", "en": "Pay by link", "vi": "Thanh toán qua link", "ko": "링크로 결제", "zh": "链接支付"}, "py_title": {"ru": "Оплата заказа", "en": "Pay for your order", "vi": "Thanh toán đơn hàng", "ko": "주문 결제", "zh": "支付订单"}, "py_ref": {"ru": "Заказ №", "en": "Order #", "vi": "Đơn số", "ko": "주문 번호", "zh": "订单号"}, "py_qr": {"ru": "QR для оплаты", "en": "Payment QR", "vi": "Mã QR thanh toán", "ko": "결제 QR", "zh": "付款二维码"}, "py_qr_hint": {"ru": "Отсканируйте QR в приложении банка: сумма и номер заказа уже вписаны.", "en": "Scan the QR in your banking app: amount and order number are filled in.", "vi": "Quét QR trong ứng dụng ngân hàng: số tiền và mã đơn đã điền sẵn.", "ko": "은행 앱으로 QR을 스캔하세요: 금액과 주문 번호가 입력되어 있습니다.", "zh": "用银行App扫码：金额和订单号已自动填写。"}, "py_link": {"ru": "Оплатить по ссылке", "en": "Pay by link", "vi": "Thanh toán qua link", "ko": "링크로 결제", "zh": "链接支付"}, "py_done": {"ru": "Я оплатил(а)", "en": "I have paid", "vi": "Tôi đã thanh toán", "ko": "결제 완료", "zh": "我已付款"}, "py_later": {"ru": "Оплачу при получении", "en": "I will pay on receipt", "vi": "Thanh toán khi nhận", "ko": "수령 시 결제", "zh": "收货时付款"}, "py_waiter": {"ru": "Оплачу у официанта", "en": "I will pay the waiter", "vi": "Thanh toán với phục vụ", "ko": "직원에게 결제", "zh": "向服务员付款"}, "py_thanks": {"ru": "Спасибо! Заведение проверит поступление.", "en": "Thank you! The venue will check the payment.", "vi": "Cảm ơn! Quán sẽ kiểm tra thanh toán.", "ko": "감사합니다! 매장에서 입금을 확인합니다.", "zh": "谢谢！店家会核对款项。"}, "py_demo_q": {"ru": "Пример: здесь будет QR на счёт заведения, сумма", "en": "Example: the venue's payment QR will be here, amount", "vi": "Ví dụ: mã QR tài khoản của quán sẽ ở đây, số tiền", "ko": "예시: 여기에 매장 결제 QR이 표시됩니다, 금액", "zh": "示例：此处显示店家收款二维码，金额"}, "py_demo": {"ru": "Демо: оплата отключена, нужны реквизиты заведения.", "en": "Demo: payment is off until the venue's details are added.", "vi": "Demo: chưa bật thanh toán, cần thông tin tài khoản của quán.", "ko": "데모: 매장 계좌 정보가 필요해 결제가 꺼져 있습니다.", "zh": "演示：需要店家收款信息，支付暂未开启。"}, "ask_table": {"ru": "Укажите номер вашего стола", "en": "Enter your table number", "vi": "Nhập số bàn của bạn", "ko": "테이블 번호를 입력하세요", "zh": "请输入您的桌号"}, "ask_go": {"ru": "Продолжить", "en": "Continue", "vi": "Tiếp tục", "ko": "계속", "zh": "继续"}, "sent_fail": {"ru": "Не получилось отправить, позовите официанта", "en": "Could not send, please call the waiter", "vi": "Không gửi được, vui lòng gọi phục vụ", "ko": "전송 실패, 직원을 불러주세요", "zh": "发送失败，请呼叫服务员"}, "empty": {"ru": "Пока пусто. Нажмите «Добавить» рядом с блюдом.", "en": "Your order is empty. Tap “Add” next to a dish.", "vi": "Chưa có món nào. Nhấn “Thêm” ở món bạn muốn.", "ko": "아직 비어 있어요. 메뉴 옆 “담기”를 눌러 주세요.", "zh": "还没有菜品，点击菜品旁的“加入”。"}, "from": {"ru": "от", "en": "from", "vi": "từ", "ko": "부터", "zh": "起"}, "choose": {"ru": "Выбрать", "en": "Choose", "vi": "Chọn", "ko": "선택", "zh": "选择"}, "opt_add": {"ru": "Добавить в заказ", "en": "Add to order", "vi": "Thêm vào đơn", "ko": "주문에 담기", "zh": "加入点单"}, "opt_v": {"ru": "Вариант", "en": "Option", "vi": "Lựa chọn", "ko": "옵션", "zh": "规格"}, "opt_m": {"ru": "Пожелания", "en": "Requests", "vi": "Yêu cầu", "ko": "요청 사항", "zh": "备注"}, "st_sent": {"ru": "Заказ {r} отправлен · ждём подтверждения", "en": "Order {r} sent · waiting for confirmation", "vi": "Đã gửi đơn {r} · đang chờ xác nhận", "ko": "주문 {r} 전송됨 · 확인 대기 중", "zh": "订单 {r} 已发送 · 等待确认"}, "st_accepted": {"ru": "Заказ {r} принят", "en": "Order {r} accepted", "vi": "Đơn {r} đã được nhận", "ko": "주문 {r} 접수됨", "zh": "订单 {r} 已接单"}, "st_cooking": {"ru": "Заказ {r} готовится", "en": "Order {r} is being prepared", "vi": "Đơn {r} đang được chuẩn bị", "ko": "주문 {r} 조리 중", "zh": "订单 {r} 正在制作"}, "st_ready": {"ru": "Заказ {r}: несём к вам", "en": "Order {r}: on its way to you", "vi": "Đơn {r}: đang mang ra cho bạn", "ko": "주문 {r}: 곧 가져다 드려요", "zh": "订单 {r}：马上为您上菜"}, "st_demo": {"ru": "Демо: статус меняет официант кнопкой в Telegram", "en": "Demo: the waiter updates the status with a button in Telegram", "vi": "Demo: phục vụ đổi trạng thái bằng nút trong Telegram", "ko": "데모: 직원이 Telegram 버튼으로 상태를 바꿉니다", "zh": "演示：服务员在 Telegram 中按按钮更新状态"}, "bk_title": {"ru": "Бронь стола", "en": "Book a table", "vi": "Đặt bàn", "ko": "테이블 예약", "zh": "预订餐桌"}, "bk_date": {"ru": "Дата", "en": "Date", "vi": "Ngày", "ko": "날짜", "zh": "日期"}, "bk_time": {"ru": "Время", "en": "Time", "vi": "Giờ", "ko": "시간", "zh": "时间"}, "bk_guests": {"ru": "Гостей", "en": "Guests", "vi": "Số khách", "ko": "인원", "zh": "人数"}, "bk_phone": {"ru": "Телефон", "en": "Phone", "vi": "Số điện thoại", "ko": "전화번호", "zh": "电话"}, "bk_fail": {"ru": "Не получилось отправить бронь. Позвоните нам, пожалуйста.", "en": "Could not send the booking. Please call us.", "vi": "Không gửi được yêu cầu. Vui lòng gọi cho chúng tôi.", "ko": "예약을 보내지 못했습니다. 전화로 문의해 주세요.", "zh": "预订发送失败，请致电我们。"}, "bk_sent": {"ru": "Бронь {r} у администратора · ждём ответа", "en": "Booking {r} sent · waiting for the manager", "vi": "Yêu cầu đặt bàn {r} đã gửi · đang chờ quản lý", "ko": "예약 {r} 전송됨 · 담당자 확인 대기 중", "zh": "预订 {r} 已发送 · 等待店员确认"}, "bk_ok_t": {"ru": "Бронь {r} подтверждена. Ждём вас!", "en": "Booking {r} confirmed. See you soon!", "vi": "Đặt bàn {r} đã được xác nhận. Hẹn gặp bạn!", "ko": "예약 {r} 확정되었습니다. 곧 뵙겠습니다!", "zh": "预订 {r} 已确认，期待您的光临！"}, "bk_no_t": {"ru": "На это время мест нет. Позвоните нам, подберём другое.", "en": "No tables at that time. Please call us to find another time.", "vi": "Giờ này đã hết bàn. Vui lòng gọi để chọn giờ khác.", "ko": "해당 시간에는 자리가 없습니다. 전화 주시면 다른 시간을 찾아 드릴게요.", "zh": "该时段已满，请致电我们另选时间。"}, "bk_comment": {"ru": "Пожелания", "en": "Comment", "vi": "Ghi chú", "ko": "요청 사항", "zh": "备注"}, "bk_send": {"ru": "Отправить бронь", "en": "Send booking", "vi": "Gửi yêu cầu đặt bàn", "ko": "예약 보내기", "zh": "提交预订"}, "bk_done": {"ru": "Бронь отправлена. Администратор перезвонит и подтвердит.", "en": "Booking sent. The manager will call you to confirm.", "vi": "Đã gửi yêu cầu. Quản lý sẽ gọi lại để xác nhận.", "ko": "예약을 보냈습니다. 담당자가 전화로 확인해 드립니다.", "zh": "预订已发送，店员会致电确认。"}, "bk_fill": {"ru": "Заполните дату, время, имя и телефон", "en": "Please fill in date, time, name and phone", "vi": "Vui lòng nhập ngày, giờ, tên và số điện thoại", "ko": "날짜, 시간, 이름, 전화번호를 입력하세요", "zh": "请填写日期、时间、姓名和电话"}, "tips": {"ru": "Оставить чаевые", "en": "Leave a tip", "vi": "Gửi tiền tip", "ko": "팁 남기기", "zh": "给小费"}, "tips_demo": {"ru": "Демо: здесь откроется ссылка на чаевые официантам заведения", "en": "Demo: the venue's tipping link opens here", "vi": "Demo: liên kết tip của quán sẽ mở ở đây", "ko": "데모: 여기서 매장의 팁 링크가 열립니다", "zh": "演示：此处将打开店家的小费链接"}, "z_table": {"ru": "Стол", "en": "Table", "vi": "Bàn", "ko": "테이블", "zh": "桌"}, "z_lane": {"ru": "Дорожка", "en": "Lane", "vi": "Làn", "ko": "레인", "zh": "球道"}, "z_karaoke": {"ru": "Караоке", "en": "Karaoke", "vi": "Karaoke", "ko": "노래방", "zh": "卡拉OK"}, "z_billiard": {"ru": "Бильярд", "en": "Billiards", "vi": "Bi-a", "ko": "당구", "zh": "台球"}, "z_veranda": {"ru": "Веранда", "en": "Terrace", "vi": "Hiên", "ko": "테라스", "zh": "露台"}, "z_vip": {"ru": "VIP-зал", "en": "VIP room", "vi": "Phòng VIP", "ko": "VIP룸", "zh": "VIP包间"}, "z_hall": {"ru": "Зал", "en": "Hall", "vi": "Sảnh", "ko": "홀", "zh": "大厅"}, "z_room": {"ru": "Комната", "en": "Room", "vi": "Phòng", "ko": "룸", "zh": "包间"}, "crest": {"ru": "Отель «Чайковский» · ул. Мира, 7", "en": "Hotel Chaykovsky · Mira St 7"}, "addr": {"ru": "ежедневно 12:00–23:00", "en": "daily 12:00–23:00"}, "vat": {"ru": "Цены в рублях. Сезонное меню «Римские каникулы с Чайковским».", "en": "Prices in rubles. Seasonal menu “Roman Holiday with Tchaikovsky”."}};
+  var L = ["ru", "en"];
+  var lang = "ru";
+  var TABLE = (function(){
+    var t = "";
+    try { t = (new URLSearchParams(location.search).get("t") || "").replace(/[^0-9A-Za-z-]/g, "").slice(0, 6); } catch(e){}
+    if (!t) { try { t = sessionStorage.getItem("grillhaus-p-table") || ""; } catch(e){} }
+    return t;
+  })();
+  // Зона из QR: ?z=lane&t=3 — «Дорожка 3». Без z — обычный стол.
+  var ZONE = (function(){
+    var z = "";
+    try { z = (new URLSearchParams(location.search).get("z") || "").replace(/[^a-z]/g, "").slice(0, 12); } catch(e){}
+    if (!z) { try { z = sessionStorage.getItem("grillhaus-p-zone") || ""; } catch(e){} }
+    if (!UI["z_" + z]) z = "table";
+    try { sessionStorage.setItem("grillhaus-p-zone", z); } catch(e){}
+    return z;
+  })();
+  function place(l){ return UI["z_" + ZONE][l] + " " + TABLE; }
+  // Ключ корзины: id блюда, а для блюд с вариантами id~вариант~пожелания (битовая маска).
+  function ci(key){
+    var p = String(key).split("~"), d = DATA[p[0]]; if (!d) return null;
+    var v = p.length > 1 && p[1] !== "" ? (d.v || [])[+p[1]] : null; if (p.length > 1 && p[1] !== "" && !v) return null;
+    var mb = +(p[2] || 0), mods = (d.m || []).filter(function(_, i){ return mb & (1 << i); });
+    return {id: p[0], d: d, v: v, mods: mods, p: v ? v.p : d.p};
+  }
+  function ciName(key, l){
+    var c = ci(key), x = [];
+    if (c.v) x.push(c.v.n[l]); c.mods.forEach(function(m){ x.push(m[l]); });
+    return c.d.n[l] + (x.length ? " (" + x.join("; ") + ")" : "");
+  }
+  function hasOpts(id){ return !!(DATA[id] && (DATA[id].v || DATA[id].m)); }
+  function qtyOf(id){ var q = 0; for (var k in cart){ if (k === id || k.split("~")[0] === id) q += cart[k]; } return q; }
+  function dropItem(id){ for (var k in cart){ if (k === id || k.split("~")[0] === id) delete cart[k]; } }
+  var cart = {};
+  try { cart = JSON.parse(localStorage.getItem("grillhaus-p-cart") || "{}") || {}; } catch(e){ cart = {}; }
+  for (var k in cart) { if (!ci(k) || (hasOpts(k) && k.indexOf("~") < 0)) delete cart[k]; }
+
+  var $ = function(id){ return document.getElementById(id); };
+  var items = Array.prototype.slice.call(document.querySelectorAll(".item[data-id]"));
+
+  function fmt(k){ return String(Math.round(k * 1)).replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " ₽"; }
+  function save(){ try { localStorage.setItem("grillhaus-p-cart", JSON.stringify(cart)); } catch(e){} }
+  function total(){ var q = 0, s = 0; for (var id in cart){ q += cart[id]; s += cart[id] * ci(id).p; } return {q:q, s:s}; }
+
+  function applyLang(l){
+    lang = l;
+    document.querySelectorAll("[data-ru]").forEach(function(n){ var v = n.getAttribute("data-" + l); if (v != null) n.textContent = v; });
+    L.forEach(function(x){ $("lang-" + x).setAttribute("aria-pressed", String(x === l)); });
+    document.querySelectorAll(".sold-tag").forEach(function(n){ n.textContent = UI.soldout[l]; });
+    document.documentElement.lang = l;
+    try { localStorage.setItem("grillhaus-p-lang", l); } catch(e){}
+    renderSheet();
+  }
+
+  function renderItems(){
+    items.forEach(function(li){
+      var id = li.getAttribute("data-id"), q = qtyOf(id), opts = hasOpts(id);
+      li.querySelector(".add").hidden = q > 0 && !opts;
+      li.querySelector(".add").setAttribute("data-q", opts && q ? q : "");
+      li.querySelector(".step").hidden = q === 0 || opts;
+      li.querySelector(".qty").textContent = q;
+    });
+    var t = total();
+    $("cnt").textContent = t.q;
+    $("bar-sum").textContent = fmt(t.s);
+    $("cartbar").hidden = t.q === 0;
+    document.body.classList.toggle("has-cart", t.q > 0);
+  }
+
+  function renderSheet(){
+    var list = $("list"), ids = Object.keys(cart);
+    $("foot").hidden = ids.length === 0;
+    if (!ids.length){ list.innerHTML = '<p class="empty"></p>'; list.firstChild.textContent = UI.empty[lang]; return; }
+    list.innerHTML = "";
+    ids.forEach(function(id){
+      var row = document.createElement("div"); row.className = "row";
+      var n = document.createElement("span"); n.className = "row-n"; n.textContent = ciName(id, lang);
+      var p = document.createElement("span"); p.className = "row-p"; p.textContent = fmt(ci(id).p * cart[id]);
+      var st = document.createElement("div"); st.className = "step";
+      st.innerHTML = '<button type="button" class="qm" aria-label="−">−</button><span class="qty"></span><button type="button" class="qp" aria-label="+">+</button>';
+      st.querySelector(".qty").textContent = cart[id];
+      st.querySelector(".qm").onclick = function(){ setQ(id, cart[id] - 1); };
+      st.querySelector(".qp").onclick = function(){ setQ(id, cart[id] + 1); };
+      row.appendChild(n); row.appendChild(p); row.appendChild(st); list.appendChild(row);
+    });
+    $("sum").textContent = fmt(total().s);
+  }
+
+  function setQ(id, q){ if (q <= 0) delete cart[id]; else cart[id] = q; save(); renderItems(); renderSheet(); }
+
+  items.forEach(function(li){
+    var id = li.getAttribute("data-id");
+    li.querySelector(".add").onclick = function(){ if (hasOpts(id)) chooser(id); else setQ(id, 1); };
+    li.querySelector(".qp").onclick = function(){ setQ(id, (cart[id] || 0) + 1); };
+    li.querySelector(".qm").onclick = function(){ setQ(id, (cart[id] || 0) - 1); };
+  });
+
+  function open(){ $("backdrop").classList.add("open"); $("sheet").classList.add("open"); document.body.style.overflow = "hidden"; }
+  function close(){ $("backdrop").classList.remove("open"); $("sheet").classList.remove("open"); document.body.style.overflow = ""; renderSheet(); }
+  $("cartbar").onclick = function(){ renderSheet(); open(); };
+  $("close").onclick = close; $("backdrop").onclick = close;
+  $("clear").onclick = function(){ cart = {}; save(); renderItems(); renderSheet(); };
+
+  function demoNote(title, sub, body){
+    var list = $("list");
+    $("foot").hidden = true;
+    list.innerHTML = '<div style="padding:14px 0"><p class="preview-h"></p><p class="preview-s"></p><pre class="preview"></pre></div>';
+    list.querySelector(".preview-h").textContent = title;
+    list.querySelector(".preview-s").textContent = sub;
+    list.querySelector(".preview").textContent = body;
+    open();
+  }
+
+  var ENDPOINT = "https://qr-orders.andreysannikov553.workers.dev/order", VENUE = "grillhaus-p", CUR = "₽", LIVE = ENDPOINT.indexOf("http") === 0;
+  var hasTable = /[?&]t=/.test(location.search);
+  // «меню открыли» для еженедельного отчёта: по QR на столе (?t=), с карточки (?src=nfc) или по ссылке. Один раз за визит.
+  // ?kp=1 — меню показано внутри коммерческого предложения: в отчёт заведения не считаем
+  if (LIVE && !/[?&]kp=1/.test(location.search)){
+    try {
+      var src = (location.search.match(/[?&]src=(qr|nfc|link|offer)/) || [])[1] || (hasTable ? "qr" : "direct");
+      if (!sessionStorage.getItem("grillhaus-p-hit")){
+        sessionStorage.setItem("grillhaus-p-hit", "1");
+        var hb = JSON.stringify({venue: VENUE, src: src}), hu = ENDPOINT.replace(/\/order$/, "/hit");
+        if (navigator.sendBeacon) navigator.sendBeacon(hu, new Blob([hb], {type: "text/plain"})); else fetch(hu, {method: "POST", body: hb, keepalive: true});
+      }
+    } catch(e){}
+  }
+  if (LIVE || hasTable) $("svc").hidden = false;
+
+  function toast(msg){
+    var el = document.createElement("div"); el.className = "toast"; el.textContent = msg; document.body.appendChild(el);
+    setTimeout(function(){ el.remove(); }, 3200);
+  }
+  function post(kind, items, extra){
+    var payload = {venue: VENUE, table: TABLE, zone: ZONE, kind: kind, lang: lang, cur: CUR, items: items || []};
+    if (extra) for (var k in extra) payload[k] = extra[k];
+    return fetch(ENDPOINT, {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(payload)})
+      .then(function(r){ return r.json().then(function(j){ return !!j.ok; }); }).catch(function(){ return false; });
+  }
+  function orderItems(){
+    return Object.keys(cart).map(function(id){ return {n: ciName(id, "ru"), q: cart[id], p: ci(id).p * 1}; });
+  }
+
+  // Без номера стола в ссылке заказ ушёл бы с чужим столом: сначала спрашиваем гостя.
+  function askTable(next){
+    var list = $("list");
+    $("foot").hidden = true;
+    list.innerHTML = '<div style="padding:14px 0;display:flex;flex-direction:column;gap:12px"><p class="preview-h"></p>' +
+      '<input id="tbl" inputmode="numeric" maxlength="6" autocomplete="off" style="font:inherit;font-size:16px;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--ground);color:var(--ink)">' +
+      '<button type="button" class="btn btn-main" id="tblgo" style="justify-content:center"></button></div>';
+    list.querySelector(".preview-h").textContent = UI.ask_table[lang];
+    $("tblgo").textContent = UI.ask_go[lang];
+    open();
+    $("tblgo").onclick = function(){
+      var v = $("tbl").value.replace(/[^0-9A-Za-z-]/g, "").slice(0, 6);
+      if (!v) { $("tbl").focus(); return; }
+      TABLE = v;
+      try { sessionStorage.setItem("grillhaus-p-table", v); } catch(e){}
+      close(); next();
+    };
+    setTimeout(function(){ $("tbl").focus(); }, 300);
+  }
+
+  // Навынос и доставка: гость оставляет контакты, заказ уходит в тот же чат без номера стола.
+  var DLV = null, PAY = null, MODE = "table";
+  function newRef(){ return "grillhaus-p".slice(0, 2).toUpperCase() + String(Math.floor(1000 + Math.random() * 9000)); }
+  // Экран оплаты: деньги идут гостем напрямую на счёт заведения (VietQR с суммой или ссылка СБП из банка заведения).
+  function payScreen(sum, ref, who){
+    var list = $("list"); $("foot").hidden = true; if ($("sheet-sug")) $("sheet-sug").hidden = true;
+    var amount = Math.round(sum * 1), qr = "", demo = !!PAY.demo;
+    if (PAY.vietqr) qr = "https://img.vietqr.io/image/" + encodeURIComponent(PAY.vietqr.bank) + "-" + encodeURIComponent(PAY.vietqr.account) + "-compact2.png?amount=" + amount + "&addInfo=" + encodeURIComponent(ref) + "&accountName=" + encodeURIComponent(PAY.vietqr.name || "");
+    else if (PAY.qr_img) qr = PAY.qr_img;
+    list.innerHTML = '<div class="pay"><p class="preview-h" id="py-h"></p><div class="amt" id="py-a"></div><div class="ref" id="py-r"></div>' +
+      '<div class="qrbox" id="py-q"></div><p class="hint" id="py-hq"></p>' +
+      '<a class="btn btn-alt" id="py-link" target="_blank" rel="noopener" hidden></a>' +
+      '<button type="button" class="btn btn-main" id="py-done"></button><button type="button" class="btn btn-alt" id="py-later"></button><p class="hint" id="py-msg" hidden></p></div>';
+    $("py-h").textContent = UI.py_title[lang]; $("py-a").textContent = fmt(sum); $("py-r").textContent = UI.py_ref[lang] + " " + ref;
+    var q = $("py-q");
+    if (qr && !demo) { var im = document.createElement("img"); im.src = qr; im.alt = UI.py_qr[lang]; q.appendChild(im); $("py-hq").textContent = UI.py_qr_hint[lang]; }
+    else if (demo) { q.classList.add("demo"); q.textContent = UI.py_demo_q[lang] + " " + fmt(sum); $("py-hq").textContent = UI.py_demo[lang]; }
+    else { q.hidden = true; }
+    var ln = $("py-link");
+    if (PAY.link || demo) { ln.hidden = false; ln.textContent = UI.py_link[lang]; if (PAY.link && !demo) ln.href = PAY.link; else ln.onclick = function(e){ e.preventDefault(); toast(UI.py_demo[lang]); }; }
+    $("py-done").textContent = UI.py_done[lang]; $("py-later").textContent = who.table ? UI.py_waiter[lang] : UI.py_later[lang];
+    $("py-later").onclick = function(){ close(); toast(UI.sent_ok[lang]); };
+    tipsButton(list.querySelector(".pay"));
+    $("py-done").onclick = function(){
+      var b = $("py-done"), m = $("py-msg"); b.disabled = true;
+      var fin = function(ok){ b.disabled = false; m.hidden = false; m.textContent = ok ? UI.py_thanks[lang] : UI.sent_fail[lang]; if (ok) { b.hidden = true; $("py-later").textContent = UI.dl_back[lang]; $("py-later").onclick = close; } };
+      if (!LIVE || demo) { fin(true); return; }
+      fetch(ENDPOINT, {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({venue: VENUE, kind: "paid", ref: ref, amount: amount, cur: CUR, table: who.table || "", zone: who.table ? ZONE : "", guest: who.guest || {}})})
+        .then(function(r){ return r.json().then(function(j){ return !!j.ok; }); }).catch(function(){ return false; }).then(fin);
+    };
+    open();
+  }
+  function setMode(m){
+    MODE = m;
+    [].forEach.call($("modes").children, function(b){ b.setAttribute("aria-pressed", b.getAttribute("data-m") === m ? "true" : "false"); });
+    $("send").textContent = m === "table" ? UI.send[lang] : UI.dl_next[lang];
+    $("nopay").textContent = m === "table" ? UI.nopay[lang] : (m === "delivery" ? UI.dl_note_d[lang] : UI.dl_note_t[lang]);
+  }
+  if (DLV) {
+    $("modes").hidden = false;
+    [].forEach.call($("modes").children, function(b){ var m = b.getAttribute("data-m"); b.textContent = UI["dl_" + m][lang]; b.onclick = function(){ setMode(m); }; });
+    setMode(TABLE ? "table" : "takeaway");
+  }
+  function guestForm(){
+    var dl = MODE === "delivery", saved = {};
+    try { saved = JSON.parse(localStorage.getItem("grillhaus-p-guest") || "{}") || {}; } catch(e){}
+    var list = $("list"); $("foot").hidden = true; if ($("sheet-sug")) $("sheet-sug").hidden = true;
+    list.innerHTML = '<form class="gform" id="gf" novalidate><p class="preview-h" id="gf-h"></p>' +
+      '<label><span data-t="dl_name"></span><input name="name" autocomplete="name" maxlength="60" required></label>' +
+      '<label><span data-t="dl_phone"></span><input name="phone" type="tel" autocomplete="tel" maxlength="40" required></label>' +
+      (dl ? '<label><span data-t="dl_addr"></span><textarea name="address" autocomplete="street-address" maxlength="200" required></textarea></label><button type="button" class="geo" id="gf-geo" data-t="dl_geo"></button><p class="hint" id="gf-geo-ok" hidden></p>' : '') +
+      '<label><span data-t="dl_when"></span><div class="pick" id="gf-when"><button type="button" data-v="asap" aria-pressed="true" data-t="dl_asap"></button><button type="button" data-v="time" aria-pressed="false" data-t="dl_attime"></button></div></label>' +
+      '<input name="time" type="time" hidden>' +
+      '<label><span data-t="dl_pay"></span><div class="pick" id="gf-pay"><button type="button" data-v="cash" aria-pressed="true" data-t="dl_cash"></button><button type="button" data-v="transfer" aria-pressed="false" data-t="dl_transfer"></button>' + (PAY && (PAY.link || PAY.demo) ? '<button type="button" data-v="online" aria-pressed="false" data-t="dl_online"></button>' : '') + '</div></label>' +
+      '<label><span data-t="dl_comment"></span><input name="note" maxlength="200"></label>' +
+      (dl && DLV.min ? '<p class="hint" id="gf-min"></p>' : '') +
+      '<p class="err" id="gf-err" hidden></p>' +
+      '<div class="sheet-actions"><button type="button" class="btn btn-alt" id="gf-back"></button><button type="submit" class="btn btn-main" id="gf-go"></button></div></form>';
+    var f = $("gf"); $("gf-h").textContent = dl ? UI.dl_title_d[lang] : UI.dl_title_t[lang];
+    [].forEach.call(f.querySelectorAll("[data-t]"), function(el){ el.textContent = UI[el.getAttribute("data-t")][lang]; });
+    $("gf-back").textContent = UI.dl_back[lang]; $("gf-go").textContent = UI.send[lang];
+    f.name.value = saved.name || ""; f.phone.value = saved.phone || ""; if (dl) f.address.value = saved.address || "";
+    if ($("gf-min")) $("gf-min").textContent = UI.dl_min[lang] + " " + fmt(DLV.min / 1);
+    var when = "asap", pay = "cash", geo = "";
+    function pick(box, cb){ [].forEach.call(box.children, function(b){ b.onclick = function(){ [].forEach.call(box.children, function(x){ x.setAttribute("aria-pressed", x === b ? "true" : "false"); }); cb(b.getAttribute("data-v")); }; }); }
+    pick($("gf-when"), function(v){ when = v; f.time.hidden = v !== "time"; if (v === "time") f.time.focus(); });
+    pick($("gf-pay"), function(v){ pay = v; });
+    if (dl) $("gf-geo").onclick = function(){
+      if (!navigator.geolocation) return;
+      navigator.geolocation.getCurrentPosition(function(p){ geo = p.coords.latitude.toFixed(5) + "," + p.coords.longitude.toFixed(5); var o = $("gf-geo-ok"); o.hidden = false; o.textContent = UI.dl_geo_ok[lang]; }, function(){}, {timeout: 8000});
+    };
+    $("gf-back").onclick = function(){ $("foot").hidden = false; renderSheet(); };
+    f.onsubmit = function(e){
+      e.preventDefault();
+      var err = $("gf-err"), g = {name: f.name.value.trim(), phone: f.phone.value.trim(), address: dl ? f.address.value.trim() : "", geo: geo,
+        when: when === "time" && f.time.value ? f.time.value : "", pay: pay};
+      if (!g.name || !g.phone || (dl && !g.address)) { err.hidden = false; err.textContent = dl ? UI.dl_fill[lang] : UI.dl_fill_t[lang]; return; }
+      if (dl && DLV.min && total().s * 1 < DLV.min) { err.hidden = false; err.textContent = UI.dl_min[lang] + " " + fmt(DLV.min / 1); return; }
+      try { localStorage.setItem("grillhaus-p-guest", JSON.stringify({name: g.name, phone: g.phone, address: g.address})); } catch(e){}
+      var note = f.note.value.trim(), kind = dl ? "delivery" : "takeaway", ref = newRef(), sum = total().s;
+      if (LIVE) {
+        $("gf-go").disabled = true;
+        fetch(ENDPOINT, {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({venue: VENUE, kind: kind, ref: ref, lang: lang, cur: CUR, items: orderItems(), note: note, guest: g})})
+          .then(function(r){ return r.json().then(function(j){ return !!j.ok; }); }).catch(function(){ return false; })
+          .then(function(ok){
+            $("gf-go").disabled = false;
+            if (!ok) { err.hidden = false; err.textContent = UI.sent_fail[lang]; return; }
+            cart = {}; save(); renderItems(); orderStatus(ref);
+            if (PAY && pay !== "cash") { payScreen(sum, ref, {guest: {name: g.name}}); return; }
+            demoNote(UI.dl_done[lang], pay === "transfer" ? UI.dl_done_tr[lang] : UI.dl_done_s[lang], "");
+            $("foot").hidden = true;
+          });
+        return;
+      }
+      var lines = [dl ? "🛵 Заказ на доставку" : "🥡 Заказ навынос", "", "Имя: " + g.name, UI.dl_phone.ru + ": " + g.phone];
+      if (dl) { lines.push("Адрес: " + g.address); if (geo) lines.push("Точка на карте: https://maps.google.com/?q=" + geo); }
+      lines.push("Когда: " + (g.when || "как можно скорее"), "Оплата: " + (pay === "transfer" ? "переводом по QR" : "наличными"), "");
+      Object.keys(cart).forEach(function(id){ lines.push("• " + ciName(id, "ru") + " × " + cart[id] + " — " + fmt(ci(id).p * cart[id])); });
+      lines.push("", "Итого: " + fmt(total().s)); if (note) lines.push("Комментарий: " + note);
+      demoNote("Так заказ увидит заведение в Telegram", "Демо: в рабочей версии сообщение сразу приходит в чат персонала, заведение подтверждает заказ гостю по телефону или Zalo.", lines.join("\n"));
+    };
+    setTimeout(function(){ (f.name.value ? f.phone : f.name).focus(); }, 300);
+  }
+
+  $("send").onclick = function(){
+    if (DLV && MODE !== "table") { guestForm(); return; }
+    if (!TABLE) { askTable(function(){ $("send").onclick(); }); return; }
+    if (LIVE) {
+      var b = $("send"); b.disabled = true;
+      var ref = newRef(), sum = total().s;
+      post("order", orderItems(), {ref: ref}).then(function(ok){
+        b.disabled = false;
+        if (ok) orderStatus(ref);
+        if (ok && PAY) { cart = {}; save(); renderItems(); payScreen(sum, ref, {table: TABLE}); return; }
+        if (ok) { cart = {}; save(); renderItems(); renderSheet(); close(); toast(UI.sent_ok[lang]); }
+        else toast(UI.sent_fail[lang]);
+      });
+      return;
+    }
+    // Demo: nothing is sent anywhere. Shows the owner what the staff chat would receive.
+    var lines = ["🧾 Новый заказ · " + place("ru"), ""];
+    Object.keys(cart).forEach(function(id){ lines.push("• " + ciName(id, "ru") + " × " + cart[id] + " — " + fmt(ci(id).p * cart[id])); });
+    lines.push("", "Итого: " + fmt(total().s), "Язык гостя: " + lang.toUpperCase());
+    demoNote("Так заказ увидит официант в Telegram", "Демо: в рабочей версии сообщение сразу приходит в чат персонала, с номером стола из QR-кода, а под ним кнопки «Принят», «Готовится», «Несём». Названия блюд у официанта всегда на русском, даже если гость заказывал на другом языке.", lines.join("\n"));
+    cart = {}; save(); renderItems(); orderStatus(newRef(), true);
+  };
+  function service(kind, demoTitle, demoText){
+    return function self(){
+      if (!TABLE) { askTable(self); return; }
+      if (LIVE) { post(kind).then(function(ok){ toast(ok ? UI.sent_ok[lang] : UI.sent_fail[lang]); }); return; }
+      demoNote(demoTitle, "Демо: так это увидит персонал в чате. В рабочей версии сообщение уходит сразу.", demoText + " · " + place("ru"));
+    };
+  }
+  $("call-waiter").onclick = service("waiter", "Гость зовёт официанта", "🙋 Просят подойти");
+  $("call-bill").onclick = service("bill", "Гость просит счёт", "💳 Просят счёт");
+  $("book").onclick = bookForm;
+
+  // Live prices and stop-list from a published Google Sheet (CSV). Falls back to the last good copy, then to the built-in menu.
+  var SHEET = "";
+  function setSold(li, off){
+    var id = li.getAttribute("data-id");
+    li.classList.toggle("soldout", off);
+    var tag = li.querySelector(".sold-tag:not(.time-tag)");
+    if (off && !tag){ tag = document.createElement("span"); tag.className = "sold-tag"; tag.setAttribute("data-sold", "1"); li.querySelector(".buy").appendChild(tag); }
+    if (off){ tag.textContent = UI.soldout[lang]; dropItem(id); }
+    else if (tag) tag.remove();
+  }
+  function parseCSV(s){
+    var rows = [], row = [], cur = "", q = false;
+    for (var i = 0; i < s.length; i++){
+      var c = s[i];
+      if (q){ if (c === '"'){ if (s[i+1] === '"'){ cur += '"'; i++; } else q = false; } else cur += c; }
+      else if (c === '"') q = true;
+      else if (c === ","){ row.push(cur); cur = ""; }
+      else if (c === "\n"){ row.push(cur); rows.push(row); row = []; cur = ""; }
+      else if (c !== "\r") cur += c;
+    }
+    if (cur.length || row.length){ row.push(cur); rows.push(row); }
+    return rows;
+  }
+  var NO = /^(no|нет|0|false|стоп|stop|-)$/i;
+  function applySheet(csv){
+    var rows = parseCSV(csv); if (rows.length < 2) return 0;
+    var head = rows[0].map(function(h){ return h.trim().toLowerCase(); });
+    var iId = head.indexOf("id"), iP = head.indexOf("price"), iA = head.indexOf("available");
+    if (iId < 0) return 0;
+    var changed = 0;
+    rows.slice(1).forEach(function(r){
+      var id = (r[iId] || "").trim(), li = document.querySelector('.item[data-id="' + id + '"]');
+      if (!li || !DATA[id]) return;
+      if (iP > -1){
+        var p = parseFloat((r[iP] || "").replace(/[^0-9.]/g, ""));
+        if (p > 0){ DATA[id].p = p / 1; li.querySelector(".price").textContent = fmt(DATA[id].p); changed++; }
+      }
+      if (iA > -1){ var off = NO.test((r[iA] || "").trim()); li.setAttribute("data-sheet-off", off ? "1" : ""); setSold(li, off || li.getAttribute("data-bot-off") === "1"); }
+    });
+    save(); renderItems(); renderSheet();
+    return changed;
+  }
+  if (SHEET.indexOf("http") === 0){
+    var KEY = "grillhaus-p-sheet";
+    var cached = null; try { cached = localStorage.getItem(KEY); } catch(e){}
+    if (cached) applySheet(cached);
+    fetch(SHEET, {cache: "no-store"}).then(function(r){ if (!r.ok) throw 0; return r.text(); }).then(function(csv){
+      if (applySheet(csv)){ try { localStorage.setItem(KEY, csv); } catch(e){} }
+    }).catch(function(){});
+  }
+
+  var BASE = ENDPOINT.replace(/\/order$/, "");
+
+  // Стоп-лист из Telegram: официант пишет в чат «/stop Карбонара», блюдо сразу отмечается «нет в наличии».
+  function norm(s){ return String(s || "").toLowerCase().replace(/ё/g, "е").replace(/[«»"'“”„()\[\].,!?:;]/g, " ").replace(/\s+/g, " ").trim(); }
+  function applyBotStops(names){
+    var keys = names.map(norm).filter(Boolean);
+    items.forEach(function(li){
+      var dish = " " + norm(DATA[li.getAttribute("data-id")].n.ru) + " ";
+      var off = keys.some(function(k){ return dish.indexOf(" " + k + " ") > -1; });
+      li.setAttribute("data-bot-off", off ? "1" : "");
+      setSold(li, off || li.getAttribute("data-sheet-off") === "1");
+    });
+    save(); renderItems(); renderSheet();
+  }
+  function pullStops(){
+    fetch(BASE + "/stop?venue=" + encodeURIComponent(VENUE), {cache: "no-store"}).then(function(r){ return r.json(); })
+      .then(function(j){ if (j && j.ok && j.items) applyBotStops(j.items); }).catch(function(){});
+  }
+  if (LIVE){ pullStops(); setInterval(pullStops, 120000); }
+
+  // Статус заказа: официант жмёт кнопку под заказом в Telegram, гость видит это здесь.
+  // заказ: sent → accepted → cooking → ready; бронь: bsent → bk_ok или bk_no (администратор жмёт кнопку под бронью)
+  var OST = {sent: "st_sent", accepted: "st_accepted", cooking: "st_cooking", ready: "st_ready", bsent: "bk_sent", bk_ok: "bk_ok_t", bk_no: "bk_no_t"}, ostTimer = null, ostCur = null;
+  var FINAL = {ready: 1, bk_ok: 1, bk_no: 1};
+  function ostShow(st, ref, demo){
+    var box = $("ostat"); box.hidden = false; box.setAttribute("data-s", st);
+    $("ostat-t").textContent = UI[OST[st]][lang].replace("{r}", "№ " + ref);
+    $("ostat-s").hidden = !demo; if (demo) $("ostat-s").textContent = UI.st_demo[lang];
+    ostCur = {st: st, ref: ref, demo: demo};
+  }
+  function orderStatus(ref, demo, book, since){
+    clearTimeout(ostTimer);
+    var started = since || Date.now(), limit = (book ? 24 * 60 : 90) * 60000;
+    if (demo){
+      var steps = book ? ["bsent", "bk_ok"] : ["sent", "accepted", "cooking", "ready"], i = 0;
+      (function next(){ ostShow(steps[i], ref, true); if (++i < steps.length) ostTimer = setTimeout(next, 3500); })();
+      return;
+    }
+    // заказ помним на время визита, бронь — сутки: ответ администратора может прийти позже
+    try { (book ? localStorage : sessionStorage).setItem("grillhaus-p-" + (book ? "bst" : "ost"), JSON.stringify({ref: ref, ts: started})); } catch(e){}
+    ostShow(book ? "bsent" : "sent", ref);
+    (function poll(){
+      fetch(BASE + "/status?venue=" + encodeURIComponent(VENUE) + "&ref=" + encodeURIComponent(ref), {cache: "no-store"})
+        .then(function(r){ return r.json(); }).then(function(j){ if (j && j.ok && OST[j.status]) ostShow(j.status, ref); }).catch(function(){})
+        .then(function(){ if (Date.now() - started < limit && !(ostCur && FINAL[ostCur.st])) ostTimer = setTimeout(poll, book ? 15000 : 8000); });
+    })();
+  }
+  $("ostat-x").onclick = function(){ clearTimeout(ostTimer); $("ostat").hidden = true; try { sessionStorage.removeItem("grillhaus-p-ost"); localStorage.removeItem("grillhaus-p-bst"); } catch(e){} };
+  if (LIVE){ try {
+    var os = JSON.parse(sessionStorage.getItem("grillhaus-p-ost") || "null"), bs = JSON.parse(localStorage.getItem("grillhaus-p-bst") || "null");
+    if (os && Date.now() - os.ts < 90 * 60000) orderStatus(os.ref, false, false, os.ts);
+    else if (bs && Date.now() - bs.ts < 24 * 3600000) orderStatus(bs.ref, false, true, bs.ts);
+  } catch(e){} }
+
+  // Варианты блюда: размер или порция со своей ценой и бесплатные пожелания.
+  function chooser(id){
+    var d = DATA[id], list = $("list"); $("foot").hidden = true; if ($("sheet-sug")) $("sheet-sug").hidden = true;
+    var h = '<form class="opt" id="opt"><p class="preview-h" id="opt-h"></p>';
+    if (d.v){ h += '<fieldset><legend id="opt-lv"></legend>'; d.v.forEach(function(v, i){ h += '<label><input type="radio" name="v" value="' + i + '"' + (i === 0 ? " checked" : "") + '><span></span><b></b></label>'; }); h += '</fieldset>'; }
+    if (d.m){ h += '<fieldset><legend id="opt-lm"></legend>'; d.m.forEach(function(m, i){ h += '<label><input type="checkbox" name="m" value="' + i + '"><span></span></label>'; }); h += '</fieldset>'; }
+    h += '<button type="submit" class="btn btn-main" id="opt-go" style="justify-content:center"></button></form>';
+    list.innerHTML = h;
+    $("opt-h").textContent = d.n[lang]; $("opt-go").textContent = UI.opt_add[lang];
+    if (d.v){ $("opt-lv").textContent = UI.opt_v[lang]; [].forEach.call(list.querySelectorAll('input[name="v"]'), function(inp, i){ var lab = inp.parentNode; lab.querySelector("span").textContent = d.v[i].n[lang]; lab.querySelector("b").textContent = fmt(d.v[i].p); }); }
+    if (d.m){ $("opt-lm").textContent = UI.opt_m[lang]; [].forEach.call(list.querySelectorAll('input[name="m"]'), function(inp, i){ inp.parentNode.querySelector("span").textContent = d.m[i][lang]; }); }
+    $("opt").onsubmit = function(e){
+      e.preventDefault();
+      var f = $("opt"), v = d.v ? (f.querySelector('input[name="v"]:checked') || {}).value || "0" : "", mb = 0;
+      [].forEach.call(f.querySelectorAll('input[name="m"]:checked'), function(x){ mb |= 1 << +x.value; });
+      var key = id + "~" + v + "~" + mb;
+      setQ(key, (cart[key] || 0) + 1); close(); showSugFor(id);
+    };
+    open();
+  }
+
+  // Бронь стола из меню: заявка уходит в чат заведения. В демо показываем, что увидит администратор.
+  var BOOKING = false;
+  function bookForm(){
+    var list = $("list"); $("foot").hidden = true; if ($("sheet-sug")) $("sheet-sug").hidden = true;
+    var guests = ""; for (var g = 1; g <= 20; g++) guests += '<option' + (g === 2 ? " selected" : "") + '>' + g + '</option>';
+    list.innerHTML = '<form class="bform" id="bf" novalidate><p class="preview-h" data-t="bk_title"></p>' +
+      '<div class="two"><label><span data-t="bk_date"></span><input name="date" type="date" required></label><label><span data-t="bk_time"></span><input name="time" type="time" value="19:00" required></label></div>' +
+      '<label><span data-t="bk_guests"></span><select name="guests">' + guests + '</select></label>' +
+      '<label><span data-t="dl_name"></span><input name="name" autocomplete="name" maxlength="60" required></label>' +
+      '<label><span data-t="bk_phone"></span><input name="phone" type="tel" autocomplete="tel" maxlength="40" required></label>' +
+      '<label><span data-t="bk_comment"></span><input name="comment" maxlength="200"></label>' +
+      '<p class="err" id="bf-err" hidden></p><button type="submit" class="btn btn-main" id="bf-go" style="justify-content:center" data-t="bk_send"></button></form>';
+    var f = $("bf");
+    [].forEach.call(f.querySelectorAll("[data-t]"), function(el){ el.textContent = UI[el.getAttribute("data-t")][lang]; });
+    var day = new Date(), p2 = function(n){ return ("0" + n).slice(-2); };
+    f.date.min = day.getFullYear() + "-" + p2(day.getMonth() + 1) + "-" + p2(day.getDate()); f.date.value = f.date.min;
+    try { var sg = JSON.parse(localStorage.getItem("grillhaus-p-guest") || "{}"); f.name.value = sg.name || ""; f.phone.value = sg.phone || ""; } catch(e){}
+    f.onsubmit = function(e){
+      e.preventDefault();
+      var b = {venue: VENUE, date: f.date.value, time: f.time.value, guests: +f.guests.value, name: f.name.value.trim(), phone: f.phone.value.trim(), comment: f.comment.value.trim(), lang: lang};
+      if (!b.date || !b.time || !b.name || b.phone.replace(/\D/g, "").length < 6){ $("bf-err").hidden = false; $("bf-err").textContent = UI.bk_fill[lang]; return; }
+      try { localStorage.setItem("grillhaus-p-guest", JSON.stringify({name: b.name, phone: b.phone})); } catch(e){}
+      if (LIVE && BOOKING){
+        $("bf-go").disabled = true;
+        fetch(BASE + "/book", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(b)})
+          .then(function(r){ return r.json(); }).catch(function(){ return {}; })
+          .then(function(j){ var ok = !!(j && j.ok); $("bf-go").disabled = false; if (ok){ close(); toast(UI.bk_done[lang]); if (j.ref) orderStatus(j.ref, false, true); } else { $("bf-err").hidden = false; $("bf-err").textContent = UI.bk_fail[lang]; } });
+        return;
+      }
+      var dd = b.date.split("-");
+      demoNote("Так бронь увидит администратор в Telegram", "Демо: в рабочей версии заявка сразу приходит в чат заведения, администратор перезванивает гостю.",
+        "📅 Новая бронь № B12345\n\nДата: " + dd[2] + "." + dd[1] + "." + dd[0] + "\nВремя: " + b.time + "\nГостей: " + b.guests + "\nИмя: " + b.name + "\nТелефон: " + b.phone + (b.comment ? "\nКомментарий: " + b.comment : "") + "\n\n[ ✅ Подтвердить ]  [ ❌ Нет мест ]");
+      orderStatus("B12345", true, true);
+    };
+    open();
+  }
+
+  // Чаевые: ссылка заведения (сервис чаевых или СБП). Показываем на экране оплаты и после просьбы о счёте.
+  var TIPS = null;
+  function tipsButton(box){
+    if (!TIPS || !box || box.querySelector(".tipsb")) return;
+    var a = document.createElement("a"); a.className = "btn btn-alt tipsb"; a.textContent = UI.tips[lang];
+    if (TIPS.url && !TIPS.demo){ a.href = TIPS.url; a.target = "_blank"; a.rel = "noopener"; }
+    else { a.href = "#"; a.onclick = function(e){ e.preventDefault(); toast(UI.tips_demo[lang]); }; }
+    box.appendChild(a);
+  }
+  if (TIPS){
+    var _billT = $("call-bill").onclick;
+    $("call-bill").onclick = function(){
+      _billT();
+      setTimeout(function(){
+        if (!TABLE) return;
+        if (!$("sheet").classList.contains("open")){ var list = $("list"); $("foot").hidden = true; list.innerHTML = '<div class="pay"><p class="preview-h"></p></div>'; list.querySelector(".preview-h").textContent = UI.sent_ok[lang]; open(); }
+        tipsButton($("list").querySelector(".pay") || $("list").firstChild);
+      }, 400);
+    };
+  }
+
+  // Filters: chips combine (all must match). "No pork" hides dishes marked as containing pork.
+  var active = {};
+  function applyFilters(){
+    var any = Object.keys(active).some(function(k){ return active[k]; });
+    items.forEach(function(li){
+      var tags = (li.getAttribute("data-tags") || "").split(" ");
+      var ok = true;
+      Object.keys(active).forEach(function(k){
+        if (!active[k]) return;
+        if (k === "nopork") { if (tags.indexOf("pork") > -1) ok = false; }
+        else if (tags.indexOf(k) === -1) ok = false;
+      });
+      li.classList.toggle("fhide", !ok);
+    });
+    document.querySelectorAll(".sec").forEach(function(s){
+      s.classList.toggle("fhide", any && !s.querySelector(".item:not(.fhide)"));
+    });
+  }
+  document.querySelectorAll(".flt").forEach(function(b){
+    b.addEventListener("click", function(){
+      var k = b.getAttribute("data-flt"); active[k] = !active[k];
+      b.setAttribute("aria-pressed", String(!!active[k])); applyFilters();
+    });
+  });
+
+  // «Хорошо сочетается»: подсказки из того же меню по правилам заведения. Без выдуманной статистики.
+  var PAIRS = [{"when": ["meat", "fish"], "offer": ["drinks-3", "drinks-4"]}, {"when": ["salads", "soups"], "offer": ["drinks-1", "drinks-2"]}, {"when": ["desserts"], "offer": ["drinks-3"]}];
+  var sugDismissed = 0, sugShown = {};
+  try { sugDismissed = parseInt(sessionStorage.getItem("grillhaus-p-sugx") || "0", 10) || 0; } catch(e){}
+  function sectionOf(id){ return id.split("-")[0]; }
+  function suggestFor(ids){
+    var out = [];
+    PAIRS.forEach(function(r){
+      var hit = ids.some(function(id){ return r.when.indexOf(id) > -1 || r.when.indexOf(sectionOf(id)) > -1; });
+      if (!hit) return;
+      r.offer.forEach(function(o){
+        var li = byId(o);
+        if (!DATA[o] || hasOpts(o) || qtyOf(o) || !li || li.classList.contains("soldout") || out.indexOf(o) > -1) return;
+        out.push(o);
+      });
+    });
+    return out.slice(0, 3);
+  }
+  function byId(id){ return document.querySelector('.item[data-id="' + id + '"]'); }
+  function sugRows(list, box, after){
+    box.innerHTML = "";
+    list.forEach(function(id){
+      var row = document.createElement("div"); row.className = "sug-r";
+      var n = document.createElement("span"); n.className = "sug-n"; n.textContent = DATA[id].n[lang];
+      var p = document.createElement("span"); p.className = "sug-p"; p.textContent = fmt(DATA[id].p);
+      var a = document.createElement("button"); a.type = "button"; a.className = "sug-a"; a.textContent = "+"; a.setAttribute("aria-label", DATA[id].n[lang]);
+      a.onclick = function(){ setQ(id, 1); after(); };
+      row.appendChild(n); row.appendChild(p); row.appendChild(a); box.appendChild(row);
+    });
+  }
+  function hideSug(){ $("sug").hidden = true; }
+  function showSugFor(id){
+    if (sugDismissed >= 2 || sugShown[sectionOf(id)]) return;
+    var list = suggestFor([id]); if (!list.length) return;
+    sugShown[sectionOf(id)] = true;
+    $("sug-t").textContent = UI.sug_t[lang];
+    var refresh = function(){ var l = suggestFor([id]); if (l.length) sugRows(l, $("sug-list"), refresh); else hideSug(); };
+    sugRows(list, $("sug-list"), refresh);
+    $("sug").hidden = false;
+  }
+  $("sug-x").onclick = function(){ sugDismissed++; try { sessionStorage.setItem("grillhaus-p-sugx", String(sugDismissed)); } catch(e){} hideSug(); };
+  function renderSheetSug(){
+    var box = $("sheet-sug"), ids = Object.keys(cart), list = ids.length ? suggestFor(ids) : [];
+    box.hidden = !list.length;
+    if (list.length){ box.querySelector(".sug-h span").textContent = UI.sug_cart[lang]; sugRows(list, $("sheet-sug-list"), renderSheetSug); }
+  }
+  items.forEach(function(li){
+    var id = li.getAttribute("data-id"), add = li.querySelector(".add");
+    var prev = add.onclick; add.onclick = function(){ prev(); showSugFor(id); };
+  });
+  var _rs = renderSheet; renderSheet = function(){ _rs(); renderSheetSug(); };
+  $("cartbar").addEventListener("click", hideSug);
+
+  // Время: статус «открыто/закрыто» по реальным часам заведения и окна подачи разделов. ?now=mon-13:30 — для проверки.
+  var HOURS = {"tz": "Asia/Yekaterinburg", "week": [[["12:00", "23:00"]], [["12:00", "23:00"]], [["12:00", "23:00"]], [["12:00", "23:00"]], [["12:00", "23:00"]], [["12:00", "23:00"]], [["12:00", "23:00"]]]}, WINDOWS = {};
+  function hm(s){ var p = s.split(":"); return (+p[0]) * 60 + (+p[1]); }
+  function nowParts(){
+    var q = (location.search.match(/[?&]now=([a-z]{3})-(\d{1,2}):(\d{2})/i) || []);
+    var names = ["mon","tue","wed","thu","fri","sat","sun"];
+    if (q[1] && names.indexOf(q[1].toLowerCase()) > -1) return {d: names.indexOf(q[1].toLowerCase()), m: (+q[2]) * 60 + (+q[3])};
+    var tz = HOURS.tz || WINDOWS.tz || "Asia/Ho_Chi_Minh";
+    var f = new Intl.DateTimeFormat("en-GB", {timeZone: tz, weekday: "short", hour: "2-digit", minute: "2-digit", hourCycle: "h23"}).formatToParts(new Date());
+    var o = {}; f.forEach(function(p){ o[p.type] = p.value; });
+    return {d: names.indexOf(o.weekday.toLowerCase().slice(0, 3)), m: (+o.hour) * 60 + (+o.minute)};
+  }
+  function pad(m){ m = (m + 1440) % 1440; return ("0" + Math.floor(m / 60)).slice(-2) + ":" + ("0" + (m % 60)).slice(-2); }
+  function statusText(){
+    if (!HOURS.week) return null;
+    var n = nowParts(), day = HOURS.week[n.d] || [];
+    // открыто сейчас?
+    for (var k = 0; k < 2; k++){
+      var d = (n.d - k + 7) % 7, iv = HOURS.week[d] || [];
+      for (var i = 0; i < iv.length; i++){
+        var f = hm(iv[i][0]), e = hm(iv[i][1]), over = e <= f;
+        if (k === 0 && !over && n.m >= f && n.m < e) return {open: true, t: iv[i][1]};
+        if (k === 0 && over && n.m >= f) return {open: true, t: iv[i][1]};
+        if (k === 1 && over && n.m < e) return {open: true, t: iv[i][1]};
+      }
+    }
+    // когда откроемся?
+    for (var s = 0; s < 8; s++){
+      var dd = (n.d + s) % 7, ivs = (HOURS.week[dd] || []).slice().sort(function(a, b){ return hm(a[0]) - hm(b[0]); });
+      for (var j = 0; j < ivs.length; j++){
+        if (s === 0 && hm(ivs[j][0]) <= n.m) continue;
+        return {open: false, t: ivs[j][0], s: s, d: dd};
+      }
+    }
+    return null;
+  }
+  var PROMO = null;
+  function renderPromo(){
+    if (!PROMO) return;
+    var n = nowParts(), on = !PROMO.days || PROMO.days.indexOf(n.d) > -1;
+    if (on && PROMO.from && PROMO.to){ var f = hm(PROMO.from), e = hm(PROMO.to); on = e > f ? (n.m >= f && n.m < e) : (n.m >= f || n.m < e); }
+    $("promo").hidden = !on; if (on) $("promo").textContent = PROMO.text[lang] || PROMO.text.ru;
+  }
+  function renderTime(){
+    renderPromo();
+    var st = statusText(), bar = $("openbar");
+    if (st){
+      var w = st.s === 0 ? UI.today[lang] : st.s === 1 ? UI.tomorrow[lang] : UI.wd[lang].split("|")[st.d];
+      bar.textContent = (st.open ? UI.open_until[lang].replace("{t}", st.t) : UI.closed_next[lang].replace("{w}", w).replace("{t}", st.t));
+      bar.className = "openbar " + (st.open ? "is-open" : "is-closed"); bar.hidden = false;
+    }
+    var n = nowParts();
+    Object.keys(WINDOWS).forEach(function(sec){
+      if (sec === "tz") return;
+      var wdw = WINDOWS[sec], f = hm(wdw.from), e = hm(wdw.to);
+      var inside = e > f ? (n.m >= f && n.m < e) : (n.m >= f || n.m < e);
+      document.querySelectorAll('.item[data-id^="' + sec + '-"]').forEach(function(li){
+        li.classList.toggle("timeclosed", !inside);
+        var tag = li.querySelector(".time-tag");
+        if (!inside && !tag){ tag = document.createElement("span"); tag.className = "sold-tag time-tag"; li.querySelector(".buy").appendChild(tag); }
+        if (!inside) tag.textContent = UI.window[lang].replace("{a}", wdw.from).replace("{b}", wdw.to);
+        else if (tag) tag.remove();
+      });
+    });
+  }
+  renderTime(); setInterval(renderTime, 60000);
+  var _al = applyLang; applyLang = function(l){ _al(l); renderTime(); };
+
+  // Просьба об отзыве. Одинаковая для всех гостей: без вопроса о настроении и без вознаграждения (правила Google).
+  var RV_URL = "https://yandex.ru/maps/org/restaurant_chaikovsky/101736090648/reviews/", RV_PROV = "yandex", RV_KEY = "grillhaus-p-rv", DAY = 86400000;
+  function rvGet(){ try { return JSON.parse(localStorage.getItem(RV_KEY) || "{}"); } catch(e){ return {}; } }
+  function rvSet(o){ try { localStorage.setItem(RV_KEY, JSON.stringify(o)); } catch(e){} }
+  function rvText(){
+    var k = RV_PROV === "yandex" ? "rv_yandex" : "rv_google";
+    $("rv-go").textContent = UI[k][lang]; $("rv-foot").textContent = UI[k][lang];
+    $("rv-t").textContent = UI.rv_t[lang]; document.querySelector(".rv-p").textContent = UI.rv_p[lang]; $("rv-later").textContent = UI.rv_later[lang];
+  }
+  function rvSnoozed(){ var s = rvGet(); return (s.done && Date.now() - s.done < 60 * DAY) || (s.later && Date.now() - s.later < 30 * DAY); }
+  function showReview(force){
+    if (!RV_URL || (!force && rvSnoozed())) return;
+    hideSug(); rvText(); $("rvc").hidden = false;
+  }
+  if (RV_URL){
+    $("rv-link").hidden = false;
+    $("rv-go").addEventListener("click", function(){ var s = rvGet(); s.done = Date.now(); rvSet(s); $("rvc").hidden = true; });
+    $("rv-foot").addEventListener("click", function(){ var s = rvGet(); s.done = Date.now(); rvSet(s); });
+    $("rv-later").addEventListener("click", function(){ var s = rvGet(); s.later = Date.now(); rvSet(s); $("rvc").hidden = true; });
+    var st = rvGet();
+    if (/[?&]review=1/.test(location.search)) showReview(true);
+    else if (st.order && Date.now() - st.order > 45 * 60000 && Date.now() - st.order < 12 * 3600000 && !rvSnoozed()) showReview();
+  }
+  // момент заказа запоминаем, чтобы вернуть гостя к просьбе позже; запрос счёта — естественный момент для просьбы
+  var _send = $("send").onclick;
+  $("send").onclick = function(){ var s = rvGet(); s.order = Date.now(); rvSet(s); _send(); };
+  var _bill = $("call-bill").onclick;
+  $("call-bill").onclick = function(){ _bill(); setTimeout(function(){ showReview(); }, 1800); };
+  var _al2 = applyLang; applyLang = function(l){ _al2(l); rvText(); if (ostCur && !$("ostat").hidden) ostShow(ostCur.st, ostCur.ref, ostCur.demo); };
+
+  // «живые» фото: анимация только у карточек на экране, чтобы не грузить телефон
+  if (document.body.classList.contains("anim") && "IntersectionObserver" in window){
+    document.querySelectorAll(".fx-steam").forEach(function(w){ ["smoke", "smoke s2"].forEach(function(c){ var e = document.createElement("i"); e.className = c; w.appendChild(e); }); });
+    // все фото «дышат» в одном ритме: фаза анимации берётся от общих часов, а не от момента появления карточки на экране
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){
+      if (e.isIntersecting && e.target.classList.contains("push")) e.target.querySelector(".phi").style.animationDelay = -(Date.now() % 12000) + "ms";
+      e.target.classList.toggle("on", e.isIntersecting); }); }, {rootMargin: "80px 0px"});
+    document.querySelectorAll(".phw").forEach(function(w){ io.observe(w); });
+    if (/[?&]anim=all/.test(location.search)) document.querySelectorAll(".phw").forEach(function(w){ io.unobserve(w); w.classList.add("on"); });
+  }
+
+  L.forEach(function(x){ $("lang-" + x).onclick = function(){ applyLang(x); }; });
+  var saved = null;
+  try { saved = localStorage.getItem("grillhaus-p-lang"); } catch(e){}
+  var qlang = (location.search.match(/[?&]lang=([a-z]{2})/) || [])[1]; if (qlang && L.indexOf(qlang) > -1) saved = qlang;
+  if (!saved){ var n = (navigator.language || "").slice(0,2).toLowerCase(); saved = L.indexOf(n) > -1 ? n : (n === "uk" || n === "be" ? "ru" : "en"); }
+  if (L.indexOf(saved) < 0) saved = L[0];
+  applyLang(saved);
+  renderItems();
+})();
+</script>
+</body>
+</html>

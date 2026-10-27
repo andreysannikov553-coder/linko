@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Судоку</title>
+<style>
+:root{--bg:#F4EFE7;--paper:#FCFAF6;--ink:#1E1B17;--soft:#5A5148;--line:#E3DBCE;--strong:#22201C;--sel:#E9E2D6;--same:#F0E7D3;--bad:#B94A2A;--accent:#22201C}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.4 -apple-system,"Segoe UI",sans-serif;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
+main{max-width:430px;margin:0 auto;padding:18px 14px 32px}
+.top{display:flex;justify-content:space-between;align-items:center}
+h1{margin:0;font:700 36px/1 Georgia,serif}
+.top a{color:var(--soft);font-size:14px}
+.ctl{display:flex;gap:8px;align-items:center;margin:14px 0}
+select,button{font:inherit;border-radius:10px;border:1px solid var(--accent);padding:9px 14px}
+select{background:var(--paper);color:var(--ink);border-color:var(--line)}
+button{background:var(--accent);color:var(--bg);font-weight:700;cursor:pointer}
+button.alt{background:var(--paper);color:var(--ink);border-color:var(--line)}
+button:focus-visible,a:focus-visible,select:focus-visible,.cell:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+#grid{display:grid;grid-template:repeat(9,1fr)/repeat(9,1fr);border:2px solid var(--strong);border-radius:6px;background:var(--paper);aspect-ratio:1}
+.cell{display:flex;align-items:center;justify-content:center;border:1px solid var(--line);font-size:clamp(17px,5.5vw,24px);cursor:pointer;user-select:none;position:relative}
+.cell.r2,.cell.r5{border-bottom:2px solid var(--strong)}
+.cell.c2,.cell.c5{border-right:2px solid var(--strong)}
+.cell.given{font-weight:700}
+.cell.user{color:#4A6A8C}
+.cell.same{background:var(--same)}
+.cell.sel{background:var(--sel)}
+.cell.bad{color:var(--bad)}
+.pad{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:14px}
+.pad button{padding:12px 0;font-size:20px;background:var(--paper);color:var(--ink);border-color:var(--line)}
+#msg{min-height:24px;margin:12px 0 0;font-weight:700;text-align:center}
+</style>
+</head>
+<body>
+<main>
+  <div class="top"><h1>Судоку</h1><a href="../../">&larr; Назад</a></div>
+  <div class="ctl">
+    <select id="lvl" aria-label="Сложность"><option value="36">Легко</option><option value="46" selected>Средне</option><option value="52">Сложно</option></select>
+    <button id="new" type="button">Новая игра</button>
+  </div>
+  <div id="grid" role="grid" aria-label="Поле судоку"></div>
+  <div class="pad" id="pad"></div>
+  <p id="msg" aria-live="polite"></p>
+</main>
+<script>
+(function(){
+  var sol,puz,cur,sel=-1;
+  var grid=document.getElementById("grid"),msg=document.getElementById("msg");
+  function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+  function ok(b,p,v){
+    var r=Math.floor(p/9),c=p%9,br=r-r%3,bc=c-c%3,i;
+    for(i=0;i<9;i++){if(b[r*9+i]===v||b[i*9+c]===v)return false}
+    for(i=0;i<3;i++)for(var j=0;j<3;j++)if(b[(br+i)*9+bc+j]===v)return false;
+    return true;
+  }
+  function fill(b){
+    var p=b.indexOf(0);if(p<0)return true;
+    var ns=shuffle([1,2,3,4,5,6,7,8,9]);
+    for(var k=0;k<9;k++){var v=ns[k];if(ok(b,p,v)){b[p]=v;if(fill(b))return true;b[p]=0}}
+    return false;
+  }
+  function count(b,lim){
+    var p=b.indexOf(0);if(p<0)return 1;
+    var n=0;
+    for(var v=1;v<=9&&n<lim;v++){if(ok(b,p,v)){b[p]=v;n+=count(b,lim-n);b[p]=0}}
+    return n;
+  }
+  function make(holes){
+    var b=new Array(81).fill(0);fill(b);sol=b.slice();
+    var order=shuffle(Array.from({length:81},function(_,i){return i})),removed=0;
+    for(var k=0;k<81&&removed<holes;k++){
+      var p=order[k],keep=b[p];b[p]=0;
+      if(count(b.slice(),2)!==1)b[p]=keep;else removed++;
+    }
+    puz=b.slice();cur=b.slice();sel=-1;msg.textContent="";draw();
+  }
+  function conflicts(i){
+    if(!cur[i])return false;
+    var r=Math.floor(i/9),c=i%9,br=r-r%3,bc=c-c%3,j;
+    for(j=0;j<9;j++){
+      if(j!==c&&cur[r*9+j]===cur[i])return true;
+      if(j!==r&&cur[j*9+c]===cur[i])return true;
+    }
+    for(var a=0;a<3;a++)for(var d=0;d<3;d++){var q=(br+a)*9+bc+d;if(q!==i&&cur[q]===cur[i])return true}
+    return false;
+  }
+  function draw(){
+    grid.innerHTML="";
+    for(var i=0;i<81;i++){
+      var d=document.createElement("div"),r=Math.floor(i/9),c=i%9;
+      d.className="cell r"+r+" c"+c+(puz[i]?" given":(cur[i]?" user":""));
+      if(sel>=0&&cur[sel]&&cur[i]===cur[sel])d.classList.add("same");
+      if(i===sel)d.classList.add("sel");
+      if(!puz[i]&&conflicts(i))d.classList.add("bad");
+      d.textContent=cur[i]||"";d.tabIndex=i===(sel<0?0:sel)?0:-1;d.dataset.i=i;
+      d.setAttribute("role","gridcell");d.setAttribute("aria-label","Строка "+(r+1)+", столбец "+(c+1)+(cur[i]?", "+cur[i]:", пусто"));
+      grid.appendChild(d);
+    }
+  }
+  function put(v){
+    if(sel<0||puz[sel])return;
+    cur[sel]=v;draw();
+    if(cur.every(function(x,i){return x===sol[i]}))msg.textContent="Готово! Всё верно.";
+    else msg.textContent="";
+  }
+  grid.addEventListener("click",function(e){var t=e.target.closest(".cell");if(!t)return;sel=+t.dataset.i;draw()});
+  document.addEventListener("keydown",function(e){
+    if(/^[1-9]$/.test(e.key))put(+e.key);
+    else if(e.key==="Backspace"||e.key==="Delete"||e.key==="0")put(0);
+    else if(sel>=0){
+      var m={ArrowLeft:-1,ArrowRight:1,ArrowUp:-9,ArrowDown:9}[e.key];
+      if(m){e.preventDefault();var n=sel+m;if(n>=0&&n<81){sel=n;draw();var f=grid.children[n];if(f)f.focus()}}
+    }
+  });
+  var pad=document.getElementById("pad");
+  for(var n=1;n<=9;n++){(function(v){var b=document.createElement("button");b.type="button";b.textContent=v;b.addEventListener("click",function(){put(v)});pad.appendChild(b)})(n)}
+  var er=document.createElement("button");er.type="button";er.textContent="Стереть";er.className="alt";er.style.fontSize="14px";er.addEventListener("click",function(){put(0)});pad.appendChild(er);
+  document.getElementById("new").addEventListener("click",function(){make(+document.getElementById("lvl").value)});
+  make(46);
+})();
+</script>
+</body>
+</html>
