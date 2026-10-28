@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#0E0D0C">
-<title>Гриль Хаус — доставка</title>
+<title>Демо доставки «Гриль Хаус»</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap&subset=cyrillic">
 <style>
@@ -104,6 +104,7 @@ img{max-width:100%;display:block}
 .btn:disabled{background:var(--paper2);color:var(--faint);cursor:default}
 .btn.alt{background:transparent;border:1px solid var(--gold);color:var(--gold)}
 .err{color:#E8957F;font-size:13px;margin-top:10px;min-height:18px}
+.pay{margin-top:10px;padding:22px 18px;border-radius:16px;background:var(--paper2);border:1px solid var(--line);display:grid;gap:6px;text-align:center}.pay span{color:var(--soft);font-size:13.5px}.pay b{font:600 40px/1.1 var(--serif);color:var(--gold-l)}.pay small{color:var(--faint);font-size:12.5px}
 .note{font-size:12px;color:var(--faint);margin-top:10px;text-align:center}
 
 /* после заказа */
@@ -154,14 +155,14 @@ img{max-width:100%;display:block}
 .bt .btn{margin-top:0}
 .addr-big{font:600 24px/1.2 var(--serif)}
 .cash{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;background:var(--gold-s);border:1px solid rgba(201,163,92,.35)}
-.cash b{font-size:20px;color:var(--gold-l)}
+.cash b{font-size:20px;color:var(--gold-l);white-space:nowrap}
 .links{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .links a{display:flex;justify-content:center;padding:13px;border-radius:12px;border:1px solid var(--gold);color:var(--gold);text-decoration:none;font-weight:600;font-size:14px}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
-<div class="demo"><b>Демо</b> · доставка «Гриль Хаус», Чайковский · цены с сайта сети, зоны и стоимость доставки — пример · заказ никуда не отправляется</div>
+<div class="demo"><b>Демо</b> · доставка «Гриль Хаус», Чайковский · курьеры Яндекс Доставки, оплата онлайн · цены с сайта сети, стоимость доставки — пример · заказ никуда не отправляется</div>
 
 <header class="hero"><div class="wrap">
   <div class="logo">Гриль Хаус</div><div class="logo-sub">ДОСТАВКА · ЧАЙКОВСКИЙ</div>
@@ -178,7 +179,7 @@ img{max-width:100%;display:block}
 
 <nav class="bar" id="bar" aria-label="Разделы меню"><div class="wrap" id="bar-in"></div></nav>
 <main class="wrap" id="menu"></main>
-<div class="wrap"><div class="foot">Цены в рублях. * — цена за вес в сыром виде.<br>Фото и цены — с официального сайта сети «Гриль Хаус». <b>Зоны, сроки и стоимость доставки здесь — пример</b>, в рабочей версии их задаёт ресторан.</div></div>
+<div class="wrap"><div class="foot">Цены в рублях. * — цена за вес в сыром виде.<br>Фото и цены — с официального сайта сети «Гриль Хаус». <b>Стоимость и время доставки здесь — пример</b>: в рабочей версии они считаются по тарифу Яндекс Доставки. Курьер Яндекса деньги не берёт — заказ оплачен онлайн.</div></div>
 
 <div class="cartbar" id="cartbar" hidden><button type="button" id="cartbtn"><span><span class="cnt" id="ccnt">0</span>Корзина</span><span id="csum"></span></button></div>
 
@@ -199,7 +200,7 @@ var ZONES = [
   {id:"m", name:"Микрорайоны", stems:["кабалевск","вокзальн","маркса","азина"], fee:250, min:1200, eta:[50,70]},
   {id:"x", name:"Дальняя зона", stems:[], fee:350, min:1500, eta:[60,90]}];
 var FREE_FROM = 2500, OPEN = "12:00–22:30";
-var S = {mode:"d", addr:"", cart:{}, pay:"card", when:"asap", step:0, view:"g", order:null, timer:null};
+var S = {mode:"d", addr:"", cart:{}, pay:"sbp", when:"asap", step:0, view:"g", order:null, timer:null};
 
 /* ---------- меню ---------- */
 function stepper(id){ var q = S.cart[id] || 0;
@@ -221,7 +222,7 @@ function count(){ return Object.keys(S.cart).reduce(function(a, id){ return a + 
 function fee(){ if (S.mode === "p") return 0; var z = zoneOf(S.addr); if (!z) return 0; return sub() >= FREE_FROM ? 0 : z.fee; }
 function renderZone(){
   var z = zoneOf(S.addr), el = $("#zone");
-  $("#rules").textContent = "Принимаем заказы " + OPEN + " · бесплатная доставка от " + ruble(FREE_FROM);
+  $("#rules").textContent = "Принимаем заказы " + OPEN + " · везут курьеры Яндекс Доставки · оплата онлайн · бесплатная доставка от " + ruble(FREE_FROM);
   if (!z){ el.className = "zone"; el.innerHTML = "<span>Введите адрес — покажем зону, стоимость и время доставки</span>"; return; }
   el.className = "zone" + (z.id === "x" ? " warn" : "");
   el.innerHTML = '<span class="z-name">'+z.name+'</span><span>Доставка <b>'+ruble(z.fee)+'</b></span><span>Минимальный заказ <b>'+ruble(z.min)+'</b></span><span>Время <b>'+z.eta[0]+'–'+z.eta[1]+' мин</b></span>' + (z.id === "x" ? '<span>Администратор уточнит возможность доставки по телефону</span>' : "");
@@ -249,7 +250,7 @@ function renderSheet(){
    + '<div class="fld two"><div><label for="f-name">Имя</label><input class="inp" id="f-name" autocomplete="given-name" value="'+esc(S.name||"")+'"></div><div><label for="f-tel">Телефон</label><input class="inp" id="f-tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7" value="'+esc(S.tel||"")+'"></div></div>'
    + (isD ? '<div class="fld"><label for="f-addr">Адрес доставки</label><input class="inp" id="f-addr" autocomplete="street-address" placeholder="Улица, дом, квартира" value="'+esc(S.addr)+'"></div>' : '<div class="fld"><span class="l">Самовывоз</span><div class="pick">Приморский бульвар, 32/1 · заказ будет готов через 20–25 минут</div></div>')
    + '<div class="fld"><label for="f-when">'+(isD ? "Когда привезти" : "Когда забрать")+'</label><select class="inp" id="f-when"><option value="asap"'+(S.when==="asap"?" selected":"")+'>Как можно скорее</option>'+sl.map(function(t){ return '<option value="'+t+'"'+(S.when===t?" selected":"")+'>К '+t+'</option>'; }).join("")+'</select></div>'
-   + '<div class="fld"><span class="l">Оплата</span><div class="seg" role="radiogroup" aria-label="Оплата">'+[["card",isD?"Картой курьеру":"Картой в ресторане"],["cash","Наличными"],["link","Онлайн по ссылке"]].map(function(p){ return '<button type="button" role="radio" aria-checked="'+(S.pay===p[0])+'" data-pay="'+p[0]+'">'+p[1]+'</button>'; }).join("")+'</div></div>'
+   + '<div class="fld"><span class="l">Оплата'+(isD?' · только онлайн: курьер Яндекса деньги не берёт':'')+'</span><div class="seg" role="radiogroup" aria-label="Оплата">'+(isD ? [["sbp","СБП"],["card","Картой онлайн"]] : [["sbp","СБП"],["card","Картой онлайн"],["cash","На кассе"]]).map(function(p){ return '<button type="button" role="radio" aria-checked="'+(S.pay===p[0])+'" data-pay="'+p[0]+'">'+p[1]+'</button>'; }).join("")+'</div></div>'
    + '<div class="fld"><label for="f-note">Комментарий</label><textarea class="inp" id="f-note" rows="2" placeholder="Подъезд, домофон, без лука…">'+esc(S.note||"")+'</textarea></div>'
    + '<div class="sum"><div><span>Блюда</span><span>'+ruble(s)+'</span></div>' + (isD ? '<div><span>Доставка'+(z?' · '+z.name:'')+'</span><span class="'+(z&&!f?"free":"")+'">'+(!z?"укажите адрес":f?ruble(f):"бесплатно")+'</span></div>' : "") + '<div class="t"><span>Итого</span><span>'+ruble(s + f)+'</span></div></div>'
    + '<div class="err" id="err" role="alert"></div>'
@@ -264,39 +265,43 @@ function send(){ keep();
   if (!(S.name || "").trim()) return err("Укажите имя");
   if ((S.tel || "").replace(/\D/g, "").length < 10) return err("Проверьте телефон: нужно не меньше 10 цифр");
   if (S.mode === "d" && S.addr.trim().length < 4) return err("Укажите адрес доставки");
+  if (S.mode === "d" && S.pay === "cash") S.pay = "sbp";
   var z = zoneOf(S.addr) || ZONES[0], now = new Date(), eta, isD = S.mode === "d";
   if (S.when === "asap") eta = new Date(now.getTime() + (isD ? z.eta[1] : 25) * 60000); else { eta = new Date(now); var p = S.when.split(":"); eta.setHours(+p[0], +p[1], 0, 0); }
   S.order = {no: 214 + Math.floor(Math.random() * 60), mode: S.mode, name: S.name.trim(), tel: S.tel.trim(), addr: S.addr.trim(), note: (S.note || "").trim(), pay: S.pay, when: S.when, eta: eta, at: now,
     lines: Object.keys(S.cart).map(function(i){ return {n: ITEMS[i].name, q: S.cart[i], p: ITEMS[i].p}; }), sub: sub(), fee: fee(), zone: z.name};
   S.order.total = S.order.sub + S.order.fee; S.step = 0; S.view = "g";
-  $("#ovl").hidden = true; document.body.style.overflow = "hidden"; $("#cartbar").hidden = true; renderDone(); $("#done").hidden = false; $("#done").scrollTop = 0;
+  if (S.pay === "cash") return finish();
+  $("#sheet").innerHTML = '<div class="sh-h"><h2>Оплата</h2><button class="x" type="button" data-a="close" aria-label="Закрыть">×</button></div><div class="pay"><span>Заказ №'+S.order.no+' · Гриль Хаус, Чайковский</span><b>'+ruble(S.order.total)+'</b><small>'+(S.pay === "sbp" ? "Система быстрых платежей: откроется приложение вашего банка" : "Банковская карта")+'</small></div>'
+    + '<button class="btn" type="button" data-a="paid">Оплатить '+ruble(S.order.total)+'</button><div class="note">Демо: деньги не списываются. В рабочей версии — платёжная страница банка или ЮKassa с чеком по 54-ФЗ.</div>';
 }
+function finish(){ $("#ovl").hidden = true; document.body.style.overflow = "hidden"; $("#cartbar").hidden = true; renderDone(); $("#done").hidden = false; $("#done").scrollTop = 0; }
 
 /* ---------- после заказа: гость / ресторан / курьер ---------- */
-var PAYN = {card:"картой", cash:"наличными", link:"онлайн по ссылке"};
-function steps(o){ var a = o.mode === "d" ? ["Заказ принят","Готовится","Курьер в пути","Доставлен"] : ["Заказ принят","Готовится","Готов — можно забирать","Выдан"];
-  var sub = o.mode === "d" ? ["Ресторан подтвердил","Повара готовят на мангале","Курьер уже выехал","Приятного аппетита"] : ["Ресторан подтвердил","Повара готовят на мангале","Ждём вас у кассы","Приятного аппетита"];
+var PAYN = {sbp:"СБП · оплачено", card:"картой онлайн · оплачено", cash:"на кассе при получении"};
+function steps(o){ var a = o.mode === "d" ? ["Оплачен и принят","Готовится","Курьер Яндекса в пути","Доставлен"] : ["Заказ принят","Готовится","Готов — можно забирать","Выдан"];
+  var sub = o.mode === "d" ? ["Ресторан получил заказ и оплату","Повара готовят на мангале","Курьер Яндекс Доставки везёт заказ","Приятного аппетита"] : ["Ресторан подтвердил","Повара готовят на мангале","Ждём вас у кассы","Приятного аппетита"];
   var t = function(k){ return k === 0 ? hhmm(o.at) : k === 3 ? hhmm(o.eta) : ""; };
   return a.map(function(n, k){ return '<li class="'+(k <= S.step ? "on" : "")+(k === S.step && S.step < 3 ? " cur" : "")+'"><i>'+(k < S.step || S.step === 3 ? "✓" : k + 1)+'</i><div><b>'+n+'</b><small>'+sub[k]+'</small></div><time>'+t(k)+'</time></li>'; }).join(""); }
 function lines(o){ return o.lines.map(function(l){ return '<div class="l"><span>'+l.q+' × '+esc(l.n)+'</span><span>'+ruble(l.p * l.q)+'</span></div>'; }).join(""); }
 function viewG(o){ return '<div class="card"><ol class="trk">'+steps(o)+'</ol></div><div class="card ord" style="margin-top:12px">'
   + '<div><span>'+(o.mode==="d"?"Адрес":"Самовывоз")+'</span><b>'+(o.mode==="d"?esc(o.addr):"Приморский бульвар, 32/1")+'</b></div><div><span>'+(o.when==="asap"?"Ожидаемое время":"Время")+'</span><b>'+(o.when==="asap"?"около ":"к ")+hhmm(o.eta)+'</b></div>'
   + '<div><span>Оплата</span><b>'+PAYN[o.pay]+'</b></div><div><span>Итого</span><b>'+ruble(o.total)+'</b></div></div>'; }
-function viewR(o){ var b = S.step === 0 ? '<button class="btn" type="button" data-a="adv">Принять заказ</button>' : S.step === 1 ? '<button class="btn" type="button" data-a="adv">'+(o.mode==="d"?"Готово — передать курьеру":"Готово — можно выдавать")+'</button>' : '<button class="btn" type="button" disabled>'+(S.step === 2 ? (o.mode==="d"?"Передан курьеру":"Ждём гостя") : "Заказ закрыт")+'</button>';
-  return '<div class="card"><div class="msg-h"><i>LK</i><div><b>LINKO · заказы</b><span>мессенджер персонала · сейчас</span></div></div><div class="bub"><h3>Заказ №'+o.no+' · '+(o.mode==="d"?"доставка":"самовывоз")+'</h3><div><span class="tag'+(S.step>=2?" g":"")+'">'+['Новый','Принят · готовим','Готов','Закрыт'][S.step]+'</span></div><div class="hr"></div>'+lines(o)
+function viewR(o){ var b = S.step === 0 ? '<button class="btn" type="button" data-a="adv">Принять заказ</button>' : S.step === 1 ? '<button class="btn" type="button" data-a="adv">'+(o.mode==="d"?"Готово — вызвать курьера Яндекса":"Готово — можно выдавать")+'</button>' : '<button class="btn" type="button" disabled>'+(S.step === 2 ? (o.mode==="d"?"Курьер Яндекса везёт заказ":"Ждём гостя") : "Заказ закрыт")+'</button>';
+  return '<div class="card"><div class="msg-h"><i>LK</i><div><b>LINKO · заказы</b><span>мессенджер персонала · сейчас</span></div></div><div class="bub"><h3>Заказ №'+o.no+' · '+(o.mode==="d"?"доставка":"самовывоз")+'</h3><div style="display:flex;gap:6px;flex-wrap:wrap"><span class="tag'+(S.step>=2?" g":"")+'">'+['Новый','Принят · готовим',(o.mode==="d"?"У курьера Яндекса":"Готов"),'Закрыт'][S.step]+'</span><span class="tag'+(o.pay!=="cash"?" g":"")+'">'+(o.pay!=="cash"?"Оплачен онлайн":"Оплата на кассе")+'</span><span class="tag">r_keeper ✓ на кухне</span></div><div class="hr"></div>'+lines(o)
   + '<div class="hr"></div>'+(o.fee?'<div class="l"><span>Доставка · '+esc(o.zone)+'</span><span>'+ruble(o.fee)+'</span></div>':"")+'<div class="l"><b>Итого</b><b>'+ruble(o.total)+'</b></div><div class="hr"></div>'
   + '<div class="l"><span class="k">Гость</span><span>'+esc(o.name)+' · '+esc(o.tel)+'</span></div>'+(o.mode==="d"?'<div class="l"><span class="k">Адрес</span><span style="white-space:normal;text-align:right">'+esc(o.addr)+'</span></div>':"")
   + '<div class="l"><span class="k">Время</span><span>'+(o.when==="asap"?"как можно скорее · около "+hhmm(o.eta):"к "+hhmm(o.eta))+'</span></div><div class="l"><span class="k">Оплата</span><span>'+PAYN[o.pay]+'</span></div>'+(o.note?'<div class="l"><span class="k">Комментарий</span><span style="white-space:normal;text-align:right">'+esc(o.note)+'</span></div>':"")
   + '</div><div class="bt">'+b+'</div></div>'; }
-function viewC(o){ var ready = S.step >= 2, b = S.step === 3 ? '<button class="btn" type="button" disabled>Заказ доставлен</button>' : ready ? '<button class="btn" type="button" data-a="adv">Доставлено</button>' : '<button class="btn" type="button" disabled>Заказ ещё готовится</button>';
-  var q = encodeURIComponent("Чайковский, " + o.addr);
-  return '<div class="card"><div class="msg-h"><i>КР</i><div><b>Курьер · заказ №'+o.no+'</b><span>'+(S.step===3?"доставлен":ready?"забрать и везти":"ожидает готовности")+'</span></div></div><div class="bub"><span class="k">Адрес</span><div class="addr-big">'+esc(o.addr)+'</div><span class="k">Гость</span><div>'+esc(o.name)+' · '+esc(o.tel)+'</div>'+(o.note?'<span class="k">Комментарий</span><div>'+esc(o.note)+'</div>':"")+'<div class="cash"><span>'+(o.pay==="cash"?"Взять наличными":o.pay==="card"?"Взять картой":"Оплачено онлайн")+'</span><b>'+(o.pay==="link"?"0 ₽":ruble(o.total))+'</b></div></div>'
-  + '<div class="links" style="margin-top:12px"><a href="https://yandex.ru/maps/?text='+q+'" target="_blank" rel="noopener">Маршрут</a><a href="tel:'+esc(o.tel.replace(/[^\d+]/g,""))+'">Позвонить</a></div><div class="bt">'+b+'</div></div>'; }
-function renderDone(){ var o = S.order, isD = o.mode === "d", caps = {g:"Так заказ видит гость на своей странице", r:"Так заказ приходит в мессенджер персонала", c:"Так заказ видит курьер"};
+function viewC(o){ var st = ["Курьер будет вызван, когда заказ будет готов","Курьер будет вызван, когда заказ будет готов","Курьер забрал заказ и везёт гостю","Заказ доставлен"][S.step];
+  var b = S.step === 2 ? '<button class="btn" type="button" data-a="adv">Курьер доставил</button><div class="note">В жизни этот статус приходит из Яндекс Доставки сам.</div>' : '<button class="btn" type="button" disabled>'+(S.step === 3 ? "Заказ доставлен" : "Ждём готовности заказа")+'</button>';
+  return '<div class="card"><div class="msg-h"><i>ЯД</i><div><b>Яндекс Доставка · заказ №'+o.no+'</b><span>'+st+'</span></div></div><div class="bub"><span class="k">Откуда</span><div>Гриль Хаус · Приморский бульвар, 32/1</div><span class="k">Куда</span><div class="addr-big">'+esc(o.addr)+'</div><span class="k">Получатель</span><div>'+esc(o.name)+' · '+esc(o.tel)+'</div>'+(o.note?'<span class="k">Комментарий курьеру</span><div>'+esc(o.note)+'</div>':"")
+  + '<div class="cash"><span>Оплачено онлайн — курьер деньги не берёт</span><b>0 ₽</b></div><div class="l"><span class="k">Доставка</span><span>'+(o.fee?ruble(o.fee):"бесплатно для гостя")+' · по тарифу Яндекса</span></div></div><div class="bt">'+b+'</div></div>'; }
+function renderDone(){ var o = S.order, isD = o.mode === "d", caps = {g:"Так заказ видит гость на своей странице", r:"Так заказ приходит персоналу: в мессенджер и в кассу r_keeper", c:"Так заказ уходит в Яндекс Доставку: ресторан вызывает курьера одной кнопкой"};
   $("#done").innerHTML = '<div class="in"><div class="d-top"><div class="ok"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div><h2>Заказ №'+o.no+' '+(isD?["принят","готовится","в пути","доставлен"]:["принят","готовится","готов","выдан"])[S.step]+'</h2><p>'+(isD?"Привезём к "+hhmm(o.eta)+" · "+ruble(o.total):"Будет готов к "+hhmm(o.eta)+" · "+ruble(o.total))+'</p></div>'
-   + '<div class="tabs" role="tablist"><button role="tab" type="button" data-v="g" aria-selected="'+(S.view==="g")+'">Гость</button><button role="tab" type="button" data-v="r" aria-selected="'+(S.view==="r")+'">Ресторан</button><button role="tab" type="button" data-v="c" aria-selected="'+(S.view==="c")+'"'+(isD?"":" disabled")+'>Курьер</button></div>'
+   + '<div class="tabs" role="tablist"><button role="tab" type="button" data-v="g" aria-selected="'+(S.view==="g")+'">Гость</button><button role="tab" type="button" data-v="r" aria-selected="'+(S.view==="r")+'">Ресторан</button><button role="tab" type="button" data-v="c" aria-selected="'+(S.view==="c")+'"'+(isD?"":" disabled")+'>Яндекс</button></div>'
    + '<div class="cap">'+caps[S.view]+'</div><div id="view">'+(S.view==="g"?viewG(o):S.view==="r"?viewR(o):viewC(o))+'</div>'
-   + '<button class="btn alt play" type="button" data-a="play">'+(S.timer?"Остановить":"Показать весь путь заказа")+'</button><button class="btn alt" type="button" data-a="again">Собрать новый заказ</button><div class="note">Демо: ресторан и курьер получают заказ в мессенджер, отдельное приложение не нужно.</div></div>'; }
+   + '<button class="btn alt play" type="button" data-a="play">'+(S.timer?"Остановить":"Показать весь путь заказа")+'</button><button class="btn alt" type="button" data-a="again">Собрать новый заказ</button><div class="note">Демо: персонал получает заказ в мессенджер и в r_keeper, курьера Яндекса вызывает одной кнопкой. Отдельное приложение не нужно.</div></div>'; }
 function advance(){ if (S.step < 3){ S.step++; renderDone(); } if (S.step >= 3) stop(); }
 function stop(){ if (S.timer){ clearInterval(S.timer); S.timer = null; renderDone(); } }
 function play(){ if (S.timer) return stop(); S.view = "g"; S.step = 0; S.timer = setInterval(advance, 2300); renderDone(); }
@@ -309,6 +314,7 @@ document.addEventListener("click", function(e){
   else if (t.id === "cartbtn"){ renderSheet(); $("#ovl").hidden = false; document.body.style.overflow = "hidden"; }
   else if (t.dataset.a === "close") closeSheet();
   else if (t.dataset.a === "send") send();
+  else if (t.dataset.a === "paid") finish();
   else if (t.dataset.a === "adv"){ stop(); advance(); }
   else if (t.dataset.a === "play") play();
   else if (t.dataset.a === "again") again();
