@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0E0D0C">
+<title>Гриль Хаус — доставка</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap&subset=cyrillic">
+<style>
+:root{--bg:#0E0D0C;--paper:#171513;--paper2:#1E1B18;--ink:#EFE6D6;--soft:#B3A792;--faint:#8A7F6E;--gold:#C9A35C;--gold-l:#E3C98F;--gold-s:#2A2319;--line:#2A2621;--ok:#9FD3A6;
+  --serif:"Cormorant Garamond",Georgia,serif;--sans:Manrope,-apple-system,"Segoe UI",Roboto,sans-serif}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:64px}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.5 var(--sans);-webkit-font-smoothing:antialiased;padding-bottom:env(safe-area-inset-bottom,0px)}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+img{max-width:100%;display:block}
+:focus-visible{outline:2px solid var(--gold-l);outline-offset:2px}
+[hidden]{display:none!important}
+.wrap{max-width:980px;margin:0 auto;padding-inline:16px}
+.demo{background:#1C1915;color:var(--gold);font-size:12.5px;padding:9px 16px;text-align:center;border-bottom:1px solid var(--line)}
+.demo b{color:var(--ink);font-weight:600}
+
+/* шапка */
+.hero{position:relative;padding:44px 0 22px;text-align:center;background:linear-gradient(180deg,rgba(14,13,12,.5),rgba(14,13,12,.86) 62%,#0E0D0C),url(img/hero.jpg) center 40%/cover no-repeat}
+.logo{font:600 clamp(32px,9vw,54px)/1 var(--serif);letter-spacing:.22em;padding-left:.22em;text-transform:uppercase}
+.logo-sub{color:var(--gold);letter-spacing:.42em;font-size:12px;margin-top:12px;padding-left:.42em}
+.mode{display:inline-grid;grid-template-columns:1fr 1fr;margin-top:26px;border:1px solid var(--line);background:rgba(23,21,19,.85);border-radius:99px;padding:4px}
+.mode button{border:0;background:transparent;padding:10px 26px;border-radius:99px;color:var(--soft);font-weight:600;font-size:14px;transition:background .25s,color .25s}
+.mode button[aria-checked=true]{background:var(--gold);color:#0E0D0C}
+.box{max-width:560px;margin:16px auto 0;text-align:left;background:rgba(23,21,19,.9);border:1px solid var(--line);border-radius:18px;padding:16px}
+.box label{display:block;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.inp{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:13px 14px;font-size:16px;transition:border-color .2s}
+.inp:focus{outline:none;border-color:var(--gold)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.chips button{border:1px solid var(--line);background:transparent;border-radius:99px;padding:6px 12px;font-size:12.5px;color:var(--soft)}
+.chips button:hover{border-color:var(--gold);color:var(--gold-l)}
+.zone{margin-top:12px;display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13.5px;color:var(--soft)}
+.zone b{color:var(--ink);font-weight:600}
+.zone .z-name{color:var(--gold-l);font-weight:600}
+.zone.warn{color:#E8B686}
+.pick{color:var(--soft);font-size:14px}.pick b{color:var(--ink)}
+.rules{margin-top:12px;font-size:12.5px;color:var(--faint)}
+
+/* разделы */
+.bar{position:sticky;top:0;z-index:20;background:rgba(14,13,12,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
+.bar .wrap{display:flex;gap:8px;overflow-x:auto;padding-block:10px;scrollbar-width:none}
+.bar .wrap::-webkit-scrollbar{display:none}
+.bar a{flex:none;text-decoration:none;color:var(--soft);font-size:12px;letter-spacing:.07em;text-transform:uppercase;padding:8px 14px;border:1px solid var(--line);border-radius:99px;transition:all .2s}
+.bar a:hover,.bar a.on{background:var(--gold-s);color:var(--gold);border-color:var(--gold)}
+.sec{padding-top:38px}
+.sec-h{font:600 28px/1.1 var(--serif);letter-spacing:.12em;text-transform:uppercase;margin:0 0 4px}
+.sec-h::after{content:"";display:block;width:46px;height:1px;background:var(--gold);margin-top:12px}
+.list{display:grid;gap:0 28px}
+@media (min-width:720px){.list{grid-template-columns:1fr 1fr}}
+.item{display:flex;flex-direction:column;gap:12px;padding:20px 0;border-bottom:1px solid var(--line)}
+.item img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.45);background:var(--paper)}
+.name{font:600 22px/1.2 var(--serif)}
+.desc{color:var(--faint);font-size:13px;line-height:1.55;margin-top:2px}
+.meta{font-size:12.5px;color:var(--soft);margin-top:4px}
+.row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:2px}
+.price{color:var(--gold);font-size:18px;font-weight:600;font-variant-numeric:tabular-nums}
+.add{border:1px solid var(--gold);background:transparent;color:var(--gold);padding:9px 18px;border-radius:99px;font-size:12px;letter-spacing:.09em;text-transform:uppercase;font-weight:600;transition:background .2s}
+.add:hover{background:var(--gold-s)}
+.step{display:inline-flex;align-items:center;gap:2px;background:var(--gold);color:#0E0D0C;border-radius:99px;padding:3px}
+.step button{width:32px;height:32px;border-radius:50%;border:0;background:#0E0D0C;color:var(--gold);font-size:19px;line-height:1;display:grid;place-items:center}
+.step .q{min-width:30px;text-align:center;font-weight:700}
+.foot{padding:40px 0 130px;color:var(--faint);font-size:12.5px;text-align:center}
+.foot b{color:var(--soft)}
+
+/* корзина */
+.cartbar{position:fixed;left:0;right:0;bottom:0;z-index:30;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));pointer-events:none}
+.cartbar button{pointer-events:auto;display:flex;width:100%;max-width:560px;margin:0 auto;justify-content:space-between;align-items:center;gap:14px;border:0;background:var(--gold);color:#0E0D0C;border-radius:99px;padding:15px 22px;font-weight:700;font-size:15px;box-shadow:0 14px 40px rgba(0,0,0,.6);animation:rise .35s cubic-bezier(.2,.7,.2,1)}
+@keyframes rise{from{transform:translateY(120%)}}
+.cnt{background:#0E0D0C;color:var(--gold);border-radius:99px;min-width:26px;height:26px;display:inline-grid;place-items:center;font-size:13px;padding:0 8px;margin-right:10px}
+.ovl{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.66);display:flex;align-items:flex-end;justify-content:center;animation:fade .25s}
+@keyframes fade{from{opacity:0}}
+.sheet{width:100%;max-width:560px;max-height:94vh;max-height:94dvh;overflow:auto;background:var(--paper);border-radius:22px 22px 0 0;border:1px solid var(--line);padding:20px 18px calc(22px + env(safe-area-inset-bottom,0px));animation:up .35s cubic-bezier(.2,.7,.2,1)}
+@keyframes up{from{transform:translateY(40px);opacity:.4}}
+@media (min-width:720px){.ovl{align-items:center}.sheet{border-radius:22px}}
+.sh-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.sh-h h2{font:600 28px/1 var(--serif);margin:0}
+.x{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:transparent;font-size:20px;line-height:1;color:var(--soft)}
+.ci{display:grid;grid-template-columns:52px 1fr auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.ci img{width:52px;height:52px;border-radius:10px;object-fit:cover}
+.ci b{font:600 17px/1.15 var(--serif);display:block}
+.ci>div>span{font-size:12.5px;color:var(--soft)}
+.ci .step{transform:scale(.88);transform-origin:right}
+.up-t{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:16px 0 8px}
+.fld{margin-top:14px}
+.fld>label,.fld>.l{display:block;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);margin-bottom:6px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:420px){.two{grid-template-columns:1fr}}
+.seg{display:flex;flex-wrap:wrap;gap:8px}
+.seg button{flex:1 1 auto;border:1px solid var(--line);background:transparent;border-radius:12px;padding:11px 12px;font-size:13.5px;color:var(--soft);font-weight:500}
+.seg button[aria-checked=true]{border-color:var(--gold);color:var(--gold-l);background:var(--gold-s)}
+.sum{margin-top:18px;border-top:1px solid var(--line);padding-top:12px;display:grid;gap:6px;font-size:14px;color:var(--soft)}
+.sum div{display:flex;justify-content:space-between}
+.sum .t{color:var(--ink);font-size:18px;font-weight:700;margin-top:4px}
+.sum .free{color:var(--ok)}
+.btn{display:flex;width:100%;justify-content:center;align-items:center;gap:8px;margin-top:16px;border:0;background:var(--gold);color:#0E0D0C;border-radius:14px;padding:16px;font-weight:700;font-size:15px}
+.btn:disabled{background:var(--paper2);color:var(--faint);cursor:default}
+.btn.alt{background:transparent;border:1px solid var(--gold);color:var(--gold)}
+.err{color:#E8957F;font-size:13px;margin-top:10px;min-height:18px}
+.note{font-size:12px;color:var(--faint);margin-top:10px;text-align:center}
+
+/* после заказа */
+.done{position:fixed;inset:0;z-index:60;background:var(--bg);overflow:auto;padding:22px 16px calc(40px + env(safe-area-inset-bottom,0px))}
+.done .in{max-width:560px;margin:0 auto}
+.d-top{text-align:center;padding:8px 0 4px}
+.d-top .ok{width:64px;height:64px;border-radius:50%;margin:0 auto 14px;display:grid;place-items:center;background:var(--gold-s);border:1px solid var(--gold);color:var(--gold);animation:pop .6s cubic-bezier(.2,.9,.3,1.4)}
+@keyframes pop{from{transform:scale(.4);opacity:0}}
+.ok svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.d-top h2{font:600 32px/1.1 var(--serif);margin:0}
+.d-top p{color:var(--soft);margin:8px 0 0}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin:20px 0 14px;padding:4px;border-radius:99px;background:var(--paper);border:1px solid var(--line)}
+.tabs button{border:0;background:transparent;border-radius:99px;padding:10px 4px;font-size:13.5px;font-weight:600;color:var(--soft)}
+.tabs button[aria-selected=true]{background:var(--gold);color:#0E0D0C}
+.tabs button:disabled{opacity:.35;cursor:default}
+.cap{font-size:12.5px;color:var(--faint);text-align:center;margin-bottom:12px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:18px}
+.trk{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.trk li{display:grid;grid-template-columns:32px 1fr auto;gap:12px;align-items:flex-start;padding-bottom:20px;position:relative;color:var(--faint)}
+.trk li:last-child{padding-bottom:0}
+.trk li::before{content:"";position:absolute;left:15px;top:30px;bottom:0;width:2px;background:var(--line)}
+.trk li:last-child::before{display:none}
+.trk li.on::before{background:var(--gold)}
+.trk i{width:32px;height:32px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;font-style:normal;font-size:13px;font-weight:700;background:var(--bg);transition:all .4s}
+.trk li.on{color:var(--ink)}
+.trk li.on i{background:var(--gold);border-color:var(--gold);color:#0E0D0C}
+.trk li.cur i{box-shadow:0 0 0 0 rgba(201,163,92,.6);animation:pulse 1.6s infinite}
+@keyframes pulse{to{box-shadow:0 0 0 12px rgba(201,163,92,0)}}
+.trk b{font-weight:600;display:block;line-height:32px}
+.trk small{display:block;font-size:12.5px;color:var(--soft);margin-top:-6px}
+.trk time{font-size:13px;line-height:32px;color:var(--soft);font-variant-numeric:tabular-nums}
+.ord{margin-top:12px;font-size:13.5px;color:var(--soft);display:grid;gap:4px}
+.ord div{display:flex;justify-content:space-between;gap:12px}
+.ord b{color:var(--ink);font-weight:500}
+.play{margin-top:14px}
+.msg-h{display:flex;align-items:center;gap:12px;padding-bottom:12px;border-bottom:1px solid var(--line);margin-bottom:14px}
+.msg-h i{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--gold);color:#0E0D0C;font:700 12px/1 var(--sans);font-style:normal}
+.msg-h b{display:block;font-weight:600;font-size:14px}.msg-h span{font-size:12px;color:var(--soft)}
+.bub{background:var(--paper2);border-radius:16px 16px 16px 4px;padding:14px;font-size:14px;display:grid;gap:8px}
+.bub h3{margin:0;font:600 19px/1.2 var(--serif)}
+.bub .l{display:flex;justify-content:space-between;gap:12px}
+.bub .l span:last-child{color:var(--soft);white-space:nowrap}
+.bub .hr{height:1px;background:var(--line)}
+.bub .k{color:var(--faint);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.tag{display:inline-block;padding:3px 10px;border-radius:99px;font-size:12px;font-weight:600;background:var(--gold-s);color:var(--gold-l)}
+.tag.g{background:rgba(159,211,166,.14);color:var(--ok)}
+.bt{display:grid;gap:8px;margin-top:12px}
+.bt .btn{margin-top:0}
+.addr-big{font:600 24px/1.2 var(--serif)}
+.cash{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;background:var(--gold-s);border:1px solid rgba(201,163,92,.35)}
+.cash b{font-size:20px;color:var(--gold-l)}
+.links{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.links a{display:flex;justify-content:center;padding:13px;border-radius:12px;border:1px solid var(--gold);color:var(--gold);text-decoration:none;font-weight:600;font-size:14px}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="demo"><b>Демо</b> · доставка «Гриль Хаус», Чайковский · цены с сайта сети, зоны и стоимость доставки — пример · заказ никуда не отправляется</div>
+
+<header class="hero"><div class="wrap">
+  <div class="logo">Гриль Хаус</div><div class="logo-sub">ДОСТАВКА · ЧАЙКОВСКИЙ</div>
+  <div class="mode" role="radiogroup" aria-label="Способ получения"><button type="button" role="radio" aria-checked="true" data-m="d">Доставка</button><button type="button" role="radio" aria-checked="false" data-m="p">Самовывоз</button></div>
+  <div class="box" id="boxD">
+    <label for="addr">Адрес доставки</label>
+    <input class="inp" id="addr" placeholder="Улица и дом, например ул. Ленина, 45" autocomplete="street-address">
+    <div class="chips" id="streets" aria-label="Подсказки улиц"></div>
+    <div class="zone" id="zone"></div>
+    <div class="rules" id="rules"></div>
+  </div>
+  <div class="box pick" id="boxP" hidden><b>Приморский бульвар, 32/1</b> · заказ будет готов через 20–25 минут · бесплатно. Позвонить: <b>+7 (342) 414-93-39</b></div>
+</div></header>
+
+<nav class="bar" id="bar" aria-label="Разделы меню"><div class="wrap" id="bar-in"></div></nav>
+<main class="wrap" id="menu"></main>
+<div class="wrap"><div class="foot">Цены в рублях. * — цена за вес в сыром виде.<br>Фото и цены — с официального сайта сети «Гриль Хаус». <b>Зоны, сроки и стоимость доставки здесь — пример</b>, в рабочей версии их задаёт ресторан.</div></div>
+
+<div class="cartbar" id="cartbar" hidden><button type="button" id="cartbtn"><span><span class="cnt" id="ccnt">0</span>Корзина</span><span id="csum"></span></button></div>
+
+<div class="ovl" id="ovl" hidden><div class="sheet" role="dialog" aria-modal="true" aria-label="Оформление заказа" id="sheet"></div></div>
+<div class="done" id="done" hidden></div>
+
+<script>
+const DATA = {"sections": [{"id": "sharing", "title": "Сеты на компанию", "items": [{"id": "sharing-1", "name": "Мясное плато", "p": 2890, "w": "610/90 г*", "desc": "Свиная шея гриль, свиные рёбра гриль, баранина гриль, картофельные чипсы, салат коул слоу, 3 соуса."}, {"id": "sharing-2", "name": "Рыбное плато", "p": 1890, "w": "300 г", "desc": "Лосось слабой соли, кальмар на гриле, мидии, креветки, каперсы, лимон."}, {"id": "sharing-4", "name": "Пивная тарелка", "p": 950, "w": "710/90 г*", "desc": "Пикантные гренки, стрипсы, луковые кольца, картофель фри, 3 соуса."}]}, {"id": "grill", "title": "Мангал", "items": [{"id": "grill-5", "name": "Куриная грудка гриль", "p": 520, "w": "200 г*", "desc": "Куриная грудка с «шайбой» кукурузы и соусом чили."}, {"id": "grill-6", "name": "Свиные рёбра гриль", "p": 950, "w": "300 г*", "desc": "Свиные рёбра, обжаренные на гриле."}, {"id": "grill-7", "name": "Свиная шея гриль", "p": 520, "w": "200 г*", "desc": "Мякоть из свиной шеи с маринованным луком."}, {"id": "grill-9", "name": "Люля-кебаб из курицы", "p": 420, "w": "180 г*", "desc": "Фарш из куриной грудки на шампуре с луком над углями, с соусом барбекю."}, {"id": "grill-10", "name": "Люля-кебаб из говядины", "p": 520, "w": "180 г*", "desc": "Фарш из мраморной говядины на шампуре над углями, с маринованным луком и соусом барбекю."}, {"id": "grill-16", "name": "Стейк лосося", "p": 1350, "w": "200 г*", "desc": "С соусом тартар."}]}, {"id": "burgers", "title": "Бургеры", "items": [{"id": "burgers-1", "name": "Джек Дэниелс бургер", "p": 750, "w": "330 г", "desc": "Говяжья котлета, томат, жареный лук, маринованные огурцы, листья салата и соус Jack Daniel's."}, {"id": "burgers-2", "name": "Биф бургер", "p": 620, "w": "300 г", "desc": "Говяжья котлета, сыр, грибной жульен, салат коул слоу и фирменный соус."}, {"id": "burgers-3", "name": "Классический бургер", "p": 590, "w": "300 г", "desc": "Говяжья котлета, томаты, лук, сыр и фирменный соус."}, {"id": "burgers-4", "name": "Цезарь бургер", "p": 590, "w": "260 г", "desc": "Куриная грудка, сыр пармезан и соус цезарь."}]}, {"id": "hot", "title": "Горячее и паста", "items": [{"id": "hot-2", "name": "Бефстроганов", "p": 950, "w": "250 г", "desc": "Мякоть мраморной говядины с картофельным кремом и трюфельным маслом."}, {"id": "hot-8", "name": "Карбонара", "p": 520, "w": "250 г", "desc": "Спагетти из твёрдых сортов пшеницы, бекон, сливки, чесночное масло, пармезан."}]}, {"id": "starters", "title": "Закуски", "items": [{"id": "starters-5", "name": "Жареный сулугуни", "p": 490, "w": "140/30 г", "desc": "С клюквенным соусом."}, {"id": "starters-8", "name": "Луковые кольца", "p": 420, "w": "170 г", "desc": ""}]}, {"id": "sides", "title": "Гарниры", "items": [{"id": "sides-1", "name": "Картофель на гриле", "p": 170, "w": "100 г", "desc": "Клубни картофеля, обжаренные на углях."}, {"id": "sides-3", "name": "Картофель фри", "p": 190, "w": "100 г", "desc": ""}, {"id": "sides-2", "name": "Картофельное пюре", "p": 150, "w": "150 г", "desc": "Картофель, молоко, сливки, сливочное масло."}, {"id": "sides-6", "name": "Овощи гриль", "p": 360, "w": "100 г", "desc": "Печёные помидоры, кабачок и болгарский перец."}]}, {"id": "desserts", "title": "Десерты", "items": [{"id": "desserts-1", "name": "Шоколадный фондан", "p": 420, "w": "150 г", "desc": "Горячий десерт с жидким шоколадом и шариком мороженого."}, {"id": "desserts-3", "name": "Профитроли трио", "p": 520, "w": "180 г", "desc": "С солёной карамелью, молочным и белым шоколадом."}]}]};
+(function(){
+"use strict";
+var $ = function(s, r){ return (r || document).querySelector(s); };
+var ruble = function(n){ return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " ₽"; };
+var esc = function(s){ return String(s).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); };
+var ITEMS = {}; DATA.sections.forEach(function(s){ s.items.forEach(function(i){ ITEMS[i.id] = i; i.sec = s.id; }); });
+var STREETS = ["Приморский бульвар","ул. Ленина","ул. Мира","ул. Советская","ул. Кабалевского","ул. Вокзальная","ул. Карла Маркса","ул. Азина"];
+var ZONES = [
+  {id:"c", name:"Центр", stems:["приморск","ленина","мира","советск"], fee:150, min:800, eta:[35,50]},
+  {id:"m", name:"Микрорайоны", stems:["кабалевск","вокзальн","маркса","азина"], fee:250, min:1200, eta:[50,70]},
+  {id:"x", name:"Дальняя зона", stems:[], fee:350, min:1500, eta:[60,90]}];
+var FREE_FROM = 2500, OPEN = "12:00–22:30";
+var S = {mode:"d", addr:"", cart:{}, pay:"card", when:"asap", step:0, view:"g", order:null, timer:null};
+
+/* ---------- меню ---------- */
+function stepper(id){ var q = S.cart[id] || 0;
+  return q ? '<span class="step"><button type="button" data-a="dec" data-id="'+id+'" aria-label="Убрать">−</button><span class="q">'+q+'</span><button type="button" data-a="inc" data-id="'+id+'" aria-label="Добавить">+</button></span>'
+           : '<button type="button" class="add" data-a="inc" data-id="'+id+'">Добавить</button>'; }
+function renderMenu(){
+  $("#bar-in").innerHTML = DATA.sections.map(function(s){ return '<a href="#s-'+s.id+'">'+esc(s.title)+'</a>'; }).join("");
+  $("#menu").innerHTML = DATA.sections.map(function(s){ return '<section class="sec" id="s-'+s.id+'"><h2 class="sec-h">'+esc(s.title)+'</h2><div class="list">'+s.items.map(function(i){
+    return '<article class="item" id="i-'+i.id+'"><img src="img/'+i.id+'.jpg" alt="'+esc(i.name)+'" loading="lazy" width="640" height="480"><div><div class="name">'+esc(i.name)+'</div>'+(i.desc?'<div class="desc">'+esc(i.desc)+'</div>':'')+'<div class="meta">'+esc(i.w)+'</div></div><div class="row"><span class="price">'+ruble(i.p)+'</span><span data-st="'+i.id+'">'+stepper(i.id)+'</span></div></article>'; }).join("")+'</div></section>'; }).join("");
+}
+function refreshItem(id){ var el = $('[data-st="'+id+'"]'); if (el) el.innerHTML = stepper(id); }
+
+/* ---------- адрес и зоны ---------- */
+function zoneOf(a){ var t = a.toLowerCase(); if (t.trim().length < 4) return null;
+  for (var i = 0; i < ZONES.length - 1; i++) if (ZONES[i].stems.some(function(s){ return t.indexOf(s) > -1; })) return ZONES[i];
+  return ZONES[2]; }
+function sub(){ return Object.keys(S.cart).reduce(function(a, id){ return a + ITEMS[id].p * S.cart[id]; }, 0); }
+function count(){ return Object.keys(S.cart).reduce(function(a, id){ return a + S.cart[id]; }, 0); }
+function fee(){ if (S.mode === "p") return 0; var z = zoneOf(S.addr); if (!z) return 0; return sub() >= FREE_FROM ? 0 : z.fee; }
+function renderZone(){
+  var z = zoneOf(S.addr), el = $("#zone");
+  $("#rules").textContent = "Принимаем заказы " + OPEN + " · бесплатная доставка от " + ruble(FREE_FROM);
+  if (!z){ el.className = "zone"; el.innerHTML = "<span>Введите адрес — покажем зону, стоимость и время доставки</span>"; return; }
+  el.className = "zone" + (z.id === "x" ? " warn" : "");
+  el.innerHTML = '<span class="z-name">'+z.name+'</span><span>Доставка <b>'+ruble(z.fee)+'</b></span><span>Минимальный заказ <b>'+ruble(z.min)+'</b></span><span>Время <b>'+z.eta[0]+'–'+z.eta[1]+' мин</b></span>' + (z.id === "x" ? '<span>Администратор уточнит возможность доставки по телефону</span>' : "");
+}
+function renderStreets(){ $("#streets").innerHTML = STREETS.map(function(s){ return '<button type="button" data-street="'+esc(s)+'">'+esc(s)+'</button>'; }).join(""); }
+
+/* ---------- корзина ---------- */
+function renderCartBar(){ var n = count(); $("#cartbar").hidden = !n || !$("#done").hidden; $("#ccnt").textContent = n; $("#csum").textContent = ruble(sub()); }
+function change(id, d){ var q = (S.cart[id] || 0) + d; if (q <= 0) delete S.cart[id]; else S.cart[id] = Math.min(q, 20); refreshItem(id); renderCartBar(); if (!$("#ovl").hidden) renderSheet(); }
+
+function slots(){ var z = zoneOf(S.addr) || ZONES[0], base = new Date(Date.now() + (S.mode === "p" ? 40 : z.eta[1] + 15) * 60000), out = [];
+  base.setMinutes(Math.ceil(base.getMinutes() / 30) * 30, 0, 0);
+  for (var i = 0; i < 6; i++){ var t = new Date(base.getTime() + i * 1800000); out.push(('0'+t.getHours()).slice(-2) + ":" + ('0'+t.getMinutes()).slice(-2)); } return out; }
+function hhmm(d){ return ('0'+d.getHours()).slice(-2) + ":" + ('0'+d.getMinutes()).slice(-2); }
+
+var upsell = ["sides-1","sides-3","sides-2","sides-6"];
+function renderSheet(){
+  var ids = Object.keys(S.cart), s = sub(), z = zoneOf(S.addr), isD = S.mode === "d", f = fee(), need = isD && z ? Math.max(0, z.min - s) : 0;
+  var hasMain = ids.some(function(i){ return ["grill","sharing","burgers","hot"].indexOf(ITEMS[i].sec) > -1; }), hasSide = ids.some(function(i){ return ITEMS[i].sec === "sides"; });
+  var ups = hasMain && !hasSide ? '<div class="up-t">Не забыли гарнир?</div><div class="chips">' + upsell.map(function(i){ return '<button type="button" data-a="inc" data-id="'+i+'">+ '+esc(ITEMS[i].name)+' · '+ruble(ITEMS[i].p)+'</button>'; }).join("") + '</div>' : "";
+  var sl = slots();
+  $("#sheet").innerHTML = '<div class="sh-h"><h2>Ваш заказ</h2><button class="x" type="button" data-a="close" aria-label="Закрыть">×</button></div>'
+   + ids.map(function(i){ var it = ITEMS[i]; return '<div class="ci"><img src="img/'+i+'.jpg" alt=""><div><b>'+esc(it.name)+'</b><span>'+ruble(it.p)+' · '+esc(it.w)+'</span></div><span class="step"><button type="button" data-a="dec" data-id="'+i+'" aria-label="Убрать">−</button><span class="q">'+S.cart[i]+'</span><button type="button" data-a="inc" data-id="'+i+'" aria-label="Добавить">+</button></span></div>'; }).join("")
+   + ups
+   + '<div class="fld two"><div><label for="f-name">Имя</label><input class="inp" id="f-name" autocomplete="given-name" value="'+esc(S.name||"")+'"></div><div><label for="f-tel">Телефон</label><input class="inp" id="f-tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7" value="'+esc(S.tel||"")+'"></div></div>'
+   + (isD ? '<div class="fld"><label for="f-addr">Адрес доставки</label><input class="inp" id="f-addr" autocomplete="street-address" placeholder="Улица, дом, квартира" value="'+esc(S.addr)+'"></div>' : '<div class="fld"><span class="l">Самовывоз</span><div class="pick">Приморский бульвар, 32/1 · заказ будет готов через 20–25 минут</div></div>')
+   + '<div class="fld"><label for="f-when">'+(isD ? "Когда привезти" : "Когда забрать")+'</label><select class="inp" id="f-when"><option value="asap"'+(S.when==="asap"?" selected":"")+'>Как можно скорее</option>'+sl.map(function(t){ return '<option value="'+t+'"'+(S.when===t?" selected":"")+'>К '+t+'</option>'; }).join("")+'</select></div>'
+   + '<div class="fld"><span class="l">Оплата</span><div class="seg" role="radiogroup" aria-label="Оплата">'+[["card",isD?"Картой курьеру":"Картой в ресторане"],["cash","Наличными"],["link","Онлайн по ссылке"]].map(function(p){ return '<button type="button" role="radio" aria-checked="'+(S.pay===p[0])+'" data-pay="'+p[0]+'">'+p[1]+'</button>'; }).join("")+'</div></div>'
+   + '<div class="fld"><label for="f-note">Комментарий</label><textarea class="inp" id="f-note" rows="2" placeholder="Подъезд, домофон, без лука…">'+esc(S.note||"")+'</textarea></div>'
+   + '<div class="sum"><div><span>Блюда</span><span>'+ruble(s)+'</span></div>' + (isD ? '<div><span>Доставка'+(z?' · '+z.name:'')+'</span><span class="'+(z&&!f?"free":"")+'">'+(!z?"укажите адрес":f?ruble(f):"бесплатно")+'</span></div>' : "") + '<div class="t"><span>Итого</span><span>'+ruble(s + f)+'</span></div></div>'
+   + '<div class="err" id="err" role="alert"></div>'
+   + '<button class="btn" type="button" data-a="send"'+(need?" disabled":"")+'>'+(need ? "Ещё "+ruble(need)+" до минимального заказа" : "Оформить заказ · "+ruble(s+f))+'</button>'
+   + '<div class="note">Это демо: заказ никуда не отправляется, платить не нужно.</div>';
+}
+function keep(){ var g = function(i){ var e = $(i); return e ? e.value : undefined; }; var n = g("#f-name"), t = g("#f-tel"), a = g("#f-addr"), w = g("#f-when"), c = g("#f-note");
+  if (n !== undefined) S.name = n; if (t !== undefined) S.tel = t; if (a !== undefined){ S.addr = a; $("#addr").value = a; } if (w !== undefined) S.when = w; if (c !== undefined) S.note = c; }
+
+function send(){ keep();
+  var err = function(m){ $("#err").textContent = m; };
+  if (!(S.name || "").trim()) return err("Укажите имя");
+  if ((S.tel || "").replace(/\D/g, "").length < 10) return err("Проверьте телефон: нужно не меньше 10 цифр");
+  if (S.mode === "d" && S.addr.trim().length < 4) return err("Укажите адрес доставки");
+  var z = zoneOf(S.addr) || ZONES[0], now = new Date(), eta, isD = S.mode === "d";
+  if (S.when === "asap") eta = new Date(now.getTime() + (isD ? z.eta[1] : 25) * 60000); else { eta = new Date(now); var p = S.when.split(":"); eta.setHours(+p[0], +p[1], 0, 0); }
+  S.order = {no: 214 + Math.floor(Math.random() * 60), mode: S.mode, name: S.name.trim(), tel: S.tel.trim(), addr: S.addr.trim(), note: (S.note || "").trim(), pay: S.pay, when: S.when, eta: eta, at: now,
+    lines: Object.keys(S.cart).map(function(i){ return {n: ITEMS[i].name, q: S.cart[i], p: ITEMS[i].p}; }), sub: sub(), fee: fee(), zone: z.name};
+  S.order.total = S.order.sub + S.order.fee; S.step = 0; S.view = "g";
+  $("#ovl").hidden = true; document.body.style.overflow = "hidden"; $("#cartbar").hidden = true; renderDone(); $("#done").hidden = false; $("#done").scrollTop = 0;
+}
+
+/* ---------- после заказа: гость / ресторан / курьер ---------- */
+var PAYN = {card:"картой", cash:"наличными", link:"онлайн по ссылке"};
+function steps(o){ var a = o.mode === "d" ? ["Заказ принят","Готовится","Курьер в пути","Доставлен"] : ["Заказ принят","Готовится","Готов — можно забирать","Выдан"];
+  var sub = o.mode === "d" ? ["Ресторан подтвердил","Повара готовят на мангале","Курьер уже выехал","Приятного аппетита"] : ["Ресторан подтвердил","Повара готовят на мангале","Ждём вас у кассы","Приятного аппетита"];
+  var t = function(k){ return k === 0 ? hhmm(o.at) : k === 3 ? hhmm(o.eta) : ""; };
+  return a.map(function(n, k){ return '<li class="'+(k <= S.step ? "on" : "")+(k === S.step && S.step < 3 ? " cur" : "")+'"><i>'+(k < S.step || S.step === 3 ? "✓" : k + 1)+'</i><div><b>'+n+'</b><small>'+sub[k]+'</small></div><time>'+t(k)+'</time></li>'; }).join(""); }
+function lines(o){ return o.lines.map(function(l){ return '<div class="l"><span>'+l.q+' × '+esc(l.n)+'</span><span>'+ruble(l.p * l.q)+'</span></div>'; }).join(""); }
+function viewG(o){ return '<div class="card"><ol class="trk">'+steps(o)+'</ol></div><div class="card ord" style="margin-top:12px">'
+  + '<div><span>'+(o.mode==="d"?"Адрес":"Самовывоз")+'</span><b>'+(o.mode==="d"?esc(o.addr):"Приморский бульвар, 32/1")+'</b></div><div><span>'+(o.when==="asap"?"Ожидаемое время":"Время")+'</span><b>'+(o.when==="asap"?"около ":"к ")+hhmm(o.eta)+'</b></div>'
+  + '<div><span>Оплата</span><b>'+PAYN[o.pay]+'</b></div><div><span>Итого</span><b>'+ruble(o.total)+'</b></div></div>'; }
+function viewR(o){ var b = S.step === 0 ? '<button class="btn" type="button" data-a="adv">Принять заказ</button>' : S.step === 1 ? '<button class="btn" type="button" data-a="adv">'+(o.mode==="d"?"Готово — передать курьеру":"Готово — можно выдавать")+'</button>' : '<button class="btn" type="button" disabled>'+(S.step === 2 ? (o.mode==="d"?"Передан курьеру":"Ждём гостя") : "Заказ закрыт")+'</button>';
+  return '<div class="card"><div class="msg-h"><i>LK</i><div><b>LINKO · заказы</b><span>мессенджер персонала · сейчас</span></div></div><div class="bub"><h3>Заказ №'+o.no+' · '+(o.mode==="d"?"доставка":"самовывоз")+'</h3><div><span class="tag'+(S.step>=2?" g":"")+'">'+['Новый','Принят · готовим','Готов','Закрыт'][S.step]+'</span></div><div class="hr"></div>'+lines(o)
+  + '<div class="hr"></div>'+(o.fee?'<div class="l"><span>Доставка · '+esc(o.zone)+'</span><span>'+ruble(o.fee)+'</span></div>':"")+'<div class="l"><b>Итого</b><b>'+ruble(o.total)+'</b></div><div class="hr"></div>'
+  + '<div class="l"><span class="k">Гость</span><span>'+esc(o.name)+' · '+esc(o.tel)+'</span></div>'+(o.mode==="d"?'<div class="l"><span class="k">Адрес</span><span style="white-space:normal;text-align:right">'+esc(o.addr)+'</span></div>':"")
+  + '<div class="l"><span class="k">Время</span><span>'+(o.when==="asap"?"как можно скорее · около "+hhmm(o.eta):"к "+hhmm(o.eta))+'</span></div><div class="l"><span class="k">Оплата</span><span>'+PAYN[o.pay]+'</span></div>'+(o.note?'<div class="l"><span class="k">Комментарий</span><span style="white-space:normal;text-align:right">'+esc(o.note)+'</span></div>':"")
+  + '</div><div class="bt">'+b+'</div></div>'; }
+function viewC(o){ var ready = S.step >= 2, b = S.step === 3 ? '<button class="btn" type="button" disabled>Заказ доставлен</button>' : ready ? '<button class="btn" type="button" data-a="adv">Доставлено</button>' : '<button class="btn" type="button" disabled>Заказ ещё готовится</button>';
+  var q = encodeURIComponent("Чайковский, " + o.addr);
+  return '<div class="card"><div class="msg-h"><i>КР</i><div><b>Курьер · заказ №'+o.no+'</b><span>'+(S.step===3?"доставлен":ready?"забрать и везти":"ожидает готовности")+'</span></div></div><div class="bub"><span class="k">Адрес</span><div class="addr-big">'+esc(o.addr)+'</div><span class="k">Гость</span><div>'+esc(o.name)+' · '+esc(o.tel)+'</div>'+(o.note?'<span class="k">Комментарий</span><div>'+esc(o.note)+'</div>':"")+'<div class="cash"><span>'+(o.pay==="cash"?"Взять наличными":o.pay==="card"?"Взять картой":"Оплачено онлайн")+'</span><b>'+(o.pay==="link"?"0 ₽":ruble(o.total))+'</b></div></div>'
+  + '<div class="links" style="margin-top:12px"><a href="https://yandex.ru/maps/?text='+q+'" target="_blank" rel="noopener">Маршрут</a><a href="tel:'+esc(o.tel.replace(/[^\d+]/g,""))+'">Позвонить</a></div><div class="bt">'+b+'</div></div>'; }
+function renderDone(){ var o = S.order, isD = o.mode === "d", caps = {g:"Так заказ видит гость на своей странице", r:"Так заказ приходит в мессенджер персонала", c:"Так заказ видит курьер"};
+  $("#done").innerHTML = '<div class="in"><div class="d-top"><div class="ok"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div><h2>Заказ №'+o.no+' '+(isD?["принят","готовится","в пути","доставлен"]:["принят","готовится","готов","выдан"])[S.step]+'</h2><p>'+(isD?"Привезём к "+hhmm(o.eta)+" · "+ruble(o.total):"Будет готов к "+hhmm(o.eta)+" · "+ruble(o.total))+'</p></div>'
+   + '<div class="tabs" role="tablist"><button role="tab" type="button" data-v="g" aria-selected="'+(S.view==="g")+'">Гость</button><button role="tab" type="button" data-v="r" aria-selected="'+(S.view==="r")+'">Ресторан</button><button role="tab" type="button" data-v="c" aria-selected="'+(S.view==="c")+'"'+(isD?"":" disabled")+'>Курьер</button></div>'
+   + '<div class="cap">'+caps[S.view]+'</div><div id="view">'+(S.view==="g"?viewG(o):S.view==="r"?viewR(o):viewC(o))+'</div>'
+   + '<button class="btn alt play" type="button" data-a="play">'+(S.timer?"Остановить":"Показать весь путь заказа")+'</button><button class="btn alt" type="button" data-a="again">Собрать новый заказ</button><div class="note">Демо: ресторан и курьер получают заказ в мессенджер, отдельное приложение не нужно.</div></div>'; }
+function advance(){ if (S.step < 3){ S.step++; renderDone(); } if (S.step >= 3) stop(); }
+function stop(){ if (S.timer){ clearInterval(S.timer); S.timer = null; renderDone(); } }
+function play(){ if (S.timer) return stop(); S.view = "g"; S.step = 0; S.timer = setInterval(advance, 2300); renderDone(); }
+function again(){ stop(); S.cart = {}; S.step = 0; S.order = null; $("#done").hidden = true; document.body.style.overflow = ""; renderMenu(); renderCartBar(); scrollTo(0, 0); }
+
+/* ---------- события ---------- */
+document.addEventListener("click", function(e){
+  var t = e.target.closest("button, a"); if (!t) return;
+  if (t.dataset.a === "inc") change(t.dataset.id, 1); else if (t.dataset.a === "dec") change(t.dataset.id, -1);
+  else if (t.id === "cartbtn"){ renderSheet(); $("#ovl").hidden = false; document.body.style.overflow = "hidden"; }
+  else if (t.dataset.a === "close") closeSheet();
+  else if (t.dataset.a === "send") send();
+  else if (t.dataset.a === "adv"){ stop(); advance(); }
+  else if (t.dataset.a === "play") play();
+  else if (t.dataset.a === "again") again();
+  else if (t.dataset.pay){ keep(); S.pay = t.dataset.pay; renderSheet(); }
+  else if (t.dataset.v){ S.view = t.dataset.v; renderDone(); }
+  else if (t.dataset.street){ $("#addr").value = S.addr = t.dataset.street + ", "; $("#addr").focus(); renderZone(); }
+  else if (t.dataset.m){ S.mode = t.dataset.m; [].forEach.call(document.querySelectorAll(".mode button"), function(b){ b.setAttribute("aria-checked", String(b === t)); }); $("#boxD").hidden = S.mode !== "d"; $("#boxP").hidden = S.mode !== "p"; renderCartBar(); }
+});
+function closeSheet(){ keep(); $("#ovl").hidden = true; document.body.style.overflow = ""; renderCartBar(); }
+$("#ovl").addEventListener("click", function(e){ if (e.target === this) closeSheet(); });
+document.addEventListener("keydown", function(e){ if (e.key === "Escape" && !$("#ovl").hidden) closeSheet(); });
+$("#addr").addEventListener("input", function(){ S.addr = this.value; renderZone(); });
+document.addEventListener("input", function(e){ if (e.target.id === "f-addr"){ S.addr = e.target.value; $("#addr").value = S.addr; } });
+// подсветка раздела в полосе
+var links = [].slice.call(document.querySelectorAll(".bar a"));
+if ("IntersectionObserver" in window){ var io = new IntersectionObserver(function(es){ es.forEach(function(x){ if (x.isIntersecting){ var id = x.target.id; links.forEach(function(a){ a.classList.toggle("on", a.getAttribute("href") === "#" + id); }); var on = document.querySelector(".bar a.on"); if (on) on.scrollIntoView({inline:"center", block:"nearest"}); } }); }, {rootMargin:"-20% 0px -70% 0px"});
+  [].forEach.call(document.querySelectorAll(".sec"), function(s){ io.observe(s); }); }
+renderMenu(); renderStreets(); renderZone();
+links = [].slice.call(document.querySelectorAll(".bar a"));
+if ("IntersectionObserver" in window) [].forEach.call(document.querySelectorAll(".sec"), function(s){ io.observe(s); });
+})();
+</script>
+</body>
+</html>
