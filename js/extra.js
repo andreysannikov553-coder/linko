@@ -18,7 +18,7 @@
   // калькулятор: цены за одно заведение (как в КП)
   var c = d.getElementById("calc"); if (!c) return;
   var P = {card: ["Страница стола", 5900, 0], m1: ["QR-меню", 7900, 1500], m2: ["Меню с заказом со стола", 14900, 2900],
-    rev: ["Карточка на кассу", 3000, 0], s1: ["Мини-сайт с бронью", 15000, 0, 1], s2: ["Сайт со сценой", 60000, 0, 1]};
+    rev: ["Карточка на кассу", 3000, 0], s1: ["Мини-сайт с бронью", 15000, 0, 1], s2: ["Сайт со сценой", 30000, 0, 1]};
   var tn = d.getElementById("c-t"), tv = d.getElementById("c-tv"), L = d.getElementById("c-l"), one = d.getElementById("c-one"), mo = d.getElementById("c-mo"), sum = "";
   var rub = function(n){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " ₽"; };
   var row = function(a, b){ return "<div><span>" + a + "</span><b>" + b + "</b></div>"; };
