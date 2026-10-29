@@ -14,7 +14,10 @@ var ZONES = [{n:"Зона 1 · до 2 км", r:2000, fee:150, min:800, eta:[35,5
 var STEMS = [["приморск","ленина","мира","кабалевск","маркса","вокзальн","сосновая","промышленн"], ["азина","советск","нефтяник","заречн","энтузиаст","строительн","камская","мичурин","уральская","декабрист"], ["шлюзов"]];
 // быстрые адреса — координаты из OpenStreetMap (Photon), по одному на зону
 var QUICK = [["ул. Карла Маркса, 10", 56.78119, 54.15071], ["ул. Азина, 1", 56.76663, 54.10227], ["Шлюзовая улица", 56.75616, 54.08063]];
-var FREE_FROM = 2500, OPEN = "12:00–22:30", SAUCE_P = 75, PROMO = "ПЕРВЫЙ";
+var FREE_FROM = 2500, OPEN = "12:00–22:30", SAUCE_P = 75;
+// промокоды по каналам: на сайте не показываются, гость получает код в зале или из рекламы; скидка — один раз на номер телефона
+var PROMOS = {"ПЕРВЫЙ": "карточка в зале", "ВКОНТАКТЕ": "реклама ВКонтакте"};
+var digits = function(t){ return String(t || "").replace(/\D/g, "").slice(-10); };
 var DONE = ["С кровью · rare", "Слабая · medium rare", "Средняя · medium", "Почти полная · medium well", "Полная · well done"];
 var SAUCES = ["Без соуса", "Гранатовый", "Клюквенный", "Дзадзики", "Сацебели", "Барбекю", "Сырный", "Перечный", "Мангово-медовый"];
 var MODS = {"grill-4": {done: true}, "grill-5": {}, "grill-6": {}, "grill-7": {}, "grill-9": {}, "grill-10": {}, "grill-16": {}};
@@ -29,6 +32,7 @@ var keys = function(){ return Object.keys(S.cart); };
 var sub = function(){ return keys().reduce(function(a, k){ return a + lineP(S.cart[k]) * S.cart[k].q; }, 0); };
 var count = function(){ return keys().reduce(function(a, k){ return a + S.cart[k].q; }, 0); };
 var disc = function(){ return S.promoOk ? Math.round(sub() * .1) : 0; };
+var usedPhones = function(){ return store.get("ghd_promo_phones", []); };
 var zone = function(){ return S.zone === null || S.zone === "out" ? null : ZONES[S.zone]; };
 var fee = function(){ var z = zone(); if (S.mode === "p" || !z) return 0; return sub() - disc() >= FREE_FROM ? 0 : z.fee; };
 var qtyOf = function(id){ return keys().reduce(function(a, k){ return a + (S.cart[k].id === id ? S.cart[k].q : 0); }, 0); };
@@ -67,6 +71,7 @@ function dist(a, b){ var r = Math.PI / 180, x = (b[1] - a[1]) * r * Math.cos((a[
 var map = null, guest = null, circles = [];
 function initMap(){ if (!window.L){ $("#map").hidden = true; $(".mapnote").hidden = true; return; }
   map = L.map("map", {zoomControl: false, scrollWheelZoom: false, attributionControl: true}).setView(REST, 12);
+  map.attributionControl.setPrefix('<a href="https://leafletjs.com" target="_blank" rel="noopener">Leaflet</a>');
   var esri = "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/";
   L.tileLayer(esri + "World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}", {maxZoom: 16, attribution: "Esri, HERE, Garmin, © OpenStreetMap"}).addTo(map);
   L.tileLayer(esri + "World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}", {maxZoom: 16, opacity: .8}).addTo(map);
@@ -98,7 +103,6 @@ function renderZone(){ var z = zone(), el = $("#zone");
 
 /* ---------- повтор и промокод ---------- */
 function renderAgain(){ var last = store.get("ghd_last", null), el = $("#again");
-  $("#promo").hidden = store.get("ghd_orders", 0) > 0;
   if (!last || !last.lines || !last.lines.length){ el.hidden = true; return; }
   el.hidden = false; el.innerHTML = '<span class="t">Ваш прошлый заказ</span><span class="l">' + last.lines.map(function(l){ return esc(ITEMS[l.id] ? ITEMS[l.id].name : "") + (l.q > 1 ? " × " + l.q : ""); }).join(", ") + ' · ' + ruble(last.total) + '</span><button class="btn" type="button" data-a="again">Повторить заказ</button>'; }
 function repeat(){ var last = store.get("ghd_last", null), skipped = []; if (!last) return; S.cart = {};
@@ -126,9 +130,9 @@ function renderSheet(msg){
           : '<div class="fld"><span class="l">Самовывоз</span><div class="pick">' + ADDR + ' · будет готов через 20–25 минут</div></div>')
    + '<div class="fld"><label for="f-when">' + (isD ? "Когда привезти" : "Когда забрать") + '</label><select class="inp" id="f-when"><option value="asap"' + (S.when === "asap" ? " selected" : "") + '>Как можно скорее</option>' + slots().map(function(t){ return '<option value="' + t + '"' + (S.when === t ? " selected" : "") + '>К ' + t + '</option>'; }).join("") + '</select></div>'
    + '<div class="fld"><span class="l">Оплата' + (isD ? " · только онлайн: курьер Яндекса деньги не берёт" : "") + '</span><div class="seg" role="radiogroup" aria-label="Оплата">' + (isD ? [["sbp","СБП"],["card","Картой онлайн"]] : [["sbp","СБП"],["card","Картой онлайн"],["cash","На кассе"]]).map(function(p){ return '<button type="button" role="radio" aria-checked="' + (S.pay === p[0]) + '" data-pay="' + p[0] + '">' + p[1] + '</button>'; }).join("") + '</div></div>'
-   + '<div class="fld"><label for="f-promo">Промокод</label><div class="inl"><input class="inp" id="f-promo" autocomplete="off" placeholder="' + PROMO + '" value="' + esc(S.promo) + '"><button type="button" data-a="promo">Применить</button></div>' + promoMsg + '</div>'
+   + '<div class="fld"><label for="f-promo">Промокод</label><div class="inl"><input class="inp" id="f-promo" autocomplete="off" placeholder="Если есть" value="' + esc(S.promo) + '"><button type="button" data-a="promo">Применить</button></div>' + promoMsg + '</div>'
    + '<div class="fld"><label for="f-note">Комментарий</label><textarea class="inp" id="f-note" rows="2" placeholder="Домофон, без лука…">' + esc(S.note) + '</textarea></div>'
-   + '<div class="sum"><div><span>Блюда</span><span>' + ruble(s) + '</span></div>' + (d ? '<div><span>Промокод ' + PROMO + ' · −10%</span><span class="disc">−' + ruble(d) + '</span></div>' : "")
+   + '<div class="sum"><div><span>Блюда</span><span>' + ruble(s) + '</span></div>' + (d ? '<div><span>Промокод ' + esc(S.promoCode) + ' · −10%</span><span class="disc">−' + ruble(d) + '</span></div>' : "")
    + (isD ? '<div><span>Доставка</span><span class="' + (z && !f ? "free" : "") + '">' + (!z ? "укажите адрес" : f ? ruble(f) : "бесплатно") + '</span></div>' : "") + '<div class="t"><span>Итого</span><span>' + ruble(s - d + f) + '</span></div></div>'
    + '<div class="err" id="err" role="alert"></div><button class="btn" type="button" data-a="send"' + (!ks.length || need || (isD && S.zone === "out") ? " disabled" : "") + '>' + btn + '</button><div class="note">Демо: заказ никуда не отправляется, платить не нужно.</div>';
 }
@@ -137,26 +141,29 @@ function keep(){ var g = function(i){ var e = $(i); return e ? e.value : null; }
   if ((v = g("#f-when")) !== null) S.when = v; if ((v = g("#f-note")) !== null) S.note = v; if ((v = g("#f-promo")) !== null) S.promo = v; }
 function applyPromo(){ keep(); var c = S.promo.trim().toUpperCase();
   if (!c){ S.promoOk = false; S.promoMsg = ""; }
-  else if (c !== PROMO){ S.promoOk = false; S.promoMsg = "Такого промокода нет"; }
-  else if (store.get("ghd_orders", 0) > 0){ S.promoOk = false; S.promoMsg = "Промокод действует только на первый заказ"; }
-  else { S.promoOk = true; S.promoMsg = "Скидка 10% на блюда применена"; }
+  else if (!PROMOS[c]){ S.promoOk = false; S.promoMsg = "Такого промокода нет"; }
+  else if (digits(S.tel).length < 10){ S.promoOk = false; S.promoMsg = "Сначала укажите телефон: промокод действует один раз на номер"; }
+  else if (usedPhones().indexOf(digits(S.tel)) > -1){ S.promoOk = false; S.promoMsg = "На этот номер скидка по промокоду уже была"; }
+  else { S.promoOk = true; S.promoCode = c; S.promoMsg = "Скидка 10% на блюда — первый заказ для этого номера"; }
   renderSheet(); }
 function send(){ keep(); var err = function(m){ $("#err").textContent = m; }, isD = S.mode === "d";
   if (!S.name.trim()) return err("Укажите имя");
   if (S.tel.replace(/\D/g, "").length < 10) return err("Проверьте телефон: нужно не меньше 10 цифр");
   if (isD && !zone()) return err("Укажите адрес: выберите из подсказок или нажмите на карту");
   if (isD && S.pay === "cash") S.pay = "sbp";
+  if (S.promoOk && usedPhones().indexOf(digits(S.tel)) > -1){ S.promoOk = false; S.promoMsg = "На этот номер скидка по промокоду уже была"; renderSheet(); return; }
   var z = zone() || ZONES[0], now = new Date(), eta;
   if (S.when === "asap") eta = new Date(now.getTime() + (isD ? z.eta[1] : 25) * 60000); else { eta = new Date(now); var p = S.when.split(":"); eta.setHours(+p[0], +p[1], 0, 0); }
   var lines = keys().map(function(k){ var l = S.cart[k]; return {id: l.id, q: l.q, done: l.done, sauce: l.sauce, n: ITEMS[l.id].name, m: lineMods(l), p: lineP(l)}; });
   S.order = {no: 214 + Math.floor(Math.random() * 60), mode: S.mode, name: S.name.trim(), tel: S.tel.trim(), addr: S.addr + (S.apt.trim() ? ", " + S.apt.trim() : ""), note: S.note.trim(), pay: S.pay, when: S.when, eta: eta, at: now,
-    lines: lines, sub: sub(), disc: disc(), fee: fee(), zone: z.n, promo: S.promoOk};
+    lines: lines, sub: sub(), disc: disc(), fee: fee(), zone: z.n, promo: S.promoOk ? S.promoCode : ""};
   S.order.total = S.order.sub - S.order.disc + S.order.fee; S.step = 0; S.view = "g";
   if (S.pay === "cash") return finish();
   $("#sheet").innerHTML = '<div class="sh-h"><h2 id="sh-title">Оплата</h2><button class="x" type="button" data-a="close" aria-label="Закрыть">×</button></div><div class="pay"><span>Заказ №' + S.order.no + ' · Гриль Хаус, Чайковский</span><b>' + ruble(S.order.total) + '</b><small>' + (S.pay === "sbp" ? "Система быстрых платежей: откроется приложение вашего банка" : "Банковская карта") + '</small></div>'
     + '<button class="btn" type="button" data-a="paid">Оплатить ' + ruble(S.order.total) + '</button><div class="note">Демо: деньги не списываются. В рабочей версии — платёжная страница банка или ЮKassa с чеком по 54-ФЗ.</div>'; }
 function finish(){ store.set("ghd_last", {lines: S.order.lines.map(function(l){ return {id: l.id, q: l.q, done: l.done, sauce: l.sauce}; }), total: S.order.total});
   store.set("ghd_orders", store.get("ghd_orders", 0) + 1);
+  if (S.order.promo){ var u = usedPhones(); u.push(digits(S.order.tel)); store.set("ghd_promo_phones", u); }
   $("#ovl").hidden = true; S.mod = null; document.body.style.overflow = "hidden"; $("#cartbar").hidden = true; renderDone(); $("#done").hidden = false; $("#done").scrollTop = 0; }
 
 /* ---------- после заказа ---------- */
@@ -178,7 +185,7 @@ function viewG(o){ var isD = o.mode === "d";
 var STOPLIST = ["sharing-2", "grill-16", "burgers-1", "hot-2", "desserts-3"];
 function viewR(o){ var isD = o.mode === "d";
   var b = S.step === 0 ? '<button class="btn" type="button" data-a="adv">Принять заказ</button>' : S.step === 1 ? '<button class="btn" type="button" data-a="adv">' + (isD ? "Готово — вызвать курьера Яндекса" : "Готово — можно выдавать") + '</button>' : S.step === 2 && !isD ? '<button class="btn" type="button" data-a="adv">Выдан гостю</button>' : '<button class="btn" type="button" disabled>' + (S.step === 2 ? "Курьер Яндекса везёт заказ" : "Заказ закрыт") + '</button>';
-  return '<div class="card"><div class="msg-h"><i>LK</i><div><b>LINKO · заказы</b><span>мессенджер персонала · сейчас</span></div></div><div class="bub"><h3>Заказ №' + o.no + ' · ' + (isD ? "доставка" : "самовывоз") + '</h3><div class="tags"><span class="tag' + (S.step >= 2 ? " g" : "") + '">' + ["Новый","Принят · готовим",(isD ? "У курьера Яндекса" : "Готов"),"Закрыт"][S.step] + '</span><span class="tag' + (o.pay !== "cash" ? " g" : "") + '">' + (o.pay !== "cash" ? "Оплачен онлайн" : "Оплата на кассе") + '</span><span class="tag">r_keeper ✓ на кухне</span>' + (o.promo ? '<span class="tag">Новый гость · ' + PROMO + '</span>' : "") + '</div><div class="hr"></div>' + lines(o)
+  return '<div class="card"><div class="msg-h"><i>LK</i><div><b>LINKO · заказы</b><span>мессенджер персонала · сейчас</span></div></div><div class="bub"><h3>Заказ №' + o.no + ' · ' + (isD ? "доставка" : "самовывоз") + '</h3><div class="tags"><span class="tag' + (S.step >= 2 ? " g" : "") + '">' + ["Новый","Принят · готовим",(isD ? "У курьера Яндекса" : "Готов"),"Закрыт"][S.step] + '</span><span class="tag' + (o.pay !== "cash" ? " g" : "") + '">' + (o.pay !== "cash" ? "Оплачен онлайн" : "Оплата на кассе") + '</span><span class="tag">r_keeper ✓ на кухне</span>' + (o.promo ? '<span class="tag">Новый гость · ' + esc(o.promo) + ' · ' + PROMOS[o.promo] + '</span>' : "") + '</div><div class="hr"></div>' + lines(o)
    + '<div class="hr"></div>' + (o.disc ? '<div class="l"><span>Промокод −10%</span><span>−' + ruble(o.disc) + '</span></div>' : "") + (o.fee ? '<div class="l"><span>Доставка · ' + esc(o.zone) + '</span><span>' + ruble(o.fee) + '</span></div>' : "") + '<div class="l"><b>Итого</b><b>' + ruble(o.total) + '</b></div><div class="hr"></div>'
    + '<div class="l"><span class="k">Гость</span><span>' + esc(o.name) + ' · ' + esc(o.tel) + '</span></div>' + (isD ? '<div class="l"><span class="k">Адрес</span><span>' + esc(o.addr) + '</span></div>' : "")
    + '<div class="l"><span class="k">Время</span><span>' + (o.when === "asap" ? "как можно скорее · около " + hhmm(o.eta) : "к " + hhmm(o.eta)) + '</span></div><div class="l"><span class="k">Оплата</span><span>' + PAYN[o.pay] + '</span></div>' + (o.note ? '<div class="l"><span class="k">Комментарий</span><span>' + esc(o.note) + '</span></div>' : "")
@@ -189,8 +196,8 @@ function viewC(o){ var st = ["Курьер будет вызван, когда �
   return '<div class="card"><div class="msg-h"><i>ЯД</i><div><b>Яндекс Доставка · заказ №' + o.no + '</b><span>' + st + '</span></div></div><div class="bub"><span class="k">Откуда</span><div>Гриль Хаус · ' + ADDR + '</div><span class="k">Куда</span><div class="addr-big">' + esc(o.addr) + '</div><span class="k">Получатель</span><div>' + esc(o.name) + ' · ' + esc(o.tel) + '</div>' + (o.note ? '<span class="k">Комментарий курьеру</span><div>' + esc(o.note) + '</div>' : "")
    + '<div class="cash"><span>Оплачено онлайн — курьер деньги не берёт</span><b>0 ₽</b></div><div class="l"><span class="k">Доставка</span><span>' + (o.fee ? ruble(o.fee) : "бесплатно для гостя") + ' · по тарифу Яндекса</span></div></div><div class="bt">' + b + '</div></div>'; }
 function viewO(){ var rev = 112640, n = 64;
-  return '<div class="card"><div class="msg-h"><i>LK</i><div><b>LINKO · отчёт по доставке</b><span>понедельник, 09:00 · пример, цифры условные</span></div></div><div class="kp"><div><span>Заказов</span><b>' + n + '</b></div><div><span>Выручка</span><b>' + ruble(rev) + '</b></div><div><span>Средний чек</span><b>' + ruble(rev / n) + '</b></div><div><span>Повторные заказы</span><b>38%</b></div><div><span>Новые гости по ' + PROMO + '</span><b>9</b></div><div><span>Отзывов после доставки</span><b>7</b></div></div>'
-   + '<div class="bub" style="margin-top:12px"><span class="k">Топ блюд</span><div class="l"><span>Мясное плато</span><span>14</span></div><div class="l"><span>Классический бургер</span><span>11</span></div><div class="l"><span>Свиные рёбра гриль</span><span>9</span></div><div class="hr"></div><span class="k">Зоны</span><div class="l"><span>Зона 1 · до 2 км</span><span>58%</span></div><div class="l"><span>Зона 2 · до 4 км</span><span>31%</span></div><div class="l"><span>Зона 3 · до 7 км</span><span>11%</span></div></div>'
+  return '<div class="card"><div class="msg-h"><i>LK</i><div><b>LINKO · отчёт по доставке</b><span>понедельник, 09:00 · пример, цифры условные</span></div></div><div class="kp"><div><span>Заказов</span><b>' + n + '</b></div><div><span>Выручка</span><b>' + ruble(rev) + '</b></div><div><span>Средний чек</span><b>' + ruble(rev / n) + '</b></div><div><span>Повторные заказы</span><b>38%</b></div><div><span>Новые гости по промокодам</span><b>9</b></div><div><span>Отзывов после доставки</span><b>7</b></div></div>'
+   + '<div class="bub" style="margin-top:12px"><span class="k">Топ блюд</span><div class="l"><span>Мясное плато</span><span>14</span></div><div class="l"><span>Классический бургер</span><span>11</span></div><div class="l"><span>Свиные рёбра гриль</span><span>9</span></div><div class="hr"></div><span class="k">Откуда новые гости</span><div class="l"><span>ПЕРВЫЙ · карточка в зале</span><span>6</span></div><div class="l"><span>ВКОНТАКТЕ · реклама ВКонтакте</span><span>3</span></div><div class="hr"></div><span class="k">Зоны</span><div class="l"><span>Зона 1 · до 2 км</span><span>58%</span></div><div class="l"><span>Зона 2 · до 4 км</span><span>31%</span></div><div class="l"><span>Зона 3 · до 7 км</span><span>11%</span></div></div>'
    + '<div class="vs"><div class="a"><span>Комиссия агрегатора 29,17% составила бы</span><b>' + ruble(rev * .2917) + '</b></div><div class="b"><span>LINKO, 2% с заказов</span><b>' + ruble(rev * .02) + '</b></div></div></div>'; }
 function renderDone(){ var o = S.order, isD = o.mode === "d", caps = {g: "Так заказ видит гость: сообщения, статус, отзыв", r: "Так заказ приходит персоналу: в мессенджер и в кассу r_keeper", c: "Так заказ уходит в Яндекс Доставку: курьер вызывается одной кнопкой", o: "Так выглядит отчёт по доставке каждый понедельник"};
   var title = (isD ? ["принят","готовится","в пути","доставлен"] : ["принят","готовится","готов","выдан"])[S.step];
@@ -201,7 +208,7 @@ function renderDone(){ var o = S.order, isD = o.mode === "d", caps = {g: "Так
 function advance(){ if (S.step < 3){ S.step++; renderDone(); } if (S.step >= 3) stop(); }
 function stop(){ if (S.timer){ clearInterval(S.timer); S.timer = null; renderDone(); } }
 function play(){ if (S.timer) return stop(); S.view = "g"; S.step = 0; S.timer = setInterval(advance, 2300); renderDone(); }
-function newOrder(){ stop(); S.cart = {}; S.step = 0; S.order = null; S.promo = ""; S.promoOk = false; S.promoMsg = ""; S.fbOpen = S.fbSent = false;
+function newOrder(){ stop(); S.cart = {}; S.step = 0; S.order = null; S.promo = ""; S.promoOk = false; S.promoMsg = ""; S.promoCode = ""; S.fbOpen = S.fbSent = false;
   $("#done").hidden = true; document.body.style.overflow = ""; renderMenu(); renderAgain(); renderCartBar(); scrollTo(0, 0); }
 
 /* ---------- события ---------- */
@@ -225,7 +232,7 @@ document.addEventListener("click", function(e){
   else if (a === "new") newOrder();
   else if (a === "fbopen"){ S.fbOpen = true; renderDone(); var f = $("#fb"); if (f) f.focus(); }
   else if (a === "fbsend"){ S.fbSent = true; renderDone(); }
-  else if (a === "reset"){ try { localStorage.removeItem("ghd_last"); localStorage.removeItem("ghd_orders"); } catch (x){} renderAgain(); }
+  else if (a === "reset"){ try { localStorage.removeItem("ghd_last"); localStorage.removeItem("ghd_orders"); localStorage.removeItem("ghd_promo_phones"); } catch (x){} renderAgain(); }
   else if (t.dataset.pay){ keep(); S.pay = t.dataset.pay; renderSheet(); }
   else if (t.dataset.v){ S.view = t.dataset.v; renderDone(); }
   else if (t.dataset.sug !== undefined){ var r = S.sugs[+t.dataset.sug]; setGeo(r.ll, r.t); }
