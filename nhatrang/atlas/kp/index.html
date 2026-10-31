@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#F4EFE7">
+<meta name="robots" content="noindex">
+<title>Atlas Café: электронное меню и заказы</title>
+<meta property="og:title" content="Предложение для Atlas Café">
+<meta property="og:description" content="Электронное меню с заказом со стола, бронь и отзывы. Бесплатный тест 7 дней.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap&subset=cyrillic,vietnamese">
+<style>
+:root{
+  --ground:#F4EFE7; --paper:#FCFAF6; --ink:#1E1B17; --ink-soft:#5A5148; --ink-faint:#8D8478;
+  --gold:#22201C; --gold-soft:#E9E2D6; --line:#E3DBCE; --on:#FFFFFF;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--ground);color:var(--ink);font-family:Manrope,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:15.5px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+.wrap{max-width:920px;margin:0 auto;padding-inline:20px}
+h1,h2,h3{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;margin:0;text-wrap:balance}
+.eyebrow{font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);font-weight:700;margin:0 0 12px}
+a{color:var(--gold)}
+.hero{padding-block:120px 56px;background:
+  linear-gradient(180deg,color-mix(in srgb,var(--ground) 55%,transparent) 0%,color-mix(in srgb,var(--ground) 86%,transparent) 50%,var(--ground) 100%),
+  url(img/hero.jpg) center 40%/cover no-repeat}
+.hero h1{font-size:clamp(38px,8vw,64px);line-height:1.05;max-width:15ch}
+.hero p.lead{color:var(--ink-soft);font-size:17px;max-width:46ch;margin:18px 0 0}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 20px;border-radius:999px;font-weight:700;font-size:14px;text-decoration:none;border:1px solid var(--gold)}
+.btn-main{background:var(--gold);color:var(--on)}
+.btn-alt{color:var(--gold)}
+.btn:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+section{padding-block:56px;border-top:1px solid var(--line)}
+section h2{font-size:clamp(28px,5vw,40px);line-height:1.1;margin-bottom:22px}
+.muted{color:var(--ink-soft)}
+.seen{display:grid;grid-template-columns:1fr;gap:12px;margin:0;padding:0}
+.seen li{list-style:none;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.seen b{font-weight:700}
+.seen span{display:block;color:var(--ink-soft);font-size:14.5px;margin-top:4px}
+.demo{display:grid;grid-template-columns:1fr;gap:20px;align-items:center}
+.phone{position:relative;width:330px;max-width:100%;height:680px;margin:0 auto;padding:12px;border-radius:56px;background:linear-gradient(145deg,#4a4a4f,#1c1c1f 35%,#2b2b30 65%,#58585e);box-shadow:0 40px 80px rgba(0,0,0,.45),0 0 0 1px rgba(255,255,255,.08),inset 0 0 2px rgba(255,255,255,.35)}
+.phone::before{content:"";position:absolute;left:-3px;top:150px;width:3px;height:64px;border-radius:2px 0 0 2px;background:#3a3a3f;box-shadow:0 84px 0 #3a3a3f}
+.phone::after{content:"";position:absolute;right:-3px;top:190px;width:3px;height:96px;border-radius:0 2px 2px 0;background:#3a3a3f}
+.scr{position:relative;width:100%;height:100%;border-radius:44px;overflow:hidden;background:#000;box-shadow:0 0 0 2px #000}
+.scr iframe{position:absolute;left:0;right:0;top:34px;bottom:0;width:100%;height:calc(100% - 34px);border:0;display:block;background:#fff}
+.sbar{position:absolute;left:0;right:0;top:0;height:34px;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:0 26px 0 30px;color:#fff;font:600 12.5px -apple-system,"Segoe UI",sans-serif;background:#000}
+.sbar i{font-style:normal;letter-spacing:.02em}.sbar b{display:flex;gap:5px;align-items:center}
+.sbar .bat{width:22px;height:11px;border:1.5px solid rgba(255,255,255,.85);border-radius:3px;position:relative}.sbar .bat::after{content:"";position:absolute;inset:1.5px;right:5px;background:#fff;border-radius:1px}
+.sbar .sig{width:16px;height:10px;background:linear-gradient(90deg,#fff 0 3px,transparent 3px 4.3px,#fff 4.3px 7.3px,transparent 7.3px 8.6px,#fff 8.6px 11.6px,transparent 11.6px 12.9px,#fff 12.9px);clip-path:polygon(0 100%,100% 0,100% 100%)}
+.isl{position:absolute;left:50%;top:9px;transform:translateX(-50%);width:96px;height:26px;border-radius:20px;background:#000;z-index:3;box-shadow:inset 0 0 0 1px #111}
+.isl::after{content:"";position:absolute;right:16px;top:8px;width:10px;height:10px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#2e3a55,#05070c 70%)}
+.shots{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.shots img{border-radius:10px;aspect-ratio:4/3;object-fit:cover;width:100%}
+.flow{counter-reset:s;display:grid;margin:0;padding:0}
+.flow li{list-style:none;counter-increment:s;display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--line)}
+.flow li:last-child{border-bottom:0}
+.flow li::before{content:counter(s);flex:0 0 30px;height:30px;border-radius:50%;border:1px solid var(--gold);color:var(--gold);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px}
+.plans{display:grid;grid-template-columns:1fr;gap:16px}
+.plan{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:24px 22px;display:flex;flex-direction:column;gap:14px}
+.plan.best{border-color:var(--gold);background:linear-gradient(180deg,var(--gold-soft),var(--paper) 60%)}
+.plan h3{font-size:26px}
+.tag{align-self:flex-start;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--on);background:var(--gold);padding:4px 10px;border-radius:999px}
+.price{font-family:"Cormorant Garamond",Georgia,serif;font-size:34px;font-weight:600;color:var(--gold);line-height:1;font-variant-numeric:tabular-nums}
+.price small{display:block;font-family:Manrope,sans-serif;font-size:13px;color:var(--ink-soft);font-weight:500;margin-top:8px}
+.plan ul{margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.plan li{list-style:none;padding-left:22px;position:relative;font-size:14.5px}
+.plan li::before{content:"";position:absolute;left:2px;top:.62em;width:10px;height:1px;background:var(--gold)}
+.extras{display:grid;grid-template-columns:1fr}
+.extra{padding:14px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:1fr auto;column-gap:16px;align-items:start}
+.extra .ep{font-style:normal;font-weight:700;color:var(--gold);white-space:nowrap;grid-row:span 2}
+.extra b{font-weight:600}
+.extra span{color:var(--ink-soft);font-size:14px;display:block}
+.foot{padding-block:56px 70px;border-top:1px solid var(--line);text-align:center}
+.foot h2{font-size:clamp(28px,5vw,40px);margin-bottom:10px}
+.foot .cta{justify-content:center}
+.note{color:var(--ink-faint);font-size:12.5px;margin-top:22px}
+@media (min-width:720px){
+  .seen{grid-template-columns:1fr 1fr}
+  .demo{grid-template-columns:1.1fr 1fr}
+  .plans{grid-template-columns:repeat(3,1fr)}
+  .plans.two{grid-template-columns:repeat(2,1fr)}
+  .plans.one{grid-template-columns:minmax(0,520px)}
+  .extras{grid-template-columns:1fr 1fr;column-gap:40px}
+}
+@media print{html,body{-webkit-print-color-adjust:exact;print-color-adjust:exact}section.nfc{break-before:page;break-inside:avoid}section.keep{break-inside:avoid}.phone{break-inside:avoid}.plan,.extra,.seen li,tr{break-inside:avoid}h2,.eyebrow{break-after:avoid}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Предложение для Atlas Café · Нячанг</p>
+    <h1>Бранч без ожидания официанта</h1>
+    <p class="lead">Гость открывает меню по QR на своём языке, собирает бранч и кофе с телефона, а официант получает заказ в Telegram с номером стола.</p>
+    <div class="cta">
+      <a class="btn btn-main" href="https://nhatrang-menus.pages.dev/nfc-card/atlas/?t=3">Открыть демо вашего меню</a>
+      <a class="btn btn-alt" href="https://t.me/andrey_vit">Написать в Telegram</a>
+    </div>
+  </div>
+</header>
+<main>
+<section><div class="wrap">
+  <p class="eyebrow">Что я заметил</p>
+  <h2>Где можно заработать больше</h2>
+  <ul class="seen"><li><b>4,8 из 1 776 отзывов</b><span>Одна из лучших оценок в Нячанге. Гостей много, а в отзывах пишут, что в обед ожидание около 30 минут — заказ с телефона экономит время официантам.</span></li><li><b>Меню на Картах только на английском</b><span>Описания блюд на английском. В QR-меню они на русском, вьетнамском, корейском и китайском.</span></li><li><b>Выбор внутри блюда</b><span>Лосось или бекон, курица или креветки, пюре или овощи — в электронном меню гость сразу пишет выбор в заказе.</span></li><li><b>Много постоянных гостей</b><span>После визита меню мягко предлагает оставить отзыв на Google Картах, а для своих можно подключить карту лояльности.</span></li></ul>
+</div></section>
+<section><div class="wrap demo">
+  <div>
+    <p class="eyebrow">Уже готово</p>
+    <h2>Ваше меню в электронном виде</h2>
+    <p class="muted">Так гость видит вашу страницу, когда сканирует QR на столе: меню и заказ, Wi-Fi, вызов официанта, отзыв, игры. Меню на ваших блюдах и ценах, на русском, английском, вьетнамском, корейском и китайском. Попробуйте прямо здесь: нажмите «Меню и заказ», добавьте пару блюд и отправьте заказ.</p>
+    <p><a class="btn btn-alt" href="https://nhatrang-menus.pages.dev/nfc-card/atlas/?t=3">Открыть демо</a></p>
+  </div>
+  <div class="phone"><div class="scr"><div class="sbar"><i>9:41</i><b><span class="sig"></span><span class="bat"></span></b></div><div class="isl"></div><iframe src="https://nhatrang-menus.pages.dev/nfc-card/atlas/?t=3" title="Страница заведения" loading="lazy"></iframe></div></div>
+</div></section>
+<section><div class="wrap">
+  <p class="eyebrow">Как это работает</p>
+  <h2>Для гостя и для персонала</h2>
+  <ol class="flow">
+    <li>На каждом столе QR-код со своим номером стола.</li>
+    <li>Гость открывает меню в браузере, без приложения: фото, описания, цены и сумма заказа на его языке.</li>
+    <li>Заказ сразу приходит в Telegram-чат персонала на русском: список блюд, номер стола, сумма.</li>
+    <li>Цены и стоп-лист меняются в одном месте и сразу обновляются в меню на всех столах.</li>
+  </ol>
+</div></section>
+<section><div class="wrap">
+  <p class="eyebrow">Пакеты</p>
+  <h2>Что можно подключить</h2>
+  <div class="plans"><div class="plan"><h3>Старт</h3><div class="price">$170<small>разово · затем $15 в месяц</small></div><ul><li>Меню на 5 языках с фото и ценами</li><li>Заказ со стола официанту в Telegram</li><li>QR на каждый стол с номером</li><li>Страница заведения по QR: Wi-Fi, официант, отзыв, игры, соцсети</li><li>Обновление цен по вашему запросу</li></ul></div><div class="plan best"><span class=tag>Рекомендую</span><h3>Стандарт</h3><div class="price">$250<small>разово · затем $30 в месяц</small></div><ul><li>Всё из пакета «Старт»</li><li>Бот для брони стола: дата, время, гости</li><li>Подсказки к блюдам: напиток, десерт</li><li>Отчёт раз в неделю по заказам</li></ul></div><div class="plan"><h3>Плюс</h3><div class="price">от $320<small>разово · затем от $40 в месяц</small></div><ul><li>Всё из пакета «Стандарт»</li><li>Заказ навынос и доставка напрямую</li><li>Сбор отзывов на Google Картах</li></ul></div></div>
+  <div class="muted" style="margin:22px 0 0;display:grid;gap:8px"><p style="margin:0">Страница заведения по QR входит в каждый пакет: <a href="https://nhatrang-menus.pages.dev/nfc-card/atlas/?t=3">посмотреть вашу страницу</a>.</p><p style="margin:0"><b>Сайт заведения:</b> мини-сайт от $170, полный сайт с анимацией от $700. У вас пока нет сайта: на Google Картах вместо сайта ссылка на Instagram. <a href="https://nhatrang-menus.pages.dev/minisites/atlas/">Ваш мини-сайт (пример)</a> · <a href="https://nhatrang-menus.pages.dev/demo-site/">Пример полного сайта</a>.</p></div>
+</div></section>
+</main>
+<footer class="foot"><div class="wrap">
+  <p class="eyebrow">Без риска</p>
+  <h2>7 дней бесплатно</h2>
+  <p class="muted">Подключаю меню и заказы на неделю. Если не подойдёт, ничего не платите.</p>
+  <div class="cta">
+    <a class="btn btn-main" href="https://t.me/andrey_vit">Telegram: @andrey_vit</a>
+    <a class="btn btn-alt" href="https://nhatrang-menus.pages.dev/nfc-card/atlas/?t=3">Демо меню</a>
+  </div>
+  <p class="note">Блюда, цены и фото взяты из открытых данных ресторана на Google Картах для демонстрации.</p>
+</div></footer>
+</body>
+</html>
