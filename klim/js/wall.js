@@ -235,7 +235,8 @@ addEventListener("resize", size); size();
 let run = false, last = performance.now(), time = 0;
 function frame(now) {
   const dt = Math.min(.05, (now - last) / 1000); last = now; time += dt;
-  const r = hall.getBoundingClientRect(), p = cl(-r.top / (r.height - innerHeight));
+  // 3D идёт первую треть прокрутки (до подлёта к узлу), дальше сцену сменяют реальные кадры
+  const r = hall.getBoundingClientRect(), pr = cl(-r.top / (r.height - innerHeight)), p = Math.min(1, pr / .34 * .62);
 
   camAt(p);
   const sway = 1 - ss(.62, .7, p) * (1 - ss(.82, .88, p));
@@ -267,12 +268,12 @@ function frame(now) {
   for (let i = 0; i < DN; i++) { dp[i * 3 + 1] += dv[i] * dt; dp[i * 3] += Math.sin(time * .3 + i) * dt * .02; if (dp[i * 3 + 1] > 3) dp[i * 3 + 1] = 0; }
   dg.attributes.position.needsUpdate = true;
 
-  caps.forEach((c, i) => { const [a, b, e, f] = wins[i], v = (a === b ? 1 : ss(a, b, p)) * (1 - ss(e, f, p));
+  caps.forEach((c, i) => { const [a, b, e, f] = wins[i], v = (a === b ? 1 : ss(a, b, pr)) * (1 - ss(e, f, pr));
     c.style.opacity = v.toFixed(3); c.style.transform = `translateY(${((1 - v) * 24).toFixed(1)}px)`; c.style.visibility = v < .01 ? "hidden" : ""; });
-  hint.style.opacity = (1 - ss(0, .03, p)).toFixed(3);
-  fade.style.opacity = ss(.96, 1, p).toFixed(3);
+  hint.style.opacity = (1 - ss(0, .02, pr)).toFixed(3);
+  fade.style.opacity = ss(.97, 1, pr).toFixed(3);
 
-  R.render(S, cam);
+  if (pr < .36) R.render(S, cam);
   if (run) requestAnimationFrame(frame);
 }
 new IntersectionObserver((e) => { const v = e[0].isIntersecting; if (v && !run) { run = true; last = performance.now(); requestAnimationFrame(frame); } run = v; }).observe(hall);
