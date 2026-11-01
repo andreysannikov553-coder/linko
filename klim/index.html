@@ -62,7 +62,7 @@ em{font-style:italic;color:var(--hot-2)}
 .menu .mono{margin-top:28px;font-size:14px}
 
 /* 1. сцена «за стеной» */
-.hall{position:relative;height:960vh;background:var(--bg)}
+.hall{position:relative;height:720vh;background:var(--bg)}
 .hall-pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:#0b0c0e url(img/hero.webp) center/cover}
 .hall-pin::before{content:"";position:absolute;inset:0;background:rgba(11,12,14,.82)}
 .gl-on .hall-pin{background:var(--bg)}.gl-on .hall-pin::before{display:none}
@@ -77,16 +77,9 @@ em{font-style:italic;color:var(--hot-2)}
 .hint{position:absolute;left:50%;bottom:28px;translate:-50% 0;display:flex;flex-direction:column;align-items:center;gap:10px;font-family:var(--mono);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
 .hint i{width:1px;height:44px;background:linear-gradient(var(--hot),transparent);animation:drop 2s var(--ease) infinite;transform-origin:top}
 @keyframes drop{0%{transform:scaleY(0)}60%{transform:scaleY(1);opacity:1}100%{transform:scaleY(1);opacity:0}}
-.real{position:absolute;inset:0;opacity:0;pointer-events:none;background:var(--bg)}
-.real__bg{position:absolute;inset:-6%;width:112%;height:112%;filter:blur(30px) brightness(.36) saturate(1.15)}
-.real__panel{position:absolute;right:max(20px,calc((100% - 1200px)/2));top:50%;height:min(82vh,860px);aspect-ratio:4/5;max-width:calc(100% - 40px);translate:0 -50%;border-radius:6px;overflow:hidden;box-shadow:0 40px 120px rgba(0,0,0,.65),inset 0 0 0 1px var(--line-2);transform-origin:50% 60%}
-.real__panel canvas{width:100%;height:100%;display:block}
-.real__tag{position:absolute;left:14px;top:14px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#e9e3d9;background:rgba(11,12,14,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid var(--line-2);border-radius:999px;padding:6px 11px}
-@media (max-width:900px){.real__panel{inset:0;height:auto;aspect-ratio:auto;max-width:none;translate:none;border-radius:0;box-shadow:none}.real__tag{top:auto;bottom:calc(46vh);left:20px}}
-@media (min-width:901px){.cap{max-width:min(540px,calc(100% - 40px))}}
 .hall-fade{position:absolute;inset:0;background:var(--bg);opacity:0;pointer-events:none}
 .nogl .hall{display:none}
-@media (max-width:760px){.hall{height:860vh}.cap{bottom:max(10vh,70px)}.hall-v{background:linear-gradient(0deg,rgba(11,12,14,.92),rgba(11,12,14,.3) 55%,transparent)}}
+@media (max-width:760px){.hall{height:620vh}.cap{bottom:max(10vh,70px)}.hall-v{background:linear-gradient(0deg,rgba(11,12,14,.92),rgba(11,12,14,.3) 55%,transparent)}}
 
 /* 2. представление */
 .intro{padding-block:clamp(110px,13vw,170px) clamp(70px,9vw,120px)}
@@ -276,20 +269,13 @@ em{font-style:italic;color:var(--hot-2)}
 <main id="top">
 <section class="hall" id="hall" aria-label="Ванная комната: плитка снимается и открывает разводку за стеной">
   <div class="hall-pin">
-    <canvas id="wall-c" aria-hidden="true"></canvas>
-    <div class="real" id="real" aria-hidden="true">
-      <canvas class="real__bg" id="realBg" width="36" height="45"></canvas>
-      <div class="real__panel" id="realPanel"><canvas id="realC"></canvas><span class="real__tag">реальная съёмка · объекты Клима</span></div>
-    </div>
-    <div class="hall-v"></div>
-    <div class="cap c0" data-w="0,0,.035,.06"><span class="kick">Клим Колегов · сантехник · Москва</span><h2>Красивая ванная — <em>это то, что видно</em></h2><p>Листайте: снимем плитку и посмотрим, что под ней.</p></div>
-    <div class="cap" data-w=".08,.1,.15,.17"><span class="kick">Черновой монтаж</span><h2>Всё главное <em>спрятано за стеной</em></h2></div>
-    <div class="cap" data-w=".19,.21,.26,.28"><span class="kick">Разводка</span><h2>Каждая труба <em>на своём месте</em></h2><span class="mono">трубы в изоляции · маркировка ХВС / ГВС</span></div>
-    <div class="cap" data-w=".33,.35,.45,.47"><span class="kick">Реальные кадры</span><h2>Узел собирается <em>на глазах</em></h2><span class="mono">от пустой панели до готового узла</span></div>
-    <div class="cap" data-w=".51,.53,.6,.63"><span class="kick">Коллекторный узел</span><h2>Собран <em>как часы</em></h2><span class="mono">нержавейка · пресс-фитинги · фильтры</span></div>
-    <div class="cap" data-w=".66,.68,.76,.79"><span class="kick">Подключение</span><h2>У каждого выхода — <em>своя линия</em></h2><span class="mono">трубы в изоляции · ХВС / ГВС</span></div>
-    <div class="cap" data-w=".81,.83,.87,.89"><span class="kick">Опрессовка</span><h2>Давление <em>держится</em></h2><span class="mono">проверка до закрытия стен</span></div>
-    <div class="cap" data-w=".91,.93,1,1"><span class="kick">Готово</span><h2>Теперь стену <em>можно закрывать</em></h2></div>
+    <canvas id="wall-c" aria-hidden="true"></canvas><div class="hall-v"></div>
+    <div class="cap c0" data-w="0,0,.07,.12"><span class="kick">Клим Колегов · сантехник · Москва</span><h2>Красивая ванная — <em>это то, что видно</em></h2><p>Листайте: снимем плитку и посмотрим, что под ней.</p></div>
+    <div class="cap" data-w=".19,.23,.31,.35"><span class="kick">Черновой монтаж</span><h2>Всё главное <em>спрятано за стеной</em></h2></div>
+    <div class="cap" data-w=".39,.43,.53,.57"><span class="kick">Разводка</span><h2>Каждая труба <em>на своём месте</em></h2><span class="mono">трубы в изоляции · маркировка ХВС / ГВС</span></div>
+    <div class="cap" data-w=".59,.62,.67,.7"><span class="kick">Коллекторный узел</span><h2>Узел, собранный <em>как часы</em></h2><span class="mono">нержавейка · пресс-фитинги · Neptun</span></div>
+    <div class="cap" data-w=".71,.74,.82,.85"><span class="kick">Опрессовка</span><h2><span class="bar-num">0,0</span> бар. <em>Давление держится</em></h2></div>
+    <div class="cap" data-w=".89,.92,1,1"><span class="kick">Готово</span><h2>Теперь стену <em>можно закрывать</em></h2></div>
     <div class="hint"><span>Листайте</span><i></i></div>
     <div class="hall-fade"></div>
   </div>
@@ -548,40 +534,6 @@ em{font-style:italic;color:var(--hot-2)}
     let act = 0; stepEls.forEach((s, i) => { if (s.getBoundingClientRect().top < vh * .55) act = i; }); setStep(act);
   };
   addEventListener('scroll', onScroll, { passive: true }); onScroll();
-
-
-  // реальные кадры на первом экране: сборка узла, трубы, манометр, ниша
-  (() => {
-    const real = $('#real'), cv = $('#realC'), g = cv.getContext('2d'), bg = $('#realBg').getContext('2d'), panel = $('#realPanel');
-    const ss = (a, b, x) => { x = cl((x - a) / (b - a)); return x * x * (3 - 2 * x); };
-    const N = 214, imgs = new Array(N), ok = new Uint8Array(N);
-    // кадр -> участок прокрутки: сцены из frames/index.json
-    const MAP = [[.31, .64, 0, 144], [.64, .8, 145, 199], [.8, .88, 200, 205], [.88, 1, 206, 213]];
-    const load = (i) => { if (imgs[i]) return; const im = new Image(); im.decoding = 'async'; im.onload = () => { ok[i] = 1; if (i === want) draw(); }; im.src = `frames/${String(i).padStart(4, '0')}.webp`; imgs[i] = im; };
-    // сначала каждый 8-й кадр, потом гуще: прокрутка работает сразу, плавность догружается
-    const order = []; [8, 4, 2, 1].forEach((st) => { for (let i = 0; i < N; i += st) if (!order.includes(i)) order.push(i); });
-    let qi = 0; const pump = () => { for (let k = 0; k < 6 && qi < order.length; k++) load(order[qi++]); if (qi < order.length) setTimeout(pump, 120); };
-    addEventListener('load', () => setTimeout(pump, 300)); setTimeout(pump, 2500);
-    let want = 0, shown = -1, W = 0, H = 0;
-    const size = () => { const r = panel.getBoundingClientRect(), d = Math.min(devicePixelRatio || 1, 2); W = cv.width = Math.round(r.width * d); H = cv.height = Math.round(r.height * d); shown = -1; draw(); };
-    function nearest(i) { for (let k = 0; k < N; k++) { if (i - k >= 0 && ok[i - k]) return i - k; if (i + k < N && ok[i + k]) return i + k; } return -1; }
-    function draw() {
-      const i = nearest(want); if (i < 0 || i === shown || !W) return; shown = i;
-      const im = imgs[i], s = Math.max(W / im.naturalWidth, H / im.naturalHeight), w = im.naturalWidth * s, h = im.naturalHeight * s;
-      g.drawImage(im, (W - w) / 2, (H - h) * .35, w, h); bg.drawImage(im, 0, 0, 36, 45);
-    }
-    addEventListener('resize', size); size();
-    const tick = () => {
-      const r = hall.getBoundingClientRect(), pr = cl(-r.top / (r.height - innerHeight));
-      const vis = ss(.28, .33, pr); real.style.opacity = vis.toFixed(3); real.style.visibility = vis < .01 ? 'hidden' : '';
-      if (vis > 0) {
-        let f = 0; for (const [a, b, s0, s1] of MAP) { if (pr >= a) f = s0 + Math.round((s1 - s0) * cl((pr - a) / (b - a))); }
-        if (pr < .31) f = 0; want = f; draw();
-        panel.style.transform = `scale(${(1 + .06 * ss(.8, .88, pr) - .04 * ss(.9, 1, pr)).toFixed(4)})`;
-      }
-    };
-    addEventListener('scroll', tick, { passive: true }); tick();
-  })();
 
   // превью объекта под курсором
   if (matchMedia('(hover:hover) and (pointer:fine)').matches) {
