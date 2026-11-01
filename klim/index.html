@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Клим Колегов · Монтаж сантехники в Москве</title>
+<meta name="description" content="Инженерная сантехника в квартирах Москвы: узлы водоснабжения, разводка, инсталляции, отопление, канализация, защита от протечек. ЖК Лаврушинский, Верди, Бунинские кварталы.">
+<meta property="og:title" content="Клим Колегов · Монтаж сантехники в Москве">
+<meta property="og:description" content="Всё главное спрятано за стеной. Звонки и Telegram: 8 (922) 33-88-217">
+<meta property="og:image" content="img/hero.webp">
+<meta name="theme-color" content="#0b0c0e">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Концепция: «что спрятано за стеной». Две температуры воды — два акцента: медь (ГВС) и сталь (ХВС). */
+:root{
+  --bg:#0b0c0e; --bg-2:#111215; --bg-3:#17191d; --line:rgba(236,231,223,.09); --line-2:rgba(236,231,223,.18);
+  --text:#ece7df; --muted:#8f8c87; --hot:#e0894a; --hot-2:#f3b37f; --cold:#7fb3e6;
+  --serif:"Cormorant Garamond","Times New Roman",serif; --sans:"Golos Text",system-ui,-apple-system,sans-serif; --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --ease:cubic-bezier(.22,1,.36,1); color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;overflow-x:clip}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:17px;line-height:1.6;overflow-x:clip;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit}
+::selection{background:var(--hot);color:#140d07}
+:focus-visible{outline:2px solid var(--hot-2);outline-offset:3px;border-radius:6px}
+.wrap{width:min(1240px,100%);margin-inline:auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.kick{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--hot)}
+h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.02;letter-spacing:-.01em;text-wrap:balance}
+h2{font-size:clamp(40px,5.6vw,80px);margin-top:16px}
+em{font-style:italic;color:var(--hot-2)}
+.lead{color:var(--muted);font-size:clamp(16px,1.3vw,18px);max-width:52ch}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--muted)}
+.sec{padding-block:clamp(90px,12vw,160px)}
+.sec__head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap;margin-bottom:clamp(44px,6vw,80px)}
+.sec__head>*{min-width:0}
+
+/* шапка */
+.header{position:fixed;inset:0 0 auto;z-index:50;padding-top:env(safe-area-inset-top,0px);transition:background .4s,transform .5s var(--ease)}
+.header.solid{background:rgba(11,12,14,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.header.hide{transform:translateY(-100%)}
+.header__in{display:flex;align-items:center;justify-content:space-between;height:70px;gap:20px}
+.logo{font-family:var(--serif);font-size:24px;display:flex;align-items:center;gap:12px;white-space:nowrap}
+.logo b{font-weight:500}.logo i{font-style:italic;color:var(--hot-2)}
+.logo svg{width:22px;height:22px;flex:none}
+.nav{display:flex;gap:30px;font-size:14px;color:var(--muted)}
+.nav a{transition:color .3s}.nav a:hover{color:var(--text)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:15px 26px;border-radius:999px;font-weight:500;font-size:15px;border:1px solid transparent;transition:background .35s,border-color .35s,color .35s;cursor:pointer;white-space:nowrap}
+.btn--hot{background:var(--hot);color:#160d06}.btn--hot:hover{background:var(--hot-2)}
+.btn--line{border-color:var(--line-2)}.btn--line:hover{border-color:var(--text)}
+.btn svg{width:18px;height:18px}
+.header .btn{padding:11px 20px;font-size:14px}
+.burger{display:none;background:none;border:1px solid var(--line-2);border-radius:999px;padding:9px 16px;font-size:14px;cursor:pointer}
+@media (max-width:900px){.nav,.header .btn{display:none}.burger{display:block}}
+.menu{position:fixed;inset:0;z-index:45;background:var(--bg);display:flex;flex-direction:column;justify-content:center;gap:6px;padding:0 max(24px,env(safe-area-inset-left,0px));opacity:0;pointer-events:none;transition:opacity .4s}
+.menu.open{opacity:1;pointer-events:auto}
+.menu a{font-family:var(--serif);font-size:42px}
+.menu .mono{margin-top:28px;font-size:14px}
+
+/* 1. сцена «за стеной» */
+.hall{position:relative;height:720vh;background:var(--bg)}
+.hall-pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:#0b0c0e url(img/hero.webp) center/cover}
+.hall-pin::before{content:"";position:absolute;inset:0;background:rgba(11,12,14,.82)}
+.gl-on .hall-pin{background:var(--bg)}.gl-on .hall-pin::before{display:none}
+#wall-c{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hall-v{position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(11,12,14,.78),rgba(11,12,14,.1) 55%,transparent),linear-gradient(0deg,rgba(11,12,14,.85),transparent 45%)}
+.cap{position:absolute;left:max(20px,calc((100% - 1200px)/2));bottom:max(13vh,90px);max-width:min(620px,calc(100% - 40px));opacity:0;will-change:opacity,transform}
+.cap.c0{opacity:1}
+.cap h2{font-size:clamp(40px,6.2vw,92px);margin-top:14px}
+.cap p{color:#bdb7ae;margin-top:16px;max-width:42ch}
+.cap .mono{display:inline-block;margin-top:18px;padding:8px 14px;border:1px solid var(--line-2);border-radius:999px;color:#cfc9bf;background:rgba(11,12,14,.4);backdrop-filter:blur(6px)}
+.bar-num{font-family:var(--mono);font-size:.62em;letter-spacing:-.02em;color:var(--cold);font-weight:400}
+.hint{position:absolute;left:50%;bottom:28px;translate:-50% 0;display:flex;flex-direction:column;align-items:center;gap:10px;font-family:var(--mono);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
+.hint i{width:1px;height:44px;background:linear-gradient(var(--hot),transparent);animation:drop 2s var(--ease) infinite;transform-origin:top}
+@keyframes drop{0%{transform:scaleY(0)}60%{transform:scaleY(1);opacity:1}100%{transform:scaleY(1);opacity:0}}
+.hall-fade{position:absolute;inset:0;background:var(--bg);opacity:0;pointer-events:none}
+.nogl .hall{display:none}
+@media (max-width:760px){.hall{height:620vh}.cap{bottom:max(10vh,70px)}.hall-v{background:linear-gradient(0deg,rgba(11,12,14,.92),rgba(11,12,14,.3) 55%,transparent)}}
+
+/* 2. представление */
+.intro{padding-block:clamp(110px,13vw,170px) clamp(70px,9vw,120px)}
+.intro__grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(40px,6vw,90px);align-items:end}
+.intro__grid>*{min-width:0}
+.intro h1{font-size:clamp(64px,10vw,150px);line-height:.92;margin-top:20px}
+.intro .lead{margin-top:30px}
+.intro__cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:38px;align-items:center}
+.intro__cta .mono{font-size:13px;margin-left:8px;color:var(--text)}
+.facts{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:46px;padding-top:24px;border-top:1px solid var(--line)}
+.facts span{font-family:var(--mono);font-size:12px;color:var(--muted)}.facts b{color:var(--text);font-weight:500}
+.frame{position:relative;aspect-ratio:3/4;border-radius:4px;overflow:hidden;max-width:100%}
+.frame img{width:100%;height:100%;object-fit:cover}
+.frame::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 1px var(--line-2)}
+.tag{position:absolute;font-family:var(--mono);font-size:11px;color:#e9e3d9;background:rgba(11,12,14,.62);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid var(--line-2);border-radius:999px;padding:6px 12px;display:flex;align-items:center;gap:8px;white-space:nowrap}
+.tag::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor;box-shadow:0 0 0 4px rgba(255,255,255,.08)}
+.tag.h{color:var(--hot-2)}.tag.k{color:var(--cold)}
+@media (max-width:900px){.intro__grid{grid-template-columns:1fr}.frame{aspect-ratio:4/4.3}}
+
+/* 3. услуги: стояк и отводы */
+.riser{position:relative;--gut:clamp(56px,8vw,110px);--px:clamp(18px,3vw,40px);padding-left:var(--gut)}
+.riser__pipe{position:absolute;left:var(--px);top:0;bottom:0;width:10px;border-radius:6px;background:var(--bg-3);box-shadow:inset 0 0 0 1px var(--line)}
+.riser__fill{position:absolute;inset:0 0 auto;height:0;border-radius:6px;background:linear-gradient(180deg,var(--cold),#5d8fe0 60%,var(--hot));box-shadow:0 0 22px rgba(127,179,230,.45)}
+.svc{position:relative;display:grid;grid-template-columns:110px 1fr 220px;gap:clamp(20px,3vw,44px);align-items:center;padding:34px 0;border-top:1px solid var(--line)}
+.svc:last-child{border-bottom:1px solid var(--line)}
+.svc>*{min-width:0}
+.svc::before,.svc::after{content:"";position:absolute;left:calc(var(--px) + 10px - var(--gut));top:50%;width:calc(var(--gut) - var(--px) - 22px);height:4px;border-radius:2px;background:var(--bg-3)}
+.svc::after{background:var(--hot);transform:scaleX(0);transform-origin:left;transition:transform .7s var(--ease);box-shadow:0 0 12px var(--hot)}
+.svc.cold::after{background:var(--cold);box-shadow:0 0 12px var(--cold)}
+.svc.on::after{transform:none}
+.svc__code{font-family:var(--mono);font-size:12px;color:var(--muted);line-height:1.5}
+.svc__code b{display:block;font-family:var(--serif);font-size:40px;font-weight:500;color:var(--text);transition:color .6s}
+.svc.on .svc__code b{color:var(--hot-2)}.svc.cold.on .svc__code b{color:var(--cold)}
+.svc h3{font-size:clamp(28px,3vw,40px)}
+.svc p{color:var(--muted);margin-top:8px;max-width:56ch}
+.svc__spec{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.svc__spec span{font-family:var(--mono);font-size:11px;border:1px solid var(--line);border-radius:999px;padding:4px 10px;color:#bdb7ae}
+.svc__img{aspect-ratio:4/3;border-radius:4px;overflow:hidden;opacity:.35;filter:grayscale(1);transition:opacity .8s,filter .8s}
+.svc.on .svc__img{opacity:1;filter:none}
+.svc__img img{width:100%;height:100%;object-fit:cover}
+@media (max-width:900px){.svc{grid-template-columns:1fr;gap:12px}.svc__img{display:none}.svc__code b{font-size:32px}}
+
+/* 4. работы: горизонтальная лента */
+.reel{position:relative;background:var(--bg-2)}
+.reel__pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:clamp(24px,4vh,48px)}
+.reel__track{display:flex;gap:22px;padding-left:max(20px,calc((100% - 1200px)/2));will-change:transform}
+.shot{flex:none;width:clamp(240px,22vw,340px);cursor:zoom-in}
+.shot__img{position:relative;aspect-ratio:3/4;max-height:58vh;overflow:hidden;border-radius:4px;background:var(--bg-3)}
+.shot__img img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+.shot:hover .shot__img img{transform:scale(1.05)}
+.shot__img .tag{left:12px;bottom:12px}
+.shot figcaption{display:flex;justify-content:space-between;gap:14px;margin-top:14px;align-items:baseline}
+.shot figcaption b{font-family:var(--serif);font-size:22px;font-weight:500;line-height:1.15}
+.shot figcaption span{font-family:var(--mono);font-size:11px;color:var(--muted);white-space:nowrap}
+.reel__bar{display:flex;align-items:center;gap:18px;font-family:var(--mono);font-size:12px;color:var(--muted)}
+.reel__line{flex:1;height:1px;background:var(--line);position:relative}
+.reel__line i{position:absolute;inset:0 auto 0 0;width:0;background:var(--hot)}
+@media (max-width:900px){
+  .reel{height:auto!important}.reel__pin{position:static;height:auto;padding-block:90px}
+  .reel__track{overflow-x:auto;scroll-snap-type:x mandatory;padding-right:20px;transform:none!important;scrollbar-width:none}
+  .reel__track::-webkit-scrollbar{display:none}.shot{scroll-snap-align:start;width:76vw}.shot__img{max-height:none}.reel__bar{display:none}
+}
+
+/* 5. кино-фраза */
+.cine{position:relative;height:260vh}
+.cine__pin{position:sticky;top:0;height:100vh;height:100svh;display:grid;place-items:center;text-align:center;overflow:hidden;padding-inline:20px}
+.cine__pin::before{content:"";position:absolute;width:70vmax;height:70vmax;border-radius:50%;background:radial-gradient(circle,rgba(127,179,230,.08),transparent 60%)}
+.cine p{position:relative;font-family:var(--serif);font-size:clamp(40px,7vw,108px);line-height:1.04;max-width:16ch;text-wrap:balance}
+.cine .w{opacity:.12;transition:opacity .25s}
+.cine .w.lit{opacity:1}
+.cine .w.em{font-style:italic;color:var(--hot-2)}
+
+/* 6. этапы и манометр */
+.steps{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(40px,7vw,110px)}
+.steps>*{min-width:0}
+.gauge{position:sticky;top:calc(50vh - 220px);aspect-ratio:1;max-width:440px;width:100%;align-self:start}
+.gauge svg{width:100%;height:100%;overflow:visible}
+.gauge__val{position:absolute;left:0;right:0;bottom:20%;text-align:center}
+.gauge__val b{display:block;font-family:var(--mono);font-weight:400;font-size:clamp(36px,4vw,54px);color:var(--text);line-height:1.1}
+.gauge__val span{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+#needle{transform-origin:200px 200px;transition:transform 1s var(--ease)}
+.step{min-height:56vh;display:flex;flex-direction:column;justify-content:center;opacity:.28;transition:opacity .6s}
+.step.on{opacity:1}
+.step .mono{color:var(--hot)}
+.step h3{font-size:clamp(34px,4vw,56px);margin-top:10px}
+.step p{color:var(--muted);margin-top:14px;max-width:46ch}
+@media (max-width:900px){.steps{grid-template-columns:1fr}.gauge{display:none}.step{min-height:0;padding:30px 0;opacity:1;border-top:1px solid var(--line)}}
+
+/* 7. видео */
+.videos{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.vid{position:relative;aspect-ratio:9/16;border-radius:4px;overflow:hidden;background:var(--bg-3);display:block}
+.vid img,.vid video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.55) saturate(.9);transition:filter .6s,transform 1.2s var(--ease)}
+.vid:hover img,.vid:hover video{filter:brightness(.8);transform:scale(1.04)}
+.vid--big{grid-column:span 2;grid-row:span 2;aspect-ratio:auto}
+.vid__top{position:absolute;top:14px;left:14px;right:14px;display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;color:#e9e3d9}
+.vid__top i{font-style:normal;display:flex;align-items:center;gap:6px}
+.vid__top i::before{content:"";width:7px;height:7px;border-radius:50%;background:#ff4b3e;animation:blink 1.6s infinite}
+@keyframes blink{50%{opacity:.2}}
+.vid__play{position:absolute;left:50%;top:50%;width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:50%;border:1px solid rgba(255,255,255,.4);display:grid;place-items:center;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);background:rgba(255,255,255,.08);transition:background .4s,transform .5s var(--ease)}
+.vid:hover .vid__play{background:var(--hot);transform:scale(1.1)}
+.vid__play svg{width:20px;height:20px;margin-left:3px}
+.vid__meta{position:absolute;left:16px;right:16px;bottom:16px}
+.vid__meta b{display:block;font-family:var(--serif);font-weight:500;font-size:22px;line-height:1.15;margin-top:6px}
+.vid--big .vid__meta b{font-size:clamp(26px,2.6vw,36px)}
+@media (max-width:1000px){.videos{grid-template-columns:repeat(2,1fr)}.vid--big{aspect-ratio:4/5}}
+@media (max-width:520px){.videos{gap:10px}.vid__meta b{font-size:17px}.vid__play{width:48px;height:48px;margin:-24px 0 0 -24px}}
+
+/* 8. объекты */
+.objs{border-top:1px solid var(--line)}
+.obj{display:grid;grid-template-columns:130px 1fr minmax(0,320px);gap:28px;align-items:baseline;padding:30px 0;border-bottom:1px solid var(--line);transition:padding .5s var(--ease)}
+.obj>*{min-width:0}
+.obj:hover{padding-left:14px}
+.obj h3{font-size:clamp(32px,4.4vw,64px);transition:color .4s}
+.obj:hover h3{color:var(--hot-2)}
+.obj p{color:var(--muted);font-size:15px}
+.peek{position:fixed;width:240px;aspect-ratio:3/4;border-radius:4px;overflow:hidden;pointer-events:none;z-index:40;opacity:0;transform:translate(-50%,-55%) scale(.85);transition:opacity .3s,transform .5s var(--ease)}
+.peek.show{opacity:1;transform:translate(-50%,-55%) scale(1)}
+.peek img{width:100%;height:100%;object-fit:cover}
+@media (max-width:700px){.obj{grid-template-columns:1fr;gap:6px}}
+
+/* 9. бриф */
+.brief{display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(40px,6vw,90px)}
+.brief>*{min-width:0}
+.phone{display:block;font-family:var(--serif);font-size:clamp(40px,5vw,68px);margin-top:34px;line-height:1;transition:color .3s}
+.phone:hover{color:var(--hot-2)}
+.contact-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.form{background:var(--bg-2);border:1px solid var(--line);border-radius:6px;padding:clamp(22px,3.4vw,40px);display:grid;gap:22px}
+.field>.mono{display:block;margin-bottom:10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips label{position:relative;cursor:pointer}
+.chips input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.chips span{display:block;padding:9px 16px;border:1px solid var(--line-2);border-radius:999px;font-size:14px;transition:all .25s}
+.chips input:checked+span{background:var(--text);color:var(--bg);border-color:var(--text)}
+.chips input:focus-visible+span{outline:2px solid var(--hot-2);outline-offset:2px}
+.inp{width:100%;background:transparent;border:0;border-bottom:1px solid var(--line-2);padding:10px 0;font:inherit;color:var(--text);resize:vertical;transition:border-color .3s}
+.inp:focus{outline:none;border-color:var(--hot)}
+.inp::placeholder{color:#5f5c58}
+.form__foot{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.form__note{font-size:13px;color:var(--muted);min-height:1.4em}
+.form__note.ok{color:var(--cold)}
+@media (max-width:900px){.brief{grid-template-columns:1fr}}
+
+/* подвал и плавающие кнопки */
+.footer{padding-block:50px calc(110px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+.footer__in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.footer a:hover{color:var(--text)}
+.fab{position:fixed;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:44;display:flex;gap:10px;transform:translateY(160%);transition:transform .6s var(--ease)}
+.fab.show{transform:none}
+.fab a{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:var(--hot);color:#160d06;box-shadow:0 12px 30px rgba(0,0,0,.45)}
+.fab a.tg{background:#2b9fd9;color:#fff}
+.fab svg{width:24px;height:24px}
+
+/* лайтбокс */
+.lb{position:fixed;inset:0;z-index:60;background:rgba(7,8,9,.95);display:grid;place-items:center;opacity:0;pointer-events:none;transition:opacity .35s}
+.lb.open{opacity:1;pointer-events:auto}
+.lb img{max-height:84vh;max-width:min(92vw,880px);border-radius:4px}
+.lb__cap{position:absolute;left:0;right:0;bottom:calc(22px + env(safe-area-inset-bottom,0px));text-align:center;font-family:var(--mono);font-size:12px;color:var(--muted);padding:0 80px}
+.lb button{position:absolute;width:52px;height:52px;border-radius:50%;border:1px solid var(--line-2);background:rgba(255,255,255,.04);cursor:pointer;font-size:18px}
+.lb button:hover{background:rgba(255,255,255,.12)}
+.lb__x{top:calc(18px + env(safe-area-inset-top,0px));right:18px}.lb__p{left:18px;top:50%;translate:0 -50%}.lb__n{right:18px;top:50%;translate:0 -50%}
+@media (max-width:640px){.lb__p,.lb__n{top:auto;bottom:calc(64px + env(safe-area-inset-bottom,0px));translate:none}}
+
+/* появление: контент виден и без скрипта, анимация только добавляется */
+.js .rv{opacity:0;transform:translateY(32px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.js .rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:.01ms!important}.js .rv{opacity:1;transform:none}}
+</style>
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+
+<header class="header" id="header">
+  <div class="wrap header__in">
+    <a href="#top" class="logo" aria-label="Клим Колегов, на главную">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2.5c3 4 6.5 7.6 6.5 11.4a6.5 6.5 0 0 1-13 0C5.5 10.1 9 6.5 12 2.5Z"/><path d="M9 14.5a3 3 0 0 0 3 3" stroke="#e0894a"/></svg>
+      <span><b>Клим</b> <i>Колегов</i></span></a>
+    <nav class="nav"><a href="#services">Услуги</a><a href="#works">Работы</a><a href="#steps">Этапы</a><a href="#video">Видео</a><a href="#contact">Контакты</a></nav>
+    <a href="https://t.me/kolegov_klim" target="_blank" rel="noopener" class="btn btn--hot">Обсудить объект</a>
+    <button class="burger" id="burger" aria-expanded="false" aria-controls="menu">Меню</button>
+  </div>
+</header>
+<nav class="menu" id="menu">
+  <a href="#services">Услуги</a><a href="#works">Работы</a><a href="#steps">Этапы</a><a href="#video">Видео</a><a href="#contact">Контакты</a>
+  <span class="mono">8 (922) 33-88-217 · Telegram @kolegov_klim</span>
+</nav>
+
+<main id="top">
+<section class="hall" id="hall" aria-label="Ванная комната: плитка снимается и открывает разводку за стеной">
+  <div class="hall-pin">
+    <canvas id="wall-c" aria-hidden="true"></canvas><div class="hall-v"></div>
+    <div class="cap c0" data-w="0,0,.07,.12"><span class="kick">Клим Колегов · сантехник · Москва</span><h2>Красивая ванная — <em>это то, что видно</em></h2><p>Листайте: снимем плитку и посмотрим, что под ней.</p></div>
+    <div class="cap" data-w=".19,.23,.31,.35"><span class="kick">Черновой монтаж</span><h2>Всё главное <em>спрятано за стеной</em></h2></div>
+    <div class="cap" data-w=".39,.43,.53,.57"><span class="kick">Разводка</span><h2>Каждая труба <em>на своём месте</em></h2><span class="mono">трубы в изоляции · маркировка ХВС / ГВС</span></div>
+    <div class="cap" data-w=".59,.62,.67,.7"><span class="kick">Коллекторный узел</span><h2>Узел, собранный <em>как часы</em></h2><span class="mono">нержавейка · пресс-фитинги · Neptun</span></div>
+    <div class="cap" data-w=".71,.74,.82,.85"><span class="kick">Опрессовка</span><h2><span class="bar-num">0,0</span> бар. <em>Давление держится</em></h2></div>
+    <div class="cap" data-w=".89,.92,1,1"><span class="kick">Готово</span><h2>Теперь стену <em>можно закрывать</em></h2></div>
+    <div class="hint"><span>Листайте</span><i></i></div>
+    <div class="hall-fade"></div>
+  </div>
+</section>
+
+<section class="intro">
+  <div class="wrap intro__grid">
+    <div>
+      <span class="kick rv">Монтаж инженерной сантехники</span>
+      <h1 class="rv">Клим<br><em>Колегов</em></h1>
+      <p class="lead rv">Собираю то, что потом закроет плитка: узлы водоснабжения, разводку, инсталляции, отопление и канализацию. Ошибку за стеной не исправить без нового ремонта, поэтому каждую трубу делаю так, будто её будут разглядывать.</p>
+      <div class="intro__cta rv">
+        <a href="https://t.me/kolegov_klim" target="_blank" rel="noopener" class="btn btn--hot">Написать в Telegram
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="tel:+79223388217" class="btn btn--line">Позвонить</a>
+        <span class="mono">8 (922) 33-88-217</span>
+      </div>
+      <div class="facts rv"><span><b>3</b> ЖК в портфолио</span><span><b>4 200+</b> подписчиков следят за объектами</span><span><b>Москва</b></span></div>
+    </div>
+    <div class="frame rv">
+      <img src="img/hero.webp" alt="Узел водоснабжения с фильтрами и коллектором в нише санузла" loading="lazy">
+      <span class="tag k" style="left:7%;top:33%">фильтры ХВС / ГВС</span>
+      <span class="tag h" style="right:6%;top:58%">коллектор на 8 выходов</span>
+      <span class="tag" style="left:7%;bottom:5%">ЖК Бунинские кварталы</span>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="services" style="padding-top:clamp(40px,6vw,80px)">
+  <div class="wrap">
+    <div class="sec__head">
+      <div><span class="kick rv">Услуги</span><h2 class="rv">От стояка <em>до каждой точки</em></h2></div>
+      <p class="lead rv">Инженерная часть санузла и квартиры целиком. Листайте, и вода дойдёт до каждой услуги.</p>
+    </div>
+    <div class="riser" id="riser">
+      <div class="riser__pipe"><div class="riser__fill" id="riserFill"></div></div>
+      <article class="svc cold"><div class="svc__code"><b>01</b>узел</div><div><h3>Узлы водоснабжения</h3><p>Коллектор с фильтрами, редукторами давления, счётчиками и манометрами. Каждый выход подписан, чтобы потом не гадать, какой кран за что отвечает.</p><div class="svc__spec"><span>нержавейка</span><span>пресс-фитинги</span><span>фильтры</span></div></div><div class="svc__img"><img src="img/node-2.webp" alt="" loading="lazy"></div></article>
+      <article class="svc"><div class="svc__code"><b>02</b>разводка</div><div><h3>Черновой монтаж</h3><p>Разметка по лазеру, разводка труб в изоляции, закладные под скрытые смесители, выводы под всю сантехнику.</p><div class="svc__spec"><span>лазерный уровень</span><span>изоляция</span><span>ХВС / ГВС</span></div></div><div class="svc__img"><img src="img/laser.webp" alt="" loading="lazy"></div></article>
+      <article class="svc cold"><div class="svc__code"><b>03</b>санузел</div><div><h3>Инсталляции и сантехника</h3><p>Монтаж инсталляций и подключение сантехники: унитазы, раковины, душевые системы.</p><div class="svc__spec"><span>TECE</span><span>Geberit</span><span>скрытый монтаж</span></div></div><div class="svc__img"><img src="img/tece-red.webp" alt="" loading="lazy"></div></article>
+      <article class="svc"><div class="svc__code"><b>04</b>тепло</div><div><h3>Отопление</h3><p>Радиаторы и внутрипольные конвекторы, коллекторы отопления, разводка труб в стяжке.</p><div class="svc__spec"><span>конвекторы</span><span>коллекторы</span><span>стяжка</span></div></div><div class="svc__img"><img src="img/conv-3.webp" alt="" loading="lazy"></div></article>
+      <article class="svc cold"><div class="svc__code"><b>05</b>стоки</div><div><h3>Канализация</h3><p>Разводка канализации с правильными уклонами, подключение к стояку, выводы под инсталляции и трапы.</p><div class="svc__spec"><span>уклоны</span><span>стояк</span><span>трапы</span></div></div><div class="svc__img"><img src="img/outlets.webp" alt="" loading="lazy"></div></article>
+      <article class="svc"><div class="svc__code"><b>06</b>защита</div><div><h3>Защита от протечек</h3><p>Краны с электроприводом, датчики и контроллер. При протечке вода перекрывается сама, даже если дома никого нет.</p><div class="svc__spec"><span>Neptun</span><span>датчики</span><span>электроприводы</span></div></div><div class="svc__img"><img src="img/neptun.webp" alt="" loading="lazy"></div></article>
+    </div>
+  </div>
+</section>
+
+<section class="reel" id="works">
+  <div class="reel__pin">
+    <div class="wrap sec__head" style="margin-bottom:0">
+      <div><span class="kick">Портфолио</span><h2>Объекты <em>изнутри</em></h2></div>
+      <p class="lead">Фото с объектов до чистовой отделки. Нажмите на кадр, чтобы рассмотреть.</p>
+    </div>
+    <div class="reel__track" id="track">
+      <figure class="shot"><div class="shot__img"><img src="img/node-2.webp" alt="Коллектор на нержавейке" loading="lazy"><span class="tag k">коллектор ХВС</span></div><figcaption><b>Коллектор на нержавейке</b><span>Бунинские кв.</span></figcaption></figure>
+      <figure class="shot"><div class="shot__img"><img src="img/laser.webp" alt="Разметка закладных по лазеру" loading="lazy"><span class="tag">лазерная разметка</span></div><figcaption><b>Закладные по лазеру</b><span>черновой</span></figcaption></figure>
+      <figure class="shot"><div class="shot__img"><img src="img/steel-node.webp" alt="Узел водоснабжения на панели из рифлёной стали" loading="lazy"><span class="tag h">узел целиком</span></div><figcaption><b>Узел на рифлёной стали</b><span>узел</span></figcaption></figure>
+      <figure class="shot"><div class="shot__img"><img src="img/conv-3.webp" alt="Внутрипольные конвекторы по радиусу окна" loading="lazy"><span class="tag h">конвекторы</span></div><figcaption><b>Конвекторы по радиусу окна</b><span>Лаврушинский</span></figcaption></figure>
+      <figure class="shot"><div class="shot__img"><img src="img/neptun.webp" alt="Кран Neptun с электроприводом" loading="lazy"><span class="tag">Neptun</span></div><figcaption><b>Кран с электроприводом</b><span>защита</span></figcaption></figure>
+      <figure class="shot"><div class="shot__img"><img src="img/geberit.webp" alt="Узел и инсталляция Geberit в одной нише" loading="lazy"><span class="tag k">Geberit</span></div><figcaption><b>Узел и инсталляция в нише</b><span>санузел</span></figcaption></figure>
+      <figure class="shot"><div class="shot__img"><img src="img/mixer.webp" alt="Закладная скрытого смесителя" loading="lazy"><span class="tag">скрытый смеситель</span></div><figcaption><b>Закладная смесителя</b><span>черновой</span></figcaption></figure>
+      <figure class="shot"><div class="shot__img"><img src="img/manifold.webp" alt="Коллектор отопления с расходомерами" loading="lazy"><span class="tag h">отопление</span></div><figcaption><b>Коллектор отопления</b><span>тепло</span></figcaption></figure>
+      <figure class="shot"><div class="shot__img"><img src="img/screed.webp" alt="Разводка труб под стяжку" loading="lazy"><span class="tag">под стяжку</span></div><figcaption><b>Разводка по полу</b><span>черновой</span></figcaption></figure>
+      <figure class="shot"><div class="shot__img"><img src="img/tece-red.webp" alt="Инсталляция TECE с подводками" loading="lazy"><span class="tag k">TECE</span></div><figcaption><b>Инсталляция TECE</b><span>санузел</span></figcaption></figure>
+      <figure class="shot"><div class="shot__img"><img src="img/press.webp" alt="Пресс-соединения на нержавейке" loading="lazy"><span class="tag">пресс-фитинги</span></div><figcaption><b>Пресс-соединения</b><span>деталь</span></figcaption></figure>
+      <figure class="shot"><div class="shot__img"><img src="img/neptun-ctrl.webp" alt="Контроллер Neptun в узле" loading="lazy"><span class="tag">контроллер</span></div><figcaption><b>Контроллер Neptun</b><span>защита</span></figcaption></figure>
+    </div>
+    <div class="wrap reel__bar"><span id="reelNum">01 / 12</span><div class="reel__line"><i id="reelLine"></i></div><span>листайте вниз</span></div>
+  </div>
+</section>
+
+<section class="cine" id="cine" aria-label="Хорошую сантехнику не замечают. Её просто не приходится чинить.">
+  <div class="cine__pin"><p id="cineText">Хорошую сантехнику <span class="em">не замечают.</span> Её просто не приходится <span class="em">чинить.</span></p></div>
+</section>
+
+<section class="sec" id="steps">
+  <div class="wrap">
+    <div class="sec__head">
+      <div><span class="kick rv">Этапы</span><h2 class="rv">Как идёт <em>работа</em></h2></div>
+      <p class="lead rv">Пять шагов от первого звонка до запуска системы.</p>
+    </div>
+    <div class="steps">
+      <div class="gauge" aria-hidden="true">
+        <svg viewBox="0 0 400 400">
+          <defs><linearGradient id="arc" x1="0" x2="1"><stop offset="0" stop-color="#7fb3e6"/><stop offset="1" stop-color="#e0894a"/></linearGradient></defs>
+          <circle cx="200" cy="200" r="196" fill="#111215" stroke="rgba(236,231,223,.18)"/>
+          <circle cx="200" cy="200" r="178" fill="none" stroke="rgba(236,231,223,.06)" stroke-width="2"/>
+          <g id="ticks"></g>
+          <path id="arcFill" d="" fill="none" stroke="url(#arc)" stroke-width="6" stroke-linecap="round"/>
+          <g id="needle"><path d="M197 200 L200 62 L203 200 Z" fill="#e0894a"/><circle cx="200" cy="200" r="13" fill="#ece7df"/><circle cx="200" cy="200" r="5" fill="#111215"/></g>
+        </svg>
+        <div class="gauge__val"><b id="gaugeStep">01</b><span>этап из 5</span></div>
+      </div>
+      <div id="stepList">
+        <div class="step on"><span class="mono">01 · заявка</span><h3>Звонок или сообщение</h3><p>Рассказываете про объект: квартира или дом, сколько санузлов, на какой стадии ремонт. Можно сразу прислать дизайн-проект.</p></div>
+        <div class="step"><span class="mono">02 · проект</span><h3>Схема и смета</h3><p>Работаю по дизайн-проекту или помогаю продумать схему разводки и состав узла. Согласуем оборудование и сроки.</p></div>
+        <div class="step"><span class="mono">03 · черновой монтаж</span><h3>Разводка и узел</h3><p>Разметка по лазеру, трубы, канализация, закладные, сборка коллекторного узла. То, что потом закроют стены.</p></div>
+        <div class="step"><span class="mono">04 · опрессовка</span><h3>Проверка давлением</h3><p>Систему проверяют под давлением до закрытия стен и заливки стяжки. Пока давление не держится, стену не закрываем.</p></div>
+        <div class="step"><span class="mono">05 · чистовой монтаж</span><h3>Сантехника и запуск</h3><p>После отделки ставлю сантехнику, подключаю и запускаю систему.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="video" style="background:var(--bg-2)">
+  <div class="wrap">
+    <div class="sec__head">
+      <div><span class="kick rv">Видео</span><h2 class="rv">Смотрите, <em>как это устроено</em></h2></div>
+      <p class="lead rv">Ролики из блога в Instagram: объекты изнутри, до чистовой отделки.</p>
+    </div>
+    <div class="videos">
+      <a class="vid vid--big rv" href="https://www.instagram.com/reel/DZN-5rHRGiQ/" target="_blank" rel="noopener" data-video=""><img src="img/conv-1.webp" alt="" loading="lazy"><span class="vid__top"><i>Reel</i><span>♥ 4 347</span></span><span class="vid__play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4v16l13-8z"/></svg></span><span class="vid__meta"><span class="kick">ЖК Лаврушинский</span><b>Вся сантехника в трёх санузлах: кастрюлечница и встроенный ёршик</b></span></a>
+      <a class="vid rv" href="https://www.instagram.com/reel/DfH5MfZibYT/" target="_blank" rel="noopener" data-video=""><img src="img/hero.webp" alt="" loading="lazy"><span class="vid__top"><i>Reel</i></span><span class="vid__play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4v16l13-8z"/></svg></span><span class="vid__meta"><span class="kick">Бунинские кварталы</span><b>Обзор работ</b></span></a>
+      <a class="vid rv" href="https://www.instagram.com/reel/DZWuAlsiAR7/" target="_blank" rel="noopener" data-video=""><img src="img/node-1.webp" alt="" loading="lazy"><span class="vid__top"><i>Reel</i></span><span class="vid__play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4v16l13-8z"/></svg></span><span class="vid__meta"><span class="kick">Лаврушинский</span><b>Трубы к узлу водоснабжения</b></span></a>
+      <a class="vid rv" href="https://www.instagram.com/reel/DaSfgM5CX9u/" target="_blank" rel="noopener" data-video=""><img src="img/steel-col.webp" alt="" loading="lazy"><span class="vid__top"><i>Reel</i></span><span class="vid__play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4v16l13-8z"/></svg></span><span class="vid__meta"><span class="kick">Монтаж</span><b>Сантехника в квартире</b></span></a>
+      <a class="vid rv" href="https://www.instagram.com/reel/DZIZ54-CTjt/" target="_blank" rel="noopener" data-video=""><img src="img/tece-red.webp" alt="" loading="lazy"><span class="vid__top"><i>Reel</i></span><span class="vid__play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4v16l13-8z"/></svg></span><span class="vid__meta"><span class="kick">Лаврушинский</span><b>Инженерная сантехника, часть 1</b></span></a>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec__head"><div><span class="kick rv">Объекты</span><h2 class="rv">Где <em>я работал</em></h2></div></div>
+    <div class="objs">
+      <div class="obj rv" data-img="img/conv-1.webp"><span class="mono">Москва, Якиманка</span><h3>ЖК Лаврушинский</h3><p>Вся сантехника в трёх санузлах, узлы, отопление, канализация, конвекторы</p></div>
+      <div class="obj rv" data-img="img/manifold.webp"><span class="mono">Москва</span><h3>ЖК Верди</h3><p>Монтаж отопления и водоснабжения</p></div>
+      <div class="obj rv" data-img="img/hero.webp"><span class="mono">Новая Москва</span><h3>ЖК Бунинские кварталы</h3><p>Узел водоснабжения в 3-комнатной квартире, черновой монтаж</p></div>
+    </div>
+  </div>
+  <div class="peek" id="peek"><img alt="" id="peekImg"></div>
+</section>
+
+<section class="sec" id="contact" style="padding-top:0">
+  <div class="wrap brief">
+    <div>
+      <span class="kick rv">Сотрудничество</span>
+      <h2 class="rv">Расскажите <em>про объект</em></h2>
+      <p class="lead rv" style="margin-top:22px">Работаю с частными заказчиками, прорабами и дизайнерами. Отметьте пару пунктов, и заявка уйдёт мне в Telegram. Или просто позвоните.</p>
+      <a href="tel:+79223388217" class="phone rv">8 (922) 33-88-217</a>
+      <div class="contact-row rv">
+        <a href="https://t.me/kolegov_klim" target="_blank" rel="noopener" class="btn btn--line">Telegram @kolegov_klim</a>
+        <a href="https://www.instagram.com/klimkolegov/" target="_blank" rel="noopener" class="btn btn--line">Instagram</a>
+      </div>
+    </div>
+    <form class="form rv" id="brief">
+      <div class="field"><span class="mono">Объект</span><div class="chips">
+        <label><input type="radio" name="type" id="t1" value="Квартира" checked><span>Квартира</span></label>
+        <label><input type="radio" name="type" id="t2" value="Дом"><span>Дом</span></label>
+        <label><input type="radio" name="type" id="t3" value="Коммерция"><span>Коммерция</span></label></div></div>
+      <div class="field"><span class="mono">Что нужно</span><div class="chips">
+        <label><input type="checkbox" name="work" id="w1" value="черновой монтаж" checked><span>Черновой монтаж</span></label>
+        <label><input type="checkbox" name="work" id="w2" value="узел водоснабжения"><span>Узел</span></label>
+        <label><input type="checkbox" name="work" id="w3" value="отопление"><span>Отопление</span></label>
+        <label><input type="checkbox" name="work" id="w4" value="чистовой монтаж"><span>Чистовой</span></label>
+        <label><input type="checkbox" name="work" id="w5" value="защита от протечек"><span>Neptun</span></label></div></div>
+      <div class="field"><span class="mono">Санузлов</span><div class="chips">
+        <label><input type="radio" name="baths" id="b1" value="1"><span>1</span></label>
+        <label><input type="radio" name="baths" id="b2" value="2" checked><span>2</span></label>
+        <label><input type="radio" name="baths" id="b3" value="3"><span>3</span></label>
+        <label><input type="radio" name="baths" id="b4" value="4+"><span>4+</span></label></div></div>
+      <div class="field"><label class="mono" for="place">ЖК или адрес</label><input class="inp" id="place" name="place" placeholder="Например, ЖК Бунинские кварталы"></div>
+      <div class="field"><label class="mono" for="note">Комментарий</label><textarea class="inp" id="note" name="note" rows="2" placeholder="Сроки, стадия ремонта, есть ли дизайн-проект"></textarea></div>
+      <div class="form__foot"><button class="btn btn--hot" type="submit">Отправить в Telegram</button><span class="form__note" id="formNote" role="status"></span></div>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer__in">
+    <span>© <span id="year">2026</span> Клим Колегов · монтаж сантехники в Москве</span>
+    <span><a href="tel:+79223388217">8 (922) 33-88-217</a> · <a href="https://t.me/kolegov_klim" target="_blank" rel="noopener">Telegram</a> · <a href="https://www.instagram.com/klimkolegov/" target="_blank" rel="noopener">Instagram</a></span>
+  </div>
+</footer>
+
+<div class="fab" id="fab">
+  <a href="https://t.me/kolegov_klim" class="tg" target="_blank" rel="noopener" aria-label="Написать в Telegram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.5 4.3 2.9 11.5c-1.3.5-1.2 1.2-.2 1.5l4.8 1.5 1.8 5.6c.2.6.4.8.9.8.4 0 .6-.2.9-.5l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3.1-14.6c.3-1.3-.5-1.9-1.4-1.5ZM9.1 14.2l9-5.7c.4-.3.8-.1.5.2l-7.6 6.9-.3 3.3-1.6-4.7Z"/></svg></a>
+  <a href="tel:+79223388217" aria-label="Позвонить"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z"/></svg></a>
+</div>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Просмотр фото">
+  <img alt="" id="lbImg"><div class="lb__cap" id="lbCap"></div>
+  <button class="lb__x" id="lbX" aria-label="Закрыть">✕</button><button class="lb__p" id="lbP" aria-label="Предыдущее фото">←</button><button class="lb__n" id="lbN" aria-label="Следующее фото">→</button>
+</div>
+
+<script type="module" src="js/wall.js"></script>
+<script>
+(() => {
+  const $ = (s, c = document) => c.querySelector(s), $$ = (s, c = document) => [...c.querySelectorAll(s)];
+  const cl = (x) => Math.min(1, Math.max(0, x));
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  $('#year').textContent = new Date().getFullYear();
+
+  // появление блоков
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12 });
+  $$('.rv').forEach((el, i) => { if (el.closest('.videos')) el.style.transitionDelay = (i % 4) * 80 + 'ms'; io.observe(el); });
+
+  // меню
+  const menu = $('#menu'), burger = $('#burger');
+  const setMenu = (o) => { menu.classList.toggle('open', o); burger.textContent = o ? 'Закрыть' : 'Меню'; burger.setAttribute('aria-expanded', o); document.body.style.overflow = o ? 'hidden' : ''; };
+  burger.onclick = () => setMenu(!menu.classList.contains('open'));
+  $$('a', menu).forEach((a) => a.addEventListener('click', () => setMenu(false)));
+
+  // кино-фраза: слова загораются по прокрутке
+  const cineP = $('#cineText'), words = [];
+  [...cineP.childNodes].forEach((n) => {
+    const em = n.nodeType === 1, frag = document.createDocumentFragment();
+    n.textContent.split(/(\s+)/).forEach((t) => { if (!t) return; if (/^\s+$/.test(t)) return frag.append(t); const s = document.createElement('span'); s.className = 'w' + (em ? ' em' : ''); s.textContent = t; words.push(s); frag.append(s); });
+    n.replaceWith(frag);
+  });
+
+  // шкала манометра
+  const G = 200, toXY = (a, r) => [G + Math.cos(a) * r, G + Math.sin(a) * r];
+  const A0 = Math.PI * .75, SPAN = Math.PI * 1.5;
+  let ticks = '';
+  for (let i = 0; i <= 25; i++) { const a = A0 + SPAN * i / 25, big = i % 5 === 0, [x1, y1] = toXY(a, big ? 150 : 160), [x2, y2] = toXY(a, 172);
+    ticks += `<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="rgba(236,231,223,${big ? .7 : .25})" stroke-width="${big ? 2 : 1}"/>`;
+    if (big && i) { const [tx, ty] = toXY(a, 128); ticks += `<text x="${tx.toFixed(1)}" y="${ty.toFixed(1)}" fill="#8f8c87" font-family="JetBrains Mono,monospace" font-size="15" text-anchor="middle" dominant-baseline="middle">0${i / 5}</text>`; } }
+  $('#ticks').innerHTML = ticks;
+  const arcPath = (k) => { const a1 = A0 + SPAN * k, [x0, y0] = toXY(A0, 186), [x1, y1] = toXY(a1, 186); return `M${x0} ${y0} A186 186 0 ${SPAN * k > Math.PI ? 1 : 0} 1 ${x1} ${y1}`; };
+  const needle = $('#needle'), arcFill = $('#arcFill'), gaugeStep = $('#gaugeStep'), stepEls = $$('.step');
+  let curStep = -1;
+  const setStep = (i) => { if (i === curStep) return; curStep = i;
+    stepEls.forEach((s, j) => s.classList.toggle('on', j === i));
+    const k = (i + 1) / 5; needle.style.transform = `rotate(${(A0 + SPAN * k) * 180 / Math.PI + 90}deg)`;
+    arcFill.setAttribute('d', arcPath(k)); gaugeStep.textContent = '0' + (i + 1); };
+  setStep(0);
+
+  // прокрутка: шапка, стояк, лента работ, кино-фраза, этапы
+  const header = $('#header'), fab = $('#fab'), hall = $('#hall');
+  const riser = $('#riser'), riserFill = $('#riserFill'), svcs = $$('.svc');
+  const reel = $('#works'), track = $('#track'), reelLine = $('#reelLine'), reelNum = $('#reelNum'), shots = $$('.shot');
+  const cine = $('#cine');
+  const wide = () => innerWidth > 900;
+  const sizeReel = () => { reel.style.height = wide() ? (track.scrollWidth - innerWidth + innerHeight * 1.6) + 'px' : ''; };
+  addEventListener('resize', sizeReel); addEventListener('load', sizeReel); sizeReel();
+  let lastY = 0;
+  const onScroll = () => {
+    const y = scrollY, vh = innerHeight;
+    const pastHall = hall.offsetHeight ? y > hall.offsetTop + hall.offsetHeight - vh - 10 : y > 60;
+    header.classList.toggle('solid', pastHall);
+    header.classList.toggle('hide', pastHall && y > lastY + 2 && !menu.classList.contains('open'));
+    if (y < lastY - 2) header.classList.remove('hide');
+    fab.classList.toggle('show', pastHall); lastY = y;
+
+    const rr = riser.getBoundingClientRect(), fillPx = cl((vh * .62 - rr.top) / rr.height) * rr.height;
+    riserFill.style.height = fillPx + 'px';
+    svcs.forEach((s) => { const sr = s.getBoundingClientRect(); s.classList.toggle('on', fillPx >= sr.top - rr.top + sr.height / 2); });
+
+    if (wide()) { const r = reel.getBoundingClientRect(), p = cl(-r.top / (r.height - vh)), max = track.scrollWidth - innerWidth + 40;
+      track.style.transform = `translate3d(${-p * Math.max(0, max)}px,0,0)`; reelLine.style.width = p * 100 + '%';
+      reelNum.textContent = String(Math.min(shots.length, 1 + Math.floor(p * shots.length))).padStart(2, '0') + ' / ' + shots.length; }
+
+    const cr = cine.getBoundingClientRect(), cp = cl((-cr.top + vh * .2) / (cr.height - vh * .6));
+    words.forEach((w, i) => w.classList.toggle('lit', reduce || cp > i / words.length));
+
+    let act = 0; stepEls.forEach((s, i) => { if (s.getBoundingClientRect().top < vh * .55) act = i; }); setStep(act);
+  };
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  // превью объекта под курсором
+  if (matchMedia('(hover:hover) and (pointer:fine)').matches) {
+    const peek = $('#peek'), peekImg = $('#peekImg');
+    $$('.obj').forEach((o) => { o.addEventListener('pointerenter', () => { peekImg.src = o.dataset.img; peek.classList.add('show'); });
+      o.addEventListener('pointerleave', () => peek.classList.remove('show'));
+      o.addEventListener('pointermove', (e) => { peek.style.left = e.clientX + 'px'; peek.style.top = e.clientY + 'px'; }); });
+  }
+
+  // лайтбокс для ленты работ
+  const lb = $('#lb'), lbImg = $('#lbImg'), lbCap = $('#lbCap'); let idx = 0;
+  const show = (i) => { idx = (i + shots.length) % shots.length; lbImg.src = $('img', shots[idx]).src; lbCap.textContent = `${String(idx + 1).padStart(2, '0')} / ${shots.length} · ${$('b', shots[idx]).textContent}`; };
+  const close = () => { lb.classList.remove('open'); document.body.style.overflow = ''; };
+  shots.forEach((s, i) => s.addEventListener('click', () => { show(i); lb.classList.add('open'); document.body.style.overflow = 'hidden'; }));
+  $('#lbX').onclick = close; $('#lbP').onclick = () => show(idx - 1); $('#lbN').onclick = () => show(idx + 1);
+  lb.addEventListener('click', (e) => { if (e.target === lb) close(); });
+  addEventListener('keydown', (e) => { if (!lb.classList.contains('open')) return; if (e.key === 'Escape') close(); if (e.key === 'ArrowLeft') show(idx - 1); if (e.key === 'ArrowRight') show(idx + 1); });
+  let sx = 0; lb.addEventListener('touchstart', (e) => sx = e.touches[0].clientX, { passive: true });
+  lb.addEventListener('touchend', (e) => { const dx = e.changedTouches[0].clientX - sx; if (Math.abs(dx) > 50) show(idx + (dx < 0 ? 1 : -1)); });
+
+  // видео: если указан mp4 в data-video, он играет при наведении поверх обложки
+  $$('.vid').forEach((v) => { if (!v.dataset.video) return; const vid = document.createElement('video');
+    Object.assign(vid, { src: v.dataset.video, muted: true, loop: true, playsInline: true, preload: 'metadata' }); vid.poster = $('img', v).src; $('img', v).replaceWith(vid);
+    v.addEventListener('pointerenter', () => vid.play().catch(() => {})); v.addEventListener('pointerleave', () => vid.pause()); });
+
+  // бриф: собираем текст заявки, копируем и открываем чат в Telegram
+  const form = $('#brief'), note = $('#formNote');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const f = new FormData(form), works = f.getAll('work');
+    const text = ['Здравствуйте, Клим! Заявка с сайта.', `Объект: ${f.get('type')}`, works.length ? `Нужно: ${works.join(', ')}` : '', `Санузлов: ${f.get('baths') || '—'}`,
+      f.get('place') ? `Где: ${f.get('place')}` : '', f.get('note') ? `Комментарий: ${f.get('note')}` : ''].filter(Boolean).join('\n');
+    let copied = false; try { await navigator.clipboard.writeText(text); copied = true; } catch (_) {}
+    note.className = 'form__note ok';
+    note.textContent = copied ? 'Текст заявки скопирован. Вставьте его в открывшийся чат.' : 'Откроется чат в Telegram. Опишите объект в сообщении.';
+    const a = document.createElement('a'); a.href = 'https://t.me/kolegov_klim'; a.target = '_blank'; a.rel = 'noopener'; document.body.append(a); a.click(); a.remove();
+  });
+})();
+</script>
+</body>
+</html>
