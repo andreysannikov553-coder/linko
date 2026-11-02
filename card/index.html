@@ -67,9 +67,10 @@ h1 em{font-style:normal;color:var(--ember)}
 .foot .by{display:inline-flex;align-items:center;gap:6px;color:var(--soft)}
 .foot .by svg{width:20px;height:13px;fill:none;stroke:var(--ember);stroke-width:2.6}
 .foot .by b{font:700 11px/1 var(--disp);letter-spacing:.08em;color:var(--ink)}
-.thanks{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom));transform:translate(-50%,140%);background:var(--ink);color:#fff;
-  padding:12px 18px;border-radius:14px;font-size:14px;transition:transform .35s cubic-bezier(.2,.9,.3,1.1);max-width:calc(100% - 32px)}
-.thanks.show{transform:translate(-50%,0)}
+.thanks{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom));transform:translate(-50%,calc(100% + 120px));background:var(--ink);color:#fff;
+  padding:12px 18px;border-radius:14px;font-size:14px;transition:transform .35s cubic-bezier(.2,.9,.3,1.1),opacity .2s,visibility 0s .35s;max-width:calc(100% - 32px);
+  opacity:0;visibility:hidden;pointer-events:none}
+.thanks.show{transform:translate(-50%,0);opacity:1;visibility:visible;transition:transform .35s cubic-bezier(.2,.9,.3,1.1),opacity .2s,visibility 0s}
 @media (prefers-reduced-motion:reduce){.tap .ph,.tap .ring,.tap .ph b{animation:none}.tap .ph{transform:translateY(20px)}.tap .ph b{opacity:1}}
 </style>
 </head>
